@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
 const packageConfig = require('../package.json');
 
@@ -42,7 +43,42 @@ if (isProduction) {
   plugins.push(
     new ManifestPlugin({
         fileName: 'asset-manifest.json',
-    })
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      beautify: false,
+      squeeze: true,
+      mangle: {
+        except: ['$super', '$', '_', 'exports', 'require'],
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        loops: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true,
+        reduce_vars: true,
+      },
+      output: {
+        comments: false,
+      },
+      sourceMap: true,
+    }),
+    //new ExtractTextPlugin('style-[hash].css'),
+    new CopyWebpackPlugin([
+      { from: Path.to.assets, to: 'assets' }
+    ])
   );
 
 } else {
