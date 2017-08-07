@@ -28,7 +28,7 @@ import DevTools         from './sources/containers/DevTools';
 import LanguageProvider from './sources/containers/LanguageProvider';
 import { translations } from './sources/i18n';
 
-
+import './styles/main.scss';
 
 const history = createBrowserHistory();
 

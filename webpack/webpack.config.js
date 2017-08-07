@@ -88,21 +88,34 @@ if (isProduction) {
 
   plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` })
+    new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        babelQuery: {
+          // require.resolve solves the issue of relative presets when dealing with
+          // locally linked packages. This is an issue with babel and webpack.
+          // See https://github.com/babel/babel-loader/issues/149 and
+          // https://github.com/webpack/webpack/issues/1866
+          presets: ['babel-preset-react-hmre'].map(require.resolve),
+        }
+      }
+    })
   );
 }
 
 module.exports = (env = {}) => {
   return {
+    target: 'web',
     bail: isProduction,
     devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
     context: Path.to.app,
 
     entry: {
-      app: path.join(Path.to.app, 'app.js'),
+      app: ['webpack-hot-middleware/client?reload=true', path.join(Path.to.app, 'app.js')],
       vendor: Object.keys(packageConfig.dependencies).concat([
         'intl/locale-data/jsonp/en',
-        'intl/locale-data/jsonp/ru'
+        'intl/locale-data/jsonp/ru',
+        'webpack-hot-middleware/client?reload=true',
       ]),
     },
 
@@ -116,7 +129,7 @@ module.exports = (env = {}) => {
 
     resolve: {
       extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', 'jsx', '.js', '.json'],
-      modules: [Path.to.app, 'node_modules'],
+      modules: ['app', 'node_modules'],
     },
 
     module: {
@@ -206,6 +219,9 @@ module.exports = (env = {}) => {
       host: HOST,
       port: PORT,
       noInfo: false,
+      inline: true,
+      compress: true,
+      headers: { 'Access-Control-Allow-Origin': '*', 'X-Custom-Header': 'yes' },
       publicPath: Path.to.public,
     },
   };
