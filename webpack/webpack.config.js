@@ -182,7 +182,13 @@ module.exports = (env = {}) => {
           ],
         },
         {
-          test: /\.(woff|woff2|eot|ttf|svg)$/,
+          test: /\.(png|gif|jpg|svg)$/,
+          include: Path.to.images,
+          use: 'url-loader?limit=20480&name=[name]-[hash].[ext]',
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf)$/,
+          include: Path.to.fonts,
           use: {
             loader: 'url-loader',
             options: {

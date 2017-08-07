@@ -16,6 +16,8 @@ const paths = {
     sources: path.join(app, 'sources'),
     styles:  path.join(app, 'styles'),
     assets:  path.join(app, 'assets'),
+    images:  path.join(app, 'assets', 'images'),
+    fonts:   path.join(app, 'assets', 'fonts'),
   }
 };
 
