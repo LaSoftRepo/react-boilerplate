@@ -1,16 +1,17 @@
 'use strict'
 
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const path              = require('path');
+const webpack           = require('webpack');
+const autoprefixer      = require('autoprefixer');
+const ManifestPlugin    = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
-const packageConfig = require('../package.json');
 
-const Path = require('./paths');
+const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
+
+const Path          = require('./paths');
+const packageConfig = require('../package.json');
 
 const HOST = 'localhost';
 const PORT = 8080;
@@ -42,7 +43,7 @@ if (isProduction) {
 
   plugins.push(
     new ManifestPlugin({
-        fileName: 'asset-manifest.json',
+      fileName: 'asset-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -115,6 +116,7 @@ module.exports = (env = {}) => {
 
     resolve: {
       extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', 'jsx', '.js', '.json'],
+      modules: [Path.to.app, 'node_modules'],
     },
 
     module: {
@@ -146,14 +148,14 @@ module.exports = (env = {}) => {
             'style-loader',
             {
               loader: 'css-loader',
-              options: { importLoaders: 1 }
+              options: { importLoaders: 1 },
             },
             {
               loader: 'postcss-loader',
               options: {
                 sourceMap: !isProduction,
                 config: {
-                  path: path.join(Path.to.root, 'postcss.config.js')
+                  path: path.join(Path.to.root, 'postcss.config.js'),
                 },
                 ident: 'postcss',
                 plugins: () => [
@@ -168,18 +170,27 @@ module.exports = (env = {}) => {
                     flexbox: 'no-2009',
                   }),
                 ],
-              }
+              },
             },
             //'resolve-url-loader',
             {
               loader: 'sass-loader',
               options: {
                 sourceMap: !isProduction,
-              }
+              },
             },
           ],
-        }
-      ]
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|svg)$/,
+          use: {
+            loader: 'url-loader',
+            options: {
+              limit: 100000,
+            },
+          },
+        },
+      ],
     },
 
     plugins,
