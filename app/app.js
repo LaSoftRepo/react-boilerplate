@@ -30,8 +30,8 @@ const store = configureStore(initialState, history);
 
 const HomePage = () => (
   <ul>
-    <li><Link to="/about">About Us</Link></li>
-    <li><Link to="/company">Company</Link></li>
+    <li><Link to='/about'>About Us</Link></li>
+    <li><Link to='/company'>Company</Link></li>
   </ul>
 );
 
@@ -48,10 +48,10 @@ const render = translations => {
             <App hideHeader hideFooter>
               <div>
                 <Switch>
-                  <Route exact path="/"  component={ HomePage } />
-                  <Route path="/index"   component={ HomePage } />
-                  <Route path="/about"   component={ AboutPage } />
-                  <Route path="/company" component={ CompanyPage } />
+                  <Route exact path='/'  component={ HomePage } />
+                  <Route path='/index'   component={ HomePage } />
+                  <Route path='/about'   component={ AboutPage } />
+                  <Route path='/company' component={ CompanyPage } />
                   <Route component={ NotFound } />
                 </Switch>
               </div>
@@ -59,7 +59,7 @@ const render = translations => {
           </ConnectedRouter>
         </LanguageProvider>
       </Provider>
-      { process.env.NODE_ENV !== "production" ? <DevTools store={ store }/> : null }
+      { process.env.NODE_ENV !== 'production' ? <DevTools store={ store }/> : null }
     </div>,
     document.getElementById('app')
   );
