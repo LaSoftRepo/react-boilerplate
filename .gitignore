@@ -1,0 +1,15 @@
+/node_modules
+/build
+/coverage
+/tmp
+/.idea
+
+.DS_Store
+.module-cache
+.python-version
+.lock-wscript
+*.log*
+_nogit
+.vscode
+.editorconfig
+.npm
