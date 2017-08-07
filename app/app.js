@@ -64,7 +64,7 @@ const render = translations => {
           </ConnectedRouter>
         </LanguageProvider>
       </Provider>
-      { process.env.NODE_ENV !== 'production' ? <DevTools store={ store }/> : null }
+      { process.env.NODE_ENV !== 'production' ? <DevTools store={ store } /> : null }
     </div>,
     document.getElementById('app')
   );

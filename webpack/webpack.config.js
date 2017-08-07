@@ -28,6 +28,9 @@ const plugins = [
     minChunks: Infinity,
     filename: 'vendor-[hash].js',
   }),
+  new webpack.optimize.LimitChunkCountPlugin({
+    maxChunks: 2,
+  }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     template:  path.join(Path.to.app, 'index.html'),
@@ -114,11 +117,7 @@ module.exports = (env = {}) => {
 
     entry: {
       app: path.join(Path.to.app, 'app.js'),
-      /*vendor: Object.keys(packageConfig.dependencies).concat([
-        'intl/locale-data/jsonp/en',
-        'intl/locale-data/jsonp/ru',
-        'webpack-hot-middleware/client?reload=true',
-      ]),*/
+      vendor: Object.keys(packageConfig.dependencies),
     },
 
     output: {
@@ -197,19 +196,22 @@ module.exports = (env = {}) => {
           ],
         },
         {
+          test: /\.css$/,
+          use: [
+            "style-loader",
+            "css-loader",
+            "postcss-loader"
+          ]
+        },
+        {
           test: /\.(png|gif|jpg|svg)$/,
           include: Path.to.images,
           use: 'url-loader?limit=20480&name=[name]-[hash].[ext]',
         },
         {
-          test: /\.(woff|woff2|eot|ttf)$/,
+          test: /\.(woff|woff2|eot|ttf|svg)$/,
           include: Path.to.fonts,
-          use: {
-            loader: 'url-loader',
-            options: {
-              limit: 100000,
-            },
-          },
+          use: 'url-loader?limit=100000',
         },
       ],
     },
