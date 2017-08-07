@@ -89,6 +89,7 @@ if (!window.Intl) {
 }*/
 
 if (!window.Intl) {
+  // Use i18n polyfills for locale data
   import('intl')
   .then(() => Promise.all([
     import('intl/locale-data/jsonp/en.js'),
