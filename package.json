@@ -12,7 +12,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
-    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js"
+    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
+    "preview": "NODE_ENV=\"production\" webpack-dev-server --config webpack/webpack.config.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",

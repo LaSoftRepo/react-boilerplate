@@ -48,7 +48,6 @@ if (isProduction) {
       minimize: true,
       debug: false,
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       beautify: false,
@@ -75,6 +74,8 @@ if (isProduction) {
       },
       sourceMap: true,
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
     //new ExtractTextPlugin('style-[hash].css'),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' }
@@ -185,6 +186,10 @@ module.exports = (env = {}) => {
 
     devServer: {
       historyApiFallback: true,
+      host: HOST,
+      port: PORT,
+      noInfo: false,
+      publicPath: Path.to.public,
     },
   };
 }

@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom';
 
 // Redux
 import { Provider } from 'react-redux';
-import configureStore from './sources/store';
 
 // Routing
 import Route    from 'react-router-dom/Route';
@@ -19,6 +18,9 @@ import Redirect from 'react-router-dom/Redirect';
 import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import { goBack } from 'react-router-redux';
+
+// Cofigurations
+import configureStore from './sources/store';
 
 // Main containers
 import App              from './sources/containers/App';
