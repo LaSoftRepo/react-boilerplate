@@ -46,6 +46,7 @@ if (isProduction) {
       fileName: 'asset-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
+      context: Path.to.app,
       minimize: true,
       debug: false,
     }),
@@ -88,8 +89,8 @@ if (isProduction) {
 
   plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
     new webpack.LoaderOptionsPlugin({
+      context: Path.to.app,
       options: {
         babelQuery: {
           // require.resolve solves the issue of relative presets when dealing with
@@ -99,7 +100,8 @@ if (isProduction) {
           presets: ['babel-preset-react-hmre'].map(require.resolve),
         }
       }
-    })
+    }),
+    new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
   );
 }
 
@@ -112,11 +114,11 @@ module.exports = (env = {}) => {
 
     entry: {
       app: ['webpack-hot-middleware/client?reload=true', path.join(Path.to.app, 'app.js')],
-      vendor: Object.keys(packageConfig.dependencies).concat([
+      /*vendor: Object.keys(packageConfig.dependencies).concat([
         'intl/locale-data/jsonp/en',
         'intl/locale-data/jsonp/ru',
         'webpack-hot-middleware/client?reload=true',
-      ]),
+      ]),*/
     },
 
     output: {
@@ -219,8 +221,9 @@ module.exports = (env = {}) => {
       host: HOST,
       port: PORT,
       noInfo: false,
-      inline: true,
-      compress: true,
+      compress: isProduction,
+      inline: !isProduction,
+      hot: !isProduction,
       headers: { 'Access-Control-Allow-Origin': '*', 'X-Custom-Header': 'yes' },
       publicPath: Path.to.public,
     },
