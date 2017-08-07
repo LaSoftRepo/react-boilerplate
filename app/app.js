@@ -2,25 +2,22 @@ import 'babel-polyfill';
 
 import React from 'react';
 
-import ReactDOM from 'react-dom';
+import ReactDOM     from 'react-dom';
 import { Provider } from 'react-redux';
 
-import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
-import Link from 'react-router-dom/Link';
+import Route    from 'react-router-dom/Route';
+import Switch   from 'react-router-dom/Switch';
+import Link     from 'react-router-dom/Link';
 import Redirect from 'react-router-dom/Redirect';
 
 import createBrowserHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, push, goBack } from 'react-router-redux'
 
-// Root app
-import App from './sources/containers/App';
-import DevTools from './sources/containers/DevTools';
-
 import configureStore from './sources/store';
-import LanguageProvider from './sources/containers/LanguageProvider';
 
-// import i18n messages
+import App              from './sources/containers/App';
+import DevTools         from './sources/containers/DevTools';
+import LanguageProvider from './sources/containers/LanguageProvider';
 import { translations } from './sources/i18n';
 
 const history = createBrowserHistory();
@@ -46,15 +43,13 @@ const render = translations => {
         <LanguageProvider messages={ translations }>
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
-              <div>
-                <Switch>
-                  <Route exact path='/'  component={ HomePage } />
-                  <Route path='/index'   component={ HomePage } />
-                  <Route path='/about'   component={ AboutPage } />
-                  <Route path='/company' component={ CompanyPage } />
-                  <Route component={ NotFound } />
-                </Switch>
-              </div>
+              <Switch>
+                <Route exact path='/'  component={ HomePage } />
+                <Route path='/index'   component={ HomePage } />
+                <Route path='/about'   component={ AboutPage } />
+                <Route path='/company' component={ CompanyPage } />
+                <Route component={ NotFound } />
+              </Switch>
             </App>
           </ConnectedRouter>
         </LanguageProvider>
