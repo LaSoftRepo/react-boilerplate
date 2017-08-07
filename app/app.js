@@ -1,24 +1,32 @@
+
+// Polyfills
 import 'babel-polyfill';
 
+// React
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-import ReactDOM     from 'react-dom';
+// Redux
 import { Provider } from 'react-redux';
+import configureStore from './sources/store';
 
+// Routing
 import Route    from 'react-router-dom/Route';
 import Switch   from 'react-router-dom/Switch';
 import Link     from 'react-router-dom/Link';
 import Redirect from 'react-router-dom/Redirect';
 
-import createBrowserHistory from 'history/createBrowserHistory'
-import { ConnectedRouter, push, goBack } from 'react-router-redux'
+import createBrowserHistory from 'history/createBrowserHistory';
+import ConnectedRouter from 'react-router-redux/ConnectedRouter';
+import { goBack } from 'react-router-redux';
 
-import configureStore from './sources/store';
-
+// Main containers
 import App              from './sources/containers/App';
 import DevTools         from './sources/containers/DevTools';
 import LanguageProvider from './sources/containers/LanguageProvider';
 import { translations } from './sources/i18n';
+
+
 
 const history = createBrowserHistory();
 
