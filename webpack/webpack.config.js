@@ -113,7 +113,7 @@ module.exports = (env = {}) => {
     context: Path.to.app,
 
     entry: {
-      app: ['webpack-hot-middleware/client?reload=true', path.join(Path.to.app, 'app.js')],
+      app: path.join(Path.to.app, 'app.js'),
       /*vendor: Object.keys(packageConfig.dependencies).concat([
         'intl/locale-data/jsonp/en',
         'intl/locale-data/jsonp/ru',
@@ -224,6 +224,7 @@ module.exports = (env = {}) => {
       compress: isProduction,
       inline: !isProduction,
       hot: !isProduction,
+      contentBase: isProduction ? './build' : './app',
       headers: { 'Access-Control-Allow-Origin': '*', 'X-Custom-Header': 'yes' },
       publicPath: Path.to.public,
     },
