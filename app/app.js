@@ -24,7 +24,9 @@ import configureStore from './sources/store';
 // Main containers
 import App              from './sources/containers/App';
 import DevTools         from './sources/containers/DevTools';
+import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
+
 import { translations } from './sources/i18n';
 
 import redirect from './sources/enhancers/redirect';
@@ -58,9 +60,7 @@ const CompanyPage = () => (
   </ul>
 );
 
-const NotFound    = () => <h2>404</h2>;
-
-const LoginPage   = () => <h2>Login</h2>;
+const LoginPage = () => <h2>Login</h2>;
 
 const render = translations => {
   ReactDOM.render(

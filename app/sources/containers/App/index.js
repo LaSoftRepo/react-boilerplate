@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './app.scss'
+import './index.scss'
 
 const Header = () => null
 const Footer = () => null
