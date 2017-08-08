@@ -23,6 +23,7 @@
     "intl": "^1.2.5",
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
+    "moize": "^3.4.0",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",

@@ -24,8 +24,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
+import moize from 'moize';
 
-export default (condition, toPath = '/login') => WrappedComponent =>
+const redirect = (condition, toPath = '/login') => WrappedComponent =>
   @connect(({ router }) => ({ router }))
   class extends Component {
     componentWillMount() {
@@ -53,3 +54,5 @@ export default (condition, toPath = '/login') => WrappedComponent =>
       return <WrappedComponent { ...this.props } />
     }
   }
+
+export default moize(redirect);

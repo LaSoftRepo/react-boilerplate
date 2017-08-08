@@ -57,6 +57,7 @@ const CompanyPage = () => (
     <li><button onClick={ () => store.dispatch(goBack()) }>Back</button></li>
   </ul>
 );
+
 const NotFound    = () => <h2>404</h2>;
 
 const LoginPage   = () => <h2>Login</h2>;
