@@ -29,6 +29,7 @@
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-hoc": "^0.1.8",
     "react-intl": "^2.3.0",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.2",
