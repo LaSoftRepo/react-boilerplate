@@ -23,6 +23,11 @@ const isProduction = env === 'production';
 const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }
+  }),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
     minChunks: Infinity,
@@ -168,9 +173,6 @@ module.exports = (env = {}) => {
               loader: 'postcss-loader',
               options: {
                 sourceMap: !isProduction,
-                config: {
-                  path: path.join(Path.to.root, 'postcss.config.js'),
-                },
                 ident: 'postcss',
                 plugins: () => [
                   require('postcss-flexbugs-fixes'),
