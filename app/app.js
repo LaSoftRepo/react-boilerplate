@@ -13,7 +13,6 @@ import { Provider } from 'react-redux';
 import Route    from 'react-router-dom/Route';
 import Switch   from 'react-router-dom/Switch';
 import Link     from 'react-router-dom/Link';
-import Redirect from 'react-router-dom/Redirect';
 
 import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
@@ -27,6 +26,8 @@ import App              from './sources/containers/App';
 import DevTools         from './sources/containers/DevTools';
 import LanguageProvider from './sources/containers/LanguageProvider';
 import { translations } from './sources/i18n';
+
+import redirect from './sources/enhancers/redirect';
 
 import './styles/main.scss';
 
@@ -42,7 +43,13 @@ const HomePage = () => (
   </ul>
 );
 
-const AboutPage   = () => <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>;
+@redirect(() => true, '/login')
+class AboutPage extends React.Component {
+  render() {
+    return <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>
+  }
+}
+
 const CompanyPage = () => (
   <ul>
     <li><h3>Company 1</h3></li>
@@ -51,6 +58,8 @@ const CompanyPage = () => (
   </ul>
 );
 const NotFound    = () => <h2>404</h2>;
+
+const LoginPage   = () => <h2>Login</h2>;
 
 const render = translations => {
   ReactDOM.render(
@@ -61,8 +70,9 @@ const render = translations => {
             <App hideHeader hideFooter>
               <Switch>
                 <Route exact path='/'  component={ HomePage } />
+                <Route path='/login'   component={ LoginPage } />
                 <Route path='/index'   component={ HomePage } />
-                <Route path='/about'   component={ AboutPage } />
+                <Route path='/about'   render={ () => <AboutPage/> } />
                 <Route path='/company' component={ CompanyPage } />
                 <Route component={ NotFound } />
               </Switch>
@@ -86,7 +96,7 @@ if (module.hot) {
   });
 }
 
-/*
+
 if (!window.Intl) {
   (new Promise(resolve => { resolve(import('intl')) }))
     .then(() => Promise.all([
@@ -95,19 +105,6 @@ if (!window.Intl) {
     ]))
     .then(() => render(translations))
     .catch(err => { throw err });
-} else {
-  render(translations);
-}*/
-
-if (!window.Intl) {
-  // Use i18n polyfills for locale data
-  import('intl')
-  .then(() => Promise.all([
-    import('intl/locale-data/jsonp/en.js'),
-    import('intl/locale-data/jsonp/ru.js'),
-  ]))
-  .then(() => render(translations))
-  .catch(err => { throw err });
 } else {
   render(translations);
 }
