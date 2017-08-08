@@ -46,7 +46,7 @@ const redirect = (condition, toPath = '/login') => WrappedComponent =>
           params.dispatch(replace({ pathname: toPath }));
         }
       } else {
-        console.warn(`redirect. Invalid pathname "${ toPath }"`);
+        console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
       }
     }
 
