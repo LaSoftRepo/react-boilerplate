@@ -73,7 +73,7 @@ const render = translations => {
                 <Route exact path='/'  component={ HomePage } />
                 <Route path='/login'   component={ LoginPage } />
                 <Route path='/index'   component={ HomePage } />
-                <Route path='/about'   render={ () => <AboutPage/> } />
+                <Route path='/about'   component={ AboutPage } />
                 <Route path='/company' component={ CompanyPage } />
                 <Route component={ NotFound } />
               </Switch>

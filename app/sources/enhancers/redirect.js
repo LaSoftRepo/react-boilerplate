@@ -1,19 +1,24 @@
 
 /* High order component (HOC) for conditional redirection
- * Decorator syntax:
+ * Arguments:
  *
- *    @redirect(conditionFunction, pathnameToRoute)(Component)
+ *  conditionFunction {function}
+ *  pathnameToRoute {string}
+ *  replaceHistory {boolean}
+ *  Component {React.Component}
+ *
+ *  redirect(conditionFunction, pathnameToRoute, overwriteHistory)(Component)
  *
  * Example of usage for Component:
  *
- *   import { ifUserNotAuthorize } from './credentials';
+ *  import { ifUserNotAuthorize } from './credentials';
  *
- *   @redirect(ifUserNotAuthorize, '/login')
- *   class SomeContainer extends React.Component {
- *     constructor(props) {
- *       super(props);
- *     }
- *   }
+ *  @redirect(ifUserNotAuthorize, '/login')
+ *  class SomeContainer extends React.Component {
+ *    constructor(props) {
+ *      super(props);
+ *    }
+ *  }
  *
  * for render function:
  *
@@ -27,39 +32,39 @@ import { replace, push } from 'react-router-redux';
 import reactHOC from 'react-hoc';
 import moize from 'moize';
 
-const redirect = (condition, toPath = '/login', replaceHistory = true) =>
-reactHOC(WrappedComponent =>
-  @connect(({ router }) => ({ router }))
-  class extends Component {
-    componentWillMount() {
-      this.checkCondition(this.props);
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.router.location !== this.props.router.location) {
-        this.checkCondition(nextProps);
+const redirect = (condition, toPath = '/login', overwrite = true) =>
+  reactHOC(WrappedComponent =>
+    @connect(({ router }) => ({ router }))
+    class extends Component {
+      componentWillMount() {
+        this.checkCondition(this.props);
       }
-    }
 
-    checkCondition(params) {
-      if (toPath && toPath.startsWith('/')) {
-        if (condition()) {
-          // TODO check if /login router exists
-          if (replaceHistory) {
-            params.dispatch(replace({ pathname: toPath }));
-          } else {
-            params.dispatch(push({ pathname: toPath }));
-          }
+      componentWillReceiveProps(nextProps) {
+        if (nextProps.router.location !== this.props.router.location) {
+          this.checkCondition(nextProps);
         }
-      } else {
-        console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
+      }
+
+      checkCondition(params) {
+        if (toPath && toPath.startsWith('/')) {
+          if (condition()) {
+            // TODO check if /login router exists
+            if (overwrite) {
+              params.dispatch(replace({ pathname: toPath }));
+            } else {
+              params.dispatch(push({ pathname: toPath }));
+            }
+          }
+        } else {
+          console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
+        }
+      }
+
+      render() {
+        return <WrappedComponent { ...this.props } />
       }
     }
-
-    render() {
-      return <WrappedComponent { ...this.props } />
-    }
-  }
-)
+  )
 
 export default moize(redirect, { maxSize: 20 });
