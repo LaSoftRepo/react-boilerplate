@@ -1,20 +1,30 @@
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
-
-/* High order component for conditional redirection
- * Example of usage:
- *   import ifUserNotAuthorize from './checkCredentials'
+/* High order component (HOC) for conditional redirection
+ * Decorator syntax:
+ *
+ *    @redirect(conditionFunction, pathnameToRoute)(Component)
+ *
+ * Example of usage for Component:
+ *
+ *   import { ifUserNotAuthorize } from './credentials';
+ *
  *   @redirect(ifUserNotAuthorize, '/login')
  *   class SomeContainer extends Component {
  *     constructor(props) {
  *       super(props);
  *     }
  *   }
- * or:
+ *
+ * for render function:
+ *
  *  const SomeRestrictedContainer = redirect(ifUserNotAuthorize)((props) => <div></div>));
+ *
  */
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
+
 export default (condition, toPath = '/login') => WrappedComponent =>
   @connect(({ router }) => ({ router }))
   class extends Component {
