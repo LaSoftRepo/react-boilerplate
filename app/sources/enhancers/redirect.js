@@ -23,36 +23,40 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
+import { replace, push } from 'react-router-redux';
 import moize from 'moize';
 
-const redirect = (condition, toPath = '/login') => WrappedComponent =>
-  @connect(({ router }) => ({ router }))
-  class extends Component {
-    componentWillMount() {
-      this.checkCondition(this.props);
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.router.location !== this.props.router.location) {
-        this.checkCondition(nextProps);
+const redirect = (condition, toPath = '/login', replaceHistory = true) => WrappedComponent =>
+    @connect(({ router }) => ({ router }))
+    class extends Component {
+      componentWillMount() {
+        this.checkCondition(this.props);
       }
-    }
 
-    checkCondition(params) {
-      if (toPath && toPath.startsWith('/')) {
-        if (condition()) {
-          // TODO check if /login router exists
-          params.dispatch(replace({ pathname: toPath }));
+      componentWillReceiveProps(nextProps) {
+        if (nextProps.router.location !== this.props.router.location) {
+          this.checkCondition(nextProps);
         }
-      } else {
-        console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
+      }
+
+      checkCondition(params) {
+        if (toPath && toPath.startsWith('/')) {
+          if (condition()) {
+            // TODO check if /login router exists
+            if (replaceHistory) {
+              params.dispatch(replace({ pathname: toPath }));
+            } else {
+              params.dispatch(push({ pathname: toPath }));
+            }
+          }
+        } else {
+          console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
+        }
+      }
+
+      render() {
+        return <WrappedComponent { ...this.props } />
       }
     }
 
-    render() {
-      return <WrappedComponent { ...this.props } />
-    }
-  }
-
-export default moize(redirect);
+export default moize(redirect, { maxSize: 20 });
