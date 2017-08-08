@@ -43,7 +43,13 @@ const HomePage = () => (
 );
 
 const AboutPage   = () => <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>;
-const CompanyPage = () => <h2>Company<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>;
+const CompanyPage = () => (
+  <ul>
+    <li><h3>Company 1</h3></li>
+    <li><h3>Company 2</h3></li>
+    <li><button onClick={ () => store.dispatch(goBack()) }>Back</button></li>
+  </ul>
+);
 const NotFound    = () => <h2>404</h2>;
 
 const render = translations => {

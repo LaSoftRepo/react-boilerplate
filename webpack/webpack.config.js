@@ -104,15 +104,6 @@ if (isProduction) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
       context: Path.to.app,
-      options: {
-        babelQuery: {
-          // require.resolve solves the issue of relative presets when dealing with
-          // locally linked packages. This is an issue with babel and webpack.
-          // See https://github.com/babel/babel-loader/issues/149 and
-          // https://github.com/webpack/webpack/issues/1866
-          presets: ['babel-preset-react-hmre'].map(require.resolve),
-        }
-      }
     }),
     new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
   );

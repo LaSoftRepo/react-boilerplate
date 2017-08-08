@@ -25,6 +25,7 @@
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
+    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-intl": "^2.3.0",

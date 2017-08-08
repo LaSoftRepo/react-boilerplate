@@ -10,6 +10,11 @@
     "stage-0"
   ],
   "env": {
+    "development": {
+      "presets": [
+        "react-hmre"
+      ]
+    },
     "production": {
       "only": [
         "app"
