@@ -19,6 +19,10 @@ const PORT = 8080;
 const env          = process.env.NODE_ENV || 'development';
 const isProduction = env === 'production';
 
+const prettifyPackageName = name => {
+  return name.replace(/[-_]/, ' ').replace(/(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g, m => m.toUpperCase());
+}
+
 // Common plugins
 const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
@@ -38,6 +42,7 @@ const plugins = [
   }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
+    title:     prettifyPackageName(packageConfig.name) || 'Boilerplate',
     template:  path.join(Path.to.app, 'index.html'),
     path:      Path.to.build,
     filename: 'index.html',
@@ -226,8 +231,8 @@ module.exports = (env = {}) => {
       port: PORT,
       noInfo: false,
       compress: isProduction,
-      inline: !isProduction,
       hot: !isProduction,
+      inline: !isProduction,
       contentBase: isProduction ? './build' : './app',
       headers: { 'Access-Control-Allow-Origin': '*', 'X-Custom-Header': 'yes' },
       publicPath: Path.to.public,
