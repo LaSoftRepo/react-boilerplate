@@ -40,13 +40,14 @@ const history = createBrowserHistory();
 const initialState = {};
 const store = configureStore(initialState, history);
 
-// const HomePage = () => (
-//   <ul>
-//     <li><Link to='/about'>About</Link></li>
-//     <li><Link to='/company'>Company</Link></li>
-//   </ul>
-// );
+const HomePage = () => (
+  <ul>
+    <li><Link to='/about'>About</Link></li>
+    <li><Link to='/company'>Company</Link></li>
+  </ul>
+);
 
+/*
 const HomePage = () => (
   <section grid='rows'>
     <div className='test-1'></div>
@@ -54,21 +55,29 @@ const HomePage = () => (
     <div className='test-2'></div>
     <div className='test'></div>
   </section>
-);
+);*/
 
-@redirect(() => true, '/login')
+@redirect(() => false, '/login')
 class AboutPage extends React.Component {
   render() {
-    return <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>
+    //return <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>
+    return (
+      <div grid='columns'>
+        <button onClick={ () => store.dispatch(goBack()) }>Back</button>
+        <h2>About</h2>
+      </div>
+    );
   }
 }
 
 const CompanyPage = () => (
-  <ul>
-    <li><h3>Company 1</h3></li>
-    <li><h3>Company 2</h3></li>
-    <li><button onClick={ () => store.dispatch(goBack()) }>Back</button></li>
-  </ul>
+  <div>
+    <button onClick={ () => store.dispatch(goBack()) }>Back</button>
+    <ul>
+      <li><h3>Company 1</h3></li>
+      <li><h3>Company 2</h3></li>
+    </ul>
+  </div>
 );
 
 const LoginPage = () => <h2>Login</h2>;
