@@ -22,6 +22,8 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import { goBack } from 'react-router-redux';
 
+import { Prompt } from 'react-router';
+
 // Cofigurations
 import configureStore from './sources/store';
 
@@ -30,14 +32,18 @@ import App              from './sources/containers/App';
 import DevTools         from './sources/containers/DevTools';
 import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
-
-import Playground from './sources/containers/Playground';
+import Playground       from './sources/containers/Playground';
+import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
 import { translations } from './sources/i18n';
 
 import redirect from './sources/enhancers/redirect';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({
+  //getUserConfirmation: ConfirmationRenderer
+});
+
+const containerNode = document.getElementById('app');
 
 const initialState = {};
 const store = configureStore(initialState, history);
@@ -58,6 +64,7 @@ class AboutPage extends React.Component {
       <div grid='columns'>
         <button onClick={ () => store.dispatch(goBack()) }>Back</button>
         <h2>About</h2>
+        <Prompt message="Move away?" when={ true } />
       </div>
     );
   }
@@ -97,7 +104,7 @@ const render = translations => {
       </Provider>
       { process.env.NODE_ENV !== 'production' ? <DevTools store={ store } /> : null }
     </div>,
-    document.getElementById('app')
+    containerNode
   );
 };
 
