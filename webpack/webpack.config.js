@@ -187,7 +187,7 @@ module.exports = (env = {}) => {
                 ],
               },
             },
-            //'resolve-url-loader',
+            'resolve-url-loader',
             {
               loader: 'sass-loader',
               options: {

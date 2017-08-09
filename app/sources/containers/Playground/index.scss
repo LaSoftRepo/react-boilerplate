@@ -1,0 +1,16 @@
+section[grid="masonry"] > .demo_box {
+  width: 250px;
+  width: 20vw;
+  max-width: 240px;
+}
+
+section > .demo_box:nth-child(odd) {
+  height: 60px;
+}
+
+.demo_box, .demo_row_box {
+  margin: 1px;
+  height: 100px;
+  width:  100px;
+  background-color: #777;
+}
