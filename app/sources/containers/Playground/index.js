@@ -40,7 +40,6 @@ export default class Playground extends React.PureComponent {
             <div className='demo-box'></div>
             <div className='demo-box'></div>
           </section>
-
         </div>
       </div>
     );

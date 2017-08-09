@@ -9,6 +9,19 @@
   contain: layout;
 
   flex-direction: row;
+
+  &[visibility~="hidden"] {
+    visibility: hidden;
+  }
+
+  &[visibility~="collapse"] {
+    visibility: collapse;
+  }
+
+  &[visibility~="visible"] {
+    visibility: visible;
+  }
+
   &[reverse] {
     flex-direction: row-reverse;
   }
@@ -71,6 +84,9 @@
     - Instead of col-xs-12 or whatever
     - Specify size on the parent
   */
+  &[columns~="1"] > * {
+    flex-basis: 100%;
+  }
   &[columns~="2"] > * {
     flex-basis: (100% / 2);
   }

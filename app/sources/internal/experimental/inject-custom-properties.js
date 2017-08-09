@@ -6,6 +6,8 @@ if (__EXPERIMENTAL_FEATURES__) {
   // Inject custom property attributes for ragrid.scss
   DOMProperty.injectDOMPropertyConfig({
     Properties: {
+      //'visibility': DOMProperty.MUST_USE_ATTRIBUTE,
+
       'grid':     DOMProperty.MUST_USE_ATTRIBUTE,
       'reverse':  DOMProperty.MUST_USE_ATTRIBUTE,
 
