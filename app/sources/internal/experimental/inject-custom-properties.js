@@ -1,4 +1,7 @@
 // We should manually inject allowing custom attributes while we waiting for custom attributes in next react.js version.
+// TODO After releasing with this PR:
+//    https://github.com/facebook/react/pull/10385
+// remove current property injects
 
 import { DOMProperty } from 'react-dom/lib/ReactInjection';
 

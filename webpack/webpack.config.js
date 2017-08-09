@@ -15,7 +15,7 @@ const packageConfig = require('../package.json');
 
 const __EXPERIMENTAL_FEATURES__ = true;
 
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 const PORT = 8080;
 
 const env          = process.env.NODE_ENV || 'development';
