@@ -1,5 +1,7 @@
 'use strict'
 
+// TODO babel: switch to babel-preset-env
+
 const path              = require('path');
 const webpack           = require('webpack');
 const autoprefixer      = require('autoprefixer');
@@ -176,15 +178,8 @@ module.exports = (env = {}) => {
                 ident: 'postcss',
                 plugins: () => [
                   require('postcss-flexbugs-fixes'),
-                  autoprefixer({
-                    browsers: [
-                      '>1%',
-                      'last 5 versions',
-                      'Firefox ESR',
-                      'not ie < 9', // React doesn't support IE8 anyway
-                    ],
-                    flexbox: 'no-2009',
-                  }),
+                  require('postcss-cssnext'),
+                  require('postcss-browser-reporter')
                 ],
               },
             },

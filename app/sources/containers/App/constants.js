@@ -1,1 +1,1 @@
-export const RESET = 'root/reset';
+export const RESET = '@@app/reset';

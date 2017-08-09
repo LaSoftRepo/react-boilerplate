@@ -41,7 +41,6 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -75,6 +74,8 @@
     "image-webpack-loader": "^3.3.1",
     "node-sass": "^4.5.3",
     "open-browser-webpack-plugin": "0.0.5",
+    "postcss-browser-reporter": "^0.5.0",
+    "postcss-cssnext": "^3.0.2",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.6",
     "redux-devtools": "^3.4.0",
