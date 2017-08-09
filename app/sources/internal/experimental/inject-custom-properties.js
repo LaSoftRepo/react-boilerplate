@@ -5,7 +5,7 @@ if (__EXPERIMENTAL_FEATURES__) {
   DOMProperty.injectDOMPropertyConfig({
     Properties: {
       'grid':     DOMProperty.MUST_USE_ATTRIBUTE,
-      'ordering': DOMProperty.MUST_USE_ATTRIBUTE,
+      'reverse':  DOMProperty.MUST_USE_ATTRIBUTE,
 
       'horizontally-aligned':     DOMProperty.MUST_USE_ATTRIBUTE,
       'vertically-aligned':       DOMProperty.MUST_USE_ATTRIBUTE,

@@ -50,12 +50,12 @@ const HomePage = () => (
 */
 
 const HomePage = () => (
-  <section grid='columns'>
+  <span grid reverse horizontally-distributed="between" vertically-aligned='center'>
     <div className='test-1'></div>
     <div className='test'></div>
     <div className='test-2'></div>
     <div className='test'></div>
-  </section>
+  </span>
 );
 
 @redirect(() => false, '/login')
@@ -120,6 +120,7 @@ if (module.hot) {
 
 
 if (!window.Intl) {
+  // We should wrap import to Promise for make HMR work
   (new Promise(resolve => { resolve(import('intl')) }))
     .then(() => Promise.all([
       import('intl/locale-data/jsonp/en.js'),
