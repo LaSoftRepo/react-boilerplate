@@ -40,22 +40,23 @@ const history = createBrowserHistory();
 const initialState = {};
 const store = configureStore(initialState, history);
 
+/*
 const HomePage = () => (
   <ul>
     <li><Link to='/about'>About</Link></li>
     <li><Link to='/company'>Company</Link></li>
   </ul>
 );
+*/
 
-/*
 const HomePage = () => (
-  <section grid='rows'>
+  <section grid='columns'>
     <div className='test-1'></div>
     <div className='test'></div>
     <div className='test-2'></div>
     <div className='test'></div>
   </section>
-);*/
+);
 
 @redirect(() => false, '/login')
 class AboutPage extends React.Component {

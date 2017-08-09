@@ -7,8 +7,7 @@
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
   contain: layout;
 
-  &[direction~="reverse"] {
-    // FIXME this not work
+  &[ordering~="reverse"] {
     flex-direction: row-reverse;
   }
 
@@ -120,7 +119,7 @@
   flex-direction: column;
   align-items: flex-start;
 
-  &[direction~="reverse"] {
+  &[ordering~="reverse"] {
     flex-direction: column-reverse;
   }
   &[horizontally-aligned~="center"] {

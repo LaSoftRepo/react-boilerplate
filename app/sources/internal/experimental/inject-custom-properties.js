@@ -4,8 +4,8 @@ if (__EXPERIMENTAL_FEATURES__) {
   // Inject custom property attributes for ragrid.scss
   DOMProperty.injectDOMPropertyConfig({
     Properties: {
-      'grid':    DOMProperty.MUST_USE_ATTRIBUTE,
-      'reverse': DOMProperty.MUST_USE_ATTRIBUTE,
+      'grid':     DOMProperty.MUST_USE_ATTRIBUTE,
+      'ordering': DOMProperty.MUST_USE_ATTRIBUTE,
 
       'horizontally-aligned':     DOMProperty.MUST_USE_ATTRIBUTE,
       'vertically-aligned':       DOMProperty.MUST_USE_ATTRIBUTE,
