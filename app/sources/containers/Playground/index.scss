@@ -1,6 +1,10 @@
 
 @import "../../../styles/variables.scss";
 
+.section-playground {
+  padding-top: 30px;
+}
+
 section[grid="masonry"] {
   height: 280px;
 }

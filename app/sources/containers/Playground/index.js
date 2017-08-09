@@ -31,7 +31,7 @@ export default class Playground extends React.PureComponent {
             <option value='masonry'>masonry</option>
           </select>
 
-          <section grid={ selectedValue } vertically-aligned="center">
+          <section grid={ selectedValue } vertically-aligned='center' className='section-playground'>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
