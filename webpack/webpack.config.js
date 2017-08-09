@@ -162,6 +162,7 @@ module.exports = (env = {}) => {
         {
           test: /\.scss$/,
           exclude: /node_modules/,
+          include: Path.to.app,
           use: [
             'style-loader',
             {

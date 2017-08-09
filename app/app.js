@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 
 import 'sources/internal/experimental/inject-custom-properties.js';
 
-import './styles/main.scss';
+import './styles/index.scss';
 
 // Redux
 import { Provider } from 'react-redux';
