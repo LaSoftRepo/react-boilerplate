@@ -40,16 +40,15 @@ const history = createBrowserHistory();
 const initialState = {};
 const store = configureStore(initialState, history);
 
-/*
 const HomePage = () => (
   <ul>
     <li><Link to='/about'>About</Link></li>
     <li><Link to='/company'>Company</Link></li>
+    <li><Link to='/playground'>Playground</Link></li>
   </ul>
 );
-*/
 
-const HomePage = () => (
+const Playground = () => (
   <span grid reverse horizontally-distributed="between" vertically-aligned='center'>
     <div className='test-1'></div>
     <div className='test'></div>
@@ -91,11 +90,12 @@ const render = translations => {
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
               <Switch>
-                <Route exact path='/'  component={ HomePage } />
-                <Route path='/login'   component={ LoginPage } />
-                <Route path='/index'   component={ HomePage } />
-                <Route path='/about'   component={ AboutPage } />
-                <Route path='/company' component={ CompanyPage } />
+                <Route exact path='/'     component={ HomePage } />
+                <Route path='/login'      component={ LoginPage } />
+                <Route path='/index'      component={ HomePage } />
+                <Route path='/about'      component={ AboutPage } />
+                <Route path='/company'    component={ CompanyPage } />
+                <Route path='/playground' component={ Playground } />
                 <Route component={ NotFound } />
               </Switch>
             </App>
