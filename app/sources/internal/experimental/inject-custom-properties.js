@@ -1,3 +1,5 @@
+// We should manually inject allowing custom attributes while we waiting for custom attributes in next react.js version.
+
 import { DOMProperty } from 'react-dom/lib/ReactInjection';
 
 if (__EXPERIMENTAL_FEATURES__) {

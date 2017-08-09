@@ -1,4 +1,5 @@
 // See https://argyleink.github.io/ragrid how use this
+// This version has some changes in order attribute. Use reverse instead order="reverse"
 
 [grid] {
   display: flex;
@@ -6,7 +7,7 @@
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
   contain: layout;
-  
+
   &[reverse] {
     flex-direction: row-reverse;
   }

@@ -31,6 +31,8 @@ import DevTools         from './sources/containers/DevTools';
 import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
 
+import Playground from './sources/containers/Playground';
+
 import { translations } from './sources/i18n';
 
 import redirect from './sources/enhancers/redirect';
@@ -46,15 +48,6 @@ const HomePage = () => (
     <li><Link to='/company'>Company</Link></li>
     <li><Link to='/playground'>Playground</Link></li>
   </ul>
-);
-
-const Playground = () => (
-  <span grid reverse horizontally-distributed="between" vertically-aligned='center'>
-    <div className='test-1'></div>
-    <div className='test'></div>
-    <div className='test-2'></div>
-    <div className='test'></div>
-  </span>
 );
 
 @redirect(() => false, '/login')
