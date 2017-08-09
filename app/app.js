@@ -6,6 +6,10 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import 'sources/internal/experimental/inject-custom-properties.js';
+
+import './styles/main.scss';
+
 // Redux
 import { Provider } from 'react-redux';
 
@@ -31,18 +35,25 @@ import { translations } from './sources/i18n';
 
 import redirect from './sources/enhancers/redirect';
 
-import './styles/main.scss';
-
 const history = createBrowserHistory();
 
 const initialState = {};
 const store = configureStore(initialState, history);
 
+// const HomePage = () => (
+//   <ul>
+//     <li><Link to='/about'>About</Link></li>
+//     <li><Link to='/company'>Company</Link></li>
+//   </ul>
+// );
+
 const HomePage = () => (
-  <ul>
-    <li><Link to='/about'>About</Link></li>
-    <li><Link to='/company'>Company</Link></li>
-  </ul>
+  <section grid='rows'>
+    <div className='test-1'></div>
+    <div className='test'></div>
+    <div className='test-2'></div>
+    <div className='test'></div>
+  </section>
 );
 
 @redirect(() => true, '/login')
@@ -118,5 +129,5 @@ if (process.env.NODE_ENV !== 'production') {
   });
   // eslint-disable-next-line global-require
   const { whyDidYouUpdate } = require('why-did-you-update');
-  whyDidYouUpdate(React, { exclude: [ /^DockMonitor/, /^Route/, /^Router/ ] });
+  whyDidYouUpdate(React, { exclude: [ /^DevTools/, /^DockMonitor/, /^Route/, /^Router/ ] });
 }

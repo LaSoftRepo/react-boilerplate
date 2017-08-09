@@ -13,6 +13,8 @@ const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModules
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
 
+const __EXPERIMENTAL_FEATURES__ = true;
+
 const HOST = 'localhost';
 const PORT = 8080;
 
@@ -30,7 +32,8 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }
+    },
+    '__EXPERIMENTAL_FEATURES__': JSON.stringify(__EXPERIMENTAL_FEATURES__),
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
@@ -175,7 +178,7 @@ module.exports = (env = {}) => {
                   autoprefixer({
                     browsers: [
                       '>1%',
-                      'last 4 versions',
+                      'last 5 versions',
                       'Firefox ESR',
                       'not ie < 9', // React doesn't support IE8 anyway
                     ],
