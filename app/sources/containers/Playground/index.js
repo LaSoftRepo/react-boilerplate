@@ -32,13 +32,13 @@ export default class Playground extends React.PureComponent {
           </select>
 
           <section grid={ selectedValue } vertically-aligned="center">
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
-            <div className='demo_box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
+            <div className='demo-box'></div>
           </section>
 
         </div>

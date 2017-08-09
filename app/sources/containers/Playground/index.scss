@@ -1,16 +1,20 @@
 
 @import "../../../styles/variables.scss";
 
+section[grid="masonry"] {
+  height: 280px;
+}
+
 section[grid="masonry"] > .demo_box {
   max-width: 240px;
 }
 
-section > .demo_box:nth-child(odd) {
+section > .demo-box:nth-child(odd) {
   height: 60px;
   background-color: $gray-80;
 }
 
-.demo_box, .demo_row_box {
+.demo-box {
   margin: 1px;
   height: 100px;
   width:  100px;
