@@ -8,6 +8,7 @@
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
   contain: layout;
 
+  flex-direction: row;
   &[reverse] {
     flex-direction: row-reverse;
   }
