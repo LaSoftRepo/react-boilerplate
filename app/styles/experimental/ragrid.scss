@@ -146,5 +146,9 @@
 
 [grid~="masonry"] {
   flex-flow: column wrap;
-  height: 20rem;
+  height: 30rem;
+
+  &[vertically-aligned~="center"] {
+    align-content: center;
+  }
 }

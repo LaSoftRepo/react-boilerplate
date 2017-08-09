@@ -22,17 +22,23 @@ export default class Playground extends React.PureComponent {
       <div>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div grid='rows' horizontally-aligned='center'>
+
           <select size='3' value={ selectedValue } onChange={ this.handleChange }>
-              <option value='rows'>rows</option>
-              <option value='columns'>columns</option>
-              <option value='masonry'>masonry</option>
+            <option value='rows'>rows</option>
+            <option value='columns'>columns</option>
+            <option value='masonry'>masonry</option>
           </select>
+
           <section grid={ selectedValue } vertically-aligned="center">
             <div className='demo_box'></div>
             <div className='demo_box'></div>
             <div className='demo_box'></div>
             <div className='demo_box'></div>
+            <div className='demo_box'></div>
+            <div className='demo_box'></div>
+            <div className='demo_box'></div>
           </section>
+
         </div>
       </div>
     );
