@@ -21,8 +21,8 @@ const __EXPERIMENTAL_FEATURES__ = true;
 
 const HOST = argv.host || '0.0.0.0';
 const PORT = argv.port || 8080;
+const env  = process.env.NODE_ENV || 'development';
 
-const env          = process.env.NODE_ENV || 'development';
 const isProduction = env === 'production';
 
 const prettifyPackageName = name => {
@@ -62,7 +62,7 @@ let useStyleLoaders = [
   {
     loader: 'style-loader',
     options: {
-      //minimize: isProduction,
+      minimize:  isProduction,
       sourceMap: !isProduction,
     },
   },
@@ -164,8 +164,6 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
-  console.log('PORT:', argv);
-
   return {
     target: 'web',
     bail: isProduction,
