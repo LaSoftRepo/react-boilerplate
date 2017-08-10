@@ -23,7 +23,7 @@ export default class Playground extends React.PureComponent {
     return (
       <div>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
-        <div grid='rows' horizontally-aligned='center'>
+        <div grid='rows' horizontal-align='center'>
 
           <select size='3' value={ selectedValue } onChange={ this.handleChange }>
             <option value='rows'>rows</option>
@@ -31,7 +31,7 @@ export default class Playground extends React.PureComponent {
             <option value='masonry'>masonry</option>
           </select>
 
-          <section grid={ selectedValue } vertically-aligned='center' className='section-playground'>
+          <section grid={ selectedValue } vertical-align='center' className='section-playground'>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
             <div className='demo-box'></div>

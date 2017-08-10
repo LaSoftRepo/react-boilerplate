@@ -35,25 +35,25 @@
     - Horizontal: Left, Center, Right
     - Vertical: Top, Center, Bottom
   */
-  &[horizontally-aligned~="left"] {
+  &[horizontal-align~="left"] {
     justify-content: flex-start;
   }
-  &[horizontally-aligned~="center"] {
+  &[horizontal-align~="center"] {
     justify-content: center;
   }
-  &[horizontally-aligned~="right"] {
+  &[horizontal-align~="right"] {
     justify-content: flex-end;
   }
-  &[vertically-aligned~="top"] {
+  &[vertical-align~="top"] {
     align-items: flex-start;
   }
-  &[vertically-aligned~="center"] {
+  &[vertical-align~="center"] {
     align-items: center;
   }
-  &[vertically-aligned~="bottom"] {
+  &[vertical-align~="bottom"] {
     align-items: flex-end;
   }
-  &[vertically-aligned~="baseline"] {
+  &[vertical-align~="baseline"] {
     align-items: baseline;
   }
 
@@ -62,24 +62,24 @@
     - Horizontal: Left, Center, Right
     - Vertical: Top, Center, Bottom
   */
-  &[horizontally-distributed~="around"] {
+  &[horizontal-distribution~="around"] {
     justify-content: space-around;
   }
-  &[horizontally-distributed~="between"] {
+  &[horizontal-distribution~="between"] {
     justify-content: space-between;
   }
-  &[horizontally-distributed~="equal"] {
+  &[horizontal-distribution~="equal"] {
     > * {
       flex-grow: 1;
     }
   }
-  &[vertically-distributed~="around"] {
+  &[vertical-distribution~="around"] {
     align-content: space-around;
   }
-  &[vertically-distributed~="between"] {
+  &[vertical-distribution~="between"] {
     align-content: space-between;
   }
-  &[vertically-distributed~="equal"] {
+  &[vertical-distribution~="equal"] {
     align-items: stretch;
   }
 
@@ -128,7 +128,7 @@
 
 // column specific
 [grid~="columns"] {
-  &[vertically-distributed~="equal"] {
+  &[vertical-distribution~="equal"] {
     align-items: stretch;
     > * {
       height: auto;
@@ -144,20 +144,20 @@
   &[reverse] {
     flex-direction: column-reverse;
   }
-  &[horizontally-aligned~="center"] {
+  &[horizontal-align~="center"] {
     align-items: center;
   }
-  &[horizontally-aligned~="right"] {
+  &[horizontal-align~="right"] {
     align-items: flex-end;
   }
 
-  &[vertically-distributed~="around"] {
+  &[vertical-distribution~="around"] {
     justify-content: space-around;
   }
-  &[vertically-distributed~="between"] {
+  &[vertical-distribution~="between"] {
     justify-content: space-between;
   }
-  &[vertically-distributed~="equal"] {
+  &[vertical-distribution~="equal"] {
     > * {
       width: initial;
     }
@@ -168,7 +168,7 @@
   flex-flow: column wrap;
   height: 30rem;
 
-  &[vertically-aligned~="center"] {
+  &[vertical-align~="center"] {
     align-content: center;
   }
 }

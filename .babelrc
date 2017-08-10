@@ -9,8 +9,7 @@
       "latest", {
         "es2015": {
           "modules": false
-        },
-        "es2017": false
+        }
       }
     ],
     "react",
