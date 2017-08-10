@@ -33,7 +33,9 @@ import DevTools         from './sources/containers/DevTools';
 import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
 import Playground       from './sources/containers/Playground';
-import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
+//import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
+
+import Modal from './sources/components/Modal';
 
 import { translations } from './sources/i18n';
 
@@ -53,6 +55,7 @@ const HomePage = () => (
     <li><Link to='/about'>About</Link></li>
     <li><Link to='/company'>Company</Link></li>
     <li><Link to='/playground'>Playground</Link></li>
+    <li><Link to='/dialog'>Test dialog</Link></li>
   </ul>
 );
 
@@ -96,6 +99,7 @@ const render = translations => {
                 <Route path='/about'      component={ AboutPage } />
                 <Route path='/company'    component={ CompanyPage } />
                 <Route path='/playground' component={ Playground } />
+                <Route path='/dialog'     component={ Modal } />
                 <Route component={ NotFound } />
               </Switch>
             </App>
@@ -120,7 +124,7 @@ if (module.hot) {
 
 
 if (!window.Intl) {
-  // We should wrap import to Promise for make HMR work
+  // We should wrap import to Promise for make HMR work in current page
   (new Promise(resolve => { resolve(import('intl')) }))
     .then(() => Promise.all([
       import('intl/locale-data/jsonp/en.js'),

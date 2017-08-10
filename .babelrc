@@ -2,9 +2,7 @@
   "plugins": [
     "transform-class-properties",
     "syntax-decorators",
-    "transform-decorators-legacy",
-    ["babel-plugin-transform-react-jsx", { "useBuiltIns": true }],
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
+    "transform-decorators-legacy"
   ],
   "presets": [
     [

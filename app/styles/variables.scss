@@ -1,3 +1,7 @@
+/*
+ *  Black & white color presets
+ */
+
 $white:   #fff    !default;
 $gray-90: #f8f9fa !default;
 $gray-80: #e9ecef !default;
@@ -7,9 +11,38 @@ $gray-50: #adb5bd !default;
 $gray-40: #868e96 !default;
 $gray-30: #495057 !default;
 $gray-20: #343a40 !default;
-$gray-15: #262626 !default;
 $gray-10: #212529 !default;
 $black:   #000    !default;
+
+/*
+ *  Alpha transparency presets
+ */
+
+$alpha-95: rgba(0,0,0,0.95) !default;
+$alpha-90: rgba(0,0,0,0.90) !default;
+$alpha-85: rgba(0,0,0,0.85) !default;
+$alpha-80: rgba(0,0,0,0.80) !default;
+$alpha-75: rgba(0,0,0,0.75) !default;
+$alpha-70: rgba(0,0,0,0.70) !default;
+$alpha-65: rgba(0,0,0,0.65) !default;
+$alpha-60: rgba(0,0,0,0.60) !default;
+$alpha-55: rgba(0,0,0,0.55) !default;
+$alpha-50: rgba(0,0,0,0.50) !default;
+$alpha-45: rgba(0,0,0,0.45) !default;
+$alpha-40: rgba(0,0,0,0.40) !default;
+$alpha-35: rgba(0,0,0,0.35) !default;
+$alpha-30: rgba(0,0,0,0.30) !default;
+$alpha-25: rgba(0,0,0,0.25) !default;
+$alpha-20: rgba(0,0,0,0.20) !default;
+$alpha-15: rgba(0,0,0,0.15) !default;
+$alpha-10: rgba(0,0,0,0.10) !default;
+$alpha-5:  rgba(0,0,0,0.05) !default;
+
+$transparent: transparent !default;
+
+/*
+ *  Basic color presets
+ */
 
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
@@ -21,6 +54,10 @@ $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
+
+/*
+ *  Space presets
+ */
 
 $space: 1rem !default;
 $spaces: (

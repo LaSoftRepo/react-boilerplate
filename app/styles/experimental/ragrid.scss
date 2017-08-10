@@ -29,6 +29,10 @@
   &[reverse] {
     flex-direction: row-reverse;
   }
+  &[center] {
+    align-items: center;
+    justify-content: center;
+  }
 
   /*
   ALIGN

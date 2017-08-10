@@ -1,0 +1,16 @@
+
+@import '../../../styles/variables.scss';
+
+.modal-dackdrop {
+  background-color: $alpha-25;
+  width:  100vw;
+  height: 100vh;
+}
+
+.modal-container {
+  width:  calc(100vw * 0.4);
+  height: calc(100vw / (1.618 * 2.5));
+  min-width:  323px;
+  min-height: 200px;
+  background-color: white;
+}
