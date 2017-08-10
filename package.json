@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "license": "UNLICENSED",
-  "autor": "Max Graey (LaSoft @ 2017)",
+  "author": "Max Graey (LaSoft @ 2017)",
   "description": "Bootstrap boilerplate for speedup React.js projects",
   "engines": {
     "node": ">=8",

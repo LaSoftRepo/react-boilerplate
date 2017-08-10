@@ -6,12 +6,14 @@
  * IntlProvider component and i18n messages (loaded from `app/sources/translations`)
  */
 
-import React, { PureComponent } from 'react';
+import React     from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { IntlProvider } from 'react-intl';
 
+import { connect }        from 'react-redux';
+import { createSelector } from 'reselect';
+import { IntlProvider }   from 'react-intl';
+
+import { DEFAULT_LOCALE } from './constants';
 import { localeSelector } from './selectors';
 
 const mapStateToProps = createSelector(
@@ -20,7 +22,7 @@ const mapStateToProps = createSelector(
 );
 
 @connect(mapStateToProps)
-export default class LanguageProvider extends PureComponent {
+export default class LanguageProvider extends React.PureComponent {
   static propTypes = {
     locale:   PropTypes.string,
     messages: PropTypes.object,
@@ -28,7 +30,7 @@ export default class LanguageProvider extends PureComponent {
   }
 
   static defaultProps = {
-    locale:   'en',
+    locale:   DEFAULT_LOCALE,
     messages: {},
   }
 

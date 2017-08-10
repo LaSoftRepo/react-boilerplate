@@ -4,7 +4,7 @@ import ExecutionEnvironment from 'exenv';
 
 import './index.scss';
 
-export default class Modal extends React.PureComponent {
+export default class Modal extends React.Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
     allowEsc:  PropTypes.bool,
@@ -13,8 +13,8 @@ export default class Modal extends React.PureComponent {
   }
 
   static defaultProps = {
-    onClose: () => {},
-    allowEsc: true,
+    onClose:   () => {},
+    allowEsc:  true,
     autoFocus: true,
   }
 
