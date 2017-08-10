@@ -9,6 +9,10 @@ html, body {
   font-size: 100%;
 }
 
+button:focus {
+  outline: none;
+}
+
 #app {
   background-color: #fff;
   min-height: 100%;

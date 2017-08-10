@@ -90,6 +90,7 @@
     "webpack-dev-server": "^2.6.1",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-manifest-plugin": "^1.2.1",
-    "why-did-you-update": "0.0.8"
+    "why-did-you-update": "0.0.8",
+    "yargs": "^8.0.2"
   }
 }

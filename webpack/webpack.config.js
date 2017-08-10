@@ -3,6 +3,7 @@
 // TODO babel: switch to babel-preset-env
 
 const path              = require('path');
+const argv              = require('yargs').argv;
 const webpack           = require('webpack');
 const autoprefixer      = require('autoprefixer');
 const ManifestPlugin    = require('webpack-manifest-plugin');
@@ -18,8 +19,8 @@ const packageConfig = require('../package.json');
 
 const __EXPERIMENTAL_FEATURES__ = true;
 
-const HOST = '0.0.0.0';
-const PORT = 8080;
+const HOST = argv.host || '0.0.0.0';
+const PORT = argv.port || 8080;
 
 const env          = process.env.NODE_ENV || 'development';
 const isProduction = env === 'production';
@@ -163,6 +164,8 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
+  console.log('PORT:', argv);
+
   return {
     target: 'web',
     bail: isProduction,
@@ -214,35 +217,6 @@ module.exports = (env = {}) => {
           exclude: /node_modules/,
           include: Path.to.app,
           use: useStyleLoaders,
-          /*use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: isProduction,
-                sourceMap: !isProduction,
-                importLoaders: 1
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: !isProduction,
-                ident: 'postcss',
-                plugins: () => [
-                  require('postcss-flexbugs-fixes'),
-                  require('postcss-cssnext'),
-                  require('postcss-browser-reporter')
-                ],
-              },
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: !isProduction,
-              },
-            },
-          ],*/
         },
         {
           test: /\.(png|gif|jpg|svg)$/,
