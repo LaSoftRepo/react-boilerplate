@@ -7,6 +7,7 @@ const webpack           = require('webpack');
 const autoprefixer      = require('autoprefixer');
 const ManifestPlugin    = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -56,8 +57,52 @@ const plugins = [
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 ];
 
+let useStyleLoaders = [
+  {
+    loader: 'style-loader',
+    options: {
+      //minimize: isProduction,
+      sourceMap: !isProduction,
+    },
+  },
+  {
+    loader: 'css-loader',
+    options: {
+      sourceMap: !isProduction,
+      importLoaders: 1
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: !isProduction,
+      ident: 'postcss',
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        require('postcss-cssnext'),
+        require('postcss-browser-reporter')
+      ],
+    },
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      sourceMap: !isProduction
+    },
+  },
+];
+
 if (isProduction) {
   // Production only plugins
+
+  if (useStyleLoaders[0] === 'style-loader' || useStyleLoaders[0].loader === 'style-loader') {
+    useStyleLoaders.shift();
+  }
+
+  useStyleLoaders = ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: useStyleLoaders,
+  });
 
   plugins.push(
     new ManifestPlugin({
@@ -96,7 +141,10 @@ if (isProduction) {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    //new ExtractTextPlugin('style-[hash].css'),
+    new ExtractTextPlugin({
+      filename: 'style-[hash].css',
+      allChunks: true,
+    }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' }
     ])
@@ -165,11 +213,16 @@ module.exports = (env = {}) => {
           test: /\.scss$/,
           exclude: /node_modules/,
           include: Path.to.app,
-          use: [
+          use: useStyleLoaders,
+          /*use: [
             'style-loader',
             {
               loader: 'css-loader',
-              options: { importLoaders: 1 },
+              options: {
+                minimize: isProduction,
+                sourceMap: !isProduction,
+                importLoaders: 1
+              },
             },
             {
               loader: 'postcss-loader',
@@ -183,22 +236,13 @@ module.exports = (env = {}) => {
                 ],
               },
             },
-            'resolve-url-loader',
             {
               loader: 'sass-loader',
               options: {
                 sourceMap: !isProduction,
               },
             },
-          ],
-        },
-        {
-          test: /\.css$/,
-          use: [
-            "style-loader",
-            "css-loader",
-            "postcss-loader"
-          ]
+          ],*/
         },
         {
           test: /\.(png|gif|jpg|svg)$/,

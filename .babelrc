@@ -2,13 +2,16 @@
   "plugins": [
     "transform-class-properties",
     "syntax-decorators",
-    "transform-decorators-legacy"
+    "transform-decorators-legacy",
+    ["babel-plugin-transform-react-jsx", { "useBuiltIns": true }],
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
   ],
   "presets": [
     [
-      "latest", {
-        "es2015": {
-          "modules": false
+      "env", {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 4 versions", "safari >= 8", "ie >= 10"]
         }
       }
     ],

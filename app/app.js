@@ -56,8 +56,8 @@ const HomePage = () => (
   </ul>
 );
 
-@redirect(() => false, '/login')
-class AboutPage extends React.Component {
+@redirect(() => true, '/login')
+class AboutPage extends React.PureComponent {
   render() {
     //return <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>
     return (
