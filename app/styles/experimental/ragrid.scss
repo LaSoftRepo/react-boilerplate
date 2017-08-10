@@ -1,5 +1,22 @@
 // See https://argyleink.github.io/ragrid how use this
-// This version has some changes in order attribute. Use reverse instead order="reverse"
+// This version has some changes in order attribute. Use "reverse" instead order="reverse"
+// Attribute names more shorter
+
+[visibility~="none"] {
+  display: none;
+}
+
+[visibility~="hidden"] {
+  visibility: hidden;
+}
+
+[visibility~="collapse"] {
+  visibility: collapse;
+}
+
+[visibility~="visible"] {
+  visibility: visible;
+}
 
 [grid] {
   display: flex;
@@ -9,22 +26,6 @@
   contain: layout;
 
   flex-direction: row;
-
-  &[visibility~="none"] {
-    display: none;
-  }
-
-  &[visibility~="hidden"] {
-    visibility: hidden;
-  }
-
-  &[visibility~="collapse"] {
-    visibility: collapse;
-  }
-
-  &[visibility~="visible"] {
-    visibility: visible;
-  }
 
   &[reverse] {
     flex-direction: row-reverse;
@@ -62,24 +63,24 @@
     - Horizontal: Left, Center, Right
     - Vertical: Top, Center, Bottom
   */
-  &[horizontal-distribution~="around"] {
+  &[horizontal-distribute~="around"] {
     justify-content: space-around;
   }
-  &[horizontal-distribution~="between"] {
+  &[horizontal-distribute~="between"] {
     justify-content: space-between;
   }
-  &[horizontal-distribution~="equal"] {
+  &[horizontal-distribute~="equal"] {
     > * {
       flex-grow: 1;
     }
   }
-  &[vertical-distribution~="around"] {
+  &[vertical-distribute~="around"] {
     align-content: space-around;
   }
-  &[vertical-distribution~="between"] {
+  &[vertical-distribute~="between"] {
     align-content: space-between;
   }
-  &[vertical-distribution~="equal"] {
+  &[vertical-distribute~="equal"] {
     align-items: stretch;
   }
 
@@ -128,7 +129,7 @@
 
 // column specific
 [grid~="columns"] {
-  &[vertical-distribution~="equal"] {
+  &[vertical-distribute~="equal"] {
     align-items: stretch;
     > * {
       height: auto;
@@ -151,13 +152,13 @@
     align-items: flex-end;
   }
 
-  &[vertical-distribution~="around"] {
+  &[vertical-distribute~="around"] {
     justify-content: space-around;
   }
-  &[vertical-distribution~="between"] {
+  &[vertical-distribute~="between"] {
     justify-content: space-between;
   }
-  &[vertical-distribution~="equal"] {
+  &[vertical-distribute~="equal"] {
     > * {
       width: initial;
     }

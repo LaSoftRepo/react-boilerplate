@@ -5,7 +5,7 @@ import { goBack } from 'react-router-redux';
 import './index.scss';
 
 @connect()
-export default class Playground extends React.PureComponent {
+export default class Playground extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
