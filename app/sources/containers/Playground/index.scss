@@ -9,18 +9,15 @@ section[grid="masonry"] {
   height: 280px;
 }
 
-section[grid="masonry"] > .demo_box {
-  max-width: 240px;
+.demo-box {
+  margin: 1px;
+  height: 100px;
+  width:  100px;
+  box-sizing: border-box;
+  background-color: $gray-70;
 }
 
 section > .demo-box:nth-child(odd) {
   height: 60px;
   background-color: $gray-80;
-}
-
-.demo-box {
-  margin: 1px;
-  height: 100px;
-  width:  100px;
-  background-color: $gray-70;
 }

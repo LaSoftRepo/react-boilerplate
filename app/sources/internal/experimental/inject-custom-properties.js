@@ -19,7 +19,8 @@ if (__EXPERIMENTAL_FEATURES__) {
       'horizontal-distribute': DOMProperty.MUST_USE_ATTRIBUTE,
       'vertical-distribute':   DOMProperty.MUST_USE_ATTRIBUTE,
 
-      'columns': DOMProperty.MUST_USE_ATTRIBUTE,
+      'columns':      DOMProperty.MUST_USE_ATTRIBUTE,
+      'column-count': DOMProperty.MUST_USE_ATTRIBUTE,
     },
   });
 }

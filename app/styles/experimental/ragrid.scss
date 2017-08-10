@@ -20,12 +20,11 @@
 
 [grid] {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
+  // Isolation for better performance
   contain: layout;
-
-  flex-direction: row;
 
   &[reverse] {
     flex-direction: row-reverse;
@@ -171,5 +170,53 @@
 
   &[vertical-align~="center"] {
     align-content: center;
+  }
+
+  &[column-count~="1"] {
+    column-count: 1;
+  }
+
+  &[column-count~="2"] {
+    column-count: 2;
+  }
+
+  &[column-count~="3"] {
+    column-count: 3;
+  }
+
+  &[column-count~="4"] {
+    column-count: 4;
+  }
+
+  &[column-count~="5"] {
+    column-count: 5;
+  }
+
+  &[column-count~="6"] {
+    column-count: 6;
+  }
+
+  &[column-count~="7"] {
+    column-count: 7;
+  }
+
+  &[column-count~="8"] {
+    column-count: 8;
+  }
+
+  &[column-count~="9"] {
+    column-count: 9;
+  }
+
+  &[column-count~="10"] {
+    column-count: 10;
+  }
+
+  &[column-count~="11"] {
+    column-count: 11;
+  }
+
+  &[column-count~="12"] {
+    column-count: 12;
   }
 }
