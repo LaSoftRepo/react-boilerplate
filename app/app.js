@@ -117,11 +117,11 @@ const render = translations => {
 if (module.hot) {
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
-  module.hot.accept('./sources/i18n', () => {
+  module.hot.accept(['./sources/i18n', 'sources/containers/App'], () => {
+    ReactDOM.unmountComponentAtNode(containerNode);
     render(translations);
   });
 }
-
 
 if (!window.Intl) {
   // We should wrap import to Promise for make HMR work in current page

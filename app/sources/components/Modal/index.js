@@ -38,7 +38,7 @@ export default class Modal extends React.PureComponent {
 
   render() {
     return (
-      <div grid center className='modal-dackdrop'>
+      <div grid center className='modal-backdrop'>
         <div className='modal-container'>
           { this.props.children }
         </div>
