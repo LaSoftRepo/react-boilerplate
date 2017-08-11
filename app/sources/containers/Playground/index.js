@@ -23,7 +23,7 @@ export default class Playground extends React.Component {
     return (
       <div>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
-        <div grid='rows' horizontal-align='center'>
+        <div layout='rows' horizontal-align='center'>
 
           <select size='3' value={ selectedValue } onChange={ this.handleChange }>
             <option value='rows'>rows</option>
@@ -31,7 +31,7 @@ export default class Playground extends React.Component {
             <option value='masonry'>masonry</option>
           </select>
 
-          <section grid={ selectedValue } vertical-align='center' className='section-playground'>
+          <section layout={ selectedValue } vertical-align='center' className='section-playground'>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
             <div className='demo-box'></div>

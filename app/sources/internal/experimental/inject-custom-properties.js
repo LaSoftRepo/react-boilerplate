@@ -11,10 +11,10 @@ if (__EXPERIMENTAL_FEATURES__) {
     Properties: {
       //'visibility': DOMProperty.MUST_USE_ATTRIBUTE,
 
-      'grid':     DOMProperty.MUST_USE_ATTRIBUTE,
-      'reverse':  DOMProperty.MUST_USE_ATTRIBUTE,
-      'center':   DOMProperty.MUST_USE_ATTRIBUTE,
-      'nowrap':   DOMProperty.MUST_USE_ATTRIBUTE,
+      'layout':  DOMProperty.MUST_USE_ATTRIBUTE,
+      'reverse': DOMProperty.MUST_USE_ATTRIBUTE,
+      'center':  DOMProperty.MUST_USE_ATTRIBUTE,
+      'nowrap':  DOMProperty.MUST_USE_ATTRIBUTE,
 
       'horizontal-align':      DOMProperty.MUST_USE_ATTRIBUTE,
       'vertical-align':        DOMProperty.MUST_USE_ATTRIBUTE,

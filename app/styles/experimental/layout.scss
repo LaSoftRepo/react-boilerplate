@@ -1,7 +1,9 @@
+// Based on ragrid.css
 // See https://argyleink.github.io/ragrid how use this
 // This version has some changes in order attribute. Use "reverse" instead order="reverse"
 // Attribute names more shorter
 
+[visibility~="false"],
 [visibility~="none"] {
   display: none;
 }
@@ -14,11 +16,12 @@
   visibility: collapse;
 }
 
+[visibility~="true"],
 [visibility~="visible"] {
   visibility: visible;
 }
 
-[grid] {
+[layout] {
   display: flex;
   flex-flow: row wrap;
 
@@ -29,12 +32,18 @@
   &[reverse] {
     flex-direction: row-reverse;
   }
+  &[reverse~="false"] {
+    flex-direction: row;
+  }
   &[center] {
     align-items: center;
     justify-content: center;
   }
   &[nowrap] {
     flex-wrap: nowrap;
+  }
+  &[nowrap~="false"] {
+    flex-wrap: wrap;
   }
 
   /*
@@ -134,7 +143,7 @@
 }
 
 // column specific
-[grid~="columns"] {
+[layout~="columns"] {
   &[vertical-distribute~="equal"] {
     align-items: stretch;
     > * {
@@ -144,12 +153,15 @@
 }
 
 // row specific
-[grid~="rows"] {
+[layout~="rows"] {
   flex-direction: column;
   align-items: flex-start;
 
   &[reverse] {
     flex-direction: column-reverse;
+  }
+  &[reverse~="false"] {
+    flex-direction: column;
   }
   &[horizontal-align~="center"] {
     align-items: center;
@@ -171,9 +183,9 @@
   }
 }
 
-[grid~="masonry"] {
+[layout~="masonry"] {
   flex-flow: column wrap;
-  height: 30rem;
+  height: 20rem;
 
   &[vertical-align~="center"] {
     align-content: center;
