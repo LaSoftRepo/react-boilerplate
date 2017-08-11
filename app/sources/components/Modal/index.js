@@ -1,6 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ExecutionEnvironment from 'exenv';
+//import ExecutionEnvironment from 'exenv';
 
 import './index.scss';
 
