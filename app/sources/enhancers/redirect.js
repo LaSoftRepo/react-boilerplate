@@ -26,7 +26,6 @@
  *
  */
 
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { replace, push } from 'react-router-redux';
 import reactHOC from 'react-hoc';
@@ -35,7 +34,7 @@ import moize from 'moize';
 const redirect = (condition, toPath = '/login', overwrite = true) =>
   reactHOC(WrappedComponent =>
     @connect(({ router }) => ({ router }))
-    class extends Component {
+    class extends React.Component {
       componentWillMount() {
         this.checkCondition(this.props);
       }
@@ -57,7 +56,7 @@ const redirect = (condition, toPath = '/login', overwrite = true) =>
             }
           }
         } else {
-          console.warn(`redirect: Invalid pathname "${ toPath }". Path should starts with slash "/"`);
+          console.warn(`redirect: Invalid pathname "${ toPath }". Path (second argument) should starts with slash "/"`);
         }
       }
 

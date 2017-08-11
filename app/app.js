@@ -1,22 +1,19 @@
 
 // Polyfills
 import 'babel-polyfill';
-
-// React
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 import 'sources/internal/experimental/inject-custom-properties.js';
 
+// Styles
 import './styles/index.scss';
 
 // Redux
 import { Provider } from 'react-redux';
 
 // Routing
-import Route  from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
-import Link   from 'react-router-dom/Link';
+import Redirect from 'react-router-dom/Redirect';
+import Route    from 'react-router-dom/Route';
+import Switch   from 'react-router-dom/Switch';
+import Link     from 'react-router-dom/Link';
 
 import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
@@ -94,9 +91,10 @@ const render = translations => {
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
               <Switch>
+                <Redirect from='/index' to='/' />
+
                 <Route exact path='/'     component={ HomePage } />
                 <Route path='/login'      component={ LoginPage } />
-                <Route path='/index'      component={ HomePage } />
                 <Route path='/about'      component={ AboutPage } />
                 <Route path='/company'    component={ CompanyPage } />
                 <Route path='/playground' component={ Playground } />

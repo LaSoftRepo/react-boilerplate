@@ -4,7 +4,7 @@ import ExecutionEnvironment from 'exenv';
 
 import './index.scss';
 
-const textContent = `Sample text`;
+const textContent = `Sample text fgvkjfdv dfhvldhgvldg dkghbldhbldg dgkbhldgbldg dgkjbldglbg`;
 
 export default class Modal extends React.Component {
   static propTypes = {
@@ -44,7 +44,7 @@ export default class Modal extends React.Component {
         <div layout='rows' columns='3' vertical-distribute="equal" horizontal-distribute='around' className='modal-container'>
           <div layout horizontal-align="center"><h3>DIALOG TITLE</h3></div>
           {/* { this.props.children } */}
-          <div layout center>{ textContent }</div>
+          <div layout horizontal-distribute='around' className='modal-content'>{ textContent }</div>
           <div layout vertical-align='bottom' horizontal-distribute='equal'>
             <button className='modal-button left'>OK</button>
             <button className='modal-button right'>CANCEL</button>

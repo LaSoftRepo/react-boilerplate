@@ -145,6 +145,30 @@
   &[columns~="12"] > * {
     flex-basis: (100% / 12);
   }
+  &[columns~="13"] > * {
+    flex-basis: (100% / 13);
+  }
+  &[columns~="14"] > * {
+    flex-basis: (100% / 14);
+  }
+  &[columns~="15"] > * {
+    flex-basis: (100% / 15);
+  }
+  &[columns~="16"] > * {
+    flex-basis: (100% / 16);
+  }
+  &[columns~="17"] > * {
+    flex-basis: (100% / 17);
+  }
+  &[columns~="18"] > * {
+    flex-basis: (100% / 18);
+  }
+  &[columns~="19"] > * {
+    flex-basis: (100% / 19);
+  }
+  &[columns~="20"] > * {
+    flex-basis: (100% / 20);
+  }
 }
 
 // column specific

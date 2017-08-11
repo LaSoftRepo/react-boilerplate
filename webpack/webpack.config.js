@@ -1,7 +1,5 @@
 'use strict'
 
-// TODO babel: switch to babel-preset-env
-
 const path              = require('path');
 const argv              = require('yargs').argv;
 const webpack           = require('webpack');
@@ -35,7 +33,7 @@ const plugins = [
   new WatchMissingNodeModulesPlugin(Path.to.modules),
   new webpack.DefinePlugin({
     'process.env': {
-      'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'NODE_ENV': JSON.stringify(env),
     },
     '__EXPERIMENTAL_FEATURES__': JSON.stringify(__EXPERIMENTAL_FEATURES__),
   }),
@@ -56,6 +54,11 @@ const plugins = [
     inject:    true,
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  new webpack.ProvidePlugin({
+    'React':     'react',
+    'ReactDOM':  'react-dom',
+    'PropTypes': 'prop-types',
+  }),
 ];
 
 let useStyleLoaders = [
