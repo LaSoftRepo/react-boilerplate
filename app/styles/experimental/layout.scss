@@ -3,24 +3,6 @@
 // This version has some changes in order attribute. Use "reverse" instead order="reverse"
 // Attribute names more shorter
 
-[visibility~="false"],
-[visibility~="none"] {
-  display: none;
-}
-
-[visibility~="hidden"] {
-  visibility: hidden;
-}
-
-[visibility~="collapse"] {
-  visibility: collapse;
-}
-
-[visibility~="true"],
-[visibility~="visible"] {
-  visibility: visible;
-}
-
 [layout] {
   display: flex;
   flex-flow: row wrap;
@@ -28,6 +10,29 @@
   // https://developer.mozilla.org/en-US/docs/Web/CSS/contain
   // Isolation for better performance
   contain: layout;
+
+
+  &[visibility~="false"],
+  &[visibility~="none"] {
+    display: none;
+  }
+
+  &[visibility~="hidden"] {
+    display: flex;
+    visibility: hidden;
+  }
+
+  &[visibility~="collapse"] {
+    display: flex;
+    visibility: collapse;
+  }
+
+  &[visibility~="true"],
+  &[visibility~="visible"] {
+    display: flex;
+    visibility: visible;
+  }
+
 
   &[reverse] {
     flex-direction: row-reverse;

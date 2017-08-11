@@ -20,5 +20,24 @@
 }
 
 .modal-button {
-  //flex-grow: 1;
+  height: 70px;
+  margin: 4px;
+
+  &.left {
+    flex: 1 0 0;
+    margin-right: 0;
+    background-color: $green;
+    border-radius: 0 !important;
+    border-bottom-left-radius: 6px !important;
+    border-top-left-radius: 6px !important;
+  }
+
+  &.right {
+    flex: 1 0 0;
+    margin-left: 0;
+    background-color: $red;
+    border-radius: 0 !important;
+    border-bottom-right-radius: 6px  !important;
+    border-top-right-radius: 6px  !important;
+  }
 }

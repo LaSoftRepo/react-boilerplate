@@ -41,13 +41,13 @@ export default class Modal extends React.Component {
   render() {
     return (
       <div layout center className='modal-backdrop'>
-        <div layout='rows' columns='3' horizontal-align="center" className='modal-container'>
-          <div layout><h3>DIALOG TITLE</h3></div>
+        <div layout='rows' columns='3' vertical-distribute="equal" horizontal-distribute='around' className='modal-container'>
+          <div layout horizontal-align="center"><h3>DIALOG TITLE</h3></div>
           {/* { this.props.children } */}
           <div layout center>{ textContent }</div>
           <div layout vertical-align='bottom' horizontal-distribute='equal'>
-            <button className='modal-button'>OK</button>
-            <button className='modal-button'>CANCEL</button>
+            <button className='modal-button left'>OK</button>
+            <button className='modal-button right'>CANCEL</button>
           </div>
         </div>
       </div>
