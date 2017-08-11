@@ -55,9 +55,10 @@ const plugins = [
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   new webpack.ProvidePlugin({
-    'React':     'react',
-    'ReactDOM':  'react-dom',
-    'PropTypes': 'prop-types',
+    React:     'react',
+    ReactDOM:  'react-dom',
+    PropTypes: 'prop-types',
+    Promise:   ['rsvp', 'Promise'],
   }),
 ];
 
@@ -122,7 +123,7 @@ if (isProduction) {
       beautify: false,
       squeeze: true,
       mangle: {
-        except: ['$super', '$', '_', 'exports', 'require'],
+        except: ['$super', '$', '_'],
       },
       compress: {
         warnings: false,
@@ -145,6 +146,7 @@ if (isProduction) {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin({
       filename: 'style-[hash].css',
       allChunks: true,

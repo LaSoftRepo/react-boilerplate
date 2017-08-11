@@ -39,6 +39,8 @@ import { translations } from './sources/i18n';
 
 import redirect from './sources/enhancers/redirect';
 
+console.log('rsvp/Promise', Promise);
+
 const history = createBrowserHistory({
   //getUserConfirmation: ConfirmationRenderer
 });
