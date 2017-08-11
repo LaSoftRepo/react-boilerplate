@@ -4,6 +4,8 @@ import ExecutionEnvironment from 'exenv';
 
 import './index.scss';
 
+const textContent = `Sample text`;
+
 export default class Modal extends React.Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
@@ -39,8 +41,14 @@ export default class Modal extends React.Component {
   render() {
     return (
       <div grid center className='modal-backdrop'>
-        <div className='modal-container'>
-          { this.props.children }
+        <div grid='rows' columns='3' horizontal-align='center' className='modal-container'>
+          <div grid><h3>DIALOG TITLE</h3></div>
+          {/* { this.props.children } */}
+          <div grid center>{ textContent }</div>
+          <div grid vertical-align='bottom'>
+            <button>OK</button>
+            <button>CANCEL</button>
+          </div>
         </div>
       </div>
     );

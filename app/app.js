@@ -14,9 +14,9 @@ import './styles/index.scss';
 import { Provider } from 'react-redux';
 
 // Routing
-import Route    from 'react-router-dom/Route';
-import Switch   from 'react-router-dom/Switch';
-import Link     from 'react-router-dom/Link';
+import Route  from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import Link   from 'react-router-dom/Link';
 
 import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
@@ -33,6 +33,7 @@ import DevTools         from './sources/containers/DevTools';
 import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
 import Playground       from './sources/containers/Playground';
+
 //import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
 import Modal from './sources/components/Modal';

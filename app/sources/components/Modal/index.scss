@@ -2,9 +2,10 @@
 @import '../../../styles/variables.scss';
 
 .modal-backdrop {
+  position: fixed;
   width:  100vw;
   height: 100vh;
-  background-color: $alpha-25;
+  background-color: $modal-backdrop-color;
 }
 
 .modal-container {
@@ -14,5 +15,6 @@
   min-height: 120px;
   border-radius: 8px;
   background-color: white;
-  box-shadow: 0 16px 38px 4px $alpha-15;
+  box-shadow: 0 1px 4px 0 $alpha-25;
+  outline: 0;
 }
