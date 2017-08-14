@@ -13,9 +13,9 @@ import { goBack } from 'react-router-redux';
 const LoginPage = () => <h2>Login</h2>;
 
 export default (store) => [
-  { path: '/', exact: true, component: Home },
-  { path: '/login',         component: LoginPage },
-  { path: '/about',         component: About },
-  { path: '/playground',    component: Playground },
-  { path: '/dialog',        render: () => <Modal onClose={ () => store.dispatch(goBack()) }/> },
+  { path: '/',           component: Home, exact: true },
+  { path: '/login',      component: LoginPage },
+  { path: '/about',      component: About },
+  { path: '/playground', component: Playground },
+  { path: '/dialog',     render: () => <Modal onClose={ () => store.dispatch(goBack()) }/> },
 ];
