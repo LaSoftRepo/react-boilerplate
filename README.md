@@ -2,7 +2,7 @@
 
 ### Features
 
-- [x] App Basic structure
+- [x] App Basic structure (WIP)
 - [x] React
 - [x] React Router v4 with Redux binding
 - [x] Redux
