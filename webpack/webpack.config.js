@@ -64,7 +64,7 @@ const plugins = [
   }),
   new HtmlWebpackPlugin({
     title:     prettifyPackageName(packageConfig.name) || 'Boilerplate',
-    template:  path.join(Path.to.app, 'index.html'),
+    template:  Path.to.template,
     path:      Path.to.build,
     filename: 'index.html',
     inject:    true,
