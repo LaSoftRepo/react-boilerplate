@@ -26,15 +26,25 @@
  *
  */
 
-import { connect } from 'react-redux';
-import { replace, push } from 'react-router-redux';
+import * as reduxRouter from 'react-router-redux';
 import reactHOC from 'react-hoc';
 import moize from 'moize';
 
-const redirect = (condition, toPath = '/login', overwrite = true) =>
+const redirect = (condition, pathname = '/login', replace = true) =>
   reactHOC(WrappedComponent =>
     @connect(({ router }) => ({ router }))
-    class extends React.Component {
+    class extends Component {
+      constructor(props) {
+        super(props);
+
+        if (typeof condition !== 'function')
+          throw new TypeError('redirect: "condition" (first argument) must be defined function');
+
+        if (!pathname || !pathname.startsWith('/'))
+          throw new TypeError(
+            `redirect: Invalid pathname "${ pathname }". Path (second argument) should starts with slash "/"`
+          );
+      }
       componentWillMount() {
         this.checkCondition(this.props);
       }
@@ -46,17 +56,9 @@ const redirect = (condition, toPath = '/login', overwrite = true) =>
       }
 
       checkCondition(params) {
-        if (toPath && toPath.startsWith('/')) {
-          if (condition()) {
-            // TODO check if /login router exists
-            if (overwrite) {
-              params.dispatch(replace({ pathname: toPath }));
-            } else {
-              params.dispatch(push({ pathname: toPath }));
-            }
-          }
-        } else {
-          console.warn(`redirect: Invalid pathname "${ toPath }". Path (second argument) should starts with slash "/"`);
+        if (condition()) {
+          // TODO check if /login router exists
+          params.dispatch(reduxRouter[replace ? 'replace' : 'push']({ pathname }));
         }
       }
 

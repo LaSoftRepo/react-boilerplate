@@ -1,25 +1,24 @@
 
 // Polyfills
 import 'babel-polyfill';
-import 'sources/internal/experimental/inject-custom-properties.js';
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
+import './sources/internal/experimental/inject-custom-properties.js';
 
 // Styles
+import 'sanitize.css/sanitize.css';
 import './styles/index.scss';
-
-// Redux
-import { Provider } from 'react-redux';
 
 // Routing
 import Redirect from 'react-router-dom/Redirect';
 import Route    from 'react-router-dom/Route';
 import Switch   from 'react-router-dom/Switch';
-import Link     from 'react-router-dom/Link';
 
 import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
-import { goBack } from 'react-router-redux';
 
-import { Prompt } from 'react-router';
+// Utils
+import { hasReduxDevToolExtension } from './sources/internal/utils';
 
 // Cofigurations
 import configureStore from './sources/store';
@@ -29,15 +28,12 @@ import App              from './sources/containers/App';
 import DevTools         from './sources/containers/DevTools';
 import NotFound         from './sources/containers/NotFound';
 import LanguageProvider from './sources/containers/LanguageProvider';
-import Playground       from './sources/containers/Playground';
+
+import routes from './sources/routes';
 
 //import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
-import Modal from './sources/components/Modal';
-
 import { translations } from './sources/i18n';
-
-import redirect from './sources/enhancers/redirect';
 
 const history = createBrowserHistory({
   //getUserConfirmation: ConfirmationRenderer
@@ -48,41 +44,6 @@ const containerNode = document.getElementById('app');
 const initialState = {};
 const store = configureStore(initialState, history);
 
-const HomePage = () => (
-  <ul>
-    <li><Link to='/about'>About</Link></li>
-    <li><Link to='/company'>Company</Link></li>
-    <li><Link to='/playground'>Playground</Link></li>
-    <li><Link to='/dialog'>Test dialog</Link></li>
-  </ul>
-);
-
-@redirect(() => true, '/login')
-class AboutPage extends React.PureComponent {
-  render() {
-    //return <h2>About<button onClick={ () => store.dispatch(goBack()) }>Back</button></h2>
-    return (
-      <div grid='columns'>
-        <button onClick={ () => store.dispatch(goBack()) }>Back</button>
-        <h2>About</h2>
-        <Prompt message="Move away?" when={ true } />
-      </div>
-    );
-  }
-}
-
-const CompanyPage = () => (
-  <div>
-    <button onClick={ () => store.dispatch(goBack()) }>Back</button>
-    <ul>
-      <li><h3>Company 1</h3></li>
-      <li><h3>Company 2</h3></li>
-    </ul>
-  </div>
-);
-
-const LoginPage = () => <h2>Login</h2>;
-
 const render = translations => {
   ReactDOM.render(
     <div>
@@ -91,21 +52,21 @@ const render = translations => {
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
               <Switch>
-                <Redirect from='/index' to='/' />
 
-                <Route exact path='/'     component={ HomePage } />
-                <Route path='/login'      component={ LoginPage } />
-                <Route path='/about'      component={ AboutPage } />
-                <Route path='/company'    component={ CompanyPage } />
-                <Route path='/playground' component={ Playground } />
-                <Route path='/dialog'     component={ Modal } />
+                <Redirect from='/index' to='/' />
+                {
+                  routes(store).map(({ path, exact, component, render }) =>
+                    <Route key={ path } path={ path } exact={ exact } component={ component } render={ render } />
+                  )
+                }
                 <Route component={ NotFound } />
+
               </Switch>
             </App>
           </ConnectedRouter>
         </LanguageProvider>
       </Provider>
-      { process.env.NODE_ENV !== 'production' ? <DevTools store={ store } /> : null }
+      { process.env.NODE_ENV !== 'production' && !hasReduxDevToolExtension ? <DevTools store={ store } /> : null }
     </div>,
     containerNode
   );
@@ -116,7 +77,12 @@ const render = translations => {
 if (module.hot) {
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
-  module.hot.accept(['./sources/i18n', 'sources/containers/App'], () => {
+  module.hot.accept([
+    './sources/containers/App',
+    './sources/reducers',
+    './sources/routes',
+    './sources/i18n',
+  ], () => {
     ReactDOM.unmountComponentAtNode(containerNode);
     render(translations);
   });

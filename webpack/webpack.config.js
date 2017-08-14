@@ -1,5 +1,11 @@
 'use strict'
 
+// TODO
+// + Add CSS modules
+// + Add Dll plugin
+// + Add OfflinePlugin
+// + Add and config eslint
+
 const path              = require('path');
 const argv              = require('yargs').argv;
 const webpack           = require('webpack');
@@ -15,17 +21,36 @@ const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModules
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
 
-const __EXPERIMENTAL_FEATURES__ = true;
+const SEPARATOR_REGEX  = /[-_]/;
+const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
+
+// Config webpack enviroment
+const __EXPERIMENTAL__ = true;
+const USE_DOCKER = false;
 const HOST = argv.host || '0.0.0.0';
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
-const isProduction = env === 'production';
+const provideConfig = {
+  moment:        'moment',
+  classnames:    'classnames',
 
-const prettifyPackageName = name => {
-  return name.replace(/[-_]/, ' ').replace(/(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g, m => m.toUpperCase());
-}
+  PropTypes:     'prop-types',
+  ReactDOM:      'react-dom',
+  React:         'react',
+  Component:      ['react',       'Component'],
+  PureComponent:  ['react',       'PureComponent'],
+  Children:       ['react',       'Children'],
+
+  Provider:       ['react-redux', 'Provider'],
+  connect:        ['react-redux', 'connect'],
+  createSelector: ['reselect',    'createSelector'],
+};
+
+
+const isProduction = env === 'production';
+const isTest       = env === 'test';
 
 // Common plugins
 const plugins = [
@@ -35,17 +60,8 @@ const plugins = [
     'process.env': {
       'NODE_ENV': JSON.stringify(env),
     },
-    '__EXPERIMENTAL_FEATURES__': JSON.stringify(__EXPERIMENTAL_FEATURES__),
+    '__EXPERIMENTAL__': JSON.stringify(__EXPERIMENTAL__),
   }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name:     'vendor',
-    minChunks: Infinity,
-    filename: 'vendor-[hash].js',
-  }),
-  new webpack.optimize.LimitChunkCountPlugin({
-    maxChunks: 2,
-  }),
-  new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     title:     prettifyPackageName(packageConfig.name) || 'Boilerplate',
     template:  path.join(Path.to.app, 'index.html'),
@@ -54,15 +70,24 @@ const plugins = [
     inject:    true,
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  new webpack.ProvidePlugin({
-    React:     'react',
-    ReactDOM:  'react-dom',
-    PropTypes: 'prop-types',
-    Promise:   ['rsvp', 'Promise'],
+  new webpack.ProvidePlugin(provideConfig),
+  new webpack.optimize.CommonsChunkPlugin({
+    name:     'vendor',
+    minChunks: Infinity,
+    filename: 'vendor.[hash].js',
+  }),
+  new webpack.optimize.LimitChunkCountPlugin({
+    maxChunks: 2,
   }),
 ];
 
 let useStyleLoaders = [
+  {
+    loader: 'cache-loader',
+    options: {
+      cacheDirectory: Path.to.cache,
+    }
+  },
   {
     loader: 'style-loader',
     options: {
@@ -74,7 +99,7 @@ let useStyleLoaders = [
     loader: 'css-loader',
     options: {
       sourceMap: !isProduction,
-      importLoaders: 1
+      importLoaders: 2
     },
   },
   {
@@ -83,15 +108,26 @@ let useStyleLoaders = [
       sourceMap: !isProduction,
       ident: 'postcss',
       plugins: () => [
-        require('postcss-flexbugs-fixes'),
-        require('postcss-cssnext'),
-        require('postcss-browser-reporter')
+        require('postcss-flexbugs-fixes')(),
+        require('postcss-cssnext')({
+          browsers: [
+            '> 1%',
+            'Explorer >= 10',
+            'last 4 Chrome versions',
+            'last 3 Firefox versions',
+            'iOS >= 9',
+            'Android >= 4.1'
+          ],
+          cascade: false,
+        }),
+        require('postcss-browser-reporter')()
       ],
     },
   },
   {
     loader: 'sass-loader',
     options: {
+      outputStyle: 'nested',
       sourceMap: !isProduction
     },
   },
@@ -100,23 +136,24 @@ let useStyleLoaders = [
 if (isProduction) {
   // Production only plugins
 
-  if (useStyleLoaders[0] === 'style-loader' || useStyleLoaders[0].loader === 'style-loader') {
-    useStyleLoaders.shift();
-  }
-
+  // Remove cache-loader and style-loader (which use as fallback)
+  useStyleLoaders.splice(0, 2);
   useStyleLoaders = ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: useStyleLoaders,
   });
 
   plugins.push(
+    new webpack.HashedModuleIdsPlugin(),
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
-      context: Path.to.app,
       minimize: true,
       debug: false,
+      options: {
+        context: Path.to.app,
+      },
     }),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
@@ -127,6 +164,8 @@ if (isProduction) {
       },
       compress: {
         warnings: false,
+        drop_console: true,
+        drop_debugger: true,
         screw_ie8: true,
         conditionals: true,
         unused: true,
@@ -148,7 +187,7 @@ if (isProduction) {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin({
-      filename: 'style-[hash].css',
+      filename: 'style.[hash].css',
       allChunks: true,
     }),
     new CopyWebpackPlugin([
@@ -160,9 +199,13 @@ if (isProduction) {
   // Development only plugins
 
   plugins.push(
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
-      context: Path.to.app,
+      options: {
+        context: Path.to.app,
+      },
+      debug: true,
     }),
     new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
   );
@@ -172,7 +215,7 @@ module.exports = (env = {}) => {
   return {
     target: 'web',
     bail: isProduction,
-    devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
+    devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
     context: Path.to.app,
 
     entry: {
@@ -183,9 +226,10 @@ module.exports = (env = {}) => {
     output: {
       path:               Path.to.build,
       publicPath:         Path.to.public,
-      filename:          '[name]-[hash].js',
-      sourceMapFilename: '[name]-[hash].js.map',
-      pathinfo:           true,
+      filename:          '[name].[hash].js',
+      sourceMapFilename: '[name].[hash].js.map',
+      chunkFilename:     '[id].[hash].js',
+      pathinfo:           !isProduction,
     },
 
     resolve: {
@@ -200,26 +244,39 @@ module.exports = (env = {}) => {
           test: /\.jsx?$/,
           enforce: 'pre',
           include: Path.to.app,
-          exclude: [ /node_modules/, /build/, /spec/ ],
-          use: [{
-            options: {
-              //formatter: eslintFormatter,
-              //eslintPath: require.resolve('eslint'),
-              //baseConfig: {
-              //  extends: [require.resolve('eslint-config-react-app')],
-              //},
-              ignore: false,
-              //useEslintrc: false
+          exclude: /(node_modules|bower_components|build|spec)/,
+          use: [
+            {
+              loader: 'cache-loader',
+              options: {
+                cacheDirectory: Path.to.cache,
+              },
             },
-            loader: 'babel-loader?cacheDirectory=true',
-            //loader: require.resolve('eslint-loader'),
-          }],
+            {
+              loader: 'babel-loader',
+              //loader: require.resolve('eslint-loader'),
+              options: {
+                //formatter: eslintFormatter,
+                //eslintPath: require.resolve('eslint'),
+                //baseConfig: {
+                //  extends: [require.resolve('eslint-config-react-app')],
+                //},
+                ignore: false,
+                //useEslintrc: false
+              },
+            },
+          ],
         },
         {
           test: /\.scss$/,
           exclude: /node_modules/,
           include: Path.to.app,
           use: useStyleLoaders,
+        },
+        {
+          test: /\.css$/,
+          include: [/node_modules/, Path.to.app],
+          loaders: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(png|gif|jpg|svg)$/,
@@ -231,13 +288,29 @@ module.exports = (env = {}) => {
           include: Path.to.fonts,
           use: 'url-loader?limit=100000',
         },
+        {
+          test: /\.json$/,
+          loader: 'json-loader',
+        },
+        {
+          test: /\.(mp4|webm)$/,
+          loader: 'url-loader',
+          query: {
+            limit: 10000,
+          },
+        },
       ],
     },
 
     plugins,
 
+    stats: {
+      colors: true,
+      reasons: true,
+    },
+
     devServer: {
-      historyApiFallback: true,
+      historyApiFallback: { disableDotRule: true },
       host: HOST,
       port: PORT,
       noInfo: false,
@@ -245,8 +318,24 @@ module.exports = (env = {}) => {
       hot: !isProduction,
       inline: !isProduction,
       contentBase: isProduction ? './build' : './app',
-      headers: { 'Access-Control-Allow-Origin': '*', 'X-Custom-Header': 'yes' },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'X-Custom-Header': 'yes',
+      },
+      watchOptions: {
+        aggregateTimeout: 240,
+        ignored: [/node_modules/, "../build/**/*.*"],
+        poll: USE_DOCKER ? 1000 : false,
+      },
       publicPath: Path.to.public,
     },
   };
+}
+
+function prettifyPackageName(name) {
+  if (!name || name === '') return null;
+  return name
+    .replace(SEPARATOR_REGEX, ' ')
+    .replace(CAPITALIZE_REGEX, m => m.toUpperCase());
 }

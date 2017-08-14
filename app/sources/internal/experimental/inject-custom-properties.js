@@ -5,7 +5,7 @@
 
 import { DOMProperty } from 'react-dom/lib/ReactInjection';
 
-if (__EXPERIMENTAL_FEATURES__) {
+if (__EXPERIMENTAL__) {
   // Inject custom property attributes for ragrid.scss
   DOMProperty.injectDOMPropertyConfig({
     Properties: {

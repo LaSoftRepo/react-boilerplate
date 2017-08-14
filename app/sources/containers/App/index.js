@@ -3,7 +3,7 @@ import './index.scss'
 const Header = () => null
 const Footer = () => null
 
-export default class App extends React.Component {
+export default class App extends Component {
   static propTypes = {
     children:    PropTypes.node,
     hideHeader:  PropTypes.bool,

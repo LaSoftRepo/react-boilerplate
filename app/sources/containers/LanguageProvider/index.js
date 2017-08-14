@@ -5,8 +5,6 @@
  * this component connects the redux state language locale to the
  * IntlProvider component and i18n messages (loaded from `app/sources/translations`)
  */
-import { connect }        from 'react-redux';
-import { createSelector } from 'reselect';
 import { IntlProvider }   from 'react-intl';
 
 import { DEFAULT_LOCALE } from './constants';
@@ -18,7 +16,7 @@ const mapStateToProps = createSelector(
 );
 
 @connect(mapStateToProps)
-export default class LanguageProvider extends React.PureComponent {
+export default class LanguageProvider extends Component {
   static propTypes = {
     locale:   PropTypes.string,
     messages: PropTypes.object,
@@ -34,7 +32,7 @@ export default class LanguageProvider extends React.PureComponent {
     const { locale, messages, children } = this.props;
     return (
       <IntlProvider locale={ locale } key={ locale } messages={ messages[locale] }>
-        { React.Children.only(children) }
+        { Children.only(children) }
       </IntlProvider>
     );
   }

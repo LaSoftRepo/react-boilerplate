@@ -1,5 +1,5 @@
 {
   "containers.LocaleToggle.en": "en",
   "containers.LocaleToggle.ru": "ru",
-  "containers.NotFoundPage.header": "Страница не найдена."
+  "containers.NotFound.header": "Страница не найдена."
 }

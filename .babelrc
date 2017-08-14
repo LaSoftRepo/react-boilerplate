@@ -4,29 +4,30 @@
     "syntax-decorators",
     "transform-decorators-legacy"
   ],
-  "presets": [
-    [
-      "env", {
-        "modules": false,
-        "targets": {
-          "browsers": ["last 4 versions", "safari >= 8", "ie >= 10"]
-        }
+  "presets": [[
+    "env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["last 4 versions", "safari >= 8", "ie >= 10"]
       }
-    ],
+    }],
     "react",
     "stage-0"
   ],
   "env": {
     "development": {
+      "only": ["app"],
       "presets": [
         "react-hmre"
+      ],
+      "plugins": [
+        "transform-react-display-name"
       ]
     },
     "production": {
-      "only": [
-        "app"
-      ],
+      "only": ["app"],
       "plugins": [
+        "transform-strict-mode",
         "transform-react-remove-prop-types",
         "transform-react-constant-elements",
         "transform-react-inline-elements",

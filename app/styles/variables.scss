@@ -75,4 +75,6 @@ $spaces: (
  *  Modal
  */
 
-$modal-backdrop-color: $alpha-25;
+$modal-backdrop-color: rgba(0, 20, 60, 0.5);
+
+$enable-rounded: false !default;

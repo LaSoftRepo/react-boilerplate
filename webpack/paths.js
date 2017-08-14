@@ -10,6 +10,7 @@ const paths = {
     app,
     public:  '/',
 
+    cache:   path.join(root, '.cache'),
     build:   path.join(root, 'build'),
     modules: path.join(root, 'node_modules'),
 

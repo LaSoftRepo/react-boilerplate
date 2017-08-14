@@ -3,6 +3,7 @@
 /coverage
 /tmp
 /.idea
+/.cache
 
 .DS_Store
 .module-cache

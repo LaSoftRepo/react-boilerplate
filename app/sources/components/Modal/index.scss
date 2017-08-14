@@ -9,39 +9,36 @@
 }
 
 .modal-container {
-  width:  40vw;
-  height: 50vh;
-  min-width:  400px;
-  min-height: 120px;
-  border-radius: 8px;
+  width:  50vw;
+  height: 40vh;
+  min-width:  500px;
+  min-height: 200px;
   background-color: white;
   box-shadow: 0 1px 4px 0 $alpha-25;
   outline: 0;
 }
 
 .modal-content {
-  max-width: 50%;
+  flex: 1 0 auto;
 }
 
 .modal-button {
   height: 70px;
-  margin: 4px;
+  margin: 20px;
+  color: $white;
+  font-size: 1.2em !important;
 
   &.left {
     flex: 1 0 0;
-    margin-right: 0;
+    margin-right: 10px;
     background-color: $green;
     border-radius: 0 !important;
-    border-bottom-left-radius: 6px !important;
-    border-top-left-radius: 6px !important;
   }
 
   &.right {
     flex: 1 0 0;
-    margin-left: 0;
+    margin-left: 10px;
     background-color: $red;
     border-radius: 0 !important;
-    border-bottom-right-radius: 6px  !important;
-    border-top-right-radius: 6px  !important;
   }
 }

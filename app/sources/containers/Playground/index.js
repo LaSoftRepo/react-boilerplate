@@ -1,10 +1,9 @@
-import { connect } from 'react-redux';
-import { goBack }  from 'react-router-redux';
+import { goBack } from 'react-router-redux';
 
 import './index.scss';
 
 @connect()
-export default class Playground extends React.Component {
+export default class Playground extends Component {
   constructor(props) {
     super(props);
     this.state = {
