@@ -146,6 +146,7 @@ if (isProduction) {
   plugins.push(
     new webpack.HashedModuleIdsPlugin(),
     new ManifestPlugin({
+      writeToFileEmit: true,
       fileName: 'asset-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
@@ -219,7 +220,7 @@ module.exports = (env = {}) => {
     context: Path.to.app,
 
     entry: {
-      app: path.join(Path.to.app, 'app.js'),
+      app: ['react-hot-loader/patch', path.join(Path.to.app, 'app.js')],
       vendor: Object.keys(packageConfig.dependencies),
     },
 
