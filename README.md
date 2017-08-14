@@ -8,7 +8,7 @@
 - [x] Redux
 - [x] Redux Sagas
 - [x] Selectors
-- [x] Redux Dev Tools
+- [x] Redux Dev Tools or Redux Dev Tools Extension
 - [x] Internalization (i18n)
 - [x] React-anime animation system
 - [x] High order component enhancers
