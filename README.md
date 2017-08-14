@@ -20,13 +20,13 @@
 - [x] React, ReactDOM, PropTypes, Children and etc provide automatic
 - [x] Babel plugins **(class props, decorators)**
 - [x] Babel optimization transformers for production
-- [x] Browser css normalization via sanitize.css
+- [x] Browser css normalization via **sanitize.css**
 - [x] SASS with cssnext and flexbox fixes
 - [x] `es6-promise`, `isomorphic-fetch` and `babel-polyfill`
 - [x] `moment`, `moize`, `query-string` and `classnames` provide automatic
 - [x] **yarn** package manager
-- [ ] DllPlugin webpack plugin
-- [ ] Offline (Service Worker) webpack plugin
+- [ ] **DllPlugin** webpack plugin
+- [ ] **OfflinePlugin** (ServiceWorker) webpack plugin
 - [ ] CSS modules
 - [ ] ES Linting
 - [ ] SCSS Linting
