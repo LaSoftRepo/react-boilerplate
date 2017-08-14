@@ -25,7 +25,8 @@
 - [x] `es6-promise`, `isomorphic-fetch` and `babel-polyfill`
 - [x] `moment`, `moize`, `query-string` and `classnames` provide automatic
 - [x] **yarn** package manager
-- [ ] Offline (Service Worker) plugin
+- [ ] DllPlugin webpack plugin
+- [ ] Offline (Service Worker) webpack plugin
 - [ ] CSS modules
 - [ ] ES Linting
 - [ ] SCSS Linting
