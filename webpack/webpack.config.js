@@ -86,7 +86,7 @@ let useStyleLoaders = [
     loader: 'cache-loader',
     options: {
       cacheDirectory: Path.to.cache,
-    }
+    },
   },
   {
     loader: 'style-loader',
@@ -99,7 +99,7 @@ let useStyleLoaders = [
     loader: 'css-loader',
     options: {
       sourceMap: !isProduction,
-      importLoaders: 2
+      importLoaders: 2,
     },
   },
   {
@@ -116,7 +116,7 @@ let useStyleLoaders = [
             'last 4 Chrome versions',
             'last 3 Firefox versions',
             'iOS >= 9',
-            'Android >= 4.1'
+            'Android >= 4.1',
           ],
           cascade: false,
         }),
@@ -128,7 +128,7 @@ let useStyleLoaders = [
     loader: 'sass-loader',
     options: {
       outputStyle: 'nested',
-      sourceMap: !isProduction
+      sourceMap: !isProduction,
     },
   },
 ];
@@ -192,8 +192,8 @@ if (isProduction) {
       allChunks: true,
     }),
     new CopyWebpackPlugin([
-      { from: Path.to.assets, to: 'assets' }
-    ])
+      { from: Path.to.assets, to: 'assets' },
+    ]),
   );
 
 } else {
