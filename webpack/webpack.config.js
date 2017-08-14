@@ -284,6 +284,14 @@ module.exports = (env = {}) => {
           use: 'url-loader?limit=20480&name=[name]-[hash].[ext]',
         },
         {
+          test: /favicon\.ico$/,
+          loader: 'url',
+          query: {
+            limit: 1,
+            name: '[name].[ext]',
+          },
+        },
+        {
           test: /\.(woff|woff2|eot|ttf|svg)$/,
           include: Path.to.fonts,
           use: 'url-loader?limit=100000',
