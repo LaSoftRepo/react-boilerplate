@@ -30,3 +30,5 @@
 - [ ] CSS modules
 - [ ] ES Linting
 - [ ] SCSS Linting
+- [ ] React Linting
+- [ ] Redux Saga Linting
