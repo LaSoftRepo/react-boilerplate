@@ -51,7 +51,7 @@ export default function configureStore(initialState, history) {
 
   if (process.env.NODE_ENV !== "production") {
     enhancers.push(
-      DevTools.instrument(),
+      hasReduxDevToolExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : DevTools.instrument(),
       persistState(
         window.location.href.match(/[?&]debug_session=([^&#]+)\b/)
       )
