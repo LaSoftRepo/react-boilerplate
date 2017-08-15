@@ -31,9 +31,9 @@
 - [ ] ES Linting
 - [ ] SCSS Linting
 - [ ] React Linting
+- [ ] React Saga Linting
 - [ ] Integrate Prettier
 - [ ] Create and setup customizable server for production/staging
-- [ ] Redux Saga Linting
 - [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?
 - [ ] Karma test solution (?)
 - [ ] Docker, CI and other test environments (?)
