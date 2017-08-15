@@ -17,8 +17,11 @@
   ],
   "env": {
     "development": {
+      "only": ["app"],
       "plugins": [
-        "transform-react-display-name"
+        "transform-react-display-name",
+        "transform-react-jsx-source",
+        "transform-react-jsx-self"
       ]
     },
     "production": {
@@ -32,7 +35,19 @@
       ]
     },
     "test": {
+      "presets": [[
+        "env", {
+          "targets": {
+            "node": "current"
+          }
+        }],
+        "react",
+        "stage-0"
+      ],
       "plugins": [
+        "transform-react-display-name",
+        "transform-react-jsx-source",
+        "transform-react-jsx-self",
         "transform-es2015-modules-commonjs",
         "dynamic-import-node"
       ]

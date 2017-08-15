@@ -3,18 +3,17 @@
 // TODO
 // + Add CSS modules
 // + Add Dll plugin
-// + Add OfflinePlugin
 // + Add and config eslint
 
 const path              = require('path');
 const argv              = require('yargs').argv;
 const webpack           = require('webpack');
-const autoprefixer      = require('autoprefixer');
 const ManifestPlugin    = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OfflinePlugin     = require('offline-plugin');
 
 const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
 
@@ -27,6 +26,7 @@ const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
 // Config webpack enviroment
 const __EXPERIMENTAL__ = true;
+const USE_OFFLINE_CACHE = true;
 const USE_DOCKER = false;
 const HOST = argv.host || '0.0.0.0';
 const PORT = argv.port || 8080;
@@ -43,11 +43,22 @@ const provideConfig = {
   PureComponent:  ['react',       'PureComponent'],
   Children:       ['react',       'Children'],
 
-  Provider:       ['react-redux', 'Provider'],
   connect:        ['react-redux', 'connect'],
   createSelector: ['reselect',    'createSelector'],
 };
 
+const htmlMinifyConfig = {
+  removeComments: true,
+  collapseWhitespace: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+  removeEmptyAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  keepClosingSlash: true,
+  minifyJS: true,
+  minifyCSS: true,
+  minifyURLs: true,
+};
 
 const isProduction = env === 'production';
 const isTest       = env === 'test';
@@ -63,22 +74,20 @@ const plugins = [
     '__EXPERIMENTAL__': JSON.stringify(__EXPERIMENTAL__),
   }),
   new HtmlWebpackPlugin({
-    title:     prettifyPackageName(packageConfig.name) || 'Boilerplate',
-    template:  Path.to.template,
-    path:      Path.to.build,
+    title:    prettifyPackageName(packageConfig.name) || 'Boilerplate',
+    template: Path.to.template,
+    path:     Path.to.build,
     filename: 'index.html',
-    inject:    true,
+    inject:   true,
+    minify:   isProduction ? htmlMinifyConfig : false,
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
-    minChunks: Infinity,
-    filename: 'vendor.[hash].js',
+    minChunks: 2,
   }),
-  new webpack.optimize.LimitChunkCountPlugin({
-    maxChunks: 2,
-  }),
+  new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 2 }),
 ];
 
 let useStyleLoaders = [
@@ -196,6 +205,22 @@ if (isProduction) {
     ]),
   );
 
+  if (USE_OFFLINE_CACHE) {
+    plugins.push(
+      new OfflinePlugin({
+        relativePaths: false,
+        publicPath: Path.to.public,
+        excludes: ['**/.*', '**/*.map', '.htaccess'],
+        caches: {
+          main: [':rest:'],
+          additional: ['vendor.*.js'],
+        },
+        safeToUseOptionalCaches: true,
+        AppCache: false,
+      })
+    );
+  }
+
 } else {
   // Development only plugins
 
@@ -234,7 +259,7 @@ module.exports = (env = {}) => {
     },
 
     resolve: {
-      extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', 'jsx', '.js', '.json'],
+      extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', '.jsx', '.js', '.json'],
       modules: ['app', 'node_modules'],
     },
 
@@ -314,7 +339,7 @@ module.exports = (env = {}) => {
     plugins,
 
     stats: {
-      colors: true,
+      colors:  true,
       reasons: true,
     },
 

@@ -2,6 +2,7 @@
 // Containers
 import Home        from './containers/Home';
 import About       from './containers/About';
+import Profile     from './containers/Profile';
 import Playground  from './containers/Playground';
 
 import Modal from './components/Modal';
@@ -14,6 +15,7 @@ export default (store) => [
   { path: '/',           component: Home, exact: true },
   { path: '/login',      component: Login },
   { path: '/about',      component: About },
+  { path: '/profile',    component: Profile },
   { path: '/playground', component: Playground },
   { path: '/dialog',     render: () => <Modal onClose={ () => store.dispatch(goBack()) }/> },
 ];

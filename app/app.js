@@ -9,6 +9,8 @@ import './sources/internal/experimental/inject-custom-properties.js';
 import 'sanitize.css/sanitize.css';
 import './styles/index.scss';
 
+import { Provider } from 'react-redux';
+
 // Routing
 import Redirect from 'react-router-dom/Redirect';
 import Route    from 'react-router-dom/Route';
@@ -53,7 +55,7 @@ const render = translations => {
             <App hideHeader hideFooter>
               <Switch>
 
-                <Redirect from='/index' to='/' />
+                <Redirect from='/index.html' to='/' />
                 {
                   routes(store).map(({ path, exact, component, render }) =>
                     <Route key={ path } path={ path } exact={ exact } component={ component } render={ render } />
@@ -110,4 +112,9 @@ if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line global-require
   const { whyDidYouUpdate } = require('why-did-you-update');
   whyDidYouUpdate(React, { exclude: [ /^DevTools/, /^DockMonitor/, /^Route/, /^Router/ ] });
+}
+
+// Install ServiceWorker and AppCache
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }

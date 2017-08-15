@@ -25,10 +25,11 @@
 - [x] `es6-promise`, `isomorphic-fetch` and `babel-polyfill`
 - [x] `moment`, `moize`, `query-string` and `classnames` provide automatic
 - [x] **yarn** package manager
+- [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin
 - [ ] **DllPlugin** webpack plugin
-- [ ] **OfflinePlugin** (ServiceWorker) webpack plugin
 - [ ] CSS modules
 - [ ] ES Linting
 - [ ] SCSS Linting
 - [ ] React Linting
 - [ ] Redux Saga Linting
+- [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?

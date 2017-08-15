@@ -4,7 +4,7 @@
   "private": true,
   "license": "UNLICENSED",
   "author": "Max Graey (LaSoft @ 2017)",
-  "description": "Bootstrap boilerplate for speedup React.js projects",
+  "description": "Bootstrap boilerplate for speedup development React.js projects",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -59,6 +59,8 @@
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-display-name": "^6.25.0",
     "babel-plugin-transform-react-inline-elements": "^6.22.0",
+    "babel-plugin-transform-react-jsx-self": "^6.22.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "babel-plugin-transform-react-pure-class-to-function": "^1.0.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
     "babel-plugin-transform-strict-mode": "^6.24.1",
@@ -79,6 +81,7 @@
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.3.1",
     "node-sass": "^4.5.3",
+    "offline-plugin": "^4.8.3",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.0.2",

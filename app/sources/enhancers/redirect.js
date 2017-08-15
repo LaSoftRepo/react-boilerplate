@@ -2,14 +2,10 @@
 /* High order component (HOC) for conditional redirection
  * Arguments:
  *
- *  conditionFunction {function}
- *  pathnameToRoute {string}
- *  replaceHistory {boolean}
- *  Component {React.Component}
+ *  condition {function}
+ *  pathname  {string}
  *
- *  redirect(conditionFunction, pathnameToRoute, overwriteHistory)(Component)
- *
- * Example of usage for Component:
+ * Example of usage:
  *
  *  import { ifUserNotAuthorize } from './credentials';
  *
@@ -23,14 +19,13 @@
  * for render function:
  *
  *  const SomeRestrictedContainer = redirect(ifUserNotAuthorize)((props) => <div></div>));
- *
  */
 
-import * as reduxRouter from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import reactHOC from 'react-hoc';
 import moize from 'moize';
 
-const redirect = (condition, pathname = '/login', replace = true) =>
+const redirect = (condition, pathname = '/login') =>
   reactHOC(WrappedComponent =>
     @connect(({ router }) => ({ router }))
     class extends Component {
@@ -45,6 +40,7 @@ const redirect = (condition, pathname = '/login', replace = true) =>
             `redirect: Invalid pathname "${ pathname }". Path (second argument) should starts with slash "/"`
           );
       }
+
       componentWillMount() {
         this.checkCondition(this.props);
       }
@@ -55,10 +51,12 @@ const redirect = (condition, pathname = '/login', replace = true) =>
         }
       }
 
-      checkCondition(params) {
+      checkCondition(props) {
         if (condition()) {
-          // TODO check if /login router exists
-          params.dispatch(reduxRouter[replace ? 'replace' : 'push']({ pathname }));
+          props.dispatch(replace(
+            { pathname },
+            { from: props.router.location }) // Pass current location for returning ability
+          );
         }
       }
 
