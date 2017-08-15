@@ -6,14 +6,15 @@
 // + Add and config eslint
 
 const path              = require('path');
+const chalk             = require('chalk');
 const argv              = require('yargs').argv;
 const webpack           = require('webpack');
 const ManifestPlugin    = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OfflinePlugin     = require('offline-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
 
@@ -65,6 +66,14 @@ const isTest       = env === 'test';
 
 // Common plugins
 const plugins = [
+  new ProgressBarPlugin({
+      width:          70,
+      format:         chalk.green.bold('Build :bar :percent'),
+      complete:       '•',
+      incomplete:     '◦',
+      clear:          true,
+      renderThrottle: 96,
+  }),
   new webpack.NoEmitOnErrorsPlugin(),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
   new webpack.DefinePlugin({
@@ -234,7 +243,6 @@ if (isProduction) {
       },
       debug: true,
     }),
-    new OpenBrowserPlugin({ url: `http://${ HOST }:${ PORT }` }),
   );
 }
 
@@ -339,16 +347,13 @@ module.exports = (env = {}) => {
 
     plugins,
 
-    stats: {
-      colors:  true,
-      reasons: true,
-    },
-
     devServer: {
       historyApiFallback: { disableDotRule: true },
       host: HOST,
       port: PORT,
-      noInfo: false,
+      noInfo:  false,
+      open:    true,
+      overlay: true,
       compress: isProduction,
       hot: !isProduction,
       inline: !isProduction,
