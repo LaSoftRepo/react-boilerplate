@@ -2,6 +2,7 @@
 
 ### Features
 
+- [x] **yarn** package manager
 - [x] App Basic structure (WIP)
 - [x] React
 - [x] React Router v4 with Redux binding
@@ -17,14 +18,13 @@
 - [x] Webpack v3
 - [x] Hot Loader v3
 - [x] Cache some loaders for faster rebuild process
-- [x] React, ReactDOM, PropTypes, Children and etc provide automatic
 - [x] Babel plugins **(class props, decorators)**
 - [x] Babel optimization transformers for production
 - [x] Browser css normalization via **sanitize.css**
 - [x] SASS with cssnext and flexbox fixes
 - [x] `es6-promise`, `isomorphic-fetch` and `babel-polyfill`
+- [x] React, ReactDOM, PropTypes, Children and etc provide automatic
 - [x] `moment`, `moize`, `query-string` and `classnames` provide automatic
-- [x] **yarn** package manager
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin
 - [ ] **DllPlugin** webpack plugin
 - [ ] CSS modules
@@ -35,3 +35,5 @@
 - [ ] Create and setup customizable server for production/staging
 - [ ] Redux Saga Linting
 - [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?
+- [ ] Karma test solution (?)
+- [ ] Docker, CI and other test environments (?)
