@@ -192,6 +192,7 @@ if (isProduction) {
         comments: false,
       },
       sourceMap: true,
+      exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
