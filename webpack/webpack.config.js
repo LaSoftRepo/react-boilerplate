@@ -118,6 +118,11 @@ let useStyleLoaders = [
     options: {
       sourceMap: !isProduction,
       importLoaders: 2,
+      alias: {
+        assets: Path.to.assets,
+        images: Path.to.images,
+        fonts:  Path.to.fonts,
+      },
     },
   },
   {
