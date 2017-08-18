@@ -48,21 +48,6 @@ const provideConfig = {
   createSelector: ['reselect',    'createSelector'],
 };
 
-const javascriptAliases = {
-  app:     Path.to.app,
-  sources: Path.to.sources,
-
-  styles:  Path.to.styles,
-  assets:  Path.to.assets,
-  images:  Path.to.images,
-  fonts:   Path.to.fonts,
-
-  components:   Path.to.components,
-  containers:   Path.to.containers,
-
-  translations: Path.to.translations,
-};
-
 const htmlMinifyConfig = {
   removeComments: true,
   collapseWhitespace: true,
@@ -292,7 +277,20 @@ module.exports = (env = {}) => {
     resolve: {
       extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', '.jsx', '.js', '.json'],
       modules: ['app', 'node_modules'],
-      alias: javascriptAliases,
+      alias: {
+        app:     Path.to.app,
+        sources: Path.to.sources,
+
+        styles:  Path.to.styles,
+        assets:  Path.to.assets,
+        images:  Path.to.images,
+        fonts:   Path.to.fonts,
+
+        components:   Path.to.components,
+        containers:   Path.to.containers,
+
+        translations: Path.to.translations,
+      },
     },
 
     module: {

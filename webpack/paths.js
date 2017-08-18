@@ -1,8 +1,9 @@
 
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
-const app  = path.join(root, 'app');
+const root    = path.resolve(__dirname, '..');
+const app     = path.join(root, 'app');
+const sources = path.join(app,  'sources');
 
 module.exports = {
   to: {
@@ -21,9 +22,9 @@ module.exports = {
     images:   path.join(app, 'assets', 'images'),
     fonts:    path.join(app, 'assets', 'fonts'),
 
-    components:   path.join(Path.to.sources, 'components'),
-    containers:   path.join(Path.to.sources, 'containers'),
+    components:   path.join(sources, 'components'),
+    containers:   path.join(sources, 'containers'),
 
-    translations: path.join(Path.to.app, 'translations'),
+    translations: path.join(app, 'translations'),
   },
 };
