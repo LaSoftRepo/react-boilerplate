@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import { createLogger } from "redux-logger";
 import { persistState } from 'redux-devtools';
 import createReducer from './reducers';
-import DevTools from './containers/DevTools';
+import DevTools from 'containers/DevTools';
 import { hasReduxDevToolExtension } from './internal/utils';
 
 const sagaMiddleware = createSagaMiddleware();

@@ -4,8 +4,8 @@
 
 import { combineReducers } from 'redux';
 import { routerReducer }   from 'react-router-redux';
-import appReducer          from './containers/App/reducer';
-import languageReducer     from './containers/LanguageProvider/reducer';
+import appReducer          from 'containers/App/reducer';
+import languageReducer     from 'containers/LanguageProvider/reducer';
 
 /**
  * Creates the global reducer with the asynchronously loaded ones

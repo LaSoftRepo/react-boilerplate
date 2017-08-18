@@ -3,10 +3,10 @@ import { addLocaleData } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import ruLocaleData from 'react-intl/locale-data/ru';
 
-import { DEFAULT_LOCALE } from './containers/LanguageProvider/constants';
+import { DEFAULT_LOCALE } from 'containers/LanguageProvider/constants';
 
-import en from '../translations/en.json';
-import ru from '../translations/ru.json';
+import en from 'translations/en.json';
+import ru from 'translations/ru.json';
 
 addLocaleData(enLocaleData);
 addLocaleData(ruLocaleData);

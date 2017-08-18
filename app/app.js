@@ -26,10 +26,10 @@ import { hasReduxDevToolExtension } from './sources/internal/utils';
 import configureStore from './sources/store';
 
 // Main containers
-import App              from './sources/containers/App';
-import DevTools         from './sources/containers/DevTools';
-import NotFound         from './sources/containers/NotFound';
-import LanguageProvider from './sources/containers/LanguageProvider';
+import App              from 'containers/App';
+import DevTools         from 'containers/DevTools';
+import NotFound         from 'containers/NotFound';
+import LanguageProvider from 'containers/LanguageProvider';
 
 import routes from './sources/routes';
 
