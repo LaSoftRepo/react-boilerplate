@@ -277,6 +277,12 @@ module.exports = (env = {}) => {
     resolve: {
       extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', '.jsx', '.js', '.json'],
       modules: ['app', 'node_modules'],
+      alias: {
+        styles: Path.to.styles,
+        assets: Path.to.assets,
+        images: Path.to.images,
+        fonts:  Path.to.fonts,
+      },
     },
 
     module: {
