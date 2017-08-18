@@ -336,9 +336,9 @@ module.exports = (env = {}) => {
           loaders: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.(png|gif|jpg|svg)$/,
+          test: /\.(png|gif|jpg|jpeg|svg)$/,
           include: Path.to.images,
-          use: 'url-loader?limit=20480&name=[name]-[hash].[ext]',
+          use: 'url-loader?limit=20480&name=[name].[hash:base64:5].[ext]',
         },
         {
           test: /favicon\.ico$/,
@@ -354,7 +354,7 @@ module.exports = (env = {}) => {
           loader: 'json-loader',
         },
         {
-          test: /\.(mp4|webm)$/,
+          test: /\.(mp4|webm|wav|mp3)$/,
           loader: 'url-loader',
           query: {
             limit: 10000,
