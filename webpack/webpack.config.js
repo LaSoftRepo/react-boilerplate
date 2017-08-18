@@ -325,13 +325,14 @@ module.exports = (env = {}) => {
         },
         {
           test: /\.scss$/,
-          exclude: /node_modules/,
+          exclude: [/node_modules/, /\.useable\.(scss|sass|css)$/i],
           include: Path.to.app,
           use: useStyleLoaders,
         },
         {
           test: /\.css$/,
           include: [/node_modules/, Path.to.app],
+          //exclude: /sanitize.css/,
           loaders: ['style-loader', 'css-loader'],
         },
         {
@@ -341,11 +342,7 @@ module.exports = (env = {}) => {
         },
         {
           test: /favicon\.ico$/,
-          loader: 'url',
-          query: {
-            limit: 1,
-            name: '[name].[ext]',
-          },
+          use: 'url-loader?name=[name].[ext]',
         },
         {
           test: /\.(woff|woff2|eot|ttf|svg)$/,

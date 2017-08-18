@@ -6,7 +6,7 @@ import 'isomorphic-fetch';
 import './sources/internal/experimental/inject-custom-properties.js';
 
 // Styles
-import 'sanitize.css/sanitize.css';
+//import 'sanitize.css/sanitize.css';
 import './styles/index.scss';
 
 import { Provider } from 'react-redux';
