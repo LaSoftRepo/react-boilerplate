@@ -123,6 +123,7 @@ let useStyleLoaders = [
         assets: Path.to.assets,
         images: Path.to.images,
         fonts:  Path.to.fonts,
+        styles: Path.to.styles,
       },
     },
   },
