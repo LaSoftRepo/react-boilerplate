@@ -283,10 +283,10 @@ module.exports = (env = {}) => {
         images: Path.to.images,
         fonts:  Path.to.fonts,
 
-        components:   path.join(Path.to.sources, 'components'),
-        containers:   path.join(Path.to.sources, 'containers'),
+        components:   Path.to.components,
+        containers:   Path.to.containers,
 
-        translations: path.join(Path.to.app, 'translations'),
+        translations: Path.to.translations,
       },
     },
 
