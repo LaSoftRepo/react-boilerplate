@@ -116,6 +116,7 @@ let useStyleLoaders = [
   {
     loader: 'css-loader',
     options: {
+      minimize: isProduction,
       sourceMap: !isProduction,
       importLoaders: 2,
       alias: {
