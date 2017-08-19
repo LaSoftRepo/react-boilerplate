@@ -5,16 +5,18 @@
 // + Add Dll plugin
 // + Add and config eslint
 
-const path              = require('path');
-const chalk             = require('chalk');
-const argv              = require('yargs').argv;
-const webpack           = require('webpack');
-const ManifestPlugin    = require('webpack-manifest-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const OfflinePlugin     = require('offline-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const path                  = require('path');
+const chalk                 = require('chalk');
+const argv                  = require('yargs').argv;
+const webpack               = require('webpack');
+const ManifestPlugin        = require('webpack-manifest-plugin');
+const ModuleScopePlugin     = require('react-dev-utils/ModuleScopePlugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const HtmlWebpackPlugin     = require('html-webpack-plugin');
+const ExtractTextPlugin     = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin     = require('copy-webpack-plugin');
+const OfflinePlugin         = require('offline-plugin');
+const ProgressBarPlugin     = require('progress-bar-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
@@ -79,11 +81,15 @@ const plugins = [
   }),
   new webpack.NoEmitOnErrorsPlugin(),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
+  new ModuleScopePlugin(Path.to.app),
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify(env),
     },
     '__EXPERIMENTAL__': JSON.stringify(__EXPERIMENTAL__),
+  }),
+  new InterpolateHtmlPlugin({
+    PUBLIC_URL: Path.to.public.replace(/\/$/, ""),
   }),
   new HtmlWebpackPlugin({
     title:    prettifyPackageName(packageConfig.name) || 'Boilerplate',
@@ -285,6 +291,7 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
+  const hmrPath = env.customServer ? 'webpack-hot-middleware/client' : 'webpack/hot/dev-server';
   return {
     bail: isProduction,
     devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
@@ -300,7 +307,9 @@ module.exports = (env = {}) => {
     entry: {
       app: [
         'react-hot-loader/patch',
-        `webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
+        //`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
+        //`webpack/hot/dev-server?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
+        `${ hmrPath }?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
         path.join(Path.to.app, 'app.js'),
       ],
       vendor: Object.keys(packageConfig.dependencies),
