@@ -94,7 +94,9 @@ if (module.hot) {
   });
 }
 
+/*
 if (!window.Intl) {
+  console.log('intl not supported');
   // We should wrap import to Promise for make HMR work in current page
   (new Promise(resolve => { resolve(import('intl')) }))
     .then(() => Promise.all([
@@ -104,8 +106,11 @@ if (!window.Intl) {
     .then(() => render(translations))
     .catch(err => { throw err });
 } else {
+  console.log('intl supported');
   render(translations);
-}
+}*/
+
+render(translations);
 
 if (process.env.NODE_ENV !== 'production') {
   // according this issue https://github.com/garbles/why-did-you-update/issues/45
