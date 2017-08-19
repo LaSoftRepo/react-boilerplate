@@ -111,20 +111,20 @@ const plugins = [
 function getStyleLoaders(modules = false, extract = false) {
   let styleLoaders = [
     {
-      loader: 'cache-loader',
+      loader: require.resolve('cache-loader'),
       options: {
         cacheDirectory: Path.to.cache,
       },
     },
     {
-      loader: 'style-loader',
+      loader: require.resolve('style-loader'),
       options: {
         minimize:  isProduction,
         sourceMap: !isProduction,
       },
     },
     {
-      loader: 'css-loader',
+      loader: require.resolve('css-loader'),
       options: {
         minimize: isProduction,
         sourceMap: !isProduction,
@@ -140,10 +140,10 @@ function getStyleLoaders(modules = false, extract = false) {
       },
     },
     {
-      loader: 'resolve-url-loader',
+      loader: require.resolve('resolve-url-loader'),
     },
     {
-      loader: 'postcss-loader',
+      loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: !isProduction,
         ident: 'postcss',
@@ -165,7 +165,7 @@ function getStyleLoaders(modules = false, extract = false) {
       },
     },
     {
-      loader: 'sass-loader',
+      loader: require.resolve('sass-loader'),
       options: {
         outputStyle: 'expanded',
         sourceMap: !isProduction,
@@ -176,7 +176,7 @@ function getStyleLoaders(modules = false, extract = false) {
   if (extract) {
     styleLoaders.splice(0, 2);
     styleLoaders = ExtractTextPlugin.extract({
-      fallback: 'style-loader',
+      fallback: require.resolve('style-loader'),
       use: styleLoaders,
     });
   }
@@ -297,18 +297,18 @@ module.exports = (env = {}) => {
     devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
     context: Path.to.app,
 
-    /*node: {
+    // Some libraries import Node modules but don't use them in the browser.
+    // Especially express inside in dependencies
+    node: {
       console: true,
       fs: 'empty',
       net: 'empty',
       tls: 'empty',
-    },*/
+    },
 
     entry: {
       app: [
         'react-hot-loader/patch',
-        //`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
-        //`webpack/hot/dev-server?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
         `${ hmrPath }?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
         path.join(Path.to.app, 'app.js'),
       ],
@@ -354,13 +354,13 @@ module.exports = (env = {}) => {
           exclude: /(node_modules|bower_components|build|spec)/,
           use: [
             {
-              loader: 'cache-loader',
+              loader: require.resolve('cache-loader'),
               options: {
                 cacheDirectory: Path.to.cache,
               },
             },
             {
-              loader: 'babel-loader',
+              loader: require.resolve('babel-loader'),
               //loader: require.resolve('eslint-loader'),
               options: {
                 //formatter: eslintFormatter,
@@ -397,7 +397,10 @@ module.exports = (env = {}) => {
           test: /\.css$/,
           exclude: /\.useable\.(scss|sass|css)$/i,
           include: [/node_modules/, Path.to.app],
-          loaders: ['style-loader', 'css-loader'],
+          loaders: [
+            require.resolve('style-loader'),
+            require.resolve('css-loader')
+          ],
         },
         {
           test: /\.(png|gif|jpg|jpeg|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
@@ -406,21 +409,27 @@ module.exports = (env = {}) => {
         },
         {
           test: /favicon\.ico$/,
-          use: 'url-loader?name=[name].[ext]',
+          loader: require.resolve('url-loader'),
+          options: {
+            name: '[name].[ext]',
+          },
         },
         {
           test: /\.(woff|woff2|eot|ttf|svg)$/,
           include: Path.to.fonts,
-          use: 'url-loader?limit=100000',
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: 10000,
+          },
         },
         {
           test: /\.json$/,
-          loader: 'json-loader',
+          loader: require.resolve('json-loader'),
         },
         {
           test: /\.(mp4|webm|wav|ogv|ogg|ogm|mp3)$/,
-          loader: 'url-loader',
-          query: {
+          loader: require.resolve('url-loader'),
+          options: {
             limit: 10000,
           },
         },
