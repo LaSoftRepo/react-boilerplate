@@ -285,20 +285,6 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
-
-  let appEntries = [
-    'react-hot-loader/patch',
-    path.join(Path.to.app, 'app.js'),
-  ];
-
-  if (env.customServer) {
-    appEntries = [
-      'react-hot-loader/patch',
-      `webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
-      path.join(Path.to.app, 'app.js'),
-    ];
-  }
-
   return {
     bail: isProduction,
     devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
@@ -312,7 +298,11 @@ module.exports = (env = {}) => {
     },*/
 
     entry: {
-      app:    appEntries,
+      app: [
+        'react-hot-loader/patch',
+        `webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
+        path.join(Path.to.app, 'app.js'),
+      ],
       vendor: Object.keys(packageConfig.dependencies),
     },
 
@@ -439,7 +429,6 @@ module.exports = (env = {}) => {
       overlay: true,
       compress: isProduction,
       hot: !isProduction,
-      inline: !isProduction && !env.customServer,
       contentBase: isProduction ? './build' : './app',
       headers: {
         'Access-Control-Allow-Origin': '*',
