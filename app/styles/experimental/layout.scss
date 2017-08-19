@@ -34,7 +34,8 @@
   }
 
 
-  &[reverse] {
+  &[reverse],
+  &[reverse~="true"] {
     flex-direction: row-reverse;
   }
   &[reverse~="false"] {

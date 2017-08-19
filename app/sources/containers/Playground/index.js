@@ -4,15 +4,12 @@ import './index.scss';
 
 @connect()
 export default class Playground extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      layout: 'rows',
-    };
+  state = {
+    layout: 'rows',
   }
 
-  handleChange = event => {
-    this.setState({ layout: event.currentTarget.value });
+  handleChange = ({ currentTarget }) => {
+    this.setState({ layout: currentTarget.value });
   }
 
   render() {

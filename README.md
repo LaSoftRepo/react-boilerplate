@@ -22,17 +22,20 @@
 - [x] Babel optimization transformers for production
 - [x] Browser css normalization via **sanitize.css**
 - [x] SASS with cssnext and flexbox fixes
-- [x] `es6-promise`, `isomorphic-fetch` and `babel-polyfill`
+- [x] Use **polyfill.io** service instead babel-polyfill for tiny and atomic polyfilling
+- [x] `es6-promise` and `isomorphic-fetch`
 - [x] React, ReactDOM, PropTypes, Children and etc provide automatic
 - [x] `moment`, `moize`, `query-string` and `classnames` provide automatic
+- [x] Auto generating all favicons and mobile icons for all platforms (production only)
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin
 - [ ] **DllPlugin** webpack plugin
-- [ ] CSS modules
+- [x] CSS modules
 - [ ] ES Linting
 - [ ] SCSS Linting
 - [ ] React Linting
 - [ ] React Saga Linting
 - [ ] Integrate Prettier
+- [ ] Add **static-site-generator-webpack-plugin** plugin for create static site for crowlers in production
 - [ ] Create and setup customizable server for production/staging
 - [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?
 - [ ] Karma test solution (?)

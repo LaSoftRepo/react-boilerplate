@@ -2,13 +2,15 @@
 
 import keycode from 'keycode';
 import Anime from 'react-anime';
+import CSSModules from 'react-css-modules';
 
-import './index.scss';
+import styles from './index.module.scss';
 
 const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
 
 const ANIMATE_DURATION = 500;
 
+@CSSModules(styles, { allowMultiple: true })
 export default class Modal extends Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
@@ -70,7 +72,7 @@ export default class Modal extends Component {
 
     return (
       <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
-        <div layout center className='modal-backdrop' onClick={ this.handleModalClick }>
+        <div layout center styleName='modal-backdrop' onClick={ this.handleModalClick }>
           <Anime
             translateY={ shouldHide ? 1200 : -1200 }
             scaleY='2.3'
@@ -79,15 +81,15 @@ export default class Modal extends Component {
             delay={ shouldHide ? 120 : 0 }
             direction={ direction }
           >
-            <div layout='rows' vertical-distribute='equal' horizontal-distribute='around' className='modal-container'>
+            <div layout='rows' vertical-distribute='equal' horizontal-distribute='around' styleName='modal-container'>
               <div layout horizontal-align='center'>
                 <h2>DIALOG TITLE</h2>
               </div>
               {/* { this.props.children } */}
-              <div layout center className='modal-content'>{ textContent }</div>
+              <div layout center styleName='modal-content'>{ textContent }</div>
               <div layout vertical-align='bottom' horizontal-distribute='equal'>
-                <button id='ok' onClick={ e => this.handleClick(e, true)  } className='modal-button left'>OK</button>
-                <button id='cancel' onClick={ e => this.handleClick(e, false) } className='modal-button right'>CANCEL</button>
+                <button id='ok' onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
+                <button id='cancel' onClick={ e => this.handleClick(e, false) } styleName='modal-button right'>CANCEL</button>
               </div>
             </div>
           </Anime>

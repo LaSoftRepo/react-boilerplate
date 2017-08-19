@@ -21,7 +21,7 @@ export default class App extends Component {
     return (
       <div className='app'>
         { this.props.hideHeader ? <Header /> : null }
-        { React.Children.toArray(this.props.children) }
+        { Children.toArray(this.props.children) }
         { this.props.hideFooter ? <Footer /> : null }
       </div>
     );

@@ -1,13 +1,13 @@
 
 // Polyfills
-import 'babel-polyfill';
+//import 'babel-polyfill';
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
 import './sources/internal/experimental/inject-custom-properties.js';
 
 // Styles
-//import 'sanitize.css/sanitize.css';
-import './styles/index.scss';
+import 'sanitize.css/sanitize.css';
+import 'styles/index.scss';
 
 import { Provider } from 'react-redux';
 
@@ -86,7 +86,11 @@ if (module.hot) {
     './sources/i18n',
   ], () => {
     ReactDOM.unmountComponentAtNode(containerNode);
-    render(translations);
+    try {
+      render(translations);
+    } catch (e) {
+      location.reload(true);
+    }
   });
 }
 

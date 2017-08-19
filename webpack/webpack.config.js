@@ -15,6 +15,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OfflinePlugin     = require('offline-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
 
@@ -46,6 +47,8 @@ const provideConfig = {
 
   connect:        ['react-redux', 'connect'],
   createSelector: ['reselect',    'createSelector'],
+
+  CSSModules:     'react-css-modules',
 };
 
 const htmlMinifyConfig = {
@@ -87,10 +90,10 @@ const plugins = [
     template: Path.to.template,
     path:     Path.to.build,
     filename: 'index.html',
-    inject:   true,
+    inject:   'body',
     minify:   isProduction ? htmlMinifyConfig : false,
   }),
-  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
@@ -99,75 +102,84 @@ const plugins = [
   new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 2 }),
 ];
 
-let useStyleLoaders = [
-  {
-    loader: 'cache-loader',
-    options: {
-      cacheDirectory: Path.to.cache,
-    },
-  },
-  {
-    loader: 'style-loader',
-    options: {
-      minimize:  isProduction,
-      sourceMap: !isProduction,
-    },
-  },
-  {
-    loader: 'css-loader',
-    options: {
-      minimize: isProduction,
-      sourceMap: !isProduction,
-      importLoaders: 2,
-      alias: {
-        assets: Path.to.assets,
-        images: Path.to.images,
-        fonts:  Path.to.fonts,
-        styles: Path.to.styles,
+function getStyleLoaders(modules = false, extract = false) {
+  let styleLoaders = [
+    {
+      loader: 'cache-loader',
+      options: {
+        cacheDirectory: Path.to.cache,
       },
     },
-  },
-  {
-    loader: 'postcss-loader',
-    options: {
-      sourceMap: !isProduction,
-      ident: 'postcss',
-      plugins: () => [
-        require('postcss-flexbugs-fixes')(),
-        require('postcss-cssnext')({
-          browsers: [
-            '> 1%',
-            'Explorer >= 10',
-            'last 4 Chrome versions',
-            'last 3 Firefox versions',
-            'iOS >= 9',
-            'Android >= 4.1',
-          ],
-          cascade: false,
-        }),
-        require('postcss-browser-reporter')()
-      ],
+    {
+      loader: 'style-loader',
+      options: {
+        minimize:  isProduction,
+        sourceMap: !isProduction,
+      },
     },
-  },
-  {
-    loader: 'sass-loader',
-    options: {
-      outputStyle: 'nested',
-      sourceMap: !isProduction,
+    {
+      loader: 'css-loader',
+      options: {
+        minimize: isProduction,
+        sourceMap: !isProduction,
+        importLoaders: 2,
+        alias: {
+          assets: Path.to.assets,
+          images: Path.to.images,
+          fonts:  Path.to.fonts,
+          styles: Path.to.styles,
+        },
+        modules,
+        localIdentName: '[path]__[local]__[hash:base64:5]',
+      },
     },
-  },
-];
+    {
+      loader: 'resolve-url-loader',
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: !isProduction,
+        ident: 'postcss',
+        plugins: () => [
+          require('postcss-flexbugs-fixes')(),
+          require('postcss-cssnext')({
+            browsers: [
+              '> 1%',
+              'Explorer >= 10',
+              'last 4 Chrome versions',
+              'last 3 Firefox versions',
+              'iOS >= 9',
+              'Android >= 4.1',
+            ],
+            cascade: false,
+          }),
+          require('postcss-browser-reporter')()
+        ],
+      },
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        outputStyle: 'expanded',
+        sourceMap: !isProduction,
+      },
+    },
+  ];
+
+  if (extract) {
+    styleLoaders.splice(0, 2);
+    styleLoaders = ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: styleLoaders,
+    });
+  }
+
+  return styleLoaders;
+}
 
 if (isProduction) {
   // Production only plugins
-
-  // Remove cache-loader and style-loader (which use as fallback)
-  useStyleLoaders.splice(0, 2);
-  useStyleLoaders = ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: useStyleLoaders,
-  });
-
   plugins.push(
     new webpack.HashedModuleIdsPlugin(),
     new ManifestPlugin({
@@ -214,11 +226,30 @@ if (isProduction) {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin({
-      filename: 'style.[hash].css',
+      filename: 'styles/style.[hash].css',
       allChunks: true,
+    }),
+    new FaviconsWebpackPlugin({
+      logo: 'favicon.png',
+      prefix: 'icons-[hash]/',
+      persistentCache: true,
+      inject: true,
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: true,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
+      //{ from: path.join(Path.to.app, 'favicon.ico'), to: 'favicon.ico' },
     ]),
   );
 
@@ -254,14 +285,34 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
+
+  let appEntries = [
+    'react-hot-loader/patch',
+    path.join(Path.to.app, 'app.js'),
+  ];
+
+  if (env.customServer) {
+    appEntries = [
+      'react-hot-loader/patch',
+      `webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
+      path.join(Path.to.app, 'app.js'),
+    ];
+  }
+
   return {
-    target: 'web',
     bail: isProduction,
     devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
     context: Path.to.app,
 
+    /*node: {
+      console: true,
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+    },*/
+
     entry: {
-      app: ['react-hot-loader/patch', path.join(Path.to.app, 'app.js')],
+      app:    appEntries,
       vendor: Object.keys(packageConfig.dependencies),
     },
 
@@ -295,6 +346,7 @@ module.exports = (env = {}) => {
 
     module: {
       strictExportPresence: true,
+      noParse: [/moment.js/],
       rules: [
         {
           test: /\.jsx?$/,
@@ -324,19 +376,32 @@ module.exports = (env = {}) => {
           ],
         },
         {
-          test: /\.scss$/,
-          exclude: [/node_modules/, /\.useable\.(scss|sass|css)$/i],
+          test: /\.module\.scss$/,
+          exclude: [
+            /node_modules/,
+            /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
+          ],
           include: Path.to.app,
-          use: useStyleLoaders,
+          use: getStyleLoaders(true, isProduction),
+        },
+        {
+          test: /\.scss$/,
+          exclude: [
+            /node_modules/,
+            /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i,
+            /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
+          ],
+          include: Path.to.app,
+          use: getStyleLoaders(),
         },
         {
           test: /\.css$/,
+          exclude: /\.useable\.(scss|sass|css)$/i,
           include: [/node_modules/, Path.to.app],
-          //exclude: /sanitize.css/,
           loaders: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.(png|gif|jpg|jpeg|svg)$/,
+          test: /\.(png|gif|jpg|jpeg|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
           include: Path.to.images,
           use: 'url-loader?limit=20480&name=[name].[hash:base64:5].[ext]',
         },
@@ -354,7 +419,7 @@ module.exports = (env = {}) => {
           loader: 'json-loader',
         },
         {
-          test: /\.(mp4|webm|wav|mp3)$/,
+          test: /\.(mp4|webm|wav|ogv|ogg|ogm|mp3)$/,
           loader: 'url-loader',
           query: {
             limit: 10000,
@@ -374,7 +439,7 @@ module.exports = (env = {}) => {
       overlay: true,
       compress: isProduction,
       hot: !isProduction,
-      inline: !isProduction,
+      inline: !isProduction && !env.customServer,
       contentBase: isProduction ? './build' : './app',
       headers: {
         'Access-Control-Allow-Origin': '*',
