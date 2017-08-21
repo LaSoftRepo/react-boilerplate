@@ -129,6 +129,7 @@ if (isDeveloping) {
     });
   });*/
 } else {
+  console.log('\r\nUse simple static server');
   // need use CORS
   app.use(express.static(path.join(rootPath, 'build')));
   app.get('*', (req, res) => {

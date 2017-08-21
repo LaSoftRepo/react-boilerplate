@@ -15,11 +15,13 @@
     <meta name="application-name" content="React Boilerplate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.png">
 
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <!-- ES6 Polyfills depending on browser's agent -->
+    <script async defer src="https://cdn.polyfill.io/v2/polyfill.min.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -29,7 +31,8 @@
     <div id="modal"></div>
     <div id="app"></div>
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/sanitize.css@latest/sanitize.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" />
   </body>
 
 </html>

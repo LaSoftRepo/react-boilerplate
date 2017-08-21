@@ -1,5 +1,5 @@
 
-import Link from 'react-router-dom/Link';
+import Link from 'react-router-dom/Link'
 
 export default class Home extends PureComponent {
   render() {

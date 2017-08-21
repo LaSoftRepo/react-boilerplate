@@ -1,7 +1,6 @@
 'use strict'
 
 // TODO
-// + Add CSS modules
 // + Add Dll plugin
 // + Add and config eslint
 
@@ -18,8 +17,10 @@ const CopyWebpackPlugin     = require('copy-webpack-plugin');
 const OfflinePlugin         = require('offline-plugin');
 const ProgressBarPlugin     = require('progress-bar-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const BrotliPlugin          = require('brotli-webpack-plugin');
 
-const WatchMissingNodeModulesPlugin = require('./plugins/WatchMissingNodeModulesPlugin');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
@@ -29,14 +30,21 @@ const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
 
 // Config webpack enviroment
-const __EXPERIMENTAL__ = true;
-const USE_OFFLINE_CACHE = true;
-const USE_DOCKER = false;
+const USE_EXPERIMENTAL      = true;
+const USE_OFFLINE_CACHE     = true;
+const USE_COMPRESSION       = true;
+const USE_DOCKER            = false;
+const USE_PERFORMANCE_TOOLS = false;
+
 const HOST = argv.host || '0.0.0.0';
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
+const isProduction = env === 'production';
+const isTest       = env === 'test';
+
 const provideConfig = {
+  axios:         'axios',
   moment:        'moment',
   classnames:    'classnames',
 
@@ -66,8 +74,26 @@ const htmlMinifyConfig = {
   minifyURLs: true,
 };
 
-const isProduction = env === 'production';
-const isTest       = env === 'test';
+const stats = {
+  entrypoints: true,
+  errors: true,
+  errorDetails: true,
+  cached: true,
+  entrypoints: false,
+  warnings: true,
+  colors: true,
+  hash: false,
+  version: false,
+  timings: false,
+  assets: true,
+  chunks: false,
+  modules: false,
+  reasons: false,
+  children: false,
+  source: false,
+  publicPath: false,
+  excludeAssets: [/^icons-[a-z0-9\/_.-]+/],
+};
 
 // Common plugins
 const plugins = [
@@ -86,7 +112,8 @@ const plugins = [
     'process.env': {
       'NODE_ENV': JSON.stringify(env),
     },
-    '__EXPERIMENTAL__': JSON.stringify(__EXPERIMENTAL__),
+    '__EXPERIMENTAL__':          JSON.stringify(USE_EXPERIMENTAL),
+    '__USE_PERFORMANCE_TOOLS__': JSON.stringify(USE_PERFORMANCE_TOOLS),
   }),
   new InterpolateHtmlPlugin({
     PUBLIC_URL: Path.to.public.replace(/\/$/, ""),
@@ -101,6 +128,7 @@ const plugins = [
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
+  new webpack.AutomaticPrefetchPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
     minChunks: 2,
@@ -229,8 +257,9 @@ if (isProduction) {
       exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new DuplicatePackageCheckerPlugin(),
     new ExtractTextPlugin({
       filename: 'styles/style.[hash].css',
       allChunks: true,
@@ -255,7 +284,6 @@ if (isProduction) {
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
-      //{ from: path.join(Path.to.app, 'favicon.ico'), to: 'favicon.ico' },
     ]),
   );
 
@@ -271,6 +299,18 @@ if (isProduction) {
         },
         safeToUseOptionalCaches: true,
         AppCache: false,
+      })
+    );
+  }
+
+  if (USE_COMPRESSION) {
+    plugins.push(
+      new BrotliPlugin({
+        asset:     '[path].br[query]',
+        test:      /\.(js|css|html|svg)$/,
+        threshold: 10240,
+        minRatio:  0.8,
+        enable_transforms: true,
       })
     );
   }
@@ -291,9 +331,15 @@ if (isProduction) {
 }
 
 module.exports = (env = {}) => {
-  const hmrPath = env.customServer ? 'webpack-hot-middleware/client' : 'webpack/hot/dev-server';
+
+  let appChunk = ['react-hot-loader/patch'];
+  if (env.customServer) {
+    appChunk.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`);
+  }
+  appChunk.push(path.join(Path.to.app, 'app.js'));
+
   return {
-    bail: isProduction,
+    bail:    isProduction,
     devtool: isProduction ? '#source-map' : '#cheap-module-eval-source-map',
     context: Path.to.app,
 
@@ -301,17 +347,13 @@ module.exports = (env = {}) => {
     // Especially express inside in dependencies
     node: {
       console: true,
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty',
+      fs:      'empty',
+      net:     'empty',
+      tls:     'empty',
     },
 
     entry: {
-      app: [
-        'react-hot-loader/patch',
-        `${ hmrPath }?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`,
-        path.join(Path.to.app, 'app.js'),
-      ],
+      app: appChunk,
       vendor: Object.keys(packageConfig.dependencies),
     },
 
@@ -326,7 +368,7 @@ module.exports = (env = {}) => {
 
     resolve: {
       extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', '.jsx', '.js', '.json'],
-      modules: ['app', 'node_modules'],
+      modules: [Path.to.app, Path.to.modules],
       alias: {
         app:     Path.to.app,
         sources: Path.to.sources,
@@ -345,7 +387,7 @@ module.exports = (env = {}) => {
 
     module: {
       strictExportPresence: true,
-      noParse: [/moment.js/],
+      noParse: [/moment.js/, /\.\/data\//],
       rules: [
         {
           test: /\.jsx?$/,
@@ -357,6 +399,14 @@ module.exports = (env = {}) => {
               loader: require.resolve('cache-loader'),
               options: {
                 cacheDirectory: Path.to.cache,
+              },
+            },
+            {
+              loader: require.resolve('thread-loader'),
+              options: {
+                workers: 4,
+                workerParallelJobs: 30,
+                poolParallelJobs: 100,
               },
             },
             {
@@ -395,7 +445,9 @@ module.exports = (env = {}) => {
         },
         {
           test: /\.css$/,
-          exclude: /\.useable\.(scss|sass|css)$/i,
+          exclude: [
+            /\.useable\.css$/i,
+          ],
           include: [/node_modules/, Path.to.app],
           loaders: [
             require.resolve('style-loader'),
@@ -437,6 +489,7 @@ module.exports = (env = {}) => {
     },
 
     plugins,
+    stats,
 
     devServer: {
       historyApiFallback: { disableDotRule: true },
@@ -453,12 +506,13 @@ module.exports = (env = {}) => {
         'Access-Control-Allow-Methods': 'GET, OPTIONS',
         'X-Custom-Header': 'yes',
       },
-      watchOptions: {
+      watchOptions: !isProduction ? {
         aggregateTimeout: 240,
-        ignored: [/node_modules/, "../build/**/*.*"],
+        ignored: [/node_modules/, "../build/**/*.*", '../server/**/*.*', '../.cache/*.*'],
         poll: USE_DOCKER ? 1000 : false,
-      },
+      } : false,
       publicPath: Path.to.public,
+      stats,
     },
   };
 }

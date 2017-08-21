@@ -1,5 +1,5 @@
 
-import { CHANGE_LOCALE } from './constants';
+import { CHANGE_LOCALE } from './constants'
 
 export function changeLocale(locale) {
   return {

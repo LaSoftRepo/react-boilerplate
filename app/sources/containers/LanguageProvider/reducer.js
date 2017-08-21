@@ -1,7 +1,7 @@
 import {
   DEFAULT_LOCALE,
   CHANGE_LOCALE,
-}  from './constants';
+}  from './constants'
 
 const initialState = {
   locale: DEFAULT_LOCALE,

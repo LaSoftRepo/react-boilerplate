@@ -1,12 +1,10 @@
 
 // Polyfills
-//import 'babel-polyfill';
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
-import './sources/internal/experimental/inject-custom-properties.js';
+import 'sources/internal/experimental/inject-custom-properties.js';
 
 // Styles
-import 'sanitize.css/sanitize.css';
 import 'styles/index.scss';
 
 import { Provider } from 'react-redux';
@@ -20,7 +18,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 
 // Utils
-import { hasReduxDevToolExtension } from './sources/internal/utils';
+import { hasReduxDevToolExtension } from 'sources/internal/utils';
 
 // Cofigurations
 import configureStore from './sources/store';
@@ -113,14 +111,16 @@ if (!window.Intl) {
 render(translations);
 
 if (process.env.NODE_ENV !== 'production') {
-  // according this issue https://github.com/garbles/why-did-you-update/issues/45
-  let createClass = React.createClass;
-  Object.defineProperty(React, 'createClass', {
-    set: nextCreateClass => { createClass = nextCreateClass }
-  });
-  // eslint-disable-next-line global-require
-  const { whyDidYouUpdate } = require('why-did-you-update');
-  whyDidYouUpdate(React, { exclude: [ /^DevTools/, /^DockMonitor/, /^Route/, /^Router/ ] });
+  if (__USE_PERFORMANCE_TOOLS__) {
+    // according this issue https://github.com/garbles/why-did-you-update/issues/45
+    let createClass = React.createClass;
+    Object.defineProperty(React, 'createClass', {
+      set: nextCreateClass => { createClass = nextCreateClass }
+    });
+    // eslint-disable-next-line global-require
+    const { whyDidYouUpdate } = require('why-did-you-update');
+    whyDidYouUpdate(React, { exclude: [ /^DevTools/, /^DockMonitor/, /^Route/, /^Router/ ] });
+  }
 }
 
 // Install ServiceWorker and AppCache

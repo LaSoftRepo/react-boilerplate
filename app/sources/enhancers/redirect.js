@@ -53,10 +53,12 @@ const redirect = (condition, pathname = '/login') =>
 
       checkCondition(props) {
         if (condition()) {
-          props.dispatch(replace(
-            { pathname },
-            { from: props.router.location }) // Pass current location for returning ability
-          );
+          props.dispatch(replace({
+            pathname,
+            state: {
+              from: props.router.location // Pass current location vis context for returning ability
+            },
+          }));
         }
       }
 

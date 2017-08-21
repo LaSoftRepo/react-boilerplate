@@ -6,6 +6,7 @@ import { goBack } from 'react-router-redux';
 export default class Profile extends Component {
   render() {
     const { dispatch } = this.props;
+    //console.log('come from:', this.props.history.location.state.from);
     return (
       <div layout='columns'>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
