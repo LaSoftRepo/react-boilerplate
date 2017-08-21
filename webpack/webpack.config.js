@@ -45,6 +45,7 @@ const isTest       = env === 'test';
 
 const provideConfig = {
   axios:         'axios',
+  store:         'store',
   moment:        'moment',
   classnames:    'classnames',
 
@@ -506,7 +507,7 @@ module.exports = (env = {}) => {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'X-Custom-Header, X-Requested-With, Content-Length, Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true',
-        
+
       },
       watchOptions: !isProduction ? {
         aggregateTimeout: 240,

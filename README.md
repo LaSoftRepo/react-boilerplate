@@ -25,7 +25,7 @@
 - [x] Use **polyfill.io** service instead babel-polyfill for tiny and atomic polyfilling
 - [x] `es6-promise` and `isomorphic-fetch`
 - [x] React, ReactDOM, PropTypes, Children and etc provide automatic
-- [x] `axios`, `moment`, `query-string` and `classnames` provide automatic
+- [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
 - [x] Auto generating all favicons and mobile icons for all platforms (production only)
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin
 - [x] Webpack use Caching and WebWorkers for speedup builds
