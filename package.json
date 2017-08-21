@@ -14,7 +14,8 @@
     "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
     "start:own": "node server/index --colors --config webpack/webpack.config.js",
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
-    "preview": "npm run build && NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js"
+    "preview": "npm run build && NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
+    "deploy": "rm -rf ./build && NODE_ENV=\"production\" deploy=true webpack -p --config webpack/webpack.config.js"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -72,6 +73,7 @@
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
+    "dotenv": "^4.0.0",
     "duplicate-package-checker-webpack-plugin": "^1.2.5",
     "eslint": "^4.3.0",
     "eslint-config-airbnb-base": "^11.3.1",
@@ -113,6 +115,8 @@
     "webpack-dev-server": "^2.6.1",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-manifest-plugin": "^1.2.1",
+    "webpack-s3-plugin": "^1.0.0-rc.0",
+    "webpack-shell-plugin": "^0.5.0",
     "why-did-you-update": "0.0.8",
     "yargs": "^8.0.2"
   },

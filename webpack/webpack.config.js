@@ -18,12 +18,16 @@ const OfflinePlugin         = require('offline-plugin');
 const ProgressBarPlugin     = require('progress-bar-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const BrotliPlugin          = require('brotli-webpack-plugin');
+const S3Plugin              = require('webpack-s3-plugin');
+const WebpackShellPlugin    = require('webpack-shell-plugin');
 
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
+
+require('dotenv').config();
 
 const SEPARATOR_REGEX  = /[-_]/;
 const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
@@ -42,6 +46,7 @@ const env  = process.env.NODE_ENV || 'development';
 
 const isProduction = env === 'production';
 const isTest       = env === 'test';
+const isAWSDeploy  = !!process.env.deploy;
 
 const provideConfig = {
   axios:         'axios',
@@ -316,6 +321,29 @@ if (isProduction) {
     );
   }
 
+  if (isAWSDeploy) {
+    const url = 'http://aws-website-lasoft-test-q57ap.s3-website-us-east-1.amazonaws.com';
+    console.log('Start deploing to AWS...')
+    console.log('url: ' + chalk.green.bold(url));
+
+    plugins.push(
+      new S3Plugin({
+        s3Options: {
+          accessKeyId:     process.env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        },
+        s3UploadOptions: {
+          Bucket: process.env.AWS_BUCKET,
+        },
+      }),
+      new WebpackShellPlugin({
+        onBuildEnd: [
+          `open ${url}`,
+        ],
+      }),
+    );
+  }
+
 } else {
   // Development only plugins
 
@@ -497,7 +525,7 @@ module.exports = (env = {}) => {
       host: HOST,
       port: PORT,
       noInfo:  false,
-      open:    true,
+      open:    !isAWSDeploy,
       overlay: true,
       compress: isProduction,
       hot: !isProduction,

@@ -12,12 +12,12 @@
 - [x] Redux Dev Tools or Redux Dev Tools Extension ***(dev only)***
 - [x] Internalization (i18n)
 - [x] React-anime animation system
-- [x] High order component enhancers
+- [x] High order component **(HOC)** enhancers
 - [x] Experimental Layout based on **RAGrid** with binding to React
 - [x] Immutable
 - [x] Webpack v3
 - [x] Hot Loader v3
-- [x] Cache some loaders for faster rebuild process
+- [x] Webpack use Caching and WebWorkers for speedup builds
 - [x] Babel plugins **(class props, decorators)**
 - [x] Babel optimization transformers for production
 - [x] Browser css normalization via **sanitize.css** ***(service)***
@@ -28,7 +28,6 @@
 - [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
 - [x] Auto generating all favicons and mobile icons for all platforms ***(production only)***
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin ***(production only)***
-- [x] Webpack use Caching and WebWorkers for speedup builds
 - [x] **Brotli** compression plugin ***(production only)***
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
