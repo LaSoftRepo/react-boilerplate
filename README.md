@@ -9,7 +9,7 @@
 - [x] Redux
 - [x] Redux Sagas
 - [x] Selectors
-- [x] Redux Dev Tools or Redux Dev Tools Extension
+- [x] Redux Dev Tools or Redux Dev Tools Extension ***(dev only)***
 - [x] Internalization (i18n)
 - [x] React-anime animation system
 - [x] High order component enhancers
@@ -24,12 +24,12 @@
 - [x] SASS with cssnext and flexbox fixes
 - [x] Use **polyfill.io** service instead babel-polyfill for tiny and atomic polyfilling
 - [x] `es6-promise` and `isomorphic-fetch`
-- [x] React, ReactDOM, PropTypes, Children and etc provide automatic
+- [x] `React`, `ReactDOM`, `PropTypes` and `Children` provide automatic
 - [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
-- [x] Auto generating all favicons and mobile icons for all platforms (production only)
+- [x] Auto generating all favicons and mobile icons for all platforms ***(production only)***
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin
 - [x] Webpack use Caching and WebWorkers for speedup builds
-- [x] **Brotli** compression plugin
+- [x] **Brotli** compression plugin ***(production only)***
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
 - [ ] ES Linting
