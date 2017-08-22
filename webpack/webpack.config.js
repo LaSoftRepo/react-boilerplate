@@ -323,7 +323,7 @@ if (isProduction) {
   }
 
   if (isAWSDeploy) {
-    const url = 'http://aws-website-lasoft-test-q57ap.s3-website-us-east-1.amazonaws.com';
+    const url = 'http://react-boilerplate-test.s3-website-us-west-2.amazonaws.com';
     console.log('Start deploing to AWS...')
     console.log('url: ' + chalk.green.bold(url));
 
@@ -347,10 +347,15 @@ if (isProduction) {
         s3Options: {
           accessKeyId:     process.env.AWS_ACCESS_KEY_ID,
           secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+          region:          'us-west-2',
         },
         s3UploadOptions: {
           Bucket: process.env.AWS_BUCKET,
         },
+        // cloudfrontInvalidateOptions: {
+        //   DistributionId: process.env.CLOUDFRONT_DISTRIBUTION_ID,
+        //   Items: ["/*"]
+        // },
       }),
       new WebpackShellPlugin({
         onBuildEnd: [
