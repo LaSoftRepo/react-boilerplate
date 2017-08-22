@@ -27,13 +27,14 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
 
-require('dotenv').config();
-
 const SEPARATOR_REGEX  = /[-_]/;
 const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
+require('dotenv').config();
+
 
 // Config webpack enviroment
+const PROJECT_NAME          = prettifyPackageName(packageConfig.name) || 'Boilerplate';
 const USE_EXPERIMENTAL      = true;
 const USE_OFFLINE_CACHE     = true;
 const USE_COMPRESSION       = true;
@@ -44,8 +45,8 @@ const HOST = argv.host || '0.0.0.0';
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
-const isProduction = env === 'production';
 const isTest       = env === 'test';
+const isProduction = env === 'production';
 const isAWSDeploy  = !!process.env.deploy;
 
 const provideConfig = {
@@ -125,7 +126,7 @@ const plugins = [
     PUBLIC_URL: Path.to.public.replace(/\/$/, ""),
   }),
   new HtmlWebpackPlugin({
-    title:    prettifyPackageName(packageConfig.name) || 'Boilerplate',
+    title:    PROJECT_NAME,
     template: Path.to.template,
     path:     Path.to.build,
     filename: 'index.html',
@@ -326,6 +327,21 @@ if (isProduction) {
     console.log('Start deploing to AWS...')
     console.log('url: ' + chalk.green.bold(url));
 
+    const getOpenBrowserCommand = url => {
+      switch (process.platform) {
+        case 'win32':
+          return `start "" "${ url }"`;
+          break;
+
+        case `darwin`:
+          return `open ${ url }`;
+
+        default: break;
+      }
+
+      return `python -m webbrowser ${ url }`;
+    }
+
     plugins.push(
       new S3Plugin({
         s3Options: {
@@ -338,7 +354,8 @@ if (isProduction) {
       }),
       new WebpackShellPlugin({
         onBuildEnd: [
-          `open ${url}`,
+          // `node_modules/scottyjs/bin/scotty.js --spa -u -r eu-central-1 -s ./build -b ${PROJECT_NAME}`,
+          getOpenBrowserCommand(url),
         ],
       }),
     );
@@ -521,29 +538,33 @@ module.exports = (env = {}) => {
     stats,
 
     devServer: {
-      historyApiFallback: { disableDotRule: true },
-      host: HOST,
-      port: PORT,
-      noInfo:  false,
-      open:    !isAWSDeploy,
-      overlay: true,
-      compress: isProduction,
-      hot: !isProduction,
+      stats,
+      host:        HOST,
+      port:        PORT,
+      open:        !isAWSDeploy,
+      noInfo:      false,
+      overlay:     true,
+      compress:    isProduction,
+      hot:         !isProduction,
+      publicPath:  Path.to.public,
       contentBase: isProduction ? './build' : './app',
+
+      historyApiFallback: {
+        disableDotRule: true
+      },
+
       headers: {
         'Access-Control-Allow-Origin':  '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'X-Custom-Header, X-Requested-With, Content-Length, Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true',
-
       },
+
       watchOptions: !isProduction ? {
         aggregateTimeout: 240,
         ignored: [/node_modules/, "../build/**/*.*", '../server/**/*.*', '../.cache/*.*'],
         poll: USE_DOCKER ? 1000 : false,
       } : false,
-      publicPath: Path.to.public,
-      stats,
     },
   };
 }
