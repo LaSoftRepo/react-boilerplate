@@ -351,6 +351,13 @@ if (isProduction) {
         },
         s3UploadOptions: {
           Bucket: process.env.AWS_BUCKET,
+          ContentEncoding(fileName) {
+            if (/\.gz/.test(fileName))
+              return 'gzip';
+
+            if (/\.br/.test(fileName))
+              return 'br';
+          },
         },
         // cloudfrontInvalidateOptions: {
         //   DistributionId: process.env.CLOUDFRONT_DISTRIBUTION_ID,
@@ -563,11 +570,17 @@ module.exports = (env = {}) => {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'X-Custom-Header, X-Requested-With, Content-Length, Content-Type, Authorization',
         'Access-Control-Allow-Credentials': 'true',
+        'Accept-Encoding': 'Vary',
       },
 
       watchOptions: !isProduction ? {
         aggregateTimeout: 240,
-        ignored: [/node_modules/, "../build/**/*.*", '../server/**/*.*', '../.cache/*.*'],
+        ignored: [
+          /node_modules/,
+          "../build/**/*.*",
+          '../server/**/*.*',
+          '../.cache/*.*'
+        ],
         poll: USE_DOCKER ? 1000 : false,
       } : false,
     },
