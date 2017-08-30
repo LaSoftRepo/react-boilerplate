@@ -137,7 +137,6 @@ const plugins = [
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
-  //new webpack.AutomaticPrefetchPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
     minChunks: 2,
@@ -236,6 +235,10 @@ if (isProduction) {
         context: Path.to.app,
       },
     }),
+    new webpack.AutomaticPrefetchPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       beautify: false,
@@ -265,9 +268,6 @@ if (isProduction) {
       sourceMap: true,
       exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new DuplicatePackageCheckerPlugin(),
     new ExtractTextPlugin({
       filename: 'styles/style.[hash].css',
