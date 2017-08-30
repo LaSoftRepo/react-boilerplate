@@ -137,7 +137,7 @@ const plugins = [
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
-  new webpack.AutomaticPrefetchPlugin(),
+  //new webpack.AutomaticPrefetchPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
     minChunks: 2,

@@ -1,10 +1,10 @@
 {
   "plugins": [
     "transform-strict-mode",
-    "react-hot-loader/babel",
     "transform-class-properties",
     "syntax-decorators",
     "transform-decorators-legacy",
+    "react-hot-loader/babel"
   ],
   "presets": [[
     "env", {
