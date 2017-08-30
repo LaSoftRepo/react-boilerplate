@@ -505,7 +505,7 @@ module.exports = (env = {}) => {
             /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
           ],
           include: Path.to.app,
-          use: getStyleLoaders(),
+          use: getStyleLoaders(false, isProduction),
         },
         {
           test: /\.css$/,
