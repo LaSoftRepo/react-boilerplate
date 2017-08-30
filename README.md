@@ -32,6 +32,7 @@
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
 - [ ] ES Linting
+- [ ] Automatic send mail to customer after deploy
 - [ ] SCSS Linting
 - [ ] React Linting
 - [ ] React Saga Linting
