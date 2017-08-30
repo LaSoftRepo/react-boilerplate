@@ -1,5 +1,6 @@
 {
   "plugins": [
+    "transform-strict-mode",
     "react-hot-loader/babel",
     "transform-class-properties",
     "syntax-decorators",
@@ -25,9 +26,9 @@
       ]
     },
     "production": {
-      "only": ["app"],
       "plugins": [
-        "transform-strict-mode",
+        "dev-expression",
+        "transform-inline-consecutive-adds",
         "transform-react-remove-prop-types",
         "transform-react-constant-elements",
         "transform-react-inline-elements",

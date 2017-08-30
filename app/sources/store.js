@@ -5,9 +5,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import { createLogger } from "redux-logger";
+import { createLogger } from 'redux-logger';
 import { persistState } from 'redux-devtools';
 import createReducer from './reducers';
+import createSagas from './sagas';
 import DevTools from 'containers/DevTools';
 import { hasReduxDevToolExtension } from './internal/utils';
 
@@ -68,8 +69,20 @@ export default function configureStore(initialState, history) {
   store.runSaga = sagaMiddleware.run;
   store.asyncReducers = {};
 
+  //let sagaTask = sagaMiddleware.run(function* () => yield createSagas());
+
   // Make reducers hot reloadable
   if (module.hot) {
+    /*module.hot.accept('./sagas', () => {
+      const getNewSagas = require('./sagas');
+      sagaTask.cancel();
+      sagaTask.done.then(() => {
+        sagaTask = sagaMiddleware.run(function* (action) => {
+          yield getNewSagas();
+        })
+      })
+    });*/
+
     module.hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });

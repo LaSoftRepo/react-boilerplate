@@ -25,6 +25,7 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 
 const Path          = require('./paths');
+const Mailer        = require('./mailer');
 const packageConfig = require('../package.json');
 
 const SEPARATOR_REGEX  = /[-_]/;
@@ -38,6 +39,7 @@ const PROJECT_NAME          = prettifyPackageName(packageConfig.name) || 'Boiler
 const USE_EXPERIMENTAL      = true;
 const USE_OFFLINE_CACHE     = true;
 const USE_COMPRESSION       = true;
+const USE_MAIL_AFTER_DEPLOY = true;
 const USE_DOCKER            = false;
 const USE_PERFORMANCE_TOOLS = false;
 
@@ -340,6 +342,10 @@ if (isProduction) {
       }
 
       return `python -m webbrowser ${ url }`;
+    }
+
+    if (USE_MAIL_AFTER_DEPLOY) {
+      //let mailer = new Mailer();
     }
 
     plugins.push(
