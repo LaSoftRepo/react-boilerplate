@@ -144,8 +144,8 @@ const plugins = [
   new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 2 }),
 ];
 
-function getStyleLoaders(modules = false, extract = false) {
-  let styleLoaders = [
+function styleLoaders(extract, modules = false) {
+  let loaders = [
     {
       loader: require.resolve('cache-loader'),
       options: {
@@ -210,14 +210,14 @@ function getStyleLoaders(modules = false, extract = false) {
   ];
 
   if (extract) {
-    styleLoaders.splice(0, 2);
-    styleLoaders = ExtractTextPlugin.extract({
+    loaders.splice(0, 2);
+    loaders = ExtractTextPlugin.extract({
       fallback: require.resolve('style-loader'),
-      use: styleLoaders,
+      use: loaders,
     });
   }
 
-  return styleLoaders;
+  return loaders;
 }
 
 if (isProduction) {
@@ -239,6 +239,7 @@ if (isProduction) {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new DuplicatePackageCheckerPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       beautify: false,
@@ -268,7 +269,6 @@ if (isProduction) {
       sourceMap: true,
       exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
-    new DuplicatePackageCheckerPlugin(),
     new ExtractTextPlugin({
       filename: 'styles/style.[hash].css',
       allChunks: true,
@@ -495,7 +495,7 @@ module.exports = (env = {}) => {
             /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
           ],
           include: Path.to.app,
-          use: getStyleLoaders(true, isProduction),
+          use: styleLoaders(isProduction, true),
         },
         {
           test: /\.scss$/,
@@ -505,7 +505,7 @@ module.exports = (env = {}) => {
             /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
           ],
           include: Path.to.app,
-          use: getStyleLoaders(false, isProduction),
+          use: styleLoaders(isProduction),
         },
         {
           test: /\.css$/,

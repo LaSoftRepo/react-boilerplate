@@ -15,7 +15,7 @@ export default class Modal extends PureComponent {
     onClose:   PropTypes.func.isRequired,
     allowKeys: PropTypes.bool,
     autoFocus: PropTypes.bool,
-    children:  PropTypes.node,
+    //children:  PropTypes.node,
   }
 
   static defaultProps = {
