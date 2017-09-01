@@ -394,6 +394,7 @@ if (isProduction) {
   );
 }
 
+
 module.exports = (env = {}) => {
 
   let appChunk = ['react-hot-loader/patch'];

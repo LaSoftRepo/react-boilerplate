@@ -2,19 +2,22 @@
   "plugins": [
     "transform-strict-mode",
     "transform-class-properties",
+    "syntax-async-functions",
+    "transform-regenerator",
     "syntax-decorators",
     "transform-decorators-legacy",
     "react-hot-loader/babel"
   ],
   "presets": [[
     "env", {
+      "useBuiltIns": true,
       "modules": false,
       "targets": {
         "browsers": ["last 4 versions", "safari >= 8", "ie >= 10"]
       }
     }],
     "react",
-    "stage-0"
+    "stage-3"
   ],
   "env": {
     "development": {
