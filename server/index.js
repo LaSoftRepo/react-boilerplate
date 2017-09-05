@@ -138,7 +138,7 @@ if (isDeveloping) {
     });
   });*/
 } else {
-  console.log('\r\nUse simple static server');
+  console.log('\r\nUser static server was lounched');
 
   app.use(cors(corsOptions));
   app.use(express.static(path.join(rootPath, 'build')));
