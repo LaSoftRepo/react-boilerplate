@@ -31,6 +31,7 @@
     "production": {
       "plugins": [
         "dev-expression",
+        "transform-react-jsx",
         "transform-inline-consecutive-adds",
         "transform-react-remove-prop-types",
         "transform-react-constant-elements",
