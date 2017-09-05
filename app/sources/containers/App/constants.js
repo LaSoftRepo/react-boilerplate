@@ -1,1 +1,1 @@
-export const RESET = '@@app/reset';
+export const RESET           = '@@app/reset';

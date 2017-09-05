@@ -394,6 +394,7 @@ if (isProduction) {
   );
 }
 
+
 module.exports = (env = {}) => {
 
   let appChunk = ['react-hot-loader/patch'];
@@ -418,7 +419,24 @@ module.exports = (env = {}) => {
 
     entry: {
       app: appChunk,
-      vendor: Object.keys(packageConfig.dependencies),
+      vendor: [
+        "babel-polyfill",
+        "es6-promise",
+        "history",
+        "immutable",
+        "isomorphic-fetch",
+        "prop-types",
+        "react",
+        "react-css-modules",
+        "react-dom",
+        "react-hoc",
+        "react-intl",
+        "react-redux",
+        "react-router",
+        "react-router-dom",
+        "react-router-redux",
+        "redux",
+      ],
     },
 
     output: {
@@ -446,6 +464,7 @@ module.exports = (env = {}) => {
         containers:   Path.to.containers,
 
         translations: Path.to.translations,
+        api:          path.join(Path.to.sources, 'api'),
       },
     },
 

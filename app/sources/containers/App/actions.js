@@ -1,7 +1,9 @@
 
-import { RESET } from './constants';
+import {
+  RESET,
+} from './constants';
 
-export default function reset() {
+export function reset() {
   return {
     type: RESET,
   };

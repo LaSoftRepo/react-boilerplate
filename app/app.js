@@ -1,39 +1,40 @@
 
 // Polyfills
-import 'es6-promise/auto';
-import 'isomorphic-fetch';
-import 'sources/internal/experimental/inject-custom-properties.js';
+import 'babel-polyfill'
+import 'es6-promise/auto'
+import 'isomorphic-fetch'
+import 'sources/internal/experimental/inject-custom-properties.js'
 
 // Styles
-import 'styles/index.scss';
+import 'styles/index.scss'
 
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 
 // Routing
-import Redirect from 'react-router-dom/Redirect';
-import Route    from 'react-router-dom/Route';
-import Switch   from 'react-router-dom/Switch';
+import Redirect from 'react-router-dom/Redirect'
+import Route    from 'react-router-dom/Route'
+import Switch   from 'react-router-dom/Switch'
 
-import createBrowserHistory from 'history/createBrowserHistory';
-import ConnectedRouter from 'react-router-redux/ConnectedRouter';
+import createBrowserHistory from 'history/createBrowserHistory'
+import ConnectedRouter from 'react-router-redux/ConnectedRouter'
 
 // Utils
-import { hasReduxDevToolExtension } from 'sources/internal/utils';
+import { hasReduxDevToolExtension } from 'sources/internal/utils'
 
 // Cofigurations
-import configureStore from './sources/store';
+import configureStore from './sources/store'
 
 // Main containers
-import App              from 'containers/App';
-import DevTools         from 'containers/DevTools';
-import NotFound         from 'containers/NotFound';
-import LanguageProvider from 'containers/LanguageProvider';
+import App              from 'containers/App'
+import DevTools         from 'containers/DevTools'
+import NotFound         from 'containers/NotFound'
+import LanguageProvider from 'containers/LanguageProvider'
 
-import routes from './sources/routes';
+import routes from './sources/routes'
 
 //import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
-import { translations } from './sources/i18n';
+import { translations } from './sources/i18n'
 
 const history = createBrowserHistory({
   //getUserConfirmation: ConfirmationRenderer
