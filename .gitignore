@@ -23,5 +23,4 @@ Thumbs.db
 .lock-wscript
 *.log*
 _nogit
-.editorconfig
 .npm
