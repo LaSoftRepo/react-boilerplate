@@ -29,7 +29,7 @@ const corsOptions = {
   origin:         devHeaders['Access-Control-Allow-Origin'],
   methods:        devHeaders['Access-Control-Allow-Methods'],
   allowedHeaders: devHeaders['Access-Control-Allow-Headers'],
-  credentials:    devHeaders['Access-Control-Allow-Credentials'],
+  credentials:    !!devHeaders['Access-Control-Allow-Credentials'],
 };
 
 if (isDeveloping) {
@@ -150,7 +150,7 @@ if (isDeveloping) {
 const server = http.createServer(app);
 server.listen(port, host, err => {
   if (err) throw err;
-  const { address, port } = server.address();
-  console.log('\r\nListening at http://%s:%d', address, port);
-  open(`http://${host}:${port}`);
+  const url = `http://${host}:${port}`;
+  console.log('\r\nListening at', url);
+  open(url);
 });
