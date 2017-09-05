@@ -464,6 +464,7 @@ module.exports = (env = {}) => {
         containers:   Path.to.containers,
 
         translations: Path.to.translations,
+        api:          path.join(Path.to.sources, 'api'),
       },
     },
 

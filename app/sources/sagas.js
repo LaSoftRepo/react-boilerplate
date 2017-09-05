@@ -1,10 +1,11 @@
 
-import { fork } from 'redux-saga/effects'
+import { fork, all } from 'redux-saga/effects'
 import { appSaga } from 'containers/App/sagas'
+import { usersSaga } from 'containers/Users/sagas'
 
 export default function* rootSaga() {
-  yield [
-    fork(appSaga),
-    //fork(saga2),
-  ];
+  yield all([
+    appSaga,
+    usersSaga,
+  ]);
 }
