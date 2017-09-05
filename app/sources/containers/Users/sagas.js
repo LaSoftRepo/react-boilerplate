@@ -1,15 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 
-import { USERS_REQUESTED } from './constants'
-import { FetchUsersActions } from './actions'
+import { USERS_REQUESTED  } from './constants'
+import { FetchUsersAction } from './actions'
 import Api from 'api'
 
 export function* fetchUsers(action) {
   try {
     const { data } = yield call(Api.fetchUsers);
-    yield put(FetchUsersActions.success(data));
+    yield put(FetchUsersAction.success(data));
   } catch (error) {
-    yield put(FetchUsersActions.fail(error));
+    yield put(FetchUsersAction.fail(error));
   }
 }
 

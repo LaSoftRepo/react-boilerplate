@@ -7,6 +7,6 @@ export default class Api {
   }
 
   static fetchUsers() {
-    return axios.get(this.entries.users, { baseURL: this.HOST });
+    return axios.get(Api.entries.users, { baseURL: Api.HOST });
   }
 }
