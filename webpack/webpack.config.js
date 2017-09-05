@@ -578,6 +578,7 @@ module.exports = (env = {}) => {
       stats,
       host:        HOST,
       port:        PORT,
+      disableHostCheck: true,
       open:        !isAWSDeploy,
       noInfo:      false,
       overlay:     true,
