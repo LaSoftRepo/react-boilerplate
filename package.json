@@ -14,7 +14,7 @@
     "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
     "start:own": "node server/index --colors --config webpack/webpack.config.js",
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
-    "preview": "npm run build && NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
+    "preview": "yarn build && NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
     "deploy": "rm -rf ./build && NODE_ENV=\"production\" deploy=true webpack -p --config webpack/webpack.config.js"
   },
   "dependencies": {
