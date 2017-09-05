@@ -1,6 +1,8 @@
 
 import Link from 'react-router-dom/Link'
 
+import './index.scss'
+
 export default class Home extends PureComponent {
   render() {
     return (

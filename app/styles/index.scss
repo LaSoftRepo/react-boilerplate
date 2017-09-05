@@ -1,12 +1,16 @@
 @import "variables";
 @import "experimental/layout";
+@import "mixins.scss";
 
 html, body {
-  width:      100%;
-  height:     100%;
-  padding:    0;
-  margin:     0;
-  font-size:  100%;
+  width:       100%;
+  height:      100%;
+  padding:     0;
+  margin:      0 auto;
+  font-size:   100%;
+  font-weight: 300;
+
+  @include font-smoothing(off);
 }
 
 button:focus {
