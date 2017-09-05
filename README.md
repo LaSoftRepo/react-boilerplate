@@ -19,7 +19,7 @@
 - [x] Hot Loader v3
 - [x] Webpack use Caching and WebWorkers for speedup builds
 - [x] Babel plugins **(class props, decorators)**
-- [x] Babel optimization transformers for production
+- [x] Babel optimization transformers ***(production only)***
 - [x] Browser css normalization via **sanitize.css** ***(service)***
 - [x] SASS with **cssnext** and **flexbox fixes**
 - [x] ~~Use **polyfill.io** service instead ```babel-polyfill``` for tiny and atomic polyfilling (service)~~ **(temprary disabled)**
@@ -32,7 +32,7 @@
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
 - [ ] ES Linting
-- [ ] Automatic send mail to customer after deploy
+- [ ] Automatic send mail to customer after deploy (WIP)
 - [ ] SCSS Linting
 - [ ] React Linting
 - [ ] React Saga Linting
