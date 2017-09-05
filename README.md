@@ -22,7 +22,7 @@
 - [x] Babel optimization transformers for production
 - [x] Browser css normalization via **sanitize.css** ***(service)***
 - [x] SASS with **cssnext** and **flexbox fixes**
-- [x] Use **polyfill.io** service instead ```babel-polyfill``` for tiny and atomic polyfilling ***(service)***
+- [x] ~~Use **polyfill.io** service instead ```babel-polyfill``` for tiny and atomic polyfilling (service)~~ **(temprary disabled)**
 - [x] `es6-promise` and `isomorphic-fetch`
 - [x] `React`, `ReactDOM`, `PropTypes` and `Children` provide automatic
 - [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
