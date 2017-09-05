@@ -78,6 +78,7 @@
     "chalk": "^2.1.0",
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^4.0.1",
+    "cors": "^2.8.4",
     "css-loader": "^0.28.5",
     "dotenv": "^4.0.0",
     "duplicate-package-checker-webpack-plugin": "^1.2.5",

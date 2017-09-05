@@ -3,7 +3,8 @@ const http    = require('http');
 const express = require('express');
 const webpack = require('webpack');
 const argv    = require('yargs').argv;
-const open    = require("open");
+const open    = require('open');
+const cors    = require('cors');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -20,8 +21,16 @@ if (typeof config === 'function') {
 
 const host = process.env.HOST || config.devServer.host || '0.0.0.0';
 const port = process.env.PORT || config.devServer.port || 8080;
+const devHeaders = config.devServer.headers;
 
 const app = express();
+
+const corsOptions = {
+  origin:         devHeaders['Access-Control-Allow-Origin'],
+  methods:        devHeaders['Access-Control-Allow-Methods'],
+  allowedHeaders: devHeaders['Access-Control-Allow-Headers'],
+  credentials:    devHeaders['Access-Control-Allow-Credentials'],
+};
 
 if (isDeveloping) {
   const compiler = webpack(config);
@@ -130,7 +139,8 @@ if (isDeveloping) {
   });*/
 } else {
   console.log('\r\nUse simple static server');
-  // need use CORS
+
+  app.use(cors(corsOptions));
   app.use(express.static(path.join(rootPath, 'build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(rootPath, 'build/index.html'));
