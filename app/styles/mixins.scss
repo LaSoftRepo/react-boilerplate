@@ -9,4 +9,8 @@
   }
 }
 
-// Add media query mixins
+@function alpha($value) {
+  @return rgba(0, 0, 0, $value / 100);
+}
+
+// TODO Add media query mixins

@@ -67,7 +67,7 @@ const render = translations => {
           </ConnectedRouter>
         </LanguageProvider>
       </Provider>
-      { process.env.NODE_ENV !== 'production' && !hasReduxDevToolExtension ? <DevTools store={ store } /> : null }
+      { process.env.NODE_ENV === 'development' && !hasReduxDevToolExtension ? <DevTools store={ store } /> : null }
     </div>,
     containerNode
   );
@@ -120,7 +120,7 @@ if (process.env.NODE_ENV !== 'production') {
     });
     // eslint-disable-next-line global-require
     const { whyDidYouUpdate } = require('why-did-you-update');
-    whyDidYouUpdate(React, { exclude: [ /^DevTools/, /^DockMonitor/, /^Route/, /^Router/ ] });
+    whyDidYouUpdate(React, { exclude: /^(DevTools|DockMonitor|Route|Router)$/ });
   }
 }
 
