@@ -42,3 +42,5 @@
 - [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?
 - [ ] Karma test solution (?)
 - [ ] Docker, CI and other test environments (?)
+
+
