@@ -7,8 +7,8 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import { persistState } from 'redux-devtools';
-import createReducer from './reducers';
-import rootSaga from './sagas';
+import { rootReducer } from './reducers';
+import { rootSaga } from './sagas';
 import DevTools from 'containers/DevTools';
 import { hasReduxDevToolExtension } from './internal/utils';
 
@@ -60,31 +60,31 @@ export default function configureStore(initialState, history) {
   }
 
   const store = createStore(
-    createReducer(),
+    rootReducer(),
     initialState,
     compose(...enhancers),
   );
 
-  // Extensions
-  //store.runSaga = sagaMiddleware.run;
-  //store.asyncReducers = {};
+  // Extensions for injectors
+  store.runSaga = sagaMiddleware.run;
+  store.asyncReducers = {};
 
   let sagaTask = sagaMiddleware.run(rootSaga);
 
   // Make sagas hot reloadable
   if (module.hot) {
     module.hot.accept('./sagas', () => {
-      const newRootSaga = require('./sagas');
+      const nextSagas = require('./sagas').rootSaga;
       sagaTask.cancel();
       sagaTask.done.then(() => {
-        sagaTask = sagaMiddleware.run(newRootSaga)
-      })
+        sagaTask = sagaMiddleware.run(nextSagas);
+      });
     });
 
     // Make reducers hot reloadable
     module.hot.accept('./reducers', () => {
       //store.replaceReducer(createReducer(store.injectedReducers));
-      const nextReducers = require('./reducers');
+      const nextReducers = require('./reducers').rootReducer;
       store.replaceReducer(nextReducers());
     });
   }

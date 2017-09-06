@@ -11,7 +11,7 @@ import languageReducer     from 'containers/LanguageProvider/reducer'
 /**
  * Creates the global reducer with the asynchronously loaded ones
  */
-export default function createReducer(asyncReducers) {
+export const rootReducer = asyncReducers => {
   return combineReducers({
     app:      appReducer,
     users:    usersReducer,
@@ -19,4 +19,11 @@ export default function createReducer(asyncReducers) {
     language: languageReducer,
     ...asyncReducers,
   });
-}
+};
+
+export const injectReducer = (store, { name, reducer }) => {
+  if (Reflect.has(store.asyncReducers, name)) return;
+
+  store.asyncReducers[name] = reducer;
+  store.replaceReducer(rootReducer(store.asyncReducers));
+};

@@ -7,15 +7,31 @@ import { bindActionCreators } from 'redux'
   ({ users }) => ({ users }),
   dispatch => bindActionCreators({
     fetchUsers: FetchUsersAction.request,
+    goBack,
   }, dispatch)
 )
 export default class Users extends PureComponent {
+  static propTypes = {
+    users:      PropTypes.object,
+    fetchUsers: PropTypes.func,
+    goBack:     PropTypes.func,
+  }
+
+  static defaultProps = {
+    users: {
+      data:  null,
+      error: null
+    },
+    fetchUsers: () => {},
+    goBack:     () => {},
+  }
+
   componentDidMount() {
     this.props.fetchUsers();
   }
 
   render() {
-    const { dispatch, users } = this.props;
+    const { users, goBack } = this.props;
 
     console.log('Github Users', users.data);
 
@@ -25,7 +41,7 @@ export default class Users extends PureComponent {
 
     return (
       <div layout='columns'>
-        <button onClick={ () => dispatch(goBack()) }>Back</button>
+        <button onClick={ () => goBack() }>Back</button>
         <h2>Github Users</h2>
       </div>
     );
