@@ -1,3 +1,14 @@
+
+@import "~sass-mediaqueries/_media-queries";
+
+/**
+ * font-smoothing [Mixin]
+ * Usage:
+ * body {
+ *   @include font-smoothing(on);
+ * }
+ */
+
 @mixin font-smoothing($value: on) {
   @if $value == on {
     -webkit-font-smoothing: antialiased;
@@ -9,8 +20,25 @@
   }
 }
 
+
+/**
+ * alpha [Function]
+ * Usage: background-color: alpha(50)
+ */
+
 @function alpha($value) {
   @return rgba(0, 0, 0, $value / 100);
 }
 
-// TODO Add media query mixins
+
+@mixin retina {
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}

@@ -7703,6 +7703,10 @@ sass-loader@^6.0.6:
     lodash.tail "^4.1.1"
     pify "^3.0.0"
 
+sass-mediaqueries@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/sass-mediaqueries/-/sass-mediaqueries-1.6.1.tgz#53fe4a3fd481d104cf6779df6f264e735826a78b"
+
 sax@0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-0.4.2.tgz#39f3b601733d6bec97105b242a2a40fd6978ac3c"

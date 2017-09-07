@@ -411,10 +411,16 @@ module.exports = (env = {}) => {
     // Some libraries import Node modules but don't use them in the browser.
     // Especially express inside in dependencies
     node: {
-      console: true,
-      fs:      'empty',
-      net:     'empty',
-      tls:     'empty',
+      console:        true,
+      module:         false,
+      clearImmediate: false,
+      setImmediate:   false,
+      global:         true,
+
+      crypto: 'empty',
+      fs:     'empty',
+      net:    'empty',
+      tls:    'empty',
     },
 
     entry: {
@@ -519,11 +525,10 @@ module.exports = (env = {}) => {
         {
           test: /\.scss$/,
           exclude: [
-            /node_modules/,
             /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i,
             /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
           ],
-          include: Path.to.app,
+          include: [/node_modules/, Path.to.app],
           use: styleLoaders(isProduction),
         },
         {
