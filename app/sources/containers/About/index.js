@@ -1,6 +1,6 @@
 import { goBack } from 'react-router-redux'
 
-import styles from './index.module.scss'
+import styles from './styles.module.scss'
 
 @connect()
 @CSSModules(styles)

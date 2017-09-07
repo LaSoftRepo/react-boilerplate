@@ -3,7 +3,7 @@
 import keycode from 'keycode'
 import Anime from 'react-anime'
 
-import styles from './index.module.scss'
+import styles from './styles.module.scss'
 
 const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
 
