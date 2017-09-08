@@ -1,42 +1,37 @@
 
 import { goBack } from 'react-router-redux'
-import { FetchUsersAction } from './actions'
-import { bindActionCreators } from 'redux'
+import { FetchAction } from './actions'
+import { linkActions } from 'helpers/redux'
+
+import Api from 'api'
+import Default from 'helpers/default'
 
 @connect(
   ({ users }) => ({ users }),
-  dispatch => bindActionCreators({
-    fetchUsers: FetchUsersAction.request,
-    goBack,
-  }, dispatch)
+  linkActions({ fetch: FetchAction.request, goBack })
 )
 export default class Users extends PureComponent {
   static propTypes = {
-    users:      PropTypes.object,
-    fetchUsers: PropTypes.func,
-    goBack:     PropTypes.func,
+    users: PropTypes.object,
   }
 
   static defaultProps = {
-    users: {
-      data:  null,
-      error: null
-    },
-    fetchUsers: () => {},
-    goBack:     () => {},
+    fetchUsers: Default.noop,
+    goBack:     Default.noop,
   }
 
-  componentDidMount() {
-    this.props.fetchUsers();
+  componentWillMount() {
+    //this.props.fetch(Api.get.users);
+    this.props.fetch(Api.users.get());
   }
 
   render() {
     const { users, goBack } = this.props;
 
-    console.log('Github Users', users.data);
-
-    if (users.error) {
-      //throw this.props.users.error;
+    if (!users.error) {
+      console.log('Github Users', users.data);
+    } else {
+      throw users.error;
     }
 
     return (

@@ -1,4 +1,5 @@
 // Fetch users
-export const USERS_REQUESTED = '@@app/USERS_REQUESTED';
-export const USERS_SUCCEEDED = '@@app/USERS_SUCCEEDED';
-export const USERS_FAILED    = '@@app/USERS_FAILED';
+export const USERS_REQUESTED = '@@users/REQUESTED';
+export const USERS_SUCCEEDED = '@@users/SUCCEEDED';
+export const USERS_FAILURED  = '@@users/FAILURED';
+export const USERS_FULFILLED = '@@users/FULFILLED';

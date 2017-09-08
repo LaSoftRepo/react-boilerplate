@@ -3,27 +3,37 @@ import {
   RESET,
   USERS_REQUESTED,
   USERS_SUCCEEDED,
-  USERS_FAILED,
+  USERS_FAILURED,
+  USERS_FULFILLED,
 } from './constants';
 
-export class FetchUsersAction {
-  static request() {
+export class FetchAction {
+  static request(config) {
     return {
       type: USERS_REQUESTED,
+      loading: true,
+      meta: config,
     };
   }
 
-  static success(data) {
+  static success(payload) {
     return {
       type: USERS_SUCCEEDED,
-      data,
+      payload,
     };
   }
 
-  static fail(error) {
+  static fail(payload) {
     return {
-      type: USERS_FAILED,
-      error,
+      type: USERS_FAILURED,
+      payload,
     };
+  }
+
+  static fulfill() {
+    return {
+      type: USERS_FULFILLED,
+      loading: false,
+    }
   }
 }

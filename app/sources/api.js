@@ -1,12 +1,28 @@
 
 export default class Api {
-  static HOST = 'https://api.github.com'
+  static Host = 'https://api.github.com'
 
-  static entries = {
-    users: '/users',
+  static users = {
+    get() {
+      return {
+        method: 'get',
+        url:    '/users',
+      };
+    },
+
+    /*
+    Just for example:
+    post(data) {
+      return {
+        method: 'post',
+        url:    '/users',
+        data,
+      };
+    },
+    */
   }
 
-  static fetchUsers() {
-    return axios.get(Api.entries.users, { baseURL: Api.HOST });
+  static request(config) {
+    return axios({ ...config, baseURL: Api.Host });
   }
 }

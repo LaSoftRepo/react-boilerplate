@@ -466,11 +466,12 @@ module.exports = (env = {}) => {
         images:  Path.to.images,
         fonts:   Path.to.fonts,
 
+        api:      path.join(Path.to.sources, 'api'),
+        helpers:  path.join(Path.to.sources, 'helpers'),
+
         components:   Path.to.components,
         containers:   Path.to.containers,
-
         translations: Path.to.translations,
-        api:          path.join(Path.to.sources, 'api'),
       },
     },
 
