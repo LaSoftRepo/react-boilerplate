@@ -12,36 +12,46 @@ export class FetchAction {
   static request(config) {
     return {
       type: USERS_REQUESTED,
-      loading: true,
+      payload: {
+        loading: true,
+      },
       meta: config,
     };
   }
 
-  static success(payload) {
+  static success(data) {
     return {
       type: USERS_SUCCEEDED,
-      payload,
+      payload: {
+        data,
+      },
     };
   }
 
-  static failure(payload) {
+  static failure(error) {
     return {
       type: USERS_FAILURED,
-      payload,
+      payload: {
+        error,
+      },
     };
   }
 
   static fulfill() {
     return {
       type: USERS_FULFILLED,
-      loading: false,
-    }
+      payload: {
+        loading: false,
+      },
+    };
   }
 
   static cancel() {
     return {
       type: USERS_CANCELLED,
-      loading: false,
-    }
+      payload: {
+        loading: false,
+      },
+    };
   }
 }

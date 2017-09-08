@@ -4,8 +4,7 @@ import { USERS_REQUESTED } from './constants'
 import { FetchAction } from './actions'
 import { request } from 'api'
 
-export function * fetchSaga(action) {
-  const meta = action.meta;
+export function * fetchSaga({ meta }) {
   try {
     switch (meta.method) {
       case 'get':
