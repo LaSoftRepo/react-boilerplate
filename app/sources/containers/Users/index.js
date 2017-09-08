@@ -3,7 +3,7 @@ import { goBack } from 'react-router-redux'
 import { FetchAction } from './actions'
 import { linkActions } from 'helpers/redux'
 
-import Api from 'api'
+import { GithubApi } from 'api'
 import Default from 'helpers/default'
 
 @connect(
@@ -22,7 +22,7 @@ export default class Users extends PureComponent {
 
   componentWillMount() {
     //this.props.fetch(Api.get.users);
-    this.props.fetch(Api.users.get());
+    this.props.fetch(GithubApi.users.get());
   }
 
   render() {
@@ -31,7 +31,8 @@ export default class Users extends PureComponent {
     if (!users.error) {
       console.log('Github Users', users.data);
     } else {
-      throw users.error;
+      console.log('Github Users Error', users.error.response);
+      //throw users.error;
     }
 
     return (

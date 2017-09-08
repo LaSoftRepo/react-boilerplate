@@ -24,7 +24,7 @@ export class FetchAction {
     };
   }
 
-  static fail(payload) {
+  static failure(payload) {
     return {
       type: USERS_FAILURED,
       payload,

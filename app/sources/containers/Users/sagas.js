@@ -2,20 +2,19 @@ import { call, put, cancel, cancelled, takeEvery } from 'redux-saga/effects'
 
 import { USERS_REQUESTED } from './constants'
 import { FetchAction } from './actions'
-import Api from 'api'
+import { request } from 'api'
 
 export function * fetchSaga(action) {
   const meta = action.meta;
   try {
     switch (meta.method) {
       case 'get':
-        //const { data } = yield call(Api.fetchUsers);
-        const { data } = yield call(Api.request, meta);
+        const { data } = yield call(request, meta);
         yield put(FetchAction.success(data));
         break;
 
       case 'post':
-        yield call(Api.request, meta);
+        yield call(request, meta);
         yield put(FetchAction.success());
         break;
 

@@ -1,12 +1,26 @@
 
-export default class Api {
-  static Host = 'https://api.github.com'
+// TODO manage external token
+export function request(config) {
+  return axios(config);
+}
+
+
+export class BackendApi {
+  static Version = 'v1'
+  static Host    = ``
+}
+
+
+export class GithubApi {
+  static Host = `https://api.github.com`
 
   static users = {
     get() {
       return {
         method: 'get',
         url:    '/users',
+
+        baseURL: GithubApi.Host,
       };
     },
 
@@ -17,12 +31,10 @@ export default class Api {
         method: 'post',
         url:    '/users',
         data,
+
+        baseURL: GithubApi.Host,
       };
     },
     */
-  }
-
-  static request(config) {
-    return axios({ ...config, baseURL: Api.Host });
   }
 }
