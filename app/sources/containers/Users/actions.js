@@ -5,6 +5,7 @@ import {
   USERS_SUCCEEDED,
   USERS_FAILURED,
   USERS_FULFILLED,
+  USERS_CANCELLED,
 } from './constants';
 
 export class FetchAction {
@@ -33,6 +34,13 @@ export class FetchAction {
   static fulfill() {
     return {
       type: USERS_FULFILLED,
+      loading: false,
+    }
+  }
+
+  static cancel() {
+    return {
+      type: USERS_CANCELLED,
       loading: false,
     }
   }
