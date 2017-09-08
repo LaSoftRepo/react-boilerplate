@@ -5,13 +5,13 @@ export function request(config) {
 }
 
 
-export class BackendApi {
+export class Backend {
   static Version = 'v1'
-  static Host    = ``
+  static Host    = ``// Example: `https://<your-service-provider>/api/${Backend.Version}`
 }
 
 
-export class GithubApi {
+export class Github {
   static Host = `https://api.github.com`
 
   static users = {
@@ -20,7 +20,7 @@ export class GithubApi {
         method: 'get',
         url:    '/users',
 
-        baseURL: GithubApi.Host,
+        baseURL: Github.Host,
       };
     },
 

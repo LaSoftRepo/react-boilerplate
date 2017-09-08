@@ -153,6 +153,14 @@ function styleLoaders(extract, modules = false) {
       },
     },
     {
+      loader: require.resolve('thread-loader'),
+      options: {
+        workers:            8,
+        workerParallelJobs: 16,
+        poolParallelJobs:   16,
+      },
+    },
+    {
       loader: require.resolve('style-loader'),
       options: {
         minimize:  isProduction,
@@ -164,7 +172,7 @@ function styleLoaders(extract, modules = false) {
       options: {
         minimize: isProduction,
         sourceMap: !isProduction,
-        importLoaders: 2,
+        importLoaders: 3,
         alias: {
           assets: Path.to.assets,
           images: Path.to.images,
@@ -210,7 +218,7 @@ function styleLoaders(extract, modules = false) {
   ];
 
   if (extract) {
-    loaders.splice(0, 2);
+    loaders.splice(0, 3);
     loaders = ExtractTextPlugin.extract({
       fallback: require.resolve('style-loader'),
       use: loaders,
@@ -483,7 +491,7 @@ module.exports = (env = {}) => {
           test: /\.jsx?$/,
           enforce: 'pre',
           include: Path.to.app,
-          exclude: /(node_modules|bower_components|build|spec)/,
+          exclude: /(node_modules|bower_components|build|spec|tests)/,
           use: [
             {
               loader: require.resolve('cache-loader'),
@@ -494,9 +502,9 @@ module.exports = (env = {}) => {
             {
               loader: require.resolve('thread-loader'),
               options: {
-                workers: 4,
-                workerParallelJobs: 30,
-                poolParallelJobs: 100,
+                workers:            8,
+                workerParallelJobs: 16,
+                poolParallelJobs:   16,
               },
             },
             {
@@ -529,7 +537,7 @@ module.exports = (env = {}) => {
             /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i,
             /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
           ],
-          include: [/node_modules/, Path.to.app],
+          include: [Path.to.app, /node_modules/],
           use: styleLoaders(isProduction),
         },
         {
@@ -537,7 +545,7 @@ module.exports = (env = {}) => {
           exclude: [
             /\.useable\.css$/i,
           ],
-          include: [/node_modules/, Path.to.app],
+          include: [Path.to.app, /node_modules/],
           loaders: [
             require.resolve('style-loader'),
             require.resolve('css-loader')

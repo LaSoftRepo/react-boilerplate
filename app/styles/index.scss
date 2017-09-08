@@ -7,10 +7,18 @@ html, body {
   height:      100%;
   padding:     0;
   margin:      0 auto;
-  font-size:   100%;
+  font-size:   $global-font-size;
   font-weight: 300;
 
-  @include font-smoothing(off);
+  @include font-smoothing($global-font-smoothing);
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::after,
+*::before {
+  @include font-smoothing($global-font-smoothing);
+  text-rendering: optimizeLegibility;
 }
 
 button:focus {

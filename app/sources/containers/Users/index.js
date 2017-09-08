@@ -3,7 +3,7 @@ import { goBack } from 'react-router-redux'
 import { FetchAction } from './actions'
 import { linkActions } from 'helpers/redux'
 
-import { GithubApi } from 'api'
+import { Github } from 'api'
 import Default from 'helpers/default'
 
 @connect(
@@ -21,8 +21,7 @@ export default class Users extends PureComponent {
   }
 
   componentWillMount() {
-    //this.props.fetch(Api.get.users);
-    this.props.fetch(GithubApi.users.get());
+    this.props.fetch(Github.users.get());
   }
 
   render() {
