@@ -12,15 +12,16 @@ const initialState = {
   loading: false,
 };
 
-export default function usersReducer(state = initialState, action = {}) {
-  switch (action.type) {
+export default function usersReducer(state = initialState, { type, payload }) {
+  switch (type) {
     case USERS_REQUESTED:
     case USERS_SUCCEEDED:
     case USERS_FAILURED:
     case USERS_FULFILLED:
     case USERS_CANCELLED:
-      return { ...state, ...action.payload };
+      return { ...state, ...payload };
 
-    default: return state;
+    default:
+      return state;
   }
 }

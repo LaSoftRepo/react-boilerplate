@@ -1,14 +1,17 @@
 
-import { goBack } from 'react-router-redux'
-import { FetchAction } from './actions'
+import { goBack }      from 'react-router-redux'
 import { linkActions } from 'helpers/redux'
-
-import { Github } from 'api'
-import Default from 'helpers/default'
+import Default         from 'helpers/default'
+import { FetchAction } from './actions'
+import { Github }      from 'api'
 
 @connect(
   ({ users }) => ({ users }),
-  linkActions({ fetch: FetchAction.request, goBack })
+  linkActions({
+    request: FetchAction.request,
+    cancel:  FetchAction.cancel,
+    goBack,
+  })
 )
 export default class Users extends PureComponent {
   static propTypes = {
@@ -21,7 +24,8 @@ export default class Users extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetch(Github.users.get());
+    this.props.request(Github.users.get());
+    //this.props.cancel();
   }
 
   render() {
@@ -31,7 +35,6 @@ export default class Users extends PureComponent {
       console.log('Github Users', users.data);
     } else {
       console.log('Github Users Error', users.error.response);
-      //throw users.error;
     }
 
     return (

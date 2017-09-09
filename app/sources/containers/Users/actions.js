@@ -6,6 +6,7 @@ import {
   USERS_FAILURED,
   USERS_FULFILLED,
   USERS_CANCELLED,
+  USERS_CANCELING,
 } from './constants';
 
 export class FetchAction {
@@ -16,6 +17,12 @@ export class FetchAction {
         loading: true,
       },
       meta: config,
+    };
+  }
+
+  static cancel() {
+    return {
+      type: USERS_CANCELING,
     };
   }
 
@@ -46,7 +53,7 @@ export class FetchAction {
     };
   }
 
-  static cancel() {
+  static cancelled() {
     return {
       type: USERS_CANCELLED,
       payload: {
