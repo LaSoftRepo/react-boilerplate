@@ -26,7 +26,7 @@
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "keycode": "^2.1.9",
-    "moize": "^3.4.0",
+    "moize": "4.x",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",

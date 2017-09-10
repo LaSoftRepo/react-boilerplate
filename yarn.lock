@@ -5445,9 +5445,9 @@ mocha@^2.1.0:
     supports-color "1.2.0"
     to-iso-string "0.0.2"
 
-moize@^3.4.0:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/moize/-/moize-3.4.2.tgz#f254e05692a60a23ab6d2ae6b433ae21c43662fa"
+moize@4.x:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/moize/-/moize-4.0.0.tgz#e7326d207dcb5f78aed083ad1110a24ec37baec9"
 
 moment@^2.18.1:
   version "2.18.1"
