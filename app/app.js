@@ -112,6 +112,8 @@ if (!window.Intl) {
 render(translations);
 
 if (process.env.NODE_ENV !== 'production') {
+  console.log('React v' + React.version);
+
   if (__USE_PERFORMANCE_TOOLS__) {
     // according this issue https://github.com/garbles/why-did-you-update/issues/45
     let createClass = React.createClass;
