@@ -1,11 +1,11 @@
 {
   "plugins": [
     "transform-strict-mode",
+    "syntax-decorators",
+    "transform-decorators-legacy",
     "transform-class-properties",
     "syntax-async-functions",
     "transform-regenerator",
-    "syntax-decorators",
-    "transform-decorators-legacy",
     "react-hot-loader/babel"
   ],
   "presets": [[
