@@ -1,6 +1,6 @@
 {
   "name": "React-boilerplate",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "license": "UNLICENSED",
   "author": "Max Graey (LaSoft @ 2017)",
@@ -51,10 +51,10 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-react-transform": "^3.0.0",
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-syntax-decorators": "^6.13.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
