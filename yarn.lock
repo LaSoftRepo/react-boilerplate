@@ -7093,6 +7093,10 @@ react-json-tree@^0.10.8:
     prop-types "^15.5.8"
     react-base16-styling "^0.5.1"
 
+react-powerplug@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-powerplug/-/react-powerplug-0.0.2.tgz#1f4cfebca5f0a1408d3fe77caa1f7ae91ecfa3ab"
+
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
