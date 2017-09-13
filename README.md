@@ -1,4 +1,40 @@
-## Work in progress
+# React Boilerplate
+
+### Work in progress
+
+Before build ensure you have **[yarn](https://yarnpkg.com/lang/en/docs/install/#mac-tab)** installed:
+
+```bash
+yarn --version
+```
+
+---
+
+### Development start and watch
+
+```bash
+yarn start
+```
+
+### Production build
+
+```bash
+yarn build
+```
+
+### Production preview
+
+```bash
+yarn preview
+```
+
+### Deploy to AWS (manually)
+
+```bash
+yarn deploy
+```
+
+#### ***Note: Usually deployment process provide by continuous integration***
 
 ### Features
 
@@ -28,7 +64,6 @@
 - [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
 - [x] Auto generating all favicons and mobile icons for all platforms ***(production only)***
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin ***(production only)***
-- [x] **Brotli** compression plugin ***(production only)***
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
 - [ ] ES Linting
@@ -39,8 +74,7 @@
 - [ ] Integrate Prettier
 - [ ] Add **static-site-generator-webpack-plugin** plugin for create static site for crawlers in production
 - [x] Create and setup customizable server for production/staging (WIP)
-- [ ] Prepack (?) or Closure minify (?) for final aggressive optimization?
-- [ ] Karma test solution (?)
-- [ ] Docker, CI and other test environments (?)
-
-
+- [x] **Brotli** compression plugin ***(production only)***
+- [ ] Prepack (?) or Closure compiler (?) for final aggressive optimization?
+- [ ] Jest test solution
+- [ ] Circle CI
