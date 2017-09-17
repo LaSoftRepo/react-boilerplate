@@ -29,8 +29,7 @@ import App              from 'containers/App'
 import DevTools         from 'containers/DevTools'
 import NotFound         from 'containers/NotFound'
 import LanguageProvider from 'containers/LanguageProvider'
-
-import routes from './sources/routes'
+import configureRoutes  from './sources/routes'
 
 //import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
@@ -43,7 +42,8 @@ const history = createBrowserHistory({
 const containerNode = document.getElementById('app');
 
 const initialState = {};
-const store = configureStore(initialState, history);
+const store  = configureStore(initialState, history);
+const routes = configureRoutes(store);
 
 const render = translations => {
   ReactDOM.render(
@@ -56,7 +56,7 @@ const render = translations => {
 
                 <Redirect from='/index.html' to='/' />
                 {
-                  routes(store).map(({ path, exact, component, render }) =>
+                  routes.map(({ path, exact, component, render }) =>
                     <Route key={ path } path={ path } exact={ exact } component={ component } render={ render } />
                   )
                 }
