@@ -552,12 +552,12 @@ module.exports = (env = {}) => {
           ],
         },
         {
-          test: /\.(png|gif|jpg|jpeg|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
+          test: /\.(png|gif|jpe?g|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
           include: Path.to.images,
           use: 'url-loader?limit=20480&name=[name].[hash:base64:5].[ext]',
         },
         {
-          test: /favicon\.ico$/,
+          test: /favicon\.ico|favicon\.png$/,
           loader: require.resolve('url-loader'),
           options: {
             name: '[name].[ext]',
