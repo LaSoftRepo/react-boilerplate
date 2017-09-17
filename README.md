@@ -53,7 +53,7 @@ yarn deploy
 - [x] Immutable
 - [x] Webpack v3
 - [x] Hot Loader v3
-- [x] Webpack use Caching and WebWorkers for speedup builds
+- [x] Webpack use Caching and WebWorkers for speedup builds ***(Switch to [HappyPack](https://github.com/amireh/happypack) in future)***
 - [x] Babel plugins **(class props, decorators)**
 - [x] Babel optimization transformers ***(production only)***
 - [x] Browser css normalization via **sanitize.css** ***(service)***
