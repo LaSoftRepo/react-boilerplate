@@ -14,9 +14,10 @@
   "scripts": {
     "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
     "start:own": "node server/index --colors --config webpack/webpack.config.js",
-    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
-    "preview": "yarn build && NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
-    "deploy": "rm -rf ./build && NODE_ENV=\"production\" deploy=true webpack -p --config webpack/webpack.config.js"
+    "build": "yarn build:clean && cross-env NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
+    "preview": "yarn build && cross-env NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
+    "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack -p --config webpack/webpack.config.js",
+    "build:clean": "rimraf ./.cache && rimraf ./build"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -83,6 +84,7 @@
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^4.0.1",
     "cors": "^2.8.4",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.5",
     "dotenv": "^4.0.0",
     "duplicate-package-checker-webpack-plugin": "^1.2.5",
@@ -90,7 +92,7 @@
     "eslint-config-airbnb-base": "12.0.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-react": "^7.3.0",
-    "eslint-plugin-redux-saga": "^0.4.0",
+    "eslint-plugin-redux-saga": "^0.5.0",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "favicons-webpack-plugin": "^0.0.7",

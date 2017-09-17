@@ -146,12 +146,12 @@ const plugins = [
 
 function styleLoaders(extract, modules = false) {
   let loaders = [
-    {
+    /*{
       loader: require.resolve('cache-loader'),
       options: {
         cacheDirectory: Path.to.cache,
       },
-    },
+    },*/
     {
       loader: require.resolve('thread-loader'),
       options: {
@@ -172,7 +172,7 @@ function styleLoaders(extract, modules = false) {
       options: {
         minimize: isProduction,
         sourceMap: !isProduction,
-        importLoaders: 3,
+        importLoaders: 2,
         alias: {
           assets: Path.to.assets,
           images: Path.to.images,
@@ -218,7 +218,7 @@ function styleLoaders(extract, modules = false) {
   ];
 
   if (extract) {
-    loaders.splice(0, 3);
+    loaders.splice(0, 2);
     loaders = ExtractTextPlugin.extract({
       fallback: require.resolve('style-loader'),
       use: loaders,
@@ -474,8 +474,8 @@ module.exports = (env = {}) => {
         images:  Path.to.images,
         fonts:   Path.to.fonts,
 
-        api:      path.join(Path.to.sources, 'api'),
-        helpers:  path.join(Path.to.sources, 'helpers'),
+        api:      Path.to.api,
+        helpers:  Path.to.helpers,
 
         components:   Path.to.components,
         containers:   Path.to.containers,
@@ -606,9 +606,15 @@ module.exports = (env = {}) => {
       },
 
       headers: {
-        'Access-Control-Allow-Origin':  '*',
+        'Access-Control-Allow-Origin':   '*',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Custom-Header, X-Requested-With, Content-Length, Content-Type, Authorization',
+        'Access-Control-Allow-Headers': [
+          'X-Custom-Header',
+          'X-Requested-With',
+          'Content-Length',
+          'Content-Type',
+          'Authorization',
+        ].join(','),
         'Access-Control-Allow-Credentials': 'true',
         'Accept-Encoding': 'Vary',
       },
