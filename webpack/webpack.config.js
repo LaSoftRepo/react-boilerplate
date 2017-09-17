@@ -569,6 +569,7 @@ module.exports = (env = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
+            name: '[name].[hash:base64:8].[ext]',
           },
         },
         {
@@ -580,6 +581,7 @@ module.exports = (env = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
+            name: '[name].[hash:base64:8].[ext]',
           },
         },
       ],
