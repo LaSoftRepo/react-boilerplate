@@ -292,7 +292,7 @@ if (isProduction) {
         appleStartup: true,
         coast: false,
         favicons: true,
-        firefox: true,
+        firefox: false,
         opengraph: false,
         twitter: false,
         yandex: false,
