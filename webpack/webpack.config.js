@@ -301,7 +301,7 @@ if (isProduction) {
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
-    ]),
+    ], { ignore: [ /.DS_Store/ ] }),
   );
 
   if (USE_OFFLINE_CACHE) {
