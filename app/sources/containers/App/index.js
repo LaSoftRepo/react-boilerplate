@@ -1,9 +1,12 @@
+
+import { withRouter } from 'react-router'
 import './styles.scss'
 
 const Header = () => null
 const Footer = () => null
 
-@connect(({ router, language }) => ({ router, language }), null, null, { pure: false })
+@withRouter
+@connect(({ router, language }) => ({ router, language }))
 export default class App extends Component {
   static propTypes = {
     children:    PropTypes.node,
