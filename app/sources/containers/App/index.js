@@ -3,6 +3,7 @@ import './styles.scss'
 const Header = () => null
 const Footer = () => null
 
+@connect(({ router, language }) => ({ router, language }), null, null, { pure: false })
 export default class App extends Component {
   static propTypes = {
     children:    PropTypes.node,
