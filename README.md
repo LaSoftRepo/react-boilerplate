@@ -63,7 +63,7 @@ yarn deploy
 - [x] `React`, `ReactDOM`, `PropTypes` and `Children` provide automatic
 - [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
 - [x] Auto generating all favicons and mobile icons for all platforms ***(production only)***
-- [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin ***(production only)***
+- [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin **(will replace with WorkBox in future)** ***(production only)***
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
 - [ ] ES Linting
