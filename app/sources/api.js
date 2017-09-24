@@ -7,7 +7,7 @@ export function request(config) {
 
 export class Backend {
   static Version = 'v1'
-  static Host    = ``// Example: `https://<your-service-provider>/api/${Backend.Version}`
+  static Host    = ``// Example: `https://<your-service-provider>/api/${this.Version}`
 }
 
 

@@ -7,14 +7,12 @@ const initialState = {
   locale: DEFAULT_LOCALE,
 };
 
-function languageProviderReducer(state = initialState, action = {}) {
-  switch (action.type) {
+export default function language(state = initialState, { type, locale } = {}) {
+  switch (type) {
     case CHANGE_LOCALE:
-      return { ...state, locale: action.locale };
+      return { ...state, locale };
 
     default:
       return state;
   }
 }
-
-export default languageProviderReducer;
