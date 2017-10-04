@@ -19,5 +19,5 @@ export default (store) => [
   { path: '/about',      component: About },
   { path: '/profile',    component: Profile },
   { path: '/playground', component: Playground },
-  { path: '/dialog',     render: () => <Modal onClose={ () => store.dispatch(goBack()) }/> },
+  { path: '/dialog',     render: () => <Modal onClose={ () => store.dispatch(goBack()) } /> },
 ];
