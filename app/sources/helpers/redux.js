@@ -9,13 +9,19 @@ function _createActionsFromClass(clazz) {
     }, {});
 }
 
-export function linkActions(actions) {
-  if (!(typeof actions === 'function' || typeof actions === 'object')) {
-    throw new TypeError('Actions must be object or static class');
+export function linkActions(...actions) {
+  let resultActions = {};
+
+  for (let action of actions) {
+    if (!(typeof action === 'function' || typeof action === 'object')) {
+      throw new TypeError('Actions must be object or static class');
+    }
+
+    if (typeof action === 'function')
+      action = _createActionsFromClass(action);
+
+    resultActions = Object.assign(resultActions, action);
   }
 
-  if (typeof actions === 'function')
-    actions = _createActionsFromClass(actions);
-
-  return dispatch => bindActionCreators(actions, dispatch);
+  return dispatch => bindActionCreators(resultActions, dispatch);
 }
