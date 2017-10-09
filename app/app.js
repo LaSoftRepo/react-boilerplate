@@ -54,15 +54,9 @@ const render = translations => {
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
               <Switch>
-
                 <Redirect from='/index.html' to='/' />
-                {
-                  routes.map(({ path, exact, component, render }) =>
-                    <Route key={ path } path={ path } exact={ exact } component={ component } render={ render } />
-                  )
-                }
+                { routes.map(route => <Route key={ route.path } { ...route } />) }
                 <Route component={ NotFound } />
-
               </Switch>
             </App>
           </ConnectedRouter>
