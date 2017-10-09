@@ -22,6 +22,7 @@
     "development": {
       "only": ["app"],
       "plugins": [
+        "react-test-id",
         "transform-react-display-name",
         "transform-react-jsx-source",
         "transform-react-jsx-self",
@@ -30,6 +31,7 @@
     },
     "production": {
       "plugins": [
+        "react-test-id",
         "dev-expression",
         "transform-react-jsx",
         "transform-inline-consecutive-adds",
@@ -53,8 +55,6 @@
         "transform-react-display-name",
         "transform-react-jsx-source",
         "transform-react-jsx-self",
-        "transform-react-pure-to-component",
-        "react-test-id",
         "transform-es2015-modules-commonjs",
         "dynamic-import-node"
       ]
