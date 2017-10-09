@@ -24,7 +24,8 @@
       "plugins": [
         "transform-react-display-name",
         "transform-react-jsx-source",
-        "transform-react-jsx-self"
+        "transform-react-jsx-self",
+        "transform-react-pure-to-component"
       ]
     },
     "production": {
@@ -52,6 +53,8 @@
         "transform-react-display-name",
         "transform-react-jsx-source",
         "transform-react-jsx-self",
+        "transform-react-pure-to-component",
+        "react-test-id",
         "transform-es2015-modules-commonjs",
         "dynamic-import-node"
       ]
