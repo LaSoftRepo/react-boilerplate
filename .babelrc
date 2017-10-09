@@ -6,7 +6,9 @@
     "transform-class-properties",
     "syntax-async-functions",
     "transform-regenerator",
-    "react-hot-loader/babel"
+    ["transform-react-jsx", {
+      "useBuiltIns": true
+    }]
   ],
   "presets": [[
     "env", {
@@ -26,14 +28,14 @@
         "transform-react-display-name",
         "transform-react-jsx-source",
         "transform-react-jsx-self",
-        "transform-react-pure-to-component"
+        "transform-react-pure-to-component",
+        "react-hot-loader/babel"
       ]
     },
     "production": {
       "plugins": [
         "react-test-id",
         "dev-expression",
-        "transform-react-jsx",
         "transform-inline-consecutive-adds",
         "transform-react-remove-prop-types",
         "transform-react-constant-elements",
