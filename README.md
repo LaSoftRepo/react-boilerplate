@@ -3,15 +3,14 @@
 ### Still work in progress
 
 ### Changes is coming!
-#### [Webpack config will be rewrite to webpack-blocks](https://github.com/andywer/webpack-blocks)
+#### [Webpack config will be rewrite with [webpack-blocks](https://github.com/andywer/webpack-blocks)
 
-Before build ensure you have latest **[yarn](https://yarnpkg.com/lang/en/docs/install/#mac-tab)** installed:
+---
 
-```bash
-yarn --version
-```
+### Requirements
 
-### Also ensure you have **[node.js](https://nodejs.org/en/download/current)** version >= 8.
+- #### Before build ensure you have latest **[yarn](https://yarnpkg.com/lang/en/docs/install/#mac-tab)** installed.
+- #### Also ensure you have got **[node.js](https://nodejs.org/en/download/current)** version >= 8.
 
 ---
 
