@@ -4,7 +4,6 @@ import {
   USERS_REQUESTED,
   USERS_SUCCEEDED,
   USERS_FAILURED,
-  USERS_FULFILLED,
   USERS_CANCELLED,
   USERS_CANCELING,
 } from './constants';
@@ -26,34 +25,27 @@ export class FetchAction {
     };
   }
 
-  static success(data) {
+  static _success(data) {
     return {
       type: USERS_SUCCEEDED,
       payload: {
+        loading: false,
         data,
       },
     };
   }
 
-  static failure(error) {
+  static _failure(error) {
     return {
       type: USERS_FAILURED,
       payload: {
+        loading: false,
         error,
       },
     };
   }
 
-  static fulfill() {
-    return {
-      type: USERS_FULFILLED,
-      payload: {
-        loading: false,
-      },
-    };
-  }
-
-  static cancelled() {
+  static _cancelled() {
     return {
       type: USERS_CANCELLED,
       payload: {

@@ -1,28 +1,27 @@
-import { call, put, take, fork, cancel, cancelled, takeEvery } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 
-import { USERS_REQUESTED, USERS_CANCELING } from './constants'
+import { delay } from 'redux-saga'
+import { call, put, take, race, fork, cancel, cancelled, takeEvery } from 'redux-saga/effects'
+import { USERS_REQUESTED, USERS_CANCELING, RESPONSE_TIMEOUT } from './constants'
 import { FetchAction } from './actions'
 import { request } from 'api'
 
 export function * fetchSaga({ meta }) {
   try {
-    switch (meta.method) {
-      case 'get':
-      case 'post':
-        const { data } = yield call(request, meta);
-        yield put(FetchAction.success(data));
-        break;
+    const { timeout, response } = yield race({
+      timeout:  call(delay,   RESPONSE_TIMEOUT),
+      response: call(request, meta),
+    });
 
-      default: break;
+    if (timeout) {
+      throw new Error('Server not responsable');
     }
+
+    yield put(FetchAction._success(response.data));
   } catch (error) {
-    yield put(FetchAction.failure(error));
+    yield put(FetchAction._failure(error));
   } finally {
     if (yield cancelled()) {
-      yield put(FetchAction.cancelled());
-    } else {
-      yield put(FetchAction.fulfill());
+      yield put(FetchAction._cancelled());
     }
   }
 }

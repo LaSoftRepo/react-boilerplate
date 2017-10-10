@@ -5,14 +5,7 @@ import Default         from 'helpers/default'
 import { FetchAction } from './actions'
 import { Github }      from 'api'
 
-@connect(
-  ({ users }) => ({ users }),
-  linkActions({
-    request: FetchAction.request,
-    cancel:  FetchAction.cancel,
-    goBack,
-  })
-)
+@connect(({ users }) => ({ users }), linkActions(FetchAction, { goBack }))
 export default class Users extends PureComponent {
   static propTypes = {
     users: PropTypes.object,
@@ -39,7 +32,7 @@ export default class Users extends PureComponent {
 
     return (
       <div layout='columns'>
-        <button onClick={ () => goBack() }>Back</button>
+        <button onClick={ goBack }>Back</button>
         <h2>Github Users</h2>
       </div>
     );
