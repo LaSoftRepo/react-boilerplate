@@ -3,7 +3,7 @@
 ### Still work in progress
 
 ### Changes is coming!
-#### [Webpack config will be rewrite with [webpack-blocks](https://github.com/andywer/webpack-blocks)
+#### Webpack config will be rewrite with [webpack-blocks](https://github.com/andywer/webpack-blocks)
 
 ---
 
