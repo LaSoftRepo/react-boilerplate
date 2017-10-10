@@ -209,10 +209,11 @@ function styleLoaders(extract, modules = false) {
       },
     },
     {
-      loader: require.resolve('sass-loader'),
+      loader: require.resolve('fast-sass-loader'),
       options: {
         outputStyle: 'expanded',
-        sourceMap: !isProduction,
+        includePaths: ['node_modules', Path.to.app],
+        //sourceMap: !isProduction,
       },
     },
   ];
@@ -554,7 +555,11 @@ module.exports = (env = {}) => {
         {
           test: /\.(png|gif|jpe?g|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
           include: Path.to.images,
-          use: 'url-loader?limit=20480&name=[name].[hash:base64:5].[ext]',
+          loader: require.resolve('url-loader'),
+          options: {
+            limit: 20480,
+            name:  '[name].[hash:base64:5].[ext]',
+          },
         },
         {
           test: /favicon\.ico|favicon\.png$/,
@@ -569,7 +574,7 @@ module.exports = (env = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
-            name: '[name].[hash:base64:8].[ext]',
+            name: '[name].[hash:base64:5].[ext]',
           },
         },
         {
@@ -581,7 +586,7 @@ module.exports = (env = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
-            name: '[name].[hash:base64:8].[ext]',
+            name: '[name].[hash:base64:5].[ext]',
           },
         },
       ],
