@@ -5,9 +5,9 @@
   "license": "UNLICENSED",
   "author": "Max Graey (LaSoft @ 2017)",
   "description": "Bootstrap boilerplate for speedup development React.js projects",
+  "enginesStrict": true,
   "engines": {
     "node": ">=8",
-    "npm": ">=5",
     "yarn": ">=0.24.6"
   },
   "main": "index.js",
