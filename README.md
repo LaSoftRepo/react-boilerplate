@@ -1,6 +1,9 @@
 # React Boilerplate
 
-### Work in progress
+### Still work in progress
+
+### Changes is coming!
+#### [Webpack config will be rewrite to webpack-blocks](https://github.com/andywer/webpack-blocks)
 
 Before build ensure you have **[yarn](https://yarnpkg.com/lang/en/docs/install/#mac-tab)** installed:
 
