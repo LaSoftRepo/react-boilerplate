@@ -14,6 +14,13 @@
 
 ---
 
+### Install all dependencies
+
+```bash
+yarn
+# or 'yarn install'
+```
+
 ### Development start and watch
 
 ```bash
