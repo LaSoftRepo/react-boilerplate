@@ -51,7 +51,7 @@ yarn deploy
 
 - [x] **yarn** package manager
 - [x] App Basic structure (WIP)
-- [x] React
+- [x] React v16
 - [x] React Router v4 with Redux binding
 - [x] Redux
 - [x] Redux Sagas

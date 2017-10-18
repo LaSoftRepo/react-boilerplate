@@ -4,7 +4,6 @@ import 'babel-polyfill'
 import 'es6-promise/auto'
 import 'raf/polyfill'
 import 'isomorphic-fetch'
-import 'sources/internal/experimental/inject-custom-properties.js'
 
 // Styles
 import 'styles/index.scss'

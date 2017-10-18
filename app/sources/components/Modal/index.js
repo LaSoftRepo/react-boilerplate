@@ -68,12 +68,12 @@ export default class Modal extends PureComponent {
   renderDialogContent(props) {
     return (
       <div layout='rows' vertical-distribute='equal' horizontal-distribute='around' styleName='modal-container'>
-        <div layout horizontal-align='center'>
+        <div layout='colummns' horizontal-align='center'>
           <h2>DIALOG TITLE</h2>
         </div>
         {/* { this.props.children } */}
-        <div layout center styleName='modal-content'>{ textContent }</div>
-        <div layout vertical-align='bottom' horizontal-distribute='equal'>
+        <div layout='colummns' center='true' styleName='modal-content'>{ textContent }</div>
+        <div layout='colummns' vertical-align='bottom' horizontal-distribute='equal'>
           <button id='ok' onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
           <button id='cancel' onClick={ e => this.handleClick(e, false) } styleName='modal-button right'>CANCEL</button>
         </div>
@@ -87,7 +87,7 @@ export default class Modal extends PureComponent {
 
     return (
       <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
-        <div layout center styleName='modal-backdrop' onClick={ this.handleModalClick }>
+        <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
           <Anime
             translateY={ shouldHide ? 1200 : -1200 }
             scaleY='2.3'
