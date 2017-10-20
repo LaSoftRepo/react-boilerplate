@@ -43,7 +43,9 @@ const USE_MAIL_AFTER_DEPLOY = true;
 const USE_DOCKER            = false;
 const USE_PERFORMANCE_TOOLS = false;
 
-const HOST = argv.host || '0.0.0.0';
+const isWindow = /^win/.test(process.platform);
+
+const HOST = argv.host || (isWindow ? '127.0.0.1' : '0.0.0.0');
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
@@ -209,7 +211,7 @@ function styleLoaders(extract, modules = false) {
       },
     },
     {
-      loader: require.resolve('fast-sass-loader'),
+      loader: require.resolve(isWindow ? 'sass-loader' : 'fast-sass-loader'),
       options: {
         outputStyle: 'expanded',
         includePaths: ['node_modules', Path.to.app],
