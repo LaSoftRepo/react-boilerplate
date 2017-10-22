@@ -165,7 +165,16 @@ function fastSass() {
         /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
       ],
       include: [ Path.to.app, /node_modules/ ],
-      use:     styleLoader(),
+      use:     styleLoader(false),
+    },
+    {
+      test: /\.module\.scss$/,
+      exclude: [
+        /node_modules/,
+        /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
+      ],
+      include: Path.to.app,
+      use:     styleLoader(true),
     }, context.match)
   );
 }
@@ -200,6 +209,7 @@ module.exports = createConfig([
   aliases(),
 
   babel(),
+
   fastSass(),
 
   // match('*.css', [
@@ -211,7 +221,7 @@ module.exports = createConfig([
 
   provide(provideConfig),
 
-  match(/\.(woff|woff2|eot|ttf|svg)$/, { include: Path.to.fonts }, [
+  match(/\.(woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/, { include: Path.to.fonts }, [
     url({
       limit: 10000,
       name: '[name].[hash:base64:5].[ext]'
