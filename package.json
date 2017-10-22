@@ -12,7 +12,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
+    "start": "webpack-dev-server --colors --config webpack/webpack.dev.js",
     "start:own": "node server/index --colors --config webpack/webpack.config.js",
     "build": "yarn build:clean && cross-env NODE_ENV=\"production\" webpack -p --config webpack/webpack.config.js",
     "preview": "yarn build && cross-env NODE_ENV=\"production\" node server/index --config webpack/webpack.config.js",
@@ -52,6 +52,7 @@
     "store": "^2.0.12"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.1",
@@ -130,6 +131,7 @@
     "thread-loader": "^1.1.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
+    "webpack-blocks": "^1.0.0-rc",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.9.3",
     "webpack-hot-middleware": "^2.20.0",
