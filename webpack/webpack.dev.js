@@ -1,5 +1,6 @@
 
 const path    = require('path');
+const argv    = require('yargs').argv;
 const webpack = require('webpack');
 
 const {
@@ -35,9 +36,38 @@ const autoprefixer  = require('autoprefixer');
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
 
-const isProduction = false;
-
 const PROJECT_NAME = 'test';
+
+const isWindow     = /^win/.test(process.platform);
+const HOST         = argv.host || (isWindow ? '127.0.0.1' : '0.0.0.0');
+const PORT         = argv.port || 8080;
+const processEnv   = process.env.NODE_ENV || 'development';
+
+const isTest       = processEnv === 'test';
+const isProduction = processEnv === 'production';
+const isAWSDeploy  = !!process.env.deploy;
+
+
+
+const provideConfig = {
+  axios:         'axios',
+  store:         'store',
+  moment:        'moment',
+  classnames:    'classnames',
+
+  PropTypes:     'prop-types',
+  ReactDOM:      'react-dom',
+  React:         'react',
+  Component:      ['react',       'Component'],
+  PureComponent:  ['react',       'PureComponent'],
+  Children:       ['react',       'Children'],
+
+  connect:        ['react-redux', 'connect'],
+  createSelector: ['reselect',    'createSelector'],
+
+  CSSModules:     'react-css-modules',
+};
+
 
 const developmentConfig = () => group([
   sourceMaps(),
@@ -49,7 +79,7 @@ const developmentConfig = () => group([
 ]);
 
 const productionConfig = () => group([
-  extractText(),
+  extractText('styles/style.[hash].css'),
   uglify(),
   addPlugins([
     new webpack.LoaderOptionsPlugin({
@@ -120,29 +150,55 @@ function styleLoader(modules = false) {
   ];
 }
 
+function provide(config) {
+  return (context, { addPlugin }) => addPlugin(
+    new webpack.ProvidePlugin(config),
+  );
+}
 
 function fastSass() {
+  return (context, { addLoader }) => addLoader(
+    Object.assign({
+      test: /\.scss$/,
+      exclude: [
+        /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i,
+        /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
+      ],
+      include: [ Path.to.app, /node_modules/ ],
+      use:     styleLoader(),
+    }, context.match)
+  );
+}
+
+function aliases() {
   return (context, { merge }) => merge({
-    module: {
-      rules: [
-        Object.assign({
-            test: /\.scss$/,
-            exclude: [
-              /\.useable\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i,
-              /\.module\.(scss|sass|css)(\?[a-z0-9=.]+)?$/i
-            ],
-            include: [ Path.to.app, /node_modules/ ],
-            use:     styleLoader(),
-          },
-          context.match,
-        )
-      ]
-    }
-  })
+    resolve: {
+      extensions: ['.webpack.js', '.web.js', '.web.jsx', '.ts', '.tsx', '.jsx', '.js', '.json'],
+      modules: [Path.to.app, Path.to.modules],
+      alias: {
+        app:     Path.to.app,
+        sources: Path.to.sources,
+
+        styles:  Path.to.styles,
+        assets:  Path.to.assets,
+        images:  Path.to.images,
+        fonts:   Path.to.fonts,
+
+        api:      Path.to.api,
+        helpers:  Path.to.helpers,
+
+        components:   Path.to.components,
+        containers:   Path.to.containers,
+        translations: Path.to.translations,
+      },
+    },
+  });
 }
 
 
 module.exports = createConfig([
+  aliases(),
+
   babel(),
   fastSass(),
 
@@ -153,7 +209,9 @@ module.exports = createConfig([
   //   ]),
   // ]),
 
-  match(/\.(woff|woff2|eot|ttf|svg)$/, { include: Path.to.fonts } [
+  provide(provideConfig),
+
+  match(/\.(woff|woff2|eot|ttf|svg)$/, { include: Path.to.fonts }, [
     url({
       limit: 10000,
       name: '[name].[hash:base64:5].[ext]'
@@ -179,7 +237,9 @@ module.exports = createConfig([
   ]),
 
   defineConstants({
-    'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
+    'process.env': {
+      'NODE_ENV': JSON.stringify(env),
+    },
   }),
 
   env('development', [
