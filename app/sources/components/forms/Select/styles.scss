@@ -1,0 +1,89 @@
+
+$gray: rgba(34, 36, 38, .15);
+$blue: #559cc9;
+
+.select-container {
+  display:        flex;
+  flex-direction: column;
+
+  width:   300px;
+  padding: 8px;
+
+  .select-label {
+    color:#999;
+    font-size:18px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+  }
+
+  .select-panel {
+    display:       flex;
+    min-height:    2em;
+
+    border:        1px solid $gray;
+    border-radius: .2rem;
+    box-shadow:    none;
+    background:    transparent;
+
+    transition:    box-shadow .1s ease, width .1s ease, border .3s ease;
+
+    &:focus-within,
+    &:hover {
+      border-color: $blue;
+    }
+  }
+
+  .select-input {
+    width:         100%;
+    padding:       0.8em 2em 0.8em 0.8em;
+
+    font-size:     14;
+    line-height:   1em;
+    white-space:   normal;
+    word-wrap:     break-word;
+
+    border:        none;
+    box-shadow:    none;
+    outline:       0;
+
+    color:         rgba(0, 0, 0, .87);
+
+    &::placeholder {
+      font-style: italic;
+    }
+
+    &:focus ~ .select-label, &:valid ~ .select-label {
+      top:-20px;
+      font-size: 14px;
+      background-color: #5264AE;
+    }
+  }
+
+  .select-arrow {
+    border:         none;
+    border-radius:  0;
+
+    background:     transparent;
+    vertical-align: middle;
+
+    transition:     background .3s ease;
+
+    &:hover {
+      background: $blue;
+    }
+  }
+
+  .select-dropdown {
+    border:     1px solid #ccc;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+
+  .select-option {
+    padding: 0.8em 2em 0.8em 0.8em;
+  }
+}

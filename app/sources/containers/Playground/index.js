@@ -1,8 +1,10 @@
-import { goBack } from 'react-router-redux';
+import { goBack } from 'react-router-redux'
+import { filter } from 'fuzzaldrin-plus'
+import Select     from 'components/forms/Select'
 
-import './styles.scss';
+import './styles.scss'
 
-@connect()
+// @connect()
 export default class Playground extends Component {
   state = {
     layout: 'rows',
@@ -17,7 +19,7 @@ export default class Playground extends Component {
     const layout = this.state.layout;
     return (
       <div>
-        <button onClick={ () => dispatch(goBack()) }>Back</button>
+        {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div layout='rows' horizontal-align='center'>
 
           <select size='3' value={ layout } onChange={ this.handleChange }>
@@ -35,7 +37,16 @@ export default class Playground extends Component {
             <div className='demo-box'></div>
             <div className='demo-box'></div>
           </section>
-        </div>
+        </div> */}
+
+        <Select
+          autoFocus
+          required
+          // placeholder=''
+          // label='Hello world'
+          filter={ (options, value) => value ? filter(options, value) : options }
+          options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
+        />
       </div>
     );
   }
