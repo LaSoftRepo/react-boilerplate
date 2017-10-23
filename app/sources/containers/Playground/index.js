@@ -1,6 +1,7 @@
 import { goBack } from 'react-router-redux'
-import { filter } from 'fuzzaldrin-plus'
 import Select     from 'components/forms/Select'
+
+import { filter } from 'fuzzaldrin-plus'
 
 import './styles.scss'
 
