@@ -39,14 +39,16 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <Select
-          autoFocus
-          required
-          // placeholder=''
-          // label='Hello world'
-          filter={ (options, value) => value ? filter(options, value) : options }
-          options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
-        />
+        <div layout='rows' horizontal-align='center' style={{ marginTop: 40 }}>
+          <Select
+            autoFocus
+            required
+            // placeholder=''
+            // label='Hello world'
+            filter={ (options, value) => value ? filter(options, value) : options }
+            options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
+          />
+        </div>
       </div>
     );
   }
