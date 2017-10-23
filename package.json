@@ -20,7 +20,7 @@
     "build:clean": "rimraf ./.cache && rimraf ./build"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "downshift": "^1.15.0",
