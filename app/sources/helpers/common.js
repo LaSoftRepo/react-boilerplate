@@ -14,9 +14,12 @@ const SEPARATOR_REGEX        = /[-_]/;
 // capitalize('lorem ipsum dolor', true) => 'Lorem Ipsum Dolor'
 
 export function capitalize(string, words = false) {
-  if (words) {
+  if (!string)
+    return '';
+
+  if (words)
     return string.replace(CAPITALIZE_EVERY_REGEX, m => m.toUpperCase());
-  }
+
   return string.charAt(0).toUpperCase() + string.substring(1);
 }
 
