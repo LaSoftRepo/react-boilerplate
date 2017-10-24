@@ -5,6 +5,10 @@
  * Helpers
  */
 
+@function capitalize($string) {
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
 @function str-replace($string, $search, $replace: "") {
 	$index: str-index($string, $search);
 
@@ -39,8 +43,6 @@
 
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
-	$src: null;
-
 	$extmods: (
 		eot: "?",
 		svg: "#" + str-replace($name, " ", "_")
@@ -50,6 +52,8 @@
 		otf: "opentype",
 		ttf: "truetype"
 	);
+
+  $src: local(quote($name + if($weight != "normal", " " + capitalize($weight), "")));
 
 	@each $ext in $exts {
 		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
@@ -61,7 +65,7 @@
 		font-family: quote($name);
 		font-style:  $style;
 		font-weight: $weight;
-		src: $src;
+		src:         $src;
 	}
 }
 
