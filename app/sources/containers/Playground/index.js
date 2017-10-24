@@ -40,12 +40,18 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <div layout='rows' horizontal-align='center' style={{ marginTop: 40 }}>
+        <div layout='column' horizontal-align='center' style={{ marginTop: 40 }}>
+          <Select
+            // placeholder=''
+            label='Simple select'
+            options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
+          />
+
           <Select
             autoFocus
             required
             // placeholder=''
-            label='Some field'
+            label='Select with filter'
             filter={ (options, value) => value ? filter(options, value) : options }
             options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
           />
