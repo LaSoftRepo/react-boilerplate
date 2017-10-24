@@ -2,6 +2,8 @@ import Downshift      from 'downshift'
 import { isFunction } from 'helpers/common'
 import Types          from 'helpers/types'
 
+// import cw from 'classwrap'
+
 import './styles.scss'
 
 export default class Select extends PureComponent {
@@ -35,7 +37,7 @@ export default class Select extends PureComponent {
 
   renderLabel({ getLabelProps, label, required, ...props }) {
     return label ? (
-      <label className={ classnames({ required }) } { ...getLabelProps() }>{ label }</label>
+      <label className={ cw({ required }) } { ...getLabelProps() }>{ label }</label>
     ) : null;
   }
 
@@ -50,7 +52,7 @@ export default class Select extends PureComponent {
 
   renderControls({ getButtonProps, clearSelection, isOpen: open, disabled, ...props }) {
     return (
-      <button className={ classnames('select-arrow', { open }) } { ...getButtonProps({ disabled }) } />
+      <button className={ cw(['select-arrow', { open }]) } { ...getButtonProps({ disabled }) } />
     );
   }
 
