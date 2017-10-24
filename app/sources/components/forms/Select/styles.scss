@@ -13,10 +13,7 @@ $blue: #559cc9;
     color: #999;
     font-size: 1rem;
     font-weight: normal;
-    position: absolute;
     pointer-events: none;
-    left: 5px;
-    top: 10px;
     transition: 0.2s ease all;
   }
 
@@ -29,10 +26,15 @@ $blue: #559cc9;
 
     transition:    box-shadow .1s ease, width .1s ease, border .3s ease;
 
-    &:focus-within,
-    &:hover {
-      border-color: $blue;
-    }
+    // &:focus-within,
+    // &:hover {
+    //   border-color: $blue;
+    // }
+
+    // &:focus ~ .select-label, &:valid ~ .select-label {
+    //   font-size: 14px;
+    //   background-color: #5264AE;
+    // }
   }
 
   .select-input {
@@ -55,12 +57,6 @@ $blue: #559cc9;
     &::placeholder {
       font-style: italic;
     }
-
-    &:focus ~ .select-label, &:valid ~ .select-label {
-      top:-20px;
-      font-size: 14px;
-      background-color: #5264AE;
-    }
   }
 
   .select-arrow {
@@ -68,7 +64,11 @@ $blue: #559cc9;
     border-radius:  0;
     padding:        0 1.1rem;
 
+    transform:      scaleY(-1);
+
     color:          $gray;
+    background:     transparent;
+
     font-variant:   normal;
     font-weight:    normal;
     font-size:      1.3rem;
@@ -76,7 +76,7 @@ $blue: #559cc9;
     text-align:     center;
     vertical-align: middle;
 
-    transform:      scaleY(-1);
+    transition:     transform 150ms ease, color .3s ease;
 
     &:after {
       content:     '⌃';
@@ -88,11 +88,6 @@ $blue: #559cc9;
       transform:    scaleY(1);
     }
 
-    background:     transparent;
-    vertical-align: middle;
-
-    transition:     background .3s ease;
-
     &:hover {
       color:      $blue;
       background: transparent;
@@ -100,7 +95,7 @@ $blue: #559cc9;
   }
 
   .select-dropdown {
-    border:     2px solid $blue;
+    border:     2px solid $gray;
     border-top: none;
     max-height: 250px;
     overflow-y: auto;
@@ -108,5 +103,11 @@ $blue: #559cc9;
 
   .select-option {
     padding: 0.8rem 1.1rem;
+    cursor: pointer;
+  }
+
+  &:focus-within > *,
+  &:hover > * {
+    border-color: $blue;
   }
 }

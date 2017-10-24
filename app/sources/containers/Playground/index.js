@@ -43,7 +43,7 @@ export default class Playground extends Component {
         <div layout='rows' horizontal-align='center' style={{ marginTop: 40 }}>
           <Select
             autoFocus
-            required
+            // required
             // placeholder=''
             // label='Hello world'
             filter={ (options, value) => value ? filter(options, value) : options }
