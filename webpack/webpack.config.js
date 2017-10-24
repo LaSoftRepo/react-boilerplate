@@ -57,9 +57,8 @@ const provideConfig = {
   axios:         'axios',
   store:         'store',
   moment:        'moment',
-  
-  classwrap:     'classwrap',
-  cw:            'classwrap',
+
+  cw:             ['classwrap', 'default'],
 
   PropTypes:     'prop-types',
   ReactDOM:      'react-dom',
