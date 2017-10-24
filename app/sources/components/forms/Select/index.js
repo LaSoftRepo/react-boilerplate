@@ -40,11 +40,11 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderInput({ getInputProps, placeholder, autoFocus, disabled, required, ...props }) {
+  renderInput({ getInputProps, placeholder, autoFocus, filter, disabled, required, ...props }) {
     return (
       <input
         className='select-input'
-        { ...getInputProps({ placeholder, autoFocus, disabled, required }) }
+        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: !filter }) }
       />
     );
   }
@@ -96,10 +96,16 @@ export default class Select extends PureComponent {
   }
 
   render() {
-    const inProps = this.props;
+    const { filter, options } = this.props;
+
+    const inProps = {
+      ...this.props,
+      onInputValueChange:  this.onInputValueChange,
+      defaultSelectedItem: !filter ? options[0] : void 0,
+    };
 
     return (
-      <Downshift { ...inProps } onInputValueChange={ this.onInputValueChange }>
+      <Downshift { ...inProps }>
         { outProps => {
             const props = { ...inProps, ...outProps };
             return (
