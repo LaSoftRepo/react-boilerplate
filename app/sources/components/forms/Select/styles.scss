@@ -32,6 +32,8 @@ $blue: #559cc9;
   .select-panel {
     display:       flex;
 
+    padding:       0 0.5rem;
+
     border:        2px solid $gray;
     box-shadow:    none;
     background:    transparent;
@@ -51,7 +53,7 @@ $blue: #559cc9;
 
   input {
     width:         100%;
-    padding:       0.8rem 1rem;
+    padding:       0.8rem 0.5rem;
 
     font-family:   Verdana, Geneva, sans-serif !important;
     font-weight:   lighter !important;
@@ -72,12 +74,10 @@ $blue: #559cc9;
     }
   }
 
-  .select-arrow {
+  .select-button {
     border:         none;
     border-radius:  0;
-    padding:        0 1.1rem;
-
-    transform:      scaleY(-1);
+    padding:        0 0.5rem;
 
     color:          $gray;
     background:     transparent;
@@ -91,14 +91,24 @@ $blue: #559cc9;
 
     transition:     transform 150ms ease, color .3s ease;
 
-    &:after {
+    &.arrow {
+      transform: scaleY(-1);
+    }
+
+    &.arrow:after {
       content:     '⌃';
       line-height: 0.8;
     }
 
-    &.open {
-      color:        $blue;
-      transform:    scaleY(1);
+    &.arrow.open {
+      color:     $blue;
+      transform: scaleY(1);
+    }
+
+    &.clear:after {
+      content:        '×';
+      line-height:    0.8;
+      vertical-align: top;
     }
 
     &:hover {

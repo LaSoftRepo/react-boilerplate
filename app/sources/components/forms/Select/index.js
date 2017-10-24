@@ -51,9 +51,10 @@ export default class Select extends PureComponent {
   }
 
   renderControls({ getButtonProps, clearSelection, isOpen: open, disabled, ...props }) {
-    return (
-      <button className={ cw(['select-arrow', { open }]) } { ...getButtonProps({ disabled }) } />
-    );
+    return [
+      <button className='select-button clear' disabled={ disabled } onClick={ clearSelection } aria-label='clear selection' />,
+      <button className={ cw(['select-button arrow', { open }]) } { ...getButtonProps({ disabled }) } />,
+    ];
   }
 
   renderOption({ getItemProps, optionStyle, ...props }) {

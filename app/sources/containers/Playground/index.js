@@ -7,6 +7,10 @@ import './styles.scss'
 
 // @connect()
 export default class Playground extends Component {
+  static defaultProps = {
+    simpleData: [ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ],
+  }
+
   state = {
     layout: 'rows',
   }
@@ -16,7 +20,7 @@ export default class Playground extends Component {
   }
 
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, simpleData } = this.props;
     const layout = this.state.layout;
     return (
       <div>
@@ -42,18 +46,16 @@ export default class Playground extends Component {
 
         <div layout='column' horizontal-align='center' style={{ marginTop: 40 }}>
           <Select
-            // placeholder=''
             label='Simple select'
-            options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
+            options={ simpleData }
           />
 
           <Select
             autoFocus
             required
-            // placeholder=''
             label='Select with filter'
             filter={ (options, value) => value ? filter(options, value) : options }
-            options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
+            options={ simpleData }
           />
         </div>
       </div>
