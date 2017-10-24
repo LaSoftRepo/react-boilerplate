@@ -40,11 +40,12 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderInput({ getInputProps, placeholder, autoFocus, filter, disabled, required, ...props }) {
+  renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, ...props }) {
     return (
       <input
         className='select-input'
         { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: !filter }) }
+        { ...!filter ? getButtonProps() : {} }
       />
     );
   }

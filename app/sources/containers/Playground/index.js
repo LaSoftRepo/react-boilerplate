@@ -46,7 +46,7 @@ export default class Playground extends Component {
             // required
             // placeholder=''
             // label='Hello world'
-            filter={ (options, value) => value ? filter(options, value) : options }
+            // filter={ (options, value) => value ? filter(options, value) : options }
             options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
           />
         </div>
