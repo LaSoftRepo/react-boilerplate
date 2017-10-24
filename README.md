@@ -72,7 +72,7 @@ yarn deploy
 - [x] ~~Use **polyfill.io** service instead ```babel-polyfill``` for tiny and atomic polyfilling (service)~~ **(temprary disabled)**
 - [x] `es6-promise` and `isomorphic-fetch`
 - [x] `React`, `ReactDOM`, `PropTypes` and `Children` provide automatic
-- [x] `axios`, `store`, `moment`, `query-string` and `classnames` provide automatic
+- [x] `axios`, `store`, `moment`, `query-string` and `classwrap` (faster alternative of classnames) provide automatic
 - [x] Auto generating all favicons and mobile icons for all platforms ***(production only)***
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin **(will replace with WorkBox in future)** ***(production only)***
 - [ ] **DllPlugin** webpack plugin
