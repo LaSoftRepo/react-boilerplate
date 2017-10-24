@@ -84,6 +84,7 @@ $blue: #559cc9;
     }
 
     &.open {
+      color:        $blue;
       transform:    scaleY(1);
     }
 
