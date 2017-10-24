@@ -48,9 +48,9 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderControls({ getButtonProps, clearSelection, isOpen, disabled, ...props }) {
+  renderControls({ getButtonProps, clearSelection, isOpen: open, disabled, ...props }) {
     return (
-      <button className={ classnames('select-arrow', { open: isOpen }) } { ...getButtonProps({ disabled }) } />
+      <button className={ classnames('select-arrow', { open }) } { ...getButtonProps({ disabled }) } />
     );
   }
 
@@ -58,9 +58,7 @@ export default class Select extends PureComponent {
     const item  = props.item;
     const style = isFunction(optionStyle) ? optionStyle(props) : optionStyle;
     return (
-      <div key={ item } className='select-option' { ...getItemProps({ style, item }) }>
-        { item }
-      </div>
+      <div key={ item } className='select-option' { ...getItemProps({ style, item }) }>{ item }</div>
     );
   }
 
