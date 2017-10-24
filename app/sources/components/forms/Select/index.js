@@ -20,7 +20,7 @@ export default class Select extends PureComponent {
     onInputValueChange: () => {},
     optionStyle: ({ index, item, highlightedIndex, selectedItem }) => ({
       backgroundColor: highlightedIndex === index ? '#559cc9' : 'transparent',
-      color:           highlightedIndex === index ? 'white' : 'black',
+      color:           highlightedIndex === index ? 'white' : 'inherit',
       fontWeight:      selectedItem     === item  ? 'bold' : 'normal'
     }),
     filter: false,
