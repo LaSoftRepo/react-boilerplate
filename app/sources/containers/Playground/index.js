@@ -43,10 +43,10 @@ export default class Playground extends Component {
         <div layout='rows' horizontal-align='center' style={{ marginTop: 40 }}>
           <Select
             autoFocus
-            // required
+            required
             // placeholder=''
-            // label='Hello world'
-            // filter={ (options, value) => value ? filter(options, value) : options }
+            label='Some field'
+            filter={ (options, value) => value ? filter(options, value) : options }
             options={[ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ]}
           />
         </div>

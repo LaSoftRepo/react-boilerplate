@@ -1,7 +1,6 @@
-import Downshift from 'downshift'
-
+import Downshift      from 'downshift'
 import { isFunction } from 'helpers/common'
-import Types from 'helpers/types'
+import Types          from 'helpers/types'
 
 import './styles.scss'
 
@@ -16,7 +15,7 @@ export default class Select extends PureComponent {
   }
 
   static defaultProps = {
-    placeholder:  'Select item...',
+    placeholder: 'Select item...',
     onInputValueChange: () => {},
     optionStyle: ({ index, item, highlightedIndex, selectedItem }) => ({
       backgroundColor: highlightedIndex === index ? '#559cc9' : 'transparent',
@@ -36,14 +35,13 @@ export default class Select extends PureComponent {
 
   renderLabel({ getLabelProps, label, required, ...props }) {
     return label ? (
-      <label className={ classnames('select-label', { required }) } { ...getLabelProps() }>{ label }</label>
+      <label className={ classnames({ required }) } { ...getLabelProps() }>{ label }</label>
     ) : null;
   }
 
   renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, ...props }) {
     return (
       <input
-        className='select-input'
         { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: !filter }) }
         { ...!filter ? getButtonProps() : {} }
       />
@@ -52,7 +50,7 @@ export default class Select extends PureComponent {
 
   renderControls({ getButtonProps, clearSelection, isOpen, disabled, ...props }) {
     return (
-      <button className={ `select-arrow ${ isOpen ? 'open' : '' }` } { ...getButtonProps({ disabled }) } />
+      <button className={ classnames('select-arrow', { open: isOpen }) } { ...getButtonProps({ disabled }) } />
     );
   }
 

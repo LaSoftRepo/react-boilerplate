@@ -7,17 +7,19 @@ $blue: #559cc9;
   display:        flex;
   flex-direction: column;
 
-  width:   26rem;
+  width:   460px;
   padding: 8px;
 
   color:   darken($gray, 50%);
 
-  .select-label {
+  label {
+    padding: 0.25rem 1.1rem;
+
     color: darken($gray, 25%);
     font-size: 1rem;
     font-weight: normal;
     pointer-events: none;
-    transition: 0.2s ease all;
+    // transition: 0.2s ease all;
 
     &.required:after {
       content:        ' *';
@@ -47,9 +49,9 @@ $blue: #559cc9;
     // }
   }
 
-  .select-input {
+  input {
     width:         100%;
-    padding:       0.8rem 1.1rem;
+    padding:       0.8rem 1rem;
 
     font-family:   Verdana, Geneva, sans-serif !important;
     font-weight:   lighter !important;
@@ -113,7 +115,7 @@ $blue: #559cc9;
   }
 
   .select-option {
-    padding: 0.8rem 1.1rem;
+    padding: 0.8rem 1rem;
     cursor:  pointer;
   }
 
