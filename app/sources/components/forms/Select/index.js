@@ -34,9 +34,9 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderLabel({ getLabelProps, label, ...props }) {
+  renderLabel({ getLabelProps, label, required, ...props }) {
     return label ? (
-      <label className='select-label' { ...getLabelProps() }>{ label }</label>
+      <label className={ classnames('select-label', { required }) } { ...getLabelProps() }>{ label }</label>
     ) : null;
   }
 

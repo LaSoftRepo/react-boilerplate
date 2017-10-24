@@ -1,4 +1,5 @@
 
+$red:  #d14b00;
 $gray: rgba(34, 36, 38, .25);
 $blue: #559cc9;
 
@@ -15,6 +16,13 @@ $blue: #559cc9;
     font-weight: normal;
     pointer-events: none;
     transition: 0.2s ease all;
+
+    &.required:after {
+      content:        ' *';
+      vertical-align: super;
+      font-size:      0.65rem;
+      color:          $red;
+    }
   }
 
   .select-panel {
