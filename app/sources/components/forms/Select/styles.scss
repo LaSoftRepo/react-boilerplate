@@ -36,16 +36,22 @@ $blue: #559cc9;
     position:   relative;
     width:      100%;
 
-    border:     2px solid $gray;
     box-shadow: none;
     background: transparent;
 
-    transition: box-shadow .1s ease, width .1s ease, border .3s ease;
+    transition: border .3s ease;
 
     .select-field {
       display:        flex;
       flex-direction: row;
       padding:        0 0.5rem;
+
+      border:         2px solid $gray;
+    }
+
+    &:focus-within > *,
+    &:hover > * {
+      border-color: $blue;
     }
 
     // &:focus-within,
@@ -139,6 +145,7 @@ $blue: #559cc9;
 
     border:     2px solid $gray;
     border-top: none;
+
     max-height: 250px;
     overflow-y: auto;
   }
@@ -146,10 +153,5 @@ $blue: #559cc9;
   .select-option {
     padding: 0.8rem 1rem;
     cursor:  pointer;
-  }
-
-  &:focus-within > *,
-  &:hover > * {
-    border-color: $blue;
   }
 }
