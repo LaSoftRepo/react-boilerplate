@@ -51,9 +51,9 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderControls({ getButtonProps, clearSelection, filter, isOpen: open, disabled, ...props }) {
+  renderControls({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled, ...props }) {
     return [
-      filter ? (
+      filter && inputValue ? (
         <button
           className='select-button clear'
           disabled={ disabled }
