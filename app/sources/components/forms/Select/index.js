@@ -87,9 +87,15 @@ export default class Select extends PureComponent {
 
   renderSelect(props) {
     return (
-      <div className='select-panel'>
-        { this.renderInput(props) }
-        { this.renderControls(props) }
+      <div className='select-container' style={ props.style }>
+        { this.renderLabel(props) }
+        <div className='select-panel'>
+          <div className='select-field'>
+            { this.renderInput(props) }
+            { this.renderControls(props) }
+          </div>
+          { this.renderOptions(props) }
+        </div>
       </div>
     );
   }
@@ -115,17 +121,7 @@ export default class Select extends PureComponent {
 
     return (
       <Downshift { ...inProps }>
-        { outProps => {
-            const props = { ...inProps, ...outProps };
-            return (
-              <div className='select-container' style={ style }>
-                { this.renderLabel(props) }
-                { this.renderSelect(props) }
-                { this.renderOptions(props) }
-              </div>
-            );
-          }
-        }
+        { outProps => this.renderSelect({ ...inProps, ...outProps }) }
       </Downshift>
     );
   }

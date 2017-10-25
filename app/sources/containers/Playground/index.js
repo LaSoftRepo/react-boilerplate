@@ -59,6 +59,14 @@ export default class Playground extends Component {
             // style={{ maxWidth: 200 }}
           />
         </div>
+
+        <Select
+          autoFocus
+          required
+          label='Select with filter'
+          filter={ (options, value) => value ? filter(options, value) : options }
+          options={ simpleData }
+        />
       </div>
     );
   }
