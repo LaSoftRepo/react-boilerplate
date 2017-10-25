@@ -6,18 +6,21 @@ $blue: #559cc9;
 .select-container {
   display:        flex;
   flex-direction: column;
+  flex-grow:      1;
 
-  width:   460px;
-  padding: 8px;
+  // width: 460px;
+  max-width: 480px;
+  padding:   8px;
 
   color:   darken($gray, 50%);
 
   label {
     padding: 0.25rem 1.1rem;
 
-    color: darken($gray, 25%);
-    font-size: 1rem;
+    color:       darken($gray, 25%);
+    font-size:   1rem;
     font-weight: normal;
+
     pointer-events: none;
     // transition: 0.2s ease all;
 
@@ -30,15 +33,15 @@ $blue: #559cc9;
   }
 
   .select-panel {
-    display:       flex;
+    display:    flex;
 
-    padding:       0 0.5rem;
+    padding:    0 0.5rem;
+    border:     2px solid $gray;
 
-    border:        2px solid $gray;
-    box-shadow:    none;
-    background:    transparent;
+    box-shadow: none;
+    background: transparent;
 
-    transition:    box-shadow .1s ease, width .1s ease, border .3s ease;
+    transition: box-shadow .1s ease, width .1s ease, border .3s ease;
 
     // &:focus-within,
     // &:hover {
@@ -55,18 +58,23 @@ $blue: #559cc9;
     width:         100%;
     padding:       0.8rem 0.5rem;
 
-    font-family:   Verdana, Geneva, sans-serif !important;
-    font-weight:   lighter !important;
-
-    font-size:     1rem;
-    white-space:   normal;
-    word-wrap:     break-word;
-
     border:        none;
     box-shadow:    none;
     outline:       0;
 
+    font-family:   Verdana, Geneva, sans-serif !important;
+    font-weight:   lighter !important;
+    font-size:     1rem;
+    white-space:   normal;
+    word-wrap:     break-word;
+
     color:         darken($gray, 40%);
+
+    user-select:   none;
+
+    .filter {
+      user-select: auto;
+    }
 
     &::placeholder {
       color:      darken($gray, 25%);

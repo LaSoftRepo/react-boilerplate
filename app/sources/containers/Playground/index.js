@@ -44,7 +44,7 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <div layout='column' horizontal-align='center' style={{ marginTop: 40 }}>
+        <div layout='column' horizontal-align='center' className='playground'>
           <Select
             label='Simple select'
             options={ simpleData }
