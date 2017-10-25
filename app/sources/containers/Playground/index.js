@@ -56,6 +56,7 @@ export default class Playground extends Component {
             label='Select with filter'
             filter={ (options, value) => value ? filter(options, value) : options }
             options={ simpleData }
+            // style={{ maxWidth: 200 }}
           />
         </div>
       </div>

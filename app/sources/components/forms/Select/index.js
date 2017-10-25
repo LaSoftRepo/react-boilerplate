@@ -105,7 +105,7 @@ export default class Select extends PureComponent {
   }
 
   render() {
-    const { filter, options, defaultSelectedItem } = this.props;
+    const { filter, options, defaultSelectedItem, style } = this.props;
 
     const inProps = {
       ...this.props,
@@ -118,7 +118,7 @@ export default class Select extends PureComponent {
         { outProps => {
             const props = { ...inProps, ...outProps };
             return (
-              <div className='select-container'>
+              <div className='select-container' style={ style }>
                 { this.renderLabel(props) }
                 { this.renderSelect(props) }
                 { this.renderOptions(props) }
