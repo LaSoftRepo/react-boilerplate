@@ -70,10 +70,9 @@ $blue: #559cc9;
 
     color:         darken($gray, 40%);
 
-    user-select:   none;
-
-    .filter {
-      user-select: auto;
+    &.passthrough {
+      user-select: none;
+      cursor:      pointer;
     }
 
     &::placeholder {
