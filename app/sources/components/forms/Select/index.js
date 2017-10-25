@@ -41,11 +41,12 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, ...props }) {
+  renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, readOnly, ...props }) {
     return (
       <input
+        type={ filter ? 'text' : 'button' }
         className={ cw({ passthrough: !filter }) }
-        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: !filter }) }
+        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: readOnly || !filter }) }
         { ...!filter ? getButtonProps() : {} }
       />
     );
