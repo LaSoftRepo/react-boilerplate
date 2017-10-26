@@ -1,9 +1,13 @@
 {
   "plugins": [
+    "transform-export-extensions",
     "transform-strict-mode",
     "syntax-decorators",
     "transform-decorators-legacy",
     "transform-class-properties",
+    ["transform-object-rest-spread", {
+      "useBuiltIns": true
+    }],
     "syntax-async-functions",
     "transform-regenerator",
     ["transform-react-jsx", {
@@ -17,8 +21,7 @@
         "browsers": ["last 4 versions", "safari >= 8", "ie >= 10"]
       }
     }],
-    "react",
-    "stage-3"
+    "react"
   ],
   "env": {
     "development": {
