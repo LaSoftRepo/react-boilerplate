@@ -4,4 +4,4 @@
 // Examples
 // @include font-face('PT Sans',    '~fonts/PTSans-Regular', normal, normal, eot woff ttf svg);
 // @include font-face('PT Sans',    '~fonts/PTSans-Bold',    bold,   normal, eot woff ttf svg);
-// @include font-face('LucidIcons', '~fonts/icon-pack',      normal, normal, eot woff ttf svg);
+// @include font-face('LucidIcons', '~fonts/icon-pack',      normal, normal); // equivalent: eot woff woff2 ttf svg

@@ -1,8 +1,10 @@
-@import "mixins";
-@import "fonts";
-@import "variables";
-@import "icons";
-@import "experimental/layout";
+@import
+  "mixins",
+  "fonts",
+  "variables",
+  "icons",
+  "experimental/layout"
+;
 
 html, body {
   width:       100%;
