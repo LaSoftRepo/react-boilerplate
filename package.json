@@ -23,7 +23,7 @@
     "axios": "^0.17.0",
     "babel-polyfill": "^6.26.0",
     "classwrap": "^1.2.1",
-    "downshift": "^1.16.0",
+    "downshift": "^1.16.1",
     "es6-promise": "4.1.1",
     "fuzzaldrin-plus": "^0.5.0",
     "history": "^4.6.3",
