@@ -42,24 +42,24 @@ export default class Select extends PureComponent {
   }
 
   renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, readOnly, ...props }) {
+    const passthrough = !filter;
     return (
       <input
-        type={ filter ? 'text' : 'button' }
-        className={ cw({ passthrough: !filter }) }
-        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: readOnly || !filter }) }
-        { ...!filter ? getButtonProps() : {} }
+        type={ passthrough ? 'button' : 'text' }
+        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: readOnly || passthrough }) }
+        { ...passthrough ? getButtonProps() : {} }
       />
     );
   }
 
-  renderControls({ getButtonProps, clearSelection, inputValue, isOpen: open, disabled, ...props }) {
+  renderControls({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled, ...props }) {
     return [
-      inputValue ? (
+      filter && inputValue ? (
         <button
+          aria-label='clear selection'
           className='select-button clear'
           disabled={ disabled }
           onClick={ clearSelection }
-          aria-label='clear selection'
         />
       ) : null,
       <button className={ cw(['select-button arrow', { open }]) } { ...getButtonProps({ disabled }) } />,
@@ -85,9 +85,9 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderSelect(props) {
+  renderSelect({ style, ...props }) {
     return (
-      <div className='select-container' style={ props.style }>
+      <div className='select-container' style={ style }>
         { this.renderLabel(props) }
         <div className='select-panel'>
           <div className='select-field'>
