@@ -12,6 +12,7 @@ const ManifestPlugin        = require('webpack-manifest-plugin');
 const ModuleScopePlugin     = require('react-dev-utils/ModuleScopePlugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin     = require('html-webpack-plugin');
+const PreloadWebpackPlugin  = require('preload-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin     = require('copy-webpack-plugin');
 const OfflinePlugin         = require('offline-plugin');
@@ -137,6 +138,10 @@ const plugins = [
     filename: 'index.html',
     inject:   'body',
     minify:   isProduction ? htmlMinifyConfig : false,
+  }),
+  new PreloadWebpackPlugin({
+    rel: 'preload',
+    include: 'all',
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
