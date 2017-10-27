@@ -7,6 +7,8 @@ import styles from './styles.module.scss'
 
 const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
 
+const animationDuration = 500;
+
 @CSSModules(styles, { allowMultiple: true })
 export default class Modal extends PureComponent {
   static propTypes = {
@@ -22,29 +24,31 @@ export default class Modal extends PureComponent {
     autoFocus: true,
   }
 
-  static animations = ({ shouldHide }) => {
-    const duration  = 500;
-    const direction = shouldHide ? 'normal' : 'reverse';
+  static animations = ({ enter }) => {
+    const duration  = animationDuration;
+    const direction = enter ? 'reverse' : 'normal';
     return {
+      duration,
+
       backdrop: {
         duration,
         direction,
         opacity:   0,
-        delay:     shouldHide ? 310 : 0,
+        delay:     enter ? 0 : 310,
       },
 
       dialog: {
         duration,
         direction,
         scaleY:     2.3,
-        translateY: shouldHide ? 1200 : -1200,
-        delay:      shouldHide ? 120  : 0,
+        translateY: enter ?-1200 : 1200,
+        delay:      enter ? 0    : 120,
       },
     };
   }
 
   state = {
-    shouldHide: false,
+    enter: true,
   }
 
   componentDidMount() {
@@ -58,16 +62,16 @@ export default class Modal extends PureComponent {
   handleClose = (event, accept) => {
     setTimeout(() => {
       this.props.onClose(event, accept);
-    }, 500);
+    }, animationDuration);
   }
 
   handleKeydown = event => {
     const { allowKeys, onClose } = this.props;
     if (allowKeys) {
       if (event.keyCode === keycode('esc')) {
-        this.setState({ shouldHide: true }, () => { this.handleClose(event, false) });
+        this.setState({ enter: false }, () => { this.handleClose(event, false) });
       } else if (event.keyCode === keycode('enter')) {
-        this.setState({ shouldHide: true }, () => { this.handleClose(event, true) });
+        this.setState({ enter: false }, () => { this.handleClose(event, true) });
       }
     }
   }
@@ -75,7 +79,7 @@ export default class Modal extends PureComponent {
   handleClick = (event, accept) => {
     event.persist();
     this.setState(
-      { shouldHide: true },
+      { enter: false },
       () => { this.handleClose(event, accept) }
     );
   }
@@ -101,6 +105,7 @@ export default class Modal extends PureComponent {
   }
 
   render() {
+    //const v = animations();
     const animations = Modal.animations(this.state);
     return (
       <Anime { ...animations.backdrop }>
