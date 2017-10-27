@@ -67,8 +67,8 @@ export default class Playground extends Component {
           filter={ (options, value) => value ? filter(options, value) : options }
           options={ simpleData }
         >
-          {({ container, props }) => (
-            container(props)
+          {({ Container, props }) => (
+            <Container { ...props } />
           )}
         </Select>
       </div>

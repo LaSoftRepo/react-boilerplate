@@ -4,6 +4,12 @@ import Types          from 'helpers/types'
 
 import './styles.scss'
 
+class SelectContainer extends PureComponent {
+  render() {
+    return <div>{ this.props.isOpen ? 'open' : 'close' }</div>;
+  }
+}
+
 export default class Select extends PureComponent {
   static propTypes = {
     options:      Types.funcOrArrayOf(Types.stringOrObject).isRequired,
@@ -128,10 +134,10 @@ export default class Select extends PureComponent {
     if (isFunction(children)) {
       return (
         <Downshift { ...inProps }>
-          { outProps => Children.only(children({
-            container: this.renderSelect,
-            props:     { ...inProps, ...outProps },
-          })) }
+          { ({ getRootProps, ...props }) => children({
+            Container: SelectContainer,
+            props:     getRootProps({ inProps, props, refKey: 'innerRef' }),
+          }) }
         </Downshift>
       );
     } else {
