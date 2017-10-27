@@ -59,7 +59,8 @@ const provideConfig = {
   store:         'store',
   moment:        'moment',
 
-  cw:             ['classwrap', 'default'],
+  classcat:       ['classcat', 'default'],
+  cc:             ['classcat', 'default'],
 
   PropTypes:     'prop-types',
   ReactDOM:      'react-dom',

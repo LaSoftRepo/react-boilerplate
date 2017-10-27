@@ -1734,9 +1734,9 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classwrap@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/classwrap/-/classwrap-1.2.1.tgz#ec577af134551f76856448721a1350d273d7117f"
+classcat@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/classcat/-/classcat-1.0.0.tgz#e98e853accb8f1d91e898a32f54183b0d4c5d57a"
 
 clean-css@4.1.x:
   version "4.1.9"
@@ -3310,9 +3310,9 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-text-webpack-plugin@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.1.tgz#605a8893faca1dd49bb0d2ca87493f33fd43d102"
+extract-text-webpack-plugin@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.2.tgz#5f043eaa02f9750a9258b78c0a6e0dc1408fb2f7"
   dependencies:
     async "^2.4.1"
     loader-utils "^1.1.0"
@@ -3351,9 +3351,9 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fast-sass-loader@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/fast-sass-loader/-/fast-sass-loader-1.3.0.tgz#e63ae46dc694805db5cf193662f1f38099afa20f"
+fast-sass-loader@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/fast-sass-loader/-/fast-sass-loader-1.4.0.tgz#2e4716e1aa35135689651c3998bcf7495a3c1783"
   dependencies:
     async "^2.0.1"
     cli-source-preview "^1.0.0"
@@ -6300,9 +6300,9 @@ node-status-codes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/node-status-codes/-/node-status-codes-1.0.0.tgz#5ae5541d024645d32a58fcddc9ceecea7ae3ac2f"
 
-nodemailer@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.2.0.tgz#310781d30130bc5b7bf756bb626ec27564c5079b"
+nodemailer@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.3.1.tgz#40e162f54193ba2fecca200d544e8f6c1106d694"
 
 nomnom@^1.8.0:
   version "1.8.1"
