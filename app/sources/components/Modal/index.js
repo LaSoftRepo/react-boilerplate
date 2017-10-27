@@ -7,8 +7,6 @@ import styles from './styles.module.scss'
 
 const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
 
-const ANIMATE_DURATION = 500;
-
 @CSSModules(styles, { allowMultiple: true })
 export default class Modal extends PureComponent {
   static propTypes = {
@@ -22,6 +20,27 @@ export default class Modal extends PureComponent {
     onClose:   () => {},
     allowKeys: true,
     autoFocus: true,
+  }
+
+  static animations = ({ shouldHide }) => {
+    const duration  = 500;
+    const direction = shouldHide ? 'normal' : 'reverse';
+    return {
+      backdrop: {
+        duration,
+        direction,
+        opacity:   0,
+        delay:     shouldHide ? 310 : 0,
+      },
+
+      dialog: {
+        duration,
+        direction,
+        scaleY:     2.3,
+        translateY: shouldHide ? 1200 : -1200,
+        delay:      shouldHide ? 120  : 0,
+      },
+    };
   }
 
   state = {
@@ -39,7 +58,7 @@ export default class Modal extends PureComponent {
   handleClose = (event, accept) => {
     setTimeout(() => {
       this.props.onClose(event, accept);
-    }, ANIMATE_DURATION);
+    }, 500);
   }
 
   handleKeydown = event => {
@@ -82,20 +101,11 @@ export default class Modal extends PureComponent {
   }
 
   render() {
-    const { shouldHide } = this.state;
-    const direction = shouldHide ? 'normal' : 'reverse';
-
+    const animations = Modal.animations(this.state);
     return (
-      <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
+      <Anime { ...animations.backdrop }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
-          <Anime
-            translateY={ shouldHide ? 1200 : -1200 }
-            scaleY='2.3'
-            duration={ ANIMATE_DURATION }
-            elasticity='0'
-            delay={ shouldHide ? 120 : 0 }
-            direction={ direction }
-          >
+          <Anime { ...animations.dialog }>
             { this.renderDialogContent(this.props) }
           </Anime>
         </div>
