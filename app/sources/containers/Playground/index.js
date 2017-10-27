@@ -63,10 +63,14 @@ export default class Playground extends Component {
         <Select
           autoFocus
           required
-          label='Select with filter'
+          label='Custom Select with filter'
           filter={ (options, value) => value ? filter(options, value) : options }
           options={ simpleData }
-        />
+        >
+          {({ container, props }) => (
+            container(props)
+          )}
+        </Select>
       </div>
     );
   }

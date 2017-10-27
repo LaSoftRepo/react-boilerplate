@@ -33,13 +33,13 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderLabel({ getLabelProps, label, required, ...props }) {
+  renderLabel = ({ getLabelProps, label, required, ...props }) => {
     return label ? (
       <label className={ cc({ required }) } { ...getLabelProps() }>{ label }</label>
     ) : null;
   }
 
-  renderInput({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, readOnly, ...props }) {
+  renderInput = ({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, readOnly, ...props }) => {
     const passthrough = !filter;
     return (
       <input
@@ -50,21 +50,26 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderControls({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled, ...props }) {
+  renderControls = ({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled, ...props }) => {
     return [
       filter && inputValue ? (
         <button
+          key='clear'
           aria-label='clear selection'
           className='select-button clear'
           disabled={ disabled }
           onClick={ clearSelection }
         />
       ) : null,
-      <button className={ cc({'select-button arrow': true, open }) } { ...getButtonProps({ disabled }) } />,
+      <button
+        key='arrow'
+        className={ cc({'select-button arrow': true, open }) }
+        { ...getButtonProps({ disabled }) }
+      />,
     ];
   }
 
-  renderOption({ getItemProps, optionStyle, ...props }) {
+  renderOption = ({ getItemProps, optionStyle, ...props }) => {
     const item  = props.item;
     const style = isFunction(optionStyle) ? optionStyle(props) : optionStyle;
     return (
@@ -72,7 +77,7 @@ export default class Select extends PureComponent {
     );
   }
 
-  renderOptions({ isOpen, options, inputValue, filter, ...props }) {
+  renderOptions = ({ isOpen, options, inputValue, filter, ...props }) => {
     const filtered = isFunction(filter) ? filter(options, inputValue) :
           (filter ? Select.defaultFilter(options, inputValue) : options);
 
@@ -83,7 +88,7 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderSelect({ style, ...props }) {
+  renderSelect = ({ style, ...props }) => {
     return (
       <div className='select-container' style={ style }>
         { this.renderLabel(props) }
@@ -109,7 +114,7 @@ export default class Select extends PureComponent {
   }
 
   render() {
-    const { filter, options, defaultSelectedItem } = this.props;
+    const { filter, options, defaultSelectedItem, children } = this.props;
 
     // Runtime error
     // options();
@@ -120,10 +125,21 @@ export default class Select extends PureComponent {
       defaultSelectedItem: defaultSelectedItem || (!filter ? options[0] : void 0),
     };
 
-    return (
-      <Downshift { ...inProps }>
-        { outProps => this.renderSelect({ ...inProps, ...outProps }) }
-      </Downshift>
-    );
+    if (isFunction(children)) {
+      return (
+        <Downshift { ...inProps }>
+          { outProps => Children.only(children({
+            container: this.renderSelect,
+            props:     { ...inProps, ...outProps },
+          })) }
+        </Downshift>
+      );
+    } else {
+      return (
+        <Downshift { ...inProps }>
+          { outProps => this.renderSelect({ ...inProps, ...outProps }) }
+        </Downshift>
+      );
+    }
   }
 }
