@@ -20,6 +20,7 @@ import ConnectedRouter from 'react-router-redux/ConnectedRouter'
 
 // Utils
 import { hasReduxDevToolExtension } from 'sources/internal/utils'
+import ErrorBoundary from 'components/ErrorBoundary'
 
 // Cofigurations
 import configureStore from './sources/store'
@@ -52,11 +53,13 @@ const render = translations => {
         <LanguageProvider messages={ translations }>
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
-              <Switch>
-                <Redirect from='/index.html' to='/' />
-                { routes.map(route => <Route key={ route.path } { ...route } />) }
-                <Route component={ NotFound } />
-              </Switch>
+              <ErrorBoundary>
+                <Switch>
+                  <Redirect from='/index.html' to='/' />
+                  { routes.map(route => <Route key={ route.path } { ...route } />) }
+                  <Route component={ NotFound } />
+                </Switch>
+              </ErrorBoundary>
             </App>
           </ConnectedRouter>
         </LanguageProvider>

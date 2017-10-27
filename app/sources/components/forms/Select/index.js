@@ -113,6 +113,9 @@ export default class Select extends PureComponent {
   render() {
     const { filter, options, defaultSelectedItem } = this.props;
 
+    // Runtime error
+    // options();
+
     const inProps = {
       ...this.props,
       onInputValueChange:  this.onInputValueChange,
