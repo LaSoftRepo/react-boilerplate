@@ -140,10 +140,6 @@ const plugins = [
     inject:   'body',
     minify:   isProduction ? htmlMinifyConfig : false,
   }),
-  new PreloadWebpackPlugin({
-    rel: 'preload',
-    include: 'all',
-  }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
   new webpack.optimize.CommonsChunkPlugin({
@@ -252,6 +248,10 @@ if (isProduction) {
       options: {
         context: Path.to.app,
       },
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: 'all',
     }),
     new webpack.AutomaticPrefetchPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
