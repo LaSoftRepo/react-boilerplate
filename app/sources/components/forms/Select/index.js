@@ -72,9 +72,13 @@ class SelectContainer extends PureComponent {
   }
 
   render() {
-    const { style, containerRef, ...props } = this.props;
+    const { style, containerRef, className, ...props } = this.props;
     return (
-      <div className='select-container' ref={ containerRef } style={ style }>
+      <div
+        ref={ containerRef }
+        style={ style }
+        className={ cc([className, 'select-container']) }
+      >
         { this.renderLabel(props) }
         <div className='select-panel'>
           <div className='select-field'>
