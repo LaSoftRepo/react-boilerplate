@@ -137,7 +137,7 @@ export function compact(array) {
 	if (!Array.isArray(array))
 		return [];
 
-	return array.filter(item => item);
+	return array.filter(Boolean);
 }
 
 
@@ -160,13 +160,11 @@ export function cleanup(array) {
 // shuffle([1, 2, 3, 4]) => [3, 1, 4, 2] in random order
 
 export function shuffle(array) {
-  let arraySize = array.length - 1;
-  let rand, temp;
-  for (let index = arraySize; index >= 0; --index) {
-    randi        = Math.round(Math.random() * arraySize);
-    temp         = array[index];
-    array[index] = array[randi];
-    array[randi] = temp;
+  const len = array.length - 1;
+  for (let index = len; index >= 0; --index) {
+    let pivot = Math.round(Math.random() * len);
+    [array[pivot], array[index]] =
+    [array[index], array[pivot]];
   }
   return array;
 }

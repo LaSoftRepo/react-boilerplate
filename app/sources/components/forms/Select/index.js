@@ -4,40 +4,17 @@ import Types          from 'helpers/types'
 
 import './styles.scss'
 
+// class SelectContainer extends PureComponent {
+//   render() {
+//     return <div>{ this.props.isOpen ? 'open' : 'close' }</div>;
+//   }
+// }
+
 class SelectContainer extends PureComponent {
-  render() {
+  /*render() {
+    console.log('this.props:', this.props);
     return <div>{ this.props.isOpen ? 'open' : 'close' }</div>;
-  }
-}
-
-export default class Select extends PureComponent {
-  static propTypes = {
-    options:      Types.funcOrArrayOf(Types.stringOrObject).isRequired,
-
-    label:        Types.string,
-    placeholder:  Types.string,
-    optionStyle:  Types.funcOrObject,
-    filter:       Types.funcOrBool,
-  }
-
-  static defaultProps = {
-    placeholder: 'Select item...',
-    onInputValueChange: () => {},
-    optionStyle: ({ index, item, highlightedIndex, selectedItem }) => ({
-      backgroundColor: highlightedIndex === index ? '#559cc9' : 'transparent',
-      color:           highlightedIndex === index ? 'white' : 'inherit',
-      fontWeight:      selectedItem     === item  ? 'bold' : 'normal'
-    }),
-    filter: false,
-  }
-
-  static defaultFilter(options, input) {
-    if (!input) return options;
-    input = input.toLowerCase();
-    return options.filter(option =>
-      option.toLowerCase().includes(input)
-    );
-  }
+  }*/
 
   renderLabel = ({ getLabelProps, label, required, ...props }) => {
     return label ? (
@@ -94,9 +71,10 @@ export default class Select extends PureComponent {
     ) : null;
   }
 
-  renderSelect = ({ style, ...props }) => {
+  render() {
+    const { style, containerRef, ...props } = this.props;
     return (
-      <div className='select-container' style={ style }>
+      <div className='select-container' ref={ containerRef } style={ style }>
         { this.renderLabel(props) }
         <div className='select-panel'>
           <div className='select-field'>
@@ -106,6 +84,36 @@ export default class Select extends PureComponent {
           { this.renderOptions(props) }
         </div>
       </div>
+    );
+  }
+}
+
+export default class Select extends PureComponent {
+  static propTypes = {
+    options:      Types.funcOrArrayOf(Types.stringOrObject).isRequired,
+
+    label:        Types.string,
+    placeholder:  Types.string,
+    optionStyle:  Types.funcOrObject,
+    filter:       Types.funcOrBool,
+  }
+
+  static defaultProps = {
+    placeholder: 'Select item...',
+    onInputValueChange: () => {},
+    optionStyle: ({ index, item, highlightedIndex, selectedItem }) => ({
+      backgroundColor: highlightedIndex === index ? '#559cc9' : 'transparent',
+      color:           highlightedIndex === index ? 'white' : 'inherit',
+      fontWeight:      selectedItem     === item  ? 'bold' : 'normal'
+    }),
+    filter: false,
+  }
+
+  static defaultFilter(options, input) {
+    if (!input) return options;
+    input = input.toLowerCase();
+    return options.filter(option =>
+      option.toLowerCase().includes(input)
     );
   }
 
@@ -119,6 +127,20 @@ export default class Select extends PureComponent {
     this.props.onInputValueChange(inputValue, state);
   }
 
+  // conditionalRender(children, element, props) {
+  //   if (isFunction(children)) {
+  //     return children({ [element] : element, ...props });
+  //   } else {
+  //     return <element { ...props } />
+  //   }
+  // }
+
+  renderProps = ({ children, render }, props) => {
+    const fn = isFunction(children) ? children : render;
+    return fn ? fn(props) : null;
+  }
+
+
   render() {
     const { filter, options, defaultSelectedItem, children } = this.props;
 
@@ -127,6 +149,7 @@ export default class Select extends PureComponent {
 
     const inProps = {
       ...this.props,
+      refKey:             'containerRef',
       onInputValueChange:  this.onInputValueChange,
       defaultSelectedItem: defaultSelectedItem || (!filter ? options[0] : void 0),
     };
@@ -135,15 +158,16 @@ export default class Select extends PureComponent {
       return (
         <Downshift { ...inProps }>
           { ({ getRootProps, ...props }) => children({
-            Container: SelectContainer,
-            props:     getRootProps({ inProps, props, refKey: 'innerRef' }),
+            SelectContainer, props: getRootProps({ ...inProps, ...props }),
           }) }
         </Downshift>
       );
     } else {
       return (
         <Downshift { ...inProps }>
-          { outProps => this.renderSelect({ ...inProps, ...outProps }) }
+          { ({ getRootProps, ...props }) =>
+            <SelectContainer { ...getRootProps({ ...inProps, ...props }) } />
+          }
         </Downshift>
       );
     }
