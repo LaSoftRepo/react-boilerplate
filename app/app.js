@@ -20,7 +20,7 @@ import ConnectedRouter from 'react-router-redux/ConnectedRouter'
 
 // Utils
 import { hasReduxDevToolExtension } from 'sources/internal/utils'
-import ErrorBoundary from 'components/ErrorBoundary'
+import ErrorBoundary from 'components/internal/ErrorBoundary'
 
 // Cofigurations
 import configureStore from './sources/store'

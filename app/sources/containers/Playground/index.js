@@ -1,7 +1,10 @@
 import { goBack } from 'react-router-redux'
-import Select     from 'components/forms/Select'
+import Select     from 'components/Select'
+import Image      from 'components/Image'
 
 import { filter } from 'fuzzaldrin-plus'
+
+import image from 'images/test-image.jpg'
 
 import './styles.scss'
 
@@ -23,7 +26,7 @@ export default class Playground extends Component {
     const { dispatch, simpleData } = this.props;
     const layout = this.state.layout;
     return (
-      <div>
+      <div layout='row'>
         {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div layout='rows' horizontal-align='center'>
 
@@ -33,7 +36,7 @@ export default class Playground extends Component {
             <option value='masonry'>masonry</option>
           </select>
 
-          <section layout={ layout } vertical-align='center' className='section-playground'>
+          <section layout={ layout } vertical-align='center' className='playground'>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
             <div className='demo-box'></div>
@@ -44,34 +47,40 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <div layout='column' horizontal-align='center' className='playground'>
-          <Select
-            label='Simple select'
-            options={ simpleData }
-          />
+        <div layout='column' horizontal-distribute='equal'>
+          <div layout='row' horizontal-align='center'>
+            <Select
+              label='Simple select'
+              options={ simpleData }
+            />
+
+            <Select
+              autoFocus
+              required
+              label='Select with filter'
+              filter={ (options, value) => value ? filter(options, value) : options }
+              options={ simpleData }
+              // style={{ maxWidth: 200 }}
+            />
+          </div>
 
           <Select
             autoFocus
             required
-            label='Select with filter'
+            // defaultIsOpen
+            label='Custom Select with filter'
             filter={ (options, value) => value ? filter(options, value) : options }
             options={ simpleData }
-            // style={{ maxWidth: 200 }}
-          />
+          >
+            {({ SelectContainer, props }) => (
+              <SelectContainer { ...props } />
+            )}
+          </Select>
+
+          {/* Test responcive image */}
+          <Image sources={ image } />
         </div>
 
-        <Select
-          autoFocus
-          required
-          // defaultIsOpen
-          label='Custom Select with filter'
-          filter={ (options, value) => value ? filter(options, value) : options }
-          options={ simpleData }
-        >
-          {({ SelectContainer, props }) => (
-            <SelectContainer { ...props } />
-          )}
-        </Select>
       </div>
     );
   }

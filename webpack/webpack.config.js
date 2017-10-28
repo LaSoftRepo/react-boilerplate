@@ -558,7 +558,18 @@ module.exports = (env = {}) => {
           ],
         },
         {
-          test: /\.(png|gif|jpe?g|jp2|webp|svg)(\?[a-z0-9=.]+)?$/,
+          test: /\.(png|jpe?g|jp2|png|webp)(\?[a-z0-9=.]+)?$/i,
+          loader: require.resolve('responsive-loader'),
+          options: {
+            adapter:         require('responsive-loader/sharp'),
+            placeholder:     true,
+            placeholderSize: 32,
+            sizes:           [320, 640, 1280],
+            // disable:         !isProduction,
+          }
+        },
+        {
+          test: /\.(gif|svg)(\?[a-z0-9=.]+)?$/,
           include: Path.to.images,
           loader: require.resolve('url-loader'),
           options: {
