@@ -3,6 +3,8 @@ import { isFunction }  from 'helpers/common'
 import Types           from 'helpers/types'
 import SelectContainer from './select.container'
 
+import './styles.scss'
+
 export default class Select extends PureComponent {
 
   static propTypes = {
@@ -25,14 +27,6 @@ export default class Select extends PureComponent {
     filter: false,
   }
 
-  static defaultFilter(options, input) {
-    if (!input) return options;
-    input = input.toLowerCase();
-    return options.filter(option =>
-      option.toLowerCase().includes(input)
-    );
-  }
-
   onInputValueChange = (inputValue, state) => {
     if (isFunction(this.props.options)) {
       // TODO
@@ -51,7 +45,7 @@ export default class Select extends PureComponent {
 
     const inProps = {
       ...this.props,
-      refKey:              'containerRef',
+      refKey:              'containerKey',
       onInputValueChange:  this.onInputValueChange,
       defaultSelectedItem: defaultSelectedItem || (!filter ? options[0] : void 0),
     };
@@ -61,7 +55,7 @@ export default class Select extends PureComponent {
         {({ getRootProps, ...outProps }) => {
           const props = getRootProps({ ...inProps, ...outProps });
           return (
-            isFunction(children) ? children({ SelectContainer, props }) : <SelectContainer { ...props } />
+            isFunction(children) ? children({ SelectContainer, ...props }) : <SelectContainer { ...props } />
           );
         }}
       </Downshift>

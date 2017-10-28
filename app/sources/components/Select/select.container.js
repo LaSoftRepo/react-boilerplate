@@ -1,10 +1,20 @@
 
-import { isFunction }  from 'helpers/common'
-import Types           from 'helpers/types'
+import Types from 'helpers/types'
+import { isFunction, isString } from 'helpers/common'
 
-import './styles.scss'
+function defaultFilter(options, input) {
+  if (!input) return options;
+  input = input.toLowerCase();
+  return options.filter(option =>
+    option.toLowerCase()[this](input)
+  );
+}
 
 export default class SelectContainer extends PureComponent {
+  static defaultFilters = {
+    includes:   defaultFilter.bind('includes'),
+    startsWith: defaultFilter.bind('startsWith'),
+  }
 
   renderLabel = ({ getLabelProps, label, required, ...props }) => {
     return label ? (
@@ -51,8 +61,15 @@ export default class SelectContainer extends PureComponent {
   }
 
   renderOptions = ({ isOpen, options, inputValue, filter, ...props }) => {
-    const filtered = isFunction(filter) ? filter(options, inputValue) :
-          (filter ? Select.defaultFilter(options, inputValue) : options);
+    let filtered = options;
+    if (filter) {
+      if (isFunction(filter)) {
+        filtered = filter(options, inputValue);
+      } else {
+        const defaultFilters = SelectContainer.defaultFilters;
+        filtered = (defaultFilters[filter] || defaultFilters.includes)(options, inputValue);
+      }
+    }
 
     return isOpen && filtered.length ? (
       <div className='select-dropdown'>
@@ -62,10 +79,10 @@ export default class SelectContainer extends PureComponent {
   }
 
   render() {
-    const { style, containerRef, className, ...props } = this.props;
+    const { style, containerKey, className, ...props } = this.props;
     return (
       <div
-        ref={ containerRef }
+        ref={ containerKey }
         style={ style }
         className={ cc([className, 'select-container']) }
       >
