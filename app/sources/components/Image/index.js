@@ -1,6 +1,19 @@
 
 
 export default class Image extends Component {
+
+  static defaultProps = {
+    style: {
+      width:  '100%',
+      height: '100%',
+
+      overflow: 'hidden',
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'top left',
+    }
+  }
+
   state = {
     src: null,
   }
@@ -17,7 +30,7 @@ export default class Image extends Component {
   }
 
   render() {
-    const { sources, title, alt } = this.props;
+    const { sources, style, title, alt } = this.props;
     const { placeholder, src, srcSet } = sources;
 
     const imgStyle = {
@@ -30,14 +43,8 @@ export default class Image extends Component {
     };
 
     const divStyle = {
-      width:  '100%',
-      height: '100%',
-
-      overflow:'hidden',
-      backgroundSize: 'contain',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'top center',
-      backgroundImage: `url("${ placeholder }")`,
+      ...style,
+      backgroundImage: `url("${ placeholder }")`
     };
 
     return (
