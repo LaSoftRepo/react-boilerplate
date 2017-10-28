@@ -1,19 +1,19 @@
 
 import Types from 'helpers/types'
 import { isFunction, isString } from 'helpers/common'
+import fuzzysearch from 'fuzzysearch'
 
 function defaultFilter(options, input) {
   if (!input) return options;
   input = input.toLowerCase();
-  return options.filter(option =>
-    option.toLowerCase()[this](input)
-  );
+  return options.filter(option => this(option.toLowerCase(), input));
 }
 
 export default class SelectContainer extends PureComponent {
   static defaultFilters = {
-    includes:   defaultFilter.bind('includes'),
-    startsWith: defaultFilter.bind('startsWith'),
+    includes:   defaultFilter.bind((option, input) => option.includes(input)),
+    startsWith: defaultFilter.bind((option, input) => option.startsWith(input)),
+    fuzzy:      defaultFilter.bind((option, input) => fuzzysearch(input, option)),
   }
 
   renderLabel = ({ getLabelProps, label, required, ...props }) => {
@@ -37,7 +37,7 @@ export default class SelectContainer extends PureComponent {
     return [
       filter && inputValue ? (
         <button
-          key='clear'
+          key='0'
           aria-label='clear selection'
           className='select-button clear'
           disabled={ disabled }
@@ -45,7 +45,7 @@ export default class SelectContainer extends PureComponent {
         />
       ) : null,
       <button
-        key='arrow'
+        key='1'
         className={ cc({'select-button arrow': true, open }) }
         { ...getButtonProps({ disabled }) }
       />,

@@ -58,7 +58,7 @@ export default class Playground extends Component {
               autoFocus
               required
               label='Select with filter'
-              filter={ (options, value) => value ? filter(options, value) : options }
+              filter // ={ (options, value) => value ? filter(options, value) : options }
               options={ simpleData }
               // style={{ maxWidth: 200 }}
             />
