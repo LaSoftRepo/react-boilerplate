@@ -9,11 +9,15 @@ function defaultFilter(options, input) {
   return options.filter(option => this(option.toLowerCase(), input));
 }
 
-export default class SelectContainer extends PureComponent {
+export default class SelectContainer extends Component {
   static defaultFilters = {
     includes:   defaultFilter.bind((option, input) => option.includes(input)),
     startsWith: defaultFilter.bind((option, input) => option.startsWith(input)),
     fuzzy:      defaultFilter.bind((option, input) => fuzzysearch(input, option)),
+  }
+
+  state = {
+    isOpen: false,
   }
 
   renderLabel = ({ getLabelProps, label, required, ...props }) => {
@@ -59,7 +63,7 @@ export default class SelectContainer extends PureComponent {
     );
   }
 
-  renderOptions = ({ isOpen, options, inputValue, filter, ...props }) => {
+  renderOptions = ({ isOpen, options, inputValue, filter, onDropdownBlur, ...props }) => {
     let filtered = options;
     if (filter) {
       if (isFunction(filter)) {
@@ -71,7 +75,7 @@ export default class SelectContainer extends PureComponent {
     }
 
     return isOpen && filtered.length ? (
-      <div className='select-dropdown'>
+      <div className='select-dropdown' onMouseLeave={ onDropdownBlur }>
         { filtered.map((item, index) => this.renderOption({ index, item, ...props })) }
       </div>
     ) : null;
