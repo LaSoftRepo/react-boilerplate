@@ -61,13 +61,12 @@ export default class Playground extends Component {
             options={ simpleData }
             // style={{ maxWidth: 200 }}
           />
-        </div>
 
-        <div layout='row' horizontal-align='center'>
           <Select
             autoFocus
             required
             // defaultIsOpen
+            style={{ width: '100%' }}
             label='Custom Select with filter'
             filter={ (options, value) => value ? filter(options, value) : options }
             options={ simpleData }
@@ -77,9 +76,10 @@ export default class Playground extends Component {
             )}
           </Select>
 
-          {/* Test responcive image */}
-          <Image sources={ image } />
         </div>
+
+        {/* Test responcive image */}
+        <Image sources={ image } />
 
       </div>
     );
