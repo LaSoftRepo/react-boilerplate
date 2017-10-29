@@ -26,7 +26,7 @@ export default class Playground extends Component {
     const { dispatch, simpleData } = this.props;
     const layout = this.state.layout;
     return (
-      <div layout='row'>
+      <div layout='row' horizontal-align='center'>
         {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div layout='rows' horizontal-align='center'>
 
@@ -47,23 +47,23 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <div layout='column' horizontal-distribute='equal'>
-          <div layout='row' horizontal-align='center'>
-            <Select
-              label='Simple select'
-              options={ simpleData }
-            />
+        <div layout='column'>
+          <Select
+            label='Simple select'
+            options={ simpleData }
+          />
 
-            <Select
-              autoFocus
-              required
-              label='Select with filter'
-              filter // ={ (options, value) => value ? filter(options, value) : options }
-              options={ simpleData }
-              // style={{ maxWidth: 200 }}
-            />
-          </div>
+          <Select
+            autoFocus
+            required
+            label='Select with filter'
+            filter // ={ (options, value) => value ? filter(options, value) : options }
+            options={ simpleData }
+            // style={{ maxWidth: 200 }}
+          />
+        </div>
 
+        <div layout='row' horizontal-align='center'>
           <Select
             autoFocus
             required
@@ -73,7 +73,7 @@ export default class Playground extends Component {
             options={ simpleData }
           >
             {({ SelectContainer, ...props }) => (
-                <SelectContainer { ...props } />
+              <SelectContainer { ...props } />
             )}
           </Select>
 

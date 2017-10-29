@@ -4,8 +4,8 @@ export default class Image extends Component {
 
   static defaultProps = {
     style: {
-      width:  '100%',
-      height: '100%',
+      width:  'auto',
+      height: 'auto',
 
       overflow: 'hidden',
       backgroundSize: 'contain',
@@ -34,7 +34,7 @@ export default class Image extends Component {
     const { placeholder, src, srcSet } = sources;
 
     const imgStyle = {
-      width:      '100%',
+      width:      'auto',
       height:     'auto',
 
       display:    'block',

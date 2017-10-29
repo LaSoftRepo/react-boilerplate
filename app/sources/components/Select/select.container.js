@@ -22,13 +22,12 @@ export default class SelectContainer extends PureComponent {
     ) : null;
   }
 
-  renderInput = ({ getInputProps, getButtonProps, placeholder, autoFocus, filter, disabled, required, readOnly, ...props }) => {
-    const passthrough = !filter;
+  renderInput = ({ getInputProps, getButtonProps, filter, placeholder, autoFocus, disabled, required, readOnly, ...props }) => {
     return (
       <input
-        type={ passthrough ? 'button' : 'text' }
-        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly: readOnly || passthrough }) }
-        { ...passthrough ? getButtonProps() : {} }
+        type={ !filter ? 'button' : 'text' }
+        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly }) }
+        { ...!filter ? getButtonProps() : {} }
       />
     );
   }
