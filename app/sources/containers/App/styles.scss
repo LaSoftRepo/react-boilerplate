@@ -1,7 +1,8 @@
 .app {
   display:        flex;
-  min-height:     100%;
   flex-direction: column;
+  flex:           1;
+  height:         100%;
 
   font-family: 'Open Sans', sans-serif;
   font-style:   normal;
