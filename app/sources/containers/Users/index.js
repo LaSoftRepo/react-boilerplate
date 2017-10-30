@@ -2,11 +2,11 @@
 import { goBack }      from 'react-router-redux'
 import { linkActions } from 'helpers/redux'
 import Default         from 'helpers/default'
-import { FetchAction } from './actions'
-import { Github }      from 'api'
+import { UsersAction } from './actions'
+import Api             from 'api'
 
-@connect(({ users }) => ({ users }), linkActions(FetchAction, { goBack }))
-export default class Users extends PureComponent {
+@connect(({ users }) => ({ users }), linkActions(UsersAction, { goBack }))
+export default class Users extends Component {
   static propTypes = {
     users: PropTypes.object,
   }
@@ -17,7 +17,7 @@ export default class Users extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.request(Github.users.get());
+    this.props.request(Api.users.get());
     //this.props.cancel();
   }
 
