@@ -138,12 +138,8 @@
     "redux-devtools-log-monitor": "^1.3.0",
     "redux-immutable-state-invariant": "^2.0.0",
     "redux-logger": "^3.0.6",
-<<<<<<< HEAD
-    "resolve-url-loader": "^2.1.0",
-    "responsive-loader": "^1.1.0",
-=======
     "resolve-url-loader": "^2.2.0",
->>>>>>> master
+    "responsive-loader": "^1.1.0",
     "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.6",
     "scottyjs": "^1.9.0",
