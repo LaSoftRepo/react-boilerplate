@@ -8,7 +8,7 @@ import {
   USERS_CANCELING,
 } from './constants';
 
-export class FetchAction {
+export class UsersAction {
   static request(config) {
     return {
       type: USERS_REQUESTED,
@@ -30,6 +30,7 @@ export class FetchAction {
       type: USERS_SUCCEEDED,
       payload: {
         loading: false,
+        error:   null,
         data,
       },
     };
@@ -50,6 +51,7 @@ export class FetchAction {
       type: USERS_CANCELLED,
       payload: {
         loading: false,
+        error:   null,
       },
     };
   }
