@@ -1,34 +1,43 @@
-import { addLocaleData } from 'react-intl';
+import i18n     from 'i18next'
+import Detector from 'i18next-browser-languagedetector'
 
-import enLocaleData from 'react-intl/locale-data/en';
-import ruLocaleData from 'react-intl/locale-data/ru';
+i18n
+.use(Detector)
+.init({
+  fallbackLng: 'en',
+  debug:       true,
 
-import { DEFAULT_LOCALE } from 'containers/LanguageProvider/constants';
+  interpolation: {
+    escapeValue: false, // not needed for react!!
+  },
 
-import en from 'translations/en.json';
-import ru from 'translations/ru.json';
+  // react i18next special options (optional)
+  react: {
+    wait:      false,
+    bindI18n:  'languageChanged loaded',
+    bindStore: 'added removed',
+    nsMode:    'default',
+  },
 
-addLocaleData(enLocaleData);
-addLocaleData(ruLocaleData);
+  // test hardcoded resorces
+  resources: {
+    en: {
+      translation: {
+        age:  { label: 'Age',  },
+        home: { label: 'Home', },
+        name: { label: 'Name', },
+      },
+    },
 
-export const appLocales = [
-  'en',
-  'ru',
-];
+    es: {
+      translation: {
+        age:  { label: 'Años',   },
+        home: { label: 'Casa',   },
+        name: { label: 'Nombre', },
+      },
+    },
+  },
+});
 
-export const formatTranslationMessages = (locale, messages) => {
-  const defaultFormattedMessages = locale !== DEFAULT_LOCALE ?
-    formatTranslationMessages(DEFAULT_LOCALE, en) : {};
 
-  return Object.keys(messages).reduce((formattedMessages, key) => {
-    const message = messages[key];
-    const formattedMessage = !message && locale !== DEFAULT_LOCALE ? defaultFormattedMessages[key] : message;
-
-    return Object.assign(formattedMessages, { [key]: formattedMessage });
-  }, {});
-};
-
-export const translations = {
-  en: formatTranslationMessages('en', en),
-  ru: formatTranslationMessages('ru', ru),
-};
+export default i18n;

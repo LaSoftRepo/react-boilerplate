@@ -6,7 +6,7 @@ import { combineReducers } from 'redux'
 import { routerReducer }   from 'react-router-redux'
 import app                 from 'containers/App/reducer'
 import users               from 'containers/Users/reducer'
-import language            from 'containers/LanguageProvider/reducer'
+// import language            from 'containers/LanguageProvider/reducer'
 
 /**
  * Creates the global reducer with the asynchronously loaded ones
@@ -15,7 +15,7 @@ export const rootReducer = asyncReducers => {
   return combineReducers({
     app,
     users,
-    language,
+    // language,
     router: routerReducer,
     ...asyncReducers,
   });

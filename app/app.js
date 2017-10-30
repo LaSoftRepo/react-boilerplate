@@ -18,6 +18,8 @@ import Switch   from 'react-router-dom/Switch'
 import createBrowserHistory from 'history/createBrowserHistory'
 import ConnectedRouter from 'react-router-redux/ConnectedRouter'
 
+import { I18nextProvider } from 'react-i18next'
+
 // Utils
 import { hasReduxDevToolExtension } from 'sources/internal/utils'
 
@@ -30,10 +32,7 @@ import DevTools         from 'containers/DevTools'
 import NotFound         from 'containers/NotFound'
 import LanguageProvider from 'containers/LanguageProvider'
 import configureRoutes  from './sources/routes'
-
-//import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
-
-import { translations } from './sources/i18n'
+import i18n             from './sources/i18n'
 
 const history = createBrowserHistory({
   //getUserConfirmation: ConfirmationRenderer
@@ -45,11 +44,11 @@ const initialState = {};
 const store  = configureStore(initialState, history);
 const routes = configureRoutes(store);
 
-const render = translations => {
+const render = () => {
   ReactDOM.render(
     <div>
       <Provider store={ store }>
-        <LanguageProvider messages={ translations }>
+        <I18nextProvider i18n={ i18n }>
           <ConnectedRouter history={ history }>
             <App hideHeader hideFooter>
               <Switch>
@@ -59,7 +58,7 @@ const render = translations => {
               </Switch>
             </App>
           </ConnectedRouter>
-        </LanguageProvider>
+        </I18nextProvider>
       </Provider>
       { process.env.NODE_ENV === 'development' && !hasReduxDevToolExtension ? <DevTools store={ store } /> : null }
     </div>,
@@ -80,7 +79,7 @@ if (module.hot) {
   ], () => {
     ReactDOM.unmountComponentAtNode(containerNode);
     try {
-      render(translations);
+      render();
     } catch (e) {
       location.reload(true);
     }
@@ -96,14 +95,14 @@ if (!window.Intl) {
       import('intl/locale-data/jsonp/en.js'),
       import('intl/locale-data/jsonp/ru.js'),
     ]))
-    .then(() => render(translations))
+    .then(() => render())
     .catch(err => { throw err });
 } else {
   console.log('intl supported');
-  render(translations);
+  render();
 }*/
 
-render(translations);
+render();
 
 if (process.env.NODE_ENV !== 'production') {
   console.log('React v' + React.version);
