@@ -26,7 +26,7 @@ export default class Playground extends Component {
     const { dispatch, simpleData } = this.props;
     const layout = this.state.layout;
     return (
-      <div layout='row' horizontal-align='center'>
+      <div layout='row' horizontal-distribute='equal'>
         {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div layout='rows' horizontal-align='center'>
 
@@ -47,7 +47,7 @@ export default class Playground extends Component {
           </section>
         </div> */}
 
-        <div layout='column' horizontal-distribute='equal'>
+        <div layout='column'>
           <Select
             closeOnBlur
             label='Simple select'
