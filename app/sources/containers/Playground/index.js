@@ -15,6 +15,7 @@ export default class Playground extends Component {
   render() {
     const { dispatch } = this.props;
     const layout = this.state.layout;
+
     return (
       <div>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
