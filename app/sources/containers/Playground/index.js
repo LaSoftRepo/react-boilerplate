@@ -25,6 +25,7 @@ export default class Playground extends Component {
   render() {
     const { dispatch, simpleData } = this.props;
     const layout = this.state.layout;
+
     return (
       <div layout='row' horizontal-distribute='equal'>
         {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
