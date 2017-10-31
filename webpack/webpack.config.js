@@ -570,6 +570,7 @@ module.exports = (env = {}) => {
           test: /\.(png|jpe?g|jp2|png|webp)(\?[a-z0-9=.]+)?$/i,
           loader: require.resolve('responsive-loader'),
           options: {
+            name:            '[name].[hash:base64:5].[width].[ext]',
             adapter:         require('responsive-loader/sharp'),
             placeholder:     true,
             placeholderSize: 32,
