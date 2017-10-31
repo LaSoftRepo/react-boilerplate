@@ -142,14 +142,6 @@ const plugins = [
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
-  new webpack.SourceMapDevToolPlugin({
-     filename:   '[file].map',
-     append:     '\n//# source' + 'MappingURL=[url]',
-     exclude:    !isProduction ? /^vendor/ : void 0,
-     columns:    true,
-     lineToLine: true,
-     module:     true,
-  }),
   new webpack.optimize.CommonsChunkPlugin({
     name:     'vendor',
     minChunks: 2,
@@ -409,6 +401,14 @@ if (isProduction) {
   // Development only plugins
 
   plugins.push(
+    new webpack.SourceMapDevToolPlugin({
+       filename:   '[file].map',
+       append:     '\n//# source' + 'MappingURL=[url]',
+       exclude:    /^vendor/,
+       columns:    true,
+       lineToLine: true,
+       module:     true,
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.LoaderOptionsPlugin({
@@ -432,6 +432,7 @@ module.exports = (env = {}) => {
   return {
     bail:    isProduction,
     // devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'source-map' : void 0,
     context: Path.to.app,
 
     // Some libraries import Node modules but don't use them in the browser.
