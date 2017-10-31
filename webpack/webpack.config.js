@@ -437,10 +437,16 @@ module.exports = (env = {}) => {
       setImmediate:   false,
       global:         true,
 
-      crypto: 'empty',
-      fs:     'empty',
-      net:    'empty',
-      tls:    'empty',
+      crypto:        'empty',
+      fs:            'empty',
+      net:           'empty',
+      tls:           'empty',
+      dgram:         'empty',
+      child_process: 'empty',
+    },
+
+    performance: {
+      hints: isProduction,
     },
 
     entry: {
