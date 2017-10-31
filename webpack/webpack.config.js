@@ -8,9 +8,9 @@ const path                  = require('path');
 const chalk                 = require('chalk');
 const argv                  = require('yargs').argv;
 const webpack               = require('webpack');
+
+// Core plugins
 const ManifestPlugin        = require('webpack-manifest-plugin');
-const ModuleScopePlugin     = require('react-dev-utils/ModuleScopePlugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin     = require('html-webpack-plugin');
 const PreloadWebpackPlugin  = require('preload-webpack-plugin');
 const ExtractTextPlugin     = require('extract-text-webpack-plugin');
@@ -22,8 +22,14 @@ const BrotliPlugin          = require('brotli-webpack-plugin');
 const S3Plugin              = require('webpack-s3-plugin');
 const WebpackShellPlugin    = require('webpack-shell-plugin');
 
+// Misc plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const ModuleScopePlugin             = require('react-dev-utils/ModuleScopePlugin');
+const InterpolateHtmlPlugin         = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const clearConsole                  = require('react-dev-utils/clearConsole');
+const eslintFormatter               = require('react-dev-utils/eslintFormatter');
+const openBrowser                   = require('react-dev-utils/openBrowser');
 
 const Path          = require('./paths');
 const Mailer        = require('./mailer');
@@ -33,7 +39,6 @@ const SEPARATOR_REGEX  = /[-_]/;
 const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
 require('dotenv').config();
-
 
 // Config webpack enviroment
 const PROJECT_NAME          = prettifyPackageName(packageConfig.name) || 'Boilerplate';
@@ -347,21 +352,6 @@ if (isProduction) {
     console.log('Start deploing to AWS...')
     console.log('url: ' + chalk.green.bold(url));
 
-    const getOpenBrowserCommand = url => {
-      switch (process.platform) {
-        case 'win32':
-          return `start "" "${ url }"`;
-          break;
-
-        case `darwin`:
-          return `open ${ url }`;
-
-        default: break;
-      }
-
-      return `python -m webbrowser ${ url }`;
-    }
-
     if (USE_MAIL_AFTER_DEPLOY) {
       //let mailer = new Mailer();
     }
@@ -391,7 +381,7 @@ if (isProduction) {
       new WebpackShellPlugin({
         onBuildEnd: [
           // `node_modules/scottyjs/bin/scotty.js --spa -u -r eu-central-1 -s ./build -b ${PROJECT_NAME}`,
-          getOpenBrowserCommand(url),
+          openBrowser(url),
         ],
       }),
     );
@@ -423,11 +413,14 @@ if (isProduction) {
 
 module.exports = (env = {}) => {
 
-  let appChunk = ['react-hot-loader/patch'];
+  clearConsole();
+
+  let appEntry = ['react-hot-loader/patch'];
+  appEntry.push('react-dev-utils/webpackHotDevClient');
   if (env.customServer) {
-    appChunk.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`);
+    appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`);
   }
-  appChunk.push(path.join(Path.to.app, 'app.js'));
+  appEntry.push(path.join(Path.to.app, 'app.js'));
 
   return {
     bail:    isProduction,
@@ -451,7 +444,7 @@ module.exports = (env = {}) => {
     },
 
     entry: {
-      app: appChunk,
+      app: appEntry,
       vendor: [
         "babel-polyfill",
         "es6-promise",
@@ -534,6 +527,9 @@ module.exports = (env = {}) => {
             },
             // {
             //   loader: require.resolve('eslint-loader'),
+            //   options: {
+            //     formatter: eslintFormatter,
+            //   },
             // },
           ],
         },
