@@ -60,6 +60,7 @@ export default class Modal extends PureComponent {
   }
 
   handleClose = (event, accept) => {
+    event.persist();
     setTimeout(() => {
       this.props.onClose(event, accept);
     }, animationDuration);
@@ -78,10 +79,8 @@ export default class Modal extends PureComponent {
 
   handleClick = (event, accept) => {
     event.persist();
-    this.setState(
-      { enter: false },
-      () => { this.handleClose(event, accept) }
-    );
+    this.setState(() => ({ shouldHide: true }));
+    this.handleClose(event, accept);
   }
 
   handleModalClick = event => {
@@ -105,14 +104,23 @@ export default class Modal extends PureComponent {
   }
 
   render() {
-    //const v = animations();
-    const animations = Modal.animations(this.state);
+    const { shouldHide } = this.state;
+    const direction = !shouldHide ? 'normal' : 'reverse';
+
     return (
-      <Anime { ...animations.backdrop }>
+      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
+      <Anime opacity={[0, 1]} direction={ direction } duration={ ANIMATE_DURATION }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
-          <Anime { ...animations.dialog }>
+          {/* <Anime
+            translateY={ shouldHide ? 1200 : -1200 }
+            scaleY='2.3'
+            duration={ ANIMATE_DURATION }
+            elasticity='0'
+            delay={ shouldHide ? 120 : 0 }
+            direction={ direction }
+          > */}
             { this.renderDialogContent(this.props) }
-          </Anime>
+          {/* </Anime> */}
         </div>
       </Anime>
     );
