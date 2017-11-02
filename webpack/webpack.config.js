@@ -156,12 +156,6 @@ const plugins = [
 
 function styleLoaders(extract, modules = false) {
   let loaders = [
-    /*{
-      loader: require.resolve('cache-loader'),
-      options: {
-        cacheDirectory: Path.to.cache,
-      },
-    },*/
     {
       loader: require.resolve('thread-loader'),
       options: {
@@ -201,7 +195,9 @@ function styleLoaders(extract, modules = false) {
       options: {
         sourceMap: !isProduction,
         ident: 'postcss',
+
         plugins: () => [
+          require('postcss-nested')(),
           require('postcss-flexbugs-fixes')(),
           require('postcss-cssnext')({
             browsers: [
@@ -212,10 +208,9 @@ function styleLoaders(extract, modules = false) {
               'iOS >= 9',
               'Android >= 4.1',
             ],
-            cascade: false,
           }),
           require('postcss-browser-reporter')()
-        ],
+        ]
       },
     },
     {
@@ -248,8 +243,8 @@ if (isProduction) {
       fileName: 'asset-manifest.json',
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
+      minimize: false,
+      debug:    false,
       options: {
         context: Path.to.app,
       },
@@ -445,8 +440,10 @@ module.exports = (env = {}) => {
       child_process: 'empty',
     },
 
-    performance: {
-      hints: isProduction,
+    performance: isProduction && {
+      maxEntrypointSize: 1 * 1024 * 1024,
+      maxAssetSize:      5 * 1024 * 1024,
+      hints: "warning",
     },
 
     entry: {
