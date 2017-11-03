@@ -111,6 +111,8 @@
     "fast-sass-loader": "^1.4.0",
     "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^1.1.5",
+    "h2x-core": "^0.1.6",
+    "h2x-plugin-jsx": "^0.1.8",
     "html-loader": "^0.5.0",
     "html-webpack-plugin": "^2.30.1",
     "image-webpack-loader": "^3.3.1",
