@@ -259,43 +259,26 @@ if (isProduction) {
     new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new DuplicatePackageCheckerPlugin(),
-    /*new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      beautify: false,
-      squeeze: true,
-      mangle: {
-        except: ['$super', '$', '_'],
-      },
-      compress: {
-        warnings: false,
-        drop_console: true,
-        drop_debugger: true,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        loops: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        reduce_vars: true,
-      },
-      output: {
-        comments: false,
-      },
-      sourceMap: true,
-      exclude: [/\.min\.js$/gi], // skip pre-minified libs
-    }),*/
     new UglifyJSPlugin({
       uglifyOptions: {
-        compress: {
-          warnings: false,
+        mangle: {
+          reserved: ['$super', '$', '_'],
+          safari10: true,
         },
+        compress: {
+          drop_console: true,
+        },
+        output: {
+          beautify: false,
+        },
+        ecma: 5,
+        ie8: false,
+        warnings: false,
       },
       sourceMap: true,
       parallel:  3,
+
+      exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
     new ExtractTextPlugin({
       filename: 'styles/style.[hash].css',
