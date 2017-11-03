@@ -18,6 +18,7 @@ const CopyWebpackPlugin     = require('copy-webpack-plugin');
 const OfflinePlugin         = require('offline-plugin');
 const ProgressBarPlugin     = require('progress-bar-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const UglifyJSPlugin        = require('uglifyjs-webpack-plugin');
 const BrotliPlugin          = require('brotli-webpack-plugin');
 const S3Plugin              = require('webpack-s3-plugin');
 const WebpackShellPlugin    = require('webpack-shell-plugin');
@@ -258,7 +259,7 @@ if (isProduction) {
     new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new DuplicatePackageCheckerPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    /*new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       beautify: false,
       squeeze: true,
@@ -286,6 +287,15 @@ if (isProduction) {
       },
       sourceMap: true,
       exclude: [/\.min\.js$/gi], // skip pre-minified libs
+    }),*/
+    new UglifyJSPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false,
+        },
+      },
+      sourceMap: true,
+      parallel:  3,
     }),
     new ExtractTextPlugin({
       filename: 'styles/style.[hash].css',
@@ -410,12 +420,14 @@ module.exports = (env = {}) => {
 
   clearConsole();
 
-  let appEntry = ['react-hot-loader/patch'];
-  appEntry.push('react-dev-utils/webpackHotDevClient');
-  if (env.customServer) {
-    appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`);
-  }
+  let appEntry = [
+    'react-hot-loader/patch',
+    'react-dev-utils/webpackHotDevClient'
+  ];
   appEntry.push(path.join(Path.to.app, 'app.js'));
+  if (env.customServer) {
+    appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=false`);
+  }
 
   return {
     bail:    isProduction,
@@ -452,7 +464,6 @@ module.exports = (env = {}) => {
         "babel-polyfill",
         "es6-promise",
         "history",
-        "immutable",
         "isomorphic-fetch",
         "prop-types",
         "react",
@@ -615,7 +626,7 @@ module.exports = (env = {}) => {
       disableHostCheck: true,
       open:        !isAWSDeploy,
       noInfo:      false,
-      overlay:     true,
+      overlay:     false,
       compress:    isProduction,
       hot:         !isProduction,
       publicPath:  Path.to.public,
