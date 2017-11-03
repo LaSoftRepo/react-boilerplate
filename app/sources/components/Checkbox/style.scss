@@ -1,0 +1,21 @@
+
+@import "~styles/variables.scss";
+
+$red:  #d14b00;
+$gray: rgb(195,210,223);
+$blue: #559cc9;
+
+.checkbox {
+  width:  2rem;
+  height: 2rem;
+  margin: 8px;
+
+  text-align:  center;
+  line-height: 1.75rem;
+  font-size:   1.5rem;
+  color:       $blue;
+
+  user-select: none;
+
+  border: 2px solid $gray;
+}

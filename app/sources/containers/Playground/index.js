@@ -1,6 +1,8 @@
 import { goBack } from 'react-router-redux'
+
 import Select     from 'components/Select'
 import Image      from 'components/Image'
+import Checkbox   from 'components/Checkbox'
 
 import { filter } from 'fuzzaldrin-plus'
 
@@ -76,6 +78,8 @@ export default class Playground extends Component {
               <SelectContainer { ...props } />
             )}
           </Select>
+
+          <Checkbox />
 
         </div>
 

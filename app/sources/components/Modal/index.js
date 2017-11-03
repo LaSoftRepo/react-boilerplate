@@ -108,13 +108,13 @@ export default class Modal extends PureComponent {
     const direction = !shouldHide ? 'normal' : 'reverse';
 
     return (
-      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
-      <Anime opacity={[0, 1]} direction={ direction } duration={ ANIMATE_DURATION }>
+      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ animationDuration }>
+      <Anime opacity={[0, 1]} direction={ direction } duration={ animationDuration }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
           {/* <Anime
             translateY={ shouldHide ? 1200 : -1200 }
             scaleY='2.3'
-            duration={ ANIMATE_DURATION }
+            duration={ animationDuration }
             elasticity='0'
             delay={ shouldHide ? 120 : 0 }
             direction={ direction }

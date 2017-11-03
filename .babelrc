@@ -2,6 +2,7 @@
   "plugins": [
     "transform-export-extensions",
     "transform-strict-mode",
+    "transform-class-properties",
     "syntax-decorators",
     "transform-decorators-legacy",
     "transform-class-properties",
