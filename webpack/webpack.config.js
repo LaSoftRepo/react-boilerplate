@@ -18,6 +18,7 @@ const CopyWebpackPlugin     = require('copy-webpack-plugin');
 const OfflinePlugin         = require('offline-plugin');
 const ProgressBarPlugin     = require('progress-bar-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const UglifyJSPlugin        = require('uglifyjs-webpack-plugin');
 const BrotliPlugin          = require('brotli-webpack-plugin');
 const S3Plugin              = require('webpack-s3-plugin');
 const WebpackShellPlugin    = require('webpack-shell-plugin');
@@ -258,33 +259,25 @@ if (isProduction) {
     new webpack.optimize.AggressiveMergingPlugin({ moveToParents: true }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new DuplicatePackageCheckerPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      beautify: false,
-      squeeze: true,
-      mangle: {
-        except: ['$super', '$', '_'],
-      },
-      compress: {
+    new UglifyJSPlugin({
+      uglifyOptions: {
+        mangle: {
+          reserved: ['$super', '$', '_'],
+          safari10: true,
+        },
+        compress: {
+          drop_console: true,
+        },
+        output: {
+          beautify: false,
+        },
+        ecma: 5,
+        ie8: false,
         warnings: false,
-        drop_console: true,
-        drop_debugger: true,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        loops: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        reduce_vars: true,
-      },
-      output: {
-        comments: false,
       },
       sourceMap: true,
+      parallel:  3,
+
       exclude: [/\.min\.js$/gi], // skip pre-minified libs
     }),
     new ExtractTextPlugin({
@@ -410,12 +403,14 @@ module.exports = (env = {}) => {
 
   clearConsole();
 
-  let appEntry = ['react-hot-loader/patch'];
-  appEntry.push('react-dev-utils/webpackHotDevClient');
-  if (env.customServer) {
-    appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=true`);
-  }
+  let appEntry = [
+    'react-hot-loader/patch',
+    'react-dev-utils/webpackHotDevClient'
+  ];
   appEntry.push(path.join(Path.to.app, 'app.js'));
+  if (env.customServer) {
+    appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=false`);
+  }
 
   return {
     bail:    isProduction,
@@ -452,7 +447,6 @@ module.exports = (env = {}) => {
         "babel-polyfill",
         "es6-promise",
         "history",
-        "immutable",
         "isomorphic-fetch",
         "prop-types",
         "react",
@@ -627,7 +621,7 @@ module.exports = (env = {}) => {
       disableHostCheck: true,
       open:        !isAWSDeploy,
       noInfo:      false,
-      overlay:     true,
+      overlay:     false,
       compress:    isProduction,
       hot:         !isProduction,
       publicPath:  Path.to.public,
