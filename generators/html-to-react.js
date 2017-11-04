@@ -7,30 +7,32 @@ const jsx = require('h2x-plugin-jsx').default;
 
 const indent = (string, times) => {
   const spaces = new Array(times + 1).join('  ');
-  const lines = string.split('\n');
-  return lines.map(line => spaces + line).join('\n');
+  const lines  = string.split('\n');
+  return lines.map(line => spaces + line).join('\n').trimRight();
 };
 
 class JSXFactory {
 
-  static convert(path, mode = 'component') {
-    const content = fs.readFileSync(path, 'utf8');
-    switch (mode) {
-      case 'component':
-        return this.component(content);
+  static convert(path, baseClass = 'PureComponent') {
+    return new Promise((resolve, reject) => {
+      fs.readFile(path, 'utf8', (err, body) => {
+        if (err) {
+          reject(err);
+          return;
+        }
 
-      default:
-        return '';
-    }
+        resolve(this.component(body, baseClass));
+      });
+    });
   }
 
-  static component(input) {
-    const prolog =`default export class extends Component {
+  static component(input, baseClass) {
+    const prolog =`default export class extends ${ baseClass } {
   render() {
     return (
 `;
 
-    const epilog = ');\n  }\n}';
+    const epilog  = '\n    );\n  }\n}';
     const content = transform(input, { plugins: [jsx] });
     return prolog + indent(content, 3) + epilog;
   }
@@ -38,6 +40,7 @@ class JSXFactory {
 
 // Test
 
-const result = JSXFactory.convert(path.join(__dirname, 'test.html'));
-
-console.log(result);
+(async () => {
+  const result = await JSXFactory.convert(path.join(__dirname, 'test.html'));
+  console.log(result);
+})();
