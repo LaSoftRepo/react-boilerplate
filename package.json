@@ -118,7 +118,7 @@
     "image-webpack-loader": "^3.3.1",
     "jest": "^21.2.1",
     "json-loader": "^0.5.7",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.6.0",
     "nodemailer": "^4.3.1",
     "noop-loader": "^1.0.0",
     "offline-plugin": "^4.8.3",
