@@ -91,3 +91,6 @@ yarn deploy
 - [ ] Prepack (?) or Closure compiler (?) for final aggressive optimization?
 - [ ] Jest test solution
 - [ ] Circle CI
+
+### Components
+- [x] React-id-swiper **(port of [Swiper.js](http://idangero.us/swiper/demos))**. [React Examples](http://kidjp85.github.io/react-id-swiper/)
