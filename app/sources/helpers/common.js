@@ -2,6 +2,7 @@
 const CAPITALIZE_EVERY_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const VALIDATION_EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 const NUM_GROUP_REGEX        = /\B(?=(\d{3})+(?!\d))/g;
+const SPLIT_VALUE_UNIT_REGEX = /^(\d+)(\S*)/;
 const FILE_PATH_REGEX        = /[^./\\]*$/;
 const SEPARATOR_REGEX        = /[-_]/;
 
@@ -31,6 +32,17 @@ export function formatNumber(value) {
   let parts = value.toString().split('.');
   parts[0] = parts[0].replace(NUM_GROUP_REGEX, ',');
   return parts.join('.');
+}
+
+// Usage:
+// const { value, unit } = parseValueUnit('100%'); or 100 %, or 5 em etc
+// value = 100
+// unit  = %
+
+export function parseValueUnit(input, trim = true) {
+  if (typeof input !== 'string') return { value: 0, unit: '' };
+  const [value, unit] = compact(input.split(SPLIT_VALUE_UNIT_REGEX));
+  return { value: +value, unit: trim && unit ? unit.trim() : unit };
 }
 
 // Usage:
