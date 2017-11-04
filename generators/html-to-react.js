@@ -14,24 +14,25 @@ const indent = (string, times) => {
 class JSXFactory {
 
   static convert(path, mode = 'component') {
+    const content = fs.readFileSync(path, 'utf8');
     switch (mode) {
       case 'component':
-        return this.transformToComponent(fs.readFileSync(path, 'utf8'));
+        return this.component(content);
 
       default:
         return '';
     }
   }
 
-  static transformToComponent(input) {
+  static component(input) {
     const prolog =`default export class extends Component {
   render() {
     return (
 `;
 
-    const end = ');\n  }\n}';
+    const epilog = ');\n  }\n}';
     const content = transform(input, { plugins: [jsx] });
-    return prolog + indent(content, 3) + end;
+    return prolog + indent(content, 3) + epilog;
   }
 }
 
