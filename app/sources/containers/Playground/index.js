@@ -52,7 +52,7 @@ export default class Playground extends Component {
 
         <div layout='column'>
           <Select
-            closeOnBlur
+            autoclose
             label='Simple select'
             options={ simpleData }
           />

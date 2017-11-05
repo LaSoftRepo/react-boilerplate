@@ -20,6 +20,19 @@ export default class SelectContainer extends Component {
     isOpen: false,
   }
 
+  onDropdownFocus() {
+    if (this.closeDelayTimer) {
+      clearTimeout(this.closeDelayTimer);
+      this.closeDelayTimer = null;
+    }
+  }
+
+  onDropdownBlur({ closeMenu }) {
+    if (!this.closeDelayTimer) {
+      this.closeDelayTimer = setTimeout(closeMenu, 350);
+    }
+  }
+
   renderLabel = ({ getLabelProps, label, required, ...props }) => {
     return label ? (
       <label className={ cc({ required }) } { ...getLabelProps() }>{ label }</label>
@@ -63,7 +76,7 @@ export default class SelectContainer extends Component {
     );
   }
 
-  renderOptions = ({ isOpen, options, inputValue, filter, onDropdownBlur, ...props }) => {
+  renderOptions = ({ isOpen, options, inputValue, filter, autoclose, ...props }) => {
     let filtered = options;
     if (filter) {
       if (isFunction(filter)) {
@@ -74,8 +87,13 @@ export default class SelectContainer extends Component {
       }
     }
 
+    const autocloseProps = autoclose ? {
+      onMouseLeave: () => this.onDropdownBlur(props),
+      onMouseEnter: () => this.onDropdownFocus(props),
+    } : {};
+
     return isOpen && filtered.length ? (
-      <div className='select-dropdown' onMouseLeave={ onDropdownBlur }>
+      <div className='select-dropdown' { ...autocloseProps }>
         { filtered.map((item, index) => this.renderOption({ index, item, ...props })) }
       </div>
     ) : null;

@@ -37,12 +37,8 @@ export default class Select extends PureComponent {
     this.props.onInputValueChange(inputValue, state);
   }
 
-  onDropdownBlur = ({ isOpen, toggleMenu }) => {
-    if (isOpen) toggleMenu();
-  }
-
   render() {
-    const { filter, options, defaultSelectedItem, closeOnBlur, children } = this.props;
+    const { filter, options, defaultSelectedItem, children } = this.props;
 
     // Runtime error
     // options();
@@ -60,9 +56,6 @@ export default class Select extends PureComponent {
           const props = getRootProps({
             ...inProps,
             ...outProps,
-            onDropdownBlur: closeOnBlur
-              ? (() => this.onDropdownBlur(outProps))
-              : () => {},
           });
 
           return (

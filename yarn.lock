@@ -2671,9 +2671,9 @@ download@^4.0.0, download@^4.1.2:
     vinyl-fs "^2.2.0"
     ware "^1.2.0"
 
-downshift@^1.16.1:
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.16.1.tgz#c8c12e1fc2d053b6d926882d257a88c3e57c1982"
+downshift@^1.16.2:
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.16.2.tgz#8e69de5789da37f8abd2af8264a0abada8839c13"
 
 duplexer2@0.0.2:
   version "0.0.2"
@@ -5656,6 +5656,12 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lodash-decorators@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash-decorators/-/lodash-decorators-4.5.0.tgz#a4bb63dfbb512f0dd9409f7af452e4e2edcb80f4"
+  dependencies:
+    tslib "^1.7.1"
 
 lodash-es@^4.2.0, lodash-es@^4.2.1:
   version "4.17.4"
@@ -9562,6 +9568,10 @@ trim@0.0.1:
 tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
+
+tslib@^1.7.1:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.8.0.tgz#dc604ebad64bcbf696d613da6c954aa0e7ea1eb6"
 
 tty-browserify@0.0.0:
   version "0.0.0"
