@@ -5,12 +5,12 @@ import { call, put, take, race, fork, cancel, cancelled } from 'redux-saga/effec
 
 import { USERS_REQUESTED, USERS_CANCELING, RESPONSE_TIMEOUT } from './constants'
 import { UsersAction } from './actions'
-import { request } from 'helpers/saga'
+import { request }     from 'helpers/saga'
 
 export function* fetchSaga({ meta }) {
   try {
     const { timeout, response } = yield race({
-      timeout:  call(delay,   RESPONSE_TIMEOUT),
+      timeout:  call(delay, RESPONSE_TIMEOUT),
       response: request(meta),
     });
 

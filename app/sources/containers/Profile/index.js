@@ -1,6 +1,6 @@
-import redirect from '../../enhancers/redirect';
-import { Prompt } from 'react-router';
-import { goBack } from 'react-router-redux';
+import redirect   from '../../enhancers/redirect'
+import { Prompt } from 'react-router'
+import { goBack } from 'react-router-redux'
 
 @redirect(() => true, '/login')
 export default class Profile extends Component {

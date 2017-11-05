@@ -2,15 +2,15 @@
  * Create the store with asynchronously loaded reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
-import createSagaMiddleware from 'redux-saga';
-import { createLogger } from 'redux-logger';   // eslint-disable-line import/no-extraneous-dependencies
-import { persistState } from 'redux-devtools'; // eslint-disable-line import/no-extraneous-dependencies
-import { rootReducer } from './reducers';
-import { rootSaga } from './sagas';
-import DevTools from 'containers/DevTools';    // eslint-disable-line
-import { hasReduxDevToolExtension } from './internal/utils';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { routerMiddleware } from 'react-router-redux'
+import createSagaMiddleware from 'redux-saga'
+import { createLogger } from 'redux-logger'   // eslint-disable-line import/no-extraneous-dependencies
+import { persistState } from 'redux-devtools' // eslint-disable-line import/no-extraneous-dependencies
+import { rootReducer } from './reducers'
+import { rootSaga } from './sagas'
+import DevTools from 'containers/DevTools'    // eslint-disable-line
+import { hasReduxDevToolExtension } from './internal/utils'
 
 const sagaMiddleware = createSagaMiddleware();
 

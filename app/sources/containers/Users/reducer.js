@@ -3,7 +3,7 @@ import {
   USERS_SUCCEEDED,
   USERS_FAILURED,
   USERS_CANCELLED,
-} from './constants';
+} from './constants'
 
 const initialState = {
   data:    null,

@@ -1,0 +1,73 @@
+
+globals:
+
+  __USE_PERFORMANCE_TOOLS__:          true
+  axios:                              true
+  store:                              true
+  moment:                             true
+  cc:                                 true
+  React:                              true
+  ReactDOM:                           true
+  PropTypes:                          true
+  Component:                          true
+  PureComponent:                      true
+  Children:                           true
+  connect:                            true
+  createSelector:                     true
+  CSSModules:                         true
+
+rules:
+
+  no-void:                            off
+  no-plusplus:                        off
+  no-trailing-spaces:                 [warn, { skipBlankLines: true }]
+  semi:                               off
+  no-underscore-dangle:               [warn, { allowAfterThis: true, allowAfterSuper: true }]
+  func-call-spacing:                  [warn, never]
+
+  import/first:                       off
+  import/no-dynamic-require:          off
+
+  jsx-quotes:                         off
+  jsx-a11y/anchor-is-valid:           [error, { components: [], specialLink: [hrefLeft, hrefRight], aspects: [noHref, invalidHref, preferButton] }]
+
+  react/jsx-filename-extension:       off
+  react/jsx-boolean-value:            warn
+  react/jsx-closing-bracket-location: warn
+  react/jsx-wrap-multilines:          warn
+  react/jsx-handler-names:            warn
+  react/jsx-indent-props:             warn
+  react/jsx-key:                      warn
+  react/jsx-max-props-per-line:       off
+  react/jsx-no-bind:                  off
+  react/jsx-no-duplicate-props:       warn
+  react/jsx-no-literals:              off
+  react/jsx-no-undef:                 warn
+  react/jsx-pascal-case:              warn
+  react/jsx-sort-prop-types:          off
+  react/jsx-sort-props:               off
+  react/jsx-uses-react:               warn
+  react/jsx-uses-vars:                warn
+  react/jsx-curly-spacing:            [warn, { when: always, children: true, spacing: { objectLiterals: never } }]
+
+  react/no-danger:                    warn
+  react/no-deprecated:                warn
+  react/no-did-mount-set-state:       warn
+  react/no-did-update-set-state:      warn
+  react/no-direct-mutation-state:     warn
+  react/no-is-mounted:                warn
+  react/no-multi-comp:                off
+  react/no-set-state:                 warn
+  react/no-string-refs:               off
+  react/no-unknown-property:          warn
+
+  react/prefer-stateless-function:    off
+  react/display-name:                 off
+  react/forbid-prop-types:            off
+  react/prefer-es6-class:             warn
+  react/react-in-jsx-scope:           warn
+  react/self-closing-comp:            warn
+  react/sort-comp:                    warn
+  react/prop-types:                   [warn, { ignore: [children, dispatch] }]
+
+  redux-saga/no-unhandled-errors:     off

@@ -105,10 +105,10 @@ if (!window.Intl) {
 render(translations);
 
 if (process.env.NODE_ENV !== 'production') {
-  console.info(`React v${ React.version }`); // eslint-disable-line no-console
-}
+  // eslint-disable-next-line no-console
+  console.info(`React v${ React.version }`);
 
-// Install ServiceWorker and AppCache
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+  // Install ServiceWorker and AppCache
+  // eslint-disable-next-line global-require
+  require('offline-plugin/runtime').install();
 }

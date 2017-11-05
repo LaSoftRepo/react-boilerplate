@@ -1,6 +1,6 @@
-import { goBack } from 'react-router-redux';
+import { goBack } from 'react-router-redux'
 
-import './styles.scss';
+import './styles.scss'
 
 @connect()
 export default class Playground extends Component {

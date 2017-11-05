@@ -5,7 +5,7 @@ import {
   USERS_FAILURED,
   USERS_CANCELLED,
   USERS_CANCELING,
-} from './constants';
+} from './constants'
 
 // eslint-disable-next-line
 export class UsersAction {

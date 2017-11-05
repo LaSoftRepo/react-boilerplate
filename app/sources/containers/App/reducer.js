@@ -1,5 +1,5 @@
 
-import { RESET } from './constants';
+import { RESET } from './constants'
 
 const initialState = {};
 

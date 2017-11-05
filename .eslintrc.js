@@ -8,7 +8,7 @@ module.exports = {
     "prettier/react",
     "plugin:promise/recommended",
     "plugin:redux-saga/recommended",
-    "./.eslint.rules.json"
+    "./.eslint.rules.yml",
   ],
   "plugins": [
     "prettier",
@@ -24,7 +24,7 @@ module.exports = {
       "jsx": true,
       "modules": true,
       "experimentalObjectRestSpread": true,
-      "experimentalDecorators": true
+      "experimentalDecorators": true,
     }
   },
   "settings": {
@@ -33,7 +33,7 @@ module.exports = {
       "webpack": {
         "config": {
           "resolve": {
-            "modules": ["app", "node_modules"]
+            "modules": ["app", "node_modules"],
           }
         }
       }
@@ -43,6 +43,6 @@ module.exports = {
     "es6":     true,
     "browser": true,
     "node":    true,
-    "jest":    true
+    "jest":    true,
   }
 };

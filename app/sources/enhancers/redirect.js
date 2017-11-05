@@ -21,9 +21,9 @@
  *  const SomeRestrictedContainer = redirect(ifUserNotAuthorize)((props) => <div></div>));
  */
 
-import { replace } from 'react-router-redux';
-import reactHOC from 'react-hoc';
-import moize from 'moize';
+import { replace } from 'react-router-redux'
+import reactHOC from 'react-hoc'
+import moize from 'moize'
 
 const redirect = (condition, pathname = '/login') => (
   reactHOC(WrappedComponent => (
