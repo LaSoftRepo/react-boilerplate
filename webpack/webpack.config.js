@@ -28,7 +28,7 @@ const ModuleScopePlugin             = require('react-dev-utils/ModuleScopePlugin
 const InterpolateHtmlPlugin         = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const clearConsole                  = require('react-dev-utils/clearConsole');
-// const eslintFormatter               = require('react-dev-utils/eslintFormatter');
+const prettyFormatter               = require('eslint-formatter-pretty');
 const openBrowser                   = require('react-dev-utils/openBrowser');
 const { prettifyPackageName }       = require('./utils');
 // const Mailer        = require('./mailer');
@@ -397,6 +397,10 @@ if (isProduction) {
     new webpack.LoaderOptionsPlugin({
       options: {
         context: Path.to.app,
+        eslint: {
+          quite: true,
+          formatter: prettyFormatter,
+        },
       },
       debug: true,
     }),
@@ -502,8 +506,7 @@ module.exports = () => {
       noParse: [/moment.js/, /\.\/data\//],
       rules: [
         {
-          test: /\.jsx?$/,
-          enforce: 'pre',
+          test:    /\.jsx?$/,
           include: Path.to.app,
           exclude: /(node_modules|bower_components|build|spec|tests)/,
           use: [
@@ -513,27 +516,28 @@ module.exports = () => {
                 cacheDirectory: Path.to.cache,
               },
             },
-            {
-              loader: require.resolve('thread-loader'),
-              options: {
-                workers:            8,
-                workerParallelJobs: 16,
-                poolParallelJobs:   16,
-              },
-            },
+            // {
+            //   loader: require.resolve('thread-loader'),
+            //   options: {
+            //     workers:            4,
+            //     workerParallelJobs: 4,
+            //     poolParallelJobs:   2,
+            //   },
+            // },
             {
               loader: require.resolve('babel-loader'),
               options: {
                 ignore: false,
               },
             },
-            // {
-            //   loader: require.resolve('eslint-loader'),
-            //   options: {
-            //     formatter: eslintFormatter,
-            //   },
-            // },
           ],
+        },
+        {
+          test:    /\.jsx?$/,
+          enforce: 'pre',
+          include: Path.to.app,
+          exclude: /(node_modules|bower_components|build|spec|tests)/,
+          loader:  require.resolve('eslint-loader'),
         },
         {
           test: /\.module\.scss$/,

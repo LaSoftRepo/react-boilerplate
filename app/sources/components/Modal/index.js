@@ -80,7 +80,7 @@ export default class Modal extends Component {
         { /* { this.props.children } */ }
         <div layout='colummns' center='true' styleName='modal-content'>{ textContent }</div>
         <div layout='colummns' vertical-align='bottom' horizontal-distribute='equal'>
-          <button id='ok' onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
+          <button id='ok'     onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
           <button id='cancel' onClick={ e => this.handleClick(e, false) } styleName='modal-button right'>CANCEL</button>
         </div>
       </div>
