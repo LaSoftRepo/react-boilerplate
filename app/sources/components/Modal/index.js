@@ -1,4 +1,3 @@
-//import ExecutionEnvironment from 'exenv';
 
 import keycode from 'keycode'
 import Anime from 'react-anime'
@@ -10,12 +9,12 @@ const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
 const ANIMATE_DURATION = 500;
 
 @CSSModules(styles, { allowMultiple: true })
-export default class Modal extends PureComponent {
+export default class Modal extends Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
     allowKeys: PropTypes.bool,
     autoFocus: PropTypes.bool,
-    //children:  PropTypes.node,
+    // children:  PropTypes.node,
   }
 
   static defaultProps = {
@@ -44,11 +43,13 @@ export default class Modal extends PureComponent {
   }
 
   handleKeydown = event => {
-    const { allowKeys, onClose } = this.props;
+    const { allowKeys } = this.props;
     if (allowKeys) {
       if (event.keyCode === keycode('esc')) {
+        // eslint-disable-next-line react/no-set-state
         this.setState({ shouldHide: true }, () => { this.handleClose(event, false) });
       } else if (event.keyCode === keycode('enter')) {
+        // eslint-disable-next-line react/no-set-state
         this.setState({ shouldHide: true }, () => { this.handleClose(event, true) });
       }
     }
@@ -56,6 +57,7 @@ export default class Modal extends PureComponent {
 
   handleClick = (event, accept) => {
     event.persist();
+    // eslint-disable-next-line react/no-set-state
     this.setState(() => ({ shouldHide: true }));
     this.handleClose(event, accept);
   }
@@ -64,13 +66,13 @@ export default class Modal extends PureComponent {
     event.stopPropagation();
   }
 
-  renderDialogContent(props) {
+  renderDialogContent() {
     return (
       <div layout='rows' vertical-distribute='equal' horizontal-distribute='around' styleName='modal-container'>
         <div layout='colummns' horizontal-align='center'>
           <h2>DIALOG TITLE</h2>
         </div>
-        {/* { this.props.children } */}
+        { /* { this.props.children } */ }
         <div layout='colummns' center='true' styleName='modal-content'>{ textContent }</div>
         <div layout='colummns' vertical-align='bottom' horizontal-distribute='equal'>
           <button id='ok' onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
@@ -86,18 +88,18 @@ export default class Modal extends PureComponent {
 
     return (
       // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
-      <Anime opacity={[0, 1]} direction={ direction } duration={ ANIMATE_DURATION }>
+      <Anime opacity={ [0, 1] } direction={ direction } duration={ ANIMATE_DURATION }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
-          {/* <Anime
+          { /* <Anime
             translateY={ shouldHide ? 1200 : -1200 }
             scaleY='2.3'
             duration={ ANIMATE_DURATION }
             elasticity='0'
             delay={ shouldHide ? 120 : 0 }
             direction={ direction }
-          > */}
+          > */ }
             { this.renderDialogContent(this.props) }
-          {/* </Anime> */}
+          { /* </Anime> */ }
         </div>
       </Anime>
     );

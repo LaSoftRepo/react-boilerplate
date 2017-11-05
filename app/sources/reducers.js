@@ -11,19 +11,20 @@ import language            from 'containers/LanguageProvider/reducer'
 /**
  * Creates the global reducer with the asynchronously loaded ones
  */
-export const rootReducer = asyncReducers => {
-  return combineReducers({
+export const rootReducer = asyncReducers => (
+  combineReducers({
     app,
     users,
     language,
     router: routerReducer,
     ...asyncReducers,
-  });
-};
+  })
+);
 
 export const injectReducer = (store, { name, reducer }) => {
   if (Reflect.has(store.asyncReducers, name)) return;
 
+  // eslint-disable-next-line no-param-reassign
   store.asyncReducers[name] = reducer;
   store.replaceReducer(rootReducer(store.asyncReducers));
 };

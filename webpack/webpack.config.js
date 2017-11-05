@@ -1,4 +1,3 @@
-'use strict'
 
 // TODO
 // + Add Dll plugin
@@ -6,7 +5,7 @@
 
 const path                  = require('path');
 const chalk                 = require('chalk');
-const argv                  = require('yargs').argv;
+const { argv }              = require('yargs');
 const webpack               = require('webpack');
 
 // Core plugins
@@ -29,15 +28,13 @@ const ModuleScopePlugin             = require('react-dev-utils/ModuleScopePlugin
 const InterpolateHtmlPlugin         = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const clearConsole                  = require('react-dev-utils/clearConsole');
-const eslintFormatter               = require('react-dev-utils/eslintFormatter');
+// const eslintFormatter               = require('react-dev-utils/eslintFormatter');
 const openBrowser                   = require('react-dev-utils/openBrowser');
+const { prettifyPackageName }       = require('./utils');
+// const Mailer        = require('./mailer');
 
 const Path          = require('./paths');
-const Mailer        = require('./mailer');
 const packageConfig = require('../package.json');
-
-const SEPARATOR_REGEX  = /[-_]/;
-const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 
 require('dotenv').config();
 
@@ -56,7 +53,7 @@ const HOST = argv.host || (isWindow ? '127.0.0.1' : '0.0.0.0');
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
-const isTest       = env === 'test';
+// const isTest       = env === 'test';
 const isProduction = env === 'production';
 const isAWSDeploy  = !!process.env.deploy;
 
@@ -95,7 +92,6 @@ const htmlMinifyConfig = {
 };
 
 const stats = {
-  entrypoints: true,
   errors: true,
   errorDetails: true,
   cached: true,
@@ -112,7 +108,7 @@ const stats = {
   children: false,
   source: false,
   publicPath: false,
-  excludeAssets: [/^icons-[a-z0-9\/_.-]+/],
+  excludeAssets: [/^icons-[a-z0-9/_.-]+/],
 };
 
 // Common plugins
@@ -198,9 +194,9 @@ function styleLoaders(extract, modules = false) {
         ident: 'postcss',
 
         plugins: () => [
-          require('postcss-nested')(),
-          require('postcss-flexbugs-fixes')(),
-          require('postcss-cssnext')({
+          require('postcss-nested')(),         // eslint-disable-line
+          require('postcss-flexbugs-fixes')(), // eslint-disable-line
+          require('postcss-cssnext')({         // eslint-disable-line
             browsers: [
               '> 1%',
               'Explorer >= 10',
@@ -210,7 +206,7 @@ function styleLoaders(extract, modules = false) {
               'Android >= 4.1',
             ],
           }),
-          require('postcss-browser-reporter')()
+          require('postcss-browser-reporter')() // eslint-disable-line
         ]
       },
     },
@@ -219,7 +215,7 @@ function styleLoaders(extract, modules = false) {
       options: {
         outputStyle: 'expanded',
         includePaths: ['node_modules', Path.to.app],
-        //sourceMap: !isProduction,
+        // sourceMap: !isProduction,
       },
     },
   ];
@@ -337,11 +333,11 @@ if (isProduction) {
 
   if (isAWSDeploy) {
     const url = 'http://react-boilerplate-test.s3-website-us-west-2.amazonaws.com';
-    console.log('Start deploing to AWS...')
-    console.log('url: ' + chalk.green.bold(url));
+    console.info('Start deploing to AWS...'); // eslint-disable-line
+    console.info(`url: ${chalk.green.bold(url)}`); // eslint-disable-line
 
     if (USE_MAIL_AFTER_DEPLOY) {
-      //let mailer = new Mailer();
+      // let mailer = new Mailer();
     }
 
     plugins.push(
@@ -354,11 +350,20 @@ if (isProduction) {
         s3UploadOptions: {
           Bucket: process.env.AWS_BUCKET,
           ContentEncoding(fileName) {
-            if (/\.gz/.test(fileName))
+            if (/\.br/.test(fileName))
+                return 'br';
+
+            else if (/\.gz/.test(fileName))
               return 'gzip';
 
-            if (/\.br/.test(fileName))
-              return 'br';
+            return void 0;
+          },
+
+          ContentType(fileName) {
+            if (/\.js/.test(fileName))
+              return 'application/javascript';
+
+            return void 0;
           },
         },
         // cloudfrontInvalidateOptions: {
@@ -381,7 +386,7 @@ if (isProduction) {
   plugins.push(
     new webpack.SourceMapDevToolPlugin({
        filename:   '[file].map',
-       append:     '\n//# source' + 'MappingURL=[url]',
+       append:     '\n//# sourceMappingURL=[url]',
        exclude:    /^vendor/,
        columns:    true,
        lineToLine: true,
@@ -399,11 +404,11 @@ if (isProduction) {
 }
 
 
-module.exports = (env = {}) => {
+module.exports = () => {
 
   clearConsole();
 
-  let appEntry = [
+  const appEntry = [
     'react-hot-loader/patch',
     'react-dev-utils/webpackHotDevClient'
   ];
@@ -645,11 +650,4 @@ module.exports = (env = {}) => {
       } : false,
     },
   };
-}
-
-function prettifyPackageName(name) {
-  if (!name || name === '') return null;
-  return name
-    .replace(SEPARATOR_REGEX, ' ')
-    .replace(CAPITALIZE_REGEX, m => m.toUpperCase());
 }

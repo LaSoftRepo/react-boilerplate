@@ -2,23 +2,43 @@
   "extends": [
     "airbnb-base",
     "prettier",
-    "prettier/react"
+    "prettier/react",
+    "./.eslint.rules.json"
   ],
   "plugins": [
-    "prettier"
+    "prettier",
+    "react"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2017,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true,
+      "experimentalDecorators": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": {
+          "resolve": {
+            "modules": ["app", "node_modules"],
+            "alias": {
+              "components": "components",
+              "containers": "containers"
+            }
+          }
+        }
+      }
     }
   },
   "env": {
-    "es6": true,
+    "es6":     true,
     "browser": true,
-    "node": true,
-    "jest": true
+    "node":    true,
+    "jest":    true
   }
 }
