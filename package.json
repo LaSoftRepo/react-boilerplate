@@ -1,26 +1,30 @@
 {
-  "name": "React-boilerplate",
+  "name":    "React-boilerplate",
   "version": "0.0.4",
   "private": true,
   "license": "UNLICENSED",
-  "author": "Max Graey (LaSoft @ 2017)",
+  "author":  "Max Graey (LaSoft @ 2017)",
   "description": "Bootstrap boilerplate for speedup development React.js projects",
   "enginesStrict": true,
+
   "engines": {
     "node": ">=8",
     "yarn": ">=0.24.6"
   },
+
   "main": "index.js",
+
   "scripts": {
-    "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
-    "start:own": "node server/index --colors --config webpack/webpack.config.js",
-    "build": "yarn build:clean && cross-env NODE_ENV=\"production\" webpack --config webpack/webpack.config.js",
-    "preview": "yarn build && cross-env NODE_ENV=\"production\" node server/index --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
-    "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
+    "start":       "webpack-dev-server --colors --config webpack/webpack.config.js",
+    "start:own":   "node server/index --colors --config webpack/webpack.config.js",
+    "build":       "yarn build:clean && cross-env NODE_ENV=\"production\" webpack --config webpack/webpack.config.js",
+    "preview":     "yarn build && cross-env NODE_ENV=\"production\" node server/index --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
+    "deploy":      "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "build:clean": "rimraf ./.cache && rimraf ./build",
-    "format": "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
-    "lint": "eslint **/*.{js,jsx} --quiet"
+    "format":      "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
+    "lint":        "eslint **/*.{js,jsx} -c .eslintrc.js --quiet"
   },
+
   "dependencies": {
     "axios": "^0.17.0",
     "babel-polyfill": "^6.26.0",
@@ -55,6 +59,7 @@
     "sass-mediaqueries": "^1.6.1",
     "store": "^2.0.12"
   },
+
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
@@ -158,6 +163,7 @@
     "webpack-shell-plugin": "^0.5.0",
     "yargs": "^10.0.3"
   },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/LaSoftRepo/React-boilerplate"
