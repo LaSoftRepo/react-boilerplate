@@ -11,7 +11,7 @@ export default class About extends PureComponent {
       <div layout='columns'>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
         <h2>React Boilerplate</h2>
-        <div styleName='menu-icon'></div>
+        <div styleName='menu-icon' />
       </div>
     );
   }

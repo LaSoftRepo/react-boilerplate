@@ -1,6 +1,9 @@
-{
+
+const Path = require('./webpack/paths');
+
+module.exports = {
   "extends": [
-    "airbnb-base",
+    "airbnb",
     "prettier",
     "prettier/react",
     "./.eslint.rules.json"
@@ -22,14 +25,11 @@
   },
   "settings": {
     "import/resolver": {
+      "alias": Object.entries(Path.to),
       "webpack": {
         "config": {
           "resolve": {
-            "modules": ["app", "node_modules"],
-            "alias": {
-              "components": "components",
-              "containers": "containers"
-            }
+            "modules": ["app", "node_modules"]
           }
         }
       }
@@ -41,4 +41,4 @@
     "node":    true,
     "jest":    true
   }
-}
+};

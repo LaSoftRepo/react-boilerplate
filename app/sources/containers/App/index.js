@@ -9,24 +9,23 @@ const Footer = () => null
 @connect(({ router, language }) => ({ router, language }))
 export default class App extends Component {
   static propTypes = {
-    children:    PropTypes.node,
     hideHeader:  PropTypes.bool,
     hideFooter:  PropTypes.bool,
-    hideSidebar: PropTypes.bool,
+    // hideSidebar: PropTypes.bool,
   }
 
   static defaultProps = {
     hideHeader:  false,
     hideFooter:  false,
-    hideSidebar: false,
+    // hideSidebar: false,
   }
 
   render() {
     return (
       <div className='app'>
-        { this.props.hideHeader ? <Header /> : null }
+        { this.props.hideHeader && <Header /> }
         { Children.toArray(this.props.children) }
-        { this.props.hideFooter ? <Footer /> : null }
+        { this.props.hideFooter && <Footer /> }
       </div>
     );
   }

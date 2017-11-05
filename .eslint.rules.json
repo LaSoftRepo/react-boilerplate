@@ -23,7 +23,24 @@
     "no-void": "off",
     "import/no-dynamic-require": "off",
 
+    "import/first": "off",
+
     "jsx-quotes": 0,
+
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": [],
+      "specialLink": [
+        "hrefLeft", "hrefRight"
+      ],
+      "aspects": [
+        "noHref",
+        "invalidHref",
+        "preferButton"
+      ]
+    }],
+
+    "react/jsx-filename-extension":    "off",
+    "react/prefer-stateless-function": "off",
     "react/display-name": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-boolean-value": 1,
@@ -60,7 +77,9 @@
     "react/no-string-refs": 0,
     "react/no-unknown-property": 1,
     "react/prefer-es6-class": 1,
-    "react/prop-types": 1,
+    "react/prop-types": [1, {
+      "ignore": ["children"]
+    }],
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1

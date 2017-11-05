@@ -114,12 +114,12 @@ const stats = {
 // Common plugins
 const plugins = [
   new ProgressBarPlugin({
-      width:          70,
-      format:         chalk.green.bold('Build :bar :percent'),
-      complete:       '•',
-      incomplete:     '◦',
-      clear:          true,
-      renderThrottle: 96,
+    width:          70,
+    format:         chalk.green.bold('Build :bar :percent'),
+    complete:       '•',
+    incomplete:     '◦',
+    clear:          true,
+    renderThrottle: 96,
   }),
   new webpack.NoEmitOnErrorsPlugin(),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
