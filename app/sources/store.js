@@ -77,8 +77,9 @@ export default function configureStore(initialState, history) {
     module.hot.accept('./sagas', () => {
       const nextSagas = require('./sagas').rootSaga; // eslint-disable-line global-require
       sagaTask.cancel();
-      sagaTask.done.then(() => {
+      return sagaTask.done.then(() => {
         sagaTask = sagaMiddleware.run(nextSagas);
+        return sagaTask;
       });
     });
 

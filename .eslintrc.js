@@ -6,11 +6,15 @@ module.exports = {
     "airbnb",
     "prettier",
     "prettier/react",
+    "plugin:promise/recommended",
+    "plugin:redux-saga/recommended",
     "./.eslint.rules.json"
   ],
   "plugins": [
     "prettier",
-    "react"
+    "react",
+    "promise",
+    "redux-saga",
   ],
   "parser": "babel-eslint",
   "parserOptions": {

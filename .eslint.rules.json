@@ -89,6 +89,8 @@
     "react/sort-comp": 1,
     "react/prop-types": [1, {
       "ignore": [ "children" ]
-    }]
+    }],
+
+    "redux-saga/no-unhandled-errors": "off"
   }
 }
