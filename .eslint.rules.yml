@@ -1,7 +1,10 @@
 
 globals:
 
+  # External compile time variables
   __USE_PERFORMANCE_TOOLS__:          true
+
+  # Stubs for pass ProvidePlugin
   axios:                              true
   store:                              true
   moment:                             true
@@ -18,47 +21,58 @@ globals:
 
 rules:
 
+  # Common Rules
+  semi:                               off
   no-void:                            off
   no-plusplus:                        off
-  no-trailing-spaces:                 [warn, { skipBlankLines: true }]
-  semi:                               off
   no-underscore-dangle:               [warn, { allowAfterThis: true, allowAfterSuper: true }]
-  func-call-spacing:                  [warn, never]
 
+  # Spacing Rules
+  keyword-spacing:                    warn
+  no-trailing-spaces:                 [warn, { skipBlankLines: true }]
+  func-call-spacing:                  [warn, never]
+  space-before-function-paren:        [warn, { anonymous: always, named: never, asyncArrow: always }]
+  space-before-blocks:                warn
+  space-infix-ops:                    error
+
+  # Import Rules
   import/first:                       off
   import/no-dynamic-require:          off
 
+  # JSX (Common) Rules
   jsx-quotes:                         off
   jsx-a11y/anchor-is-valid:           [error, { components: [], specialLink: [hrefLeft, hrefRight], aspects: [noHref, invalidHref, preferButton] }]
 
+  # JSX (React) Rules
   react/jsx-filename-extension:       off
+  react/jsx-max-props-per-line:       off
+  react/jsx-no-bind:                  off
+  react/jsx-no-literals:              off
+  react/jsx-sort-prop-types:          off
+  react/jsx-sort-props:               off
   react/jsx-boolean-value:            warn
   react/jsx-closing-bracket-location: warn
   react/jsx-wrap-multilines:          warn
   react/jsx-handler-names:            warn
   react/jsx-indent-props:             warn
   react/jsx-key:                      warn
-  react/jsx-max-props-per-line:       off
-  react/jsx-no-bind:                  off
   react/jsx-no-duplicate-props:       warn
-  react/jsx-no-literals:              off
   react/jsx-no-undef:                 warn
   react/jsx-pascal-case:              warn
-  react/jsx-sort-prop-types:          off
-  react/jsx-sort-props:               off
   react/jsx-uses-react:               warn
   react/jsx-uses-vars:                warn
   react/jsx-curly-spacing:            [warn, { when: always, children: true, spacing: { objectLiterals: never } }]
 
+  # React Rules
+  react/no-multi-comp:                off
+  react/no-string-refs:               off
   react/no-danger:                    warn
   react/no-deprecated:                warn
   react/no-did-mount-set-state:       warn
   react/no-did-update-set-state:      warn
   react/no-direct-mutation-state:     warn
   react/no-is-mounted:                warn
-  react/no-multi-comp:                off
   react/no-set-state:                 warn
-  react/no-string-refs:               off
   react/no-unknown-property:          warn
 
   react/prefer-stateless-function:    off
@@ -70,4 +84,5 @@ rules:
   react/sort-comp:                    warn
   react/prop-types:                   [warn, { ignore: [children, dispatch] }]
 
+  # Redux Saga Rules
   redux-saga/no-unhandled-errors:     off

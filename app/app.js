@@ -1,8 +1,8 @@
 
 // Polyfills
 import 'es6-promise/auto'
-import 'raf/polyfill'
 import 'isomorphic-fetch'
+import 'raf/polyfill'
 
 // Styles
 import 'styles/index.scss'
