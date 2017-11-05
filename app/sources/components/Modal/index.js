@@ -1,10 +1,16 @@
+/*
+  eslint
+  jsx-a11y/lick-events-have-key-events:    "off",
+  jsx-a11y/no-static-element-interactions: "off",
+  jsx-a11y/click-events-have-key-events:   "off"
+*/
 
 import keycode from 'keycode'
-import Anime from 'react-anime'
+import Anime   from 'react-anime'
 
-import styles from './styles.module.scss'
+import styles  from './styles.module.scss'
 
-const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
+const textContent = `Sample text fgvkjfdv dfhvldhgvldg`
 
 const ANIMATE_DURATION = 500;
 
@@ -13,14 +19,13 @@ export default class Modal extends Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
     allowKeys: PropTypes.bool,
-    autoFocus: PropTypes.bool,
+    // autoFocus: PropTypes.bool,
     // children:  PropTypes.node,
   }
 
   static defaultProps = {
-    onClose:   () => {},
     allowKeys: true,
-    autoFocus: true,
+    // autoFocus: true,
   }
 
   state = {

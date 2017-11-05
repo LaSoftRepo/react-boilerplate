@@ -9,12 +9,13 @@ export default class Playground extends Component {
   }
 
   handleChange = ({ currentTarget }) => {
+    // eslint-disable-next-line
     this.setState({ layout: currentTarget.value });
   }
 
   render() {
     const { dispatch } = this.props;
-    const layout = this.state.layout;
+    const { layout } = this.state;
 
     return (
       <div>
@@ -28,13 +29,13 @@ export default class Playground extends Component {
           </select>
 
           <section layout={ layout } vertical-align='center' className='section-playground'>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
-            <div className='demo-box'></div>
+            <div className='demo-box' />
+            <div className='demo-box' />
+            <div className='demo-box' />
+            <div className='demo-box' />
+            <div className='demo-box' />
+            <div className='demo-box' />
+            <div className='demo-box' />
           </section>
         </div>
       </div>

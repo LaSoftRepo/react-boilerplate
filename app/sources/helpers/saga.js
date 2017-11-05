@@ -1,5 +1,5 @@
 import { replace, push } from 'react-router-redux'
-import { put, call, select } from 'redux-saga/effects'
+import { put, call }     from 'redux-saga/effects'
 
 import Api from 'api'
 
