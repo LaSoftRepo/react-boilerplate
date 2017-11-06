@@ -132,7 +132,7 @@ const plugins = [
     '__USE_PERFORMANCE_TOOLS__': JSON.stringify(USE_PERFORMANCE_TOOLS),
   }),
   new InterpolateHtmlPlugin({
-    PUBLIC_URL: Path.to.public.replace(/\/$/, ""),
+    PUBLIC_URL: Path.to.public.replace(/\/$/, ''),
   }),
   new HtmlWebpackPlugin({
     title:    PROJECT_NAME,
@@ -456,27 +456,27 @@ module.exports = () => {
     performance: isProduction && {
       maxEntrypointSize: 1 * 1024 * 1024,
       maxAssetSize:      5 * 1024 * 1024,
-      hints: "warning",
+      hints: 'warning',
     },
 
     entry: {
       app: appEntry,
       vendor: [
-        "babel-polyfill",
-        "es6-promise",
-        "history",
-        "isomorphic-fetch",
-        "prop-types",
-        "react",
-        "react-css-modules",
-        "react-dom",
-        "react-hoc",
-        "react-intl",
-        "react-redux",
-        "react-router",
-        "react-router-dom",
-        "react-router-redux",
-        "redux",
+        'babel-polyfill',
+        'es6-promise',
+        'history',
+        'isomorphic-fetch',
+        'prop-types',
+        'react',
+        'react-css-modules',
+        'react-dom',
+        'react-hoc',
+        'react-intl',
+        'react-redux',
+        'react-router',
+        'react-router-dom',
+        'react-router-redux',
+        'redux',
       ],
     },
 
@@ -655,7 +655,7 @@ module.exports = () => {
         aggregateTimeout: 240,
         ignored: [
           /node_modules/,
-          "../build/**/*.*",
+          '../build/**/*.*',
           '../server/**/*.*',
           '../.cache/*.*'
         ],
