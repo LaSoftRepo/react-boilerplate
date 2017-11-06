@@ -310,8 +310,17 @@ if (isProduction) {
         publicPath: Path.to.public,
         excludes: ['**/.*', '**/*.map', '.htaccess'],
         caches: {
-          main: [':rest:'],
-          additional: ['vendor.*.js'],
+          main: [
+            'styles/style.*.css',
+            'vendor.*.js',
+            'app.*.js'
+          ],
+          additional: [':externals:'],
+          optional:   [':rest:'],
+        },
+        externals: ['/'],
+        ServiceWorker: {
+          navigateFallbackURL: '/'
         },
         safeToUseOptionalCaches: true,
         AppCache: false,
