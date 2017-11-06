@@ -10,7 +10,7 @@ import Anime   from 'react-anime'
 
 import styles  from './styles.module.scss'
 
-const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
+const textContent = 'Sample text fgvkjfdv dfhvldhgvldg';
 
 const ANIMATE_DURATION = 500;
 

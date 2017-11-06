@@ -25,24 +25,24 @@ export default function configureStore(initialState, history) {
   ];
 
   // Add some debug middlewares
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     const loggerMiddleware = createLogger({
-      level:    "info",
+      level:    'info',
       collapsed: true,
       logErrors: true,
       duration:  true,
       colors: {
-        title:     () => "#3366ff",
-        prevState: () => "#75b8d4",
-        nextState: () => "#f6921e",
-        action:    () => "#60bd16",
-        error:     () => "#aa0000",
+        title:     () => '#3366ff',
+        prevState: () => '#75b8d4',
+        nextState: () => '#f6921e',
+        action:    () => '#60bd16',
+        error:     () => '#aa0000',
       },
     });
 
     middlewares.unshift(
       loggerMiddleware,
-      require("redux-immutable-state-invariant").default(), // eslint-disable-line
+      require('redux-immutable-state-invariant').default(), // eslint-disable-line
     );
   }
 
@@ -50,7 +50,7 @@ export default function configureStore(initialState, history) {
     applyMiddleware(...middlewares),
   ];
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     enhancers.push(
        // eslint-disable-next-line
       hasReduxDevToolExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : DevTools.instrument(),

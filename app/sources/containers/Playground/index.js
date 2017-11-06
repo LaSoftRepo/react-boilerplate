@@ -15,7 +15,7 @@ export default class Playground extends Component {
 
   render() {
     const { dispatch } = this.props;
-    const { layout } = this.state;
+    const { layout }   = this.state;
 
     return (
       <div>

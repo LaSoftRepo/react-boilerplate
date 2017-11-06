@@ -1,6 +1,6 @@
 
 export default class Api {
-  static Host = `https://api.github.com`
+  static Host = 'https://api.github.com'
 
   static users = {
     get() {

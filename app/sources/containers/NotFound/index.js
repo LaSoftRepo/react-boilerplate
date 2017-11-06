@@ -1,6 +1,3 @@
 import './styles.scss'
 
-// eslint-disable-next-line
-export default (props) => {
-  return <h2>Not Found</h2>
-}
+export default () => <h2>Not Found</h2>
