@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const path     = require('path');
 const http     = require('http');
 const express  = require('express'); // eslint-disable-line
@@ -50,14 +52,14 @@ if (isDeveloping) {
         // console.log('module done!', doneModules);
       }
 
-      compiler.plugin("compilation", compilation => {
+      compiler.plugin('compilation', compilation => {
         if (compilation.compiler.isChild()) return;
-        //handler(0, "compiling");
-        let moduleCount = 0;
-        //console.log('start compiling...');
-        compilation.plugin("build-module", module => {
-    		  moduleCount++;
-    		  const ident = module.identifier();
+        // handler(0, "compiling");
+        // let moduleCount = 0;
+        // console.log('start compiling...');
+        compilation.plugin('build-module', module => {
+    		  // moduleCount++;
+    		  // const ident = module.identifier();
     		  // if (ident) {
     		  	// activeModules.push(ident);
     		  // }
@@ -65,8 +67,8 @@ if (isDeveloping) {
           // console.log('progress:', moduleCount);
         });
 
-        compilation.plugin("failed-module",  moduleDone);
-        compilation.plugin("succeed-module", moduleDone);
+        compilation.plugin('failed-module',  moduleDone);
+        compilation.plugin('succeed-module', moduleDone);
       });
 
       /* res.header('Content-Type', 'text/html');
@@ -154,3 +156,5 @@ server.listen(port, host, err => {
   console.info('\r\nListening at', url); // eslint-disable-line no-console
   open(url);
 });
+
+/* eslint-enable */
