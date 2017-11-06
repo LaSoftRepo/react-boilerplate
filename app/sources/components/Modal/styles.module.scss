@@ -1,6 +1,6 @@
 
-@import '~styles/mixins.scss';
-@import '~styles/variables.scss';
+@import '~styles/mixins';
+@import '~styles/variables';
 
 .modal-backdrop {
   position: fixed;
@@ -14,7 +14,7 @@
   height: 40vh;
   min-width:  500px;
   min-height: 200px;
-  background-color: white;
+  background-color: $white;
   box-shadow: 0 1px 4px 0 alpha(25);
   outline: 0;
 }
@@ -27,19 +27,19 @@
   height: 70px;
   margin: 20px;
   color: $white;
-  font-size: 1.2em !important;
+  font-size: 1.2em !important; // sass-lint:disable-line no-important
 
   &.left {
     flex: 1 0 0;
     margin-right: 10px;
     background-color: $green;
-    border-radius: 0 !important;
+    border-radius: 0 !important; // sass-lint:disable-line no-important
   }
 
   &.right {
     flex: 1 0 0;
     margin-left: 10px;
     background-color: $red;
-    border-radius: 0 !important;
+    border-radius: 0 !important; // sass-lint:disable-line no-important
   }
 }
