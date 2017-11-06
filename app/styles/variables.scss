@@ -1,6 +1,5 @@
-/*
- *  Black & white color presets
- */
+
+// Black & white color presets
 
 $white:   #fff    !default;
 $gray-90: #f8f9fa !default;
@@ -15,9 +14,8 @@ $gray-10: #212529 !default;
 $black:   #000    !default;
 $transparent: transparent !default;
 
-/*
- *  Basic color presets
- */
+
+// Basic color presets
 
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
@@ -30,9 +28,8 @@ $green:   #68c755 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
-/*
- *  Space presets
- */
+
+// Space presets
 
 $space: 1rem !default;
 $spaces: (
@@ -46,16 +43,13 @@ $spaces: (
   7: ($space * 8)
 ) !default;
 
-/*
- * Global font config
- */
+
+// Global font config
 
 $global-font-size:      100% !default;
 $global-font-smoothing: off;
 
-/*
- *  Modal
- */
+// Modal
 
-$modal-backdrop-color: rgba(0, 20, 60, 0.5);
+$modal-backdrop-color: rgba(0, 20, 60, .5);
 $enable-rounded: false !default;

@@ -30,6 +30,7 @@ rules:
     - warn
     -
       order:
+        - content
         - display
         - flex
         - flex-direction
