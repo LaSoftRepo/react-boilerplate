@@ -22,7 +22,7 @@
     "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "build:clean": "rimraf ./.cache && rimraf ./build",
     "format": "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
-    "lint": "./node_modules/.bin/eslint **/*.{js,jsx} -c .eslintrc.js --quiet"
+    "lint": "./node_modules/.bin/eslint . --color -f codeframe --max-warnings 50"
   },
   "dependencies": {
     "axios": "^0.17.0",
