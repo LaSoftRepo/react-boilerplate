@@ -2,7 +2,7 @@
 const CAPITALIZE_EVERY_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
 const VALIDATION_EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 const NUM_GROUP_REGEX        = /\B(?=(\d{3})+(?!\d))/g;
-const SPLIT_VALUE_UNIT_REGEX = /^(\d+)(\S*)/;
+const SPLIT_VALUE_UNIT_REGEX = /^([+-]?[0-9]*[.][0-9]+)(\S*)/;
 const FILE_PATH_REGEX        = /[^./\\]*$/;
 const SEPARATOR_REGEX        = /[-_]/;
 
