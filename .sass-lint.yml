@@ -39,6 +39,8 @@ rules:
         - height
         - min-width
         - min-height
+        - max-width
+        - max-height
         - margin
         - /^margin\-+/
         - padding

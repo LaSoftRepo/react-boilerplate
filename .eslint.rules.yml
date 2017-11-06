@@ -30,19 +30,19 @@ rules:
   no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
   class-methods-use-this:
     - warn
-    - exceptMethods:                          [
-                                                render,
-                                                getInitialState,
-                                                getDefaultProps,
-                                                getChildContext,
-                                                componentWillMount,
-                                                componentDidMount,
-                                                componentWillReceiveProps,
-                                                shouldComponentUpdate,
-                                                componentWillUpdate,
-                                                componentDidUpdate,
-                                                componentWillUnmount
-                                              ]
+    -
+      exceptMethods:
+        - render
+        - getInitialState
+        - getDefaultProps
+        - getChildContext
+        - componentWillMount
+        - componentDidMount
+        - componentWillReceiveProps
+        - shouldComponentUpdate
+        - componentWillUpdate
+        - componentDidUpdate
+        - componentWillUnmount
 
   # Spacing Rules
   keyword-spacing:                            warn
@@ -58,7 +58,12 @@ rules:
 
   # JSX Common Rules
   jsx-quotes:                                 [warn, prefer-single]
-  jsx-a11y/anchor-is-valid:                   [error, { components: [], specialLink: [hrefLeft, hrefRight], aspects: [noHref, invalidHref, preferButton] }]
+  jsx-a11y/anchor-is-valid:
+    - error
+    -
+      components:                             []
+      specialLink:                            [hrefLeft, hrefRight]
+      aspects:                                [noHref, invalidHref, preferButton]
 
   # JSX React Rules
   react/jsx-filename-extension:               off
@@ -104,19 +109,19 @@ rules:
   react/no-danger-with-children:              error
   react/sort-comp:
     - warn
-    - order: [
-      static-methods,
-      constructor,
-      lifecycle,
-      /^on.+$/,
-      /^handle.+$/,
-      getters,
-      setters,
-      /^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/,
-      everything-else,
-      /^render.+$/,
-      render
-    ]
+    -
+      order:
+        - static-methods
+        - constructor
+        - lifecycle
+        - /^on.+$/
+        - /^handle.+$/
+        - getters
+        - setters
+        - /^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/
+        - everything-else
+        - /^render.+$/
+        - render
 
   react/display-name:                         off
   react/forbid-prop-types:                    off
