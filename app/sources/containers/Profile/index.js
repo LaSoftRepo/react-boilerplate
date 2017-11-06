@@ -11,7 +11,7 @@ export default class Profile extends Component {
       <div layout='columns'>
         <button onClick={ () => dispatch(goBack()) }>Back</button>
         <h2>-- User Profile Data --</h2>
-        <Prompt message="Move away?" when />
+        <Prompt message='Move away?' when />
       </div>
     );
   }
