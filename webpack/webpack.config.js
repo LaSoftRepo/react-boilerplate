@@ -1,7 +1,5 @@
 
-// TODO
-// + Add Dll plugin
-// + Add and config eslint
+require('dotenv').config();
 
 const path                  = require('path');
 const chalk                 = require('chalk');
@@ -35,8 +33,6 @@ const { prettifyPackageName }       = require('./utils');
 
 const Path          = require('./paths');
 const packageConfig = require('../package.json');
-
-require('dotenv').config();
 
 // Config webpack enviroment
 const PROJECT_NAME          = prettifyPackageName(packageConfig.name) || 'Boilerplate';
@@ -171,7 +167,7 @@ function styleLoaders(extract, modules = false) {
     {
       loader: require.resolve('css-loader'),
       options: {
-        minimize: isProduction,
+        minimize:  isProduction,
         sourceMap: !isProduction,
         importLoaders: 2,
         alias: {
@@ -191,7 +187,7 @@ function styleLoaders(extract, modules = false) {
       loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: !isProduction,
-        ident: 'postcss',
+        ident:     'postcss',
 
         plugins: () => [
           require('postcss-nested')(),         // eslint-disable-line
@@ -281,21 +277,21 @@ if (isProduction) {
       allChunks: true,
     }),
     new FaviconsWebpackPlugin({
-      logo: 'favicon.png',
-      prefix: 'icons-[hash]/',
+      logo:            'favicon.png',
+      prefix:          'icons-[hash]/',
       persistentCache: true,
-      inject: true,
+      inject:          true,
       icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
+        android:       true,
+        appleIcon:     true,
+        appleStartup:  true,
+        favicons:      true,
+        coast:         false,
+        firefox:       false,
+        opengraph:     false,
+        twitter:       false,
+        yandex:        false,
+        windows:       false,
       },
     }),
     new CopyWebpackPlugin([
@@ -468,7 +464,6 @@ module.exports = () => {
         'isomorphic-fetch',
         'prop-types',
         'react',
-        'react-css-modules',
         'react-dom',
         'react-hoc',
         'react-intl',
@@ -476,6 +471,8 @@ module.exports = () => {
         'react-router',
         'react-router-dom',
         'react-router-redux',
+        'react-css-modules',
+        'redux-saga',
         'redux',
       ],
     },

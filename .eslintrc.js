@@ -6,14 +6,17 @@ module.exports = {
     "airbnb",
     "prettier",
     "prettier/react",
+    "plugin:react/recommended",
     "plugin:promise/recommended",
     "plugin:redux-saga/recommended",
     "./.eslint.rules.yml",
   ],
   "plugins": [
-    "prettier",
+    "html",
+    "node",
     "react",
     "promise",
+    "prettier",
     "redux-saga",
   ],
   "parser": "babel-eslint",
@@ -23,6 +26,7 @@ module.exports = {
     "ecmaFeatures": {
       "jsx": true,
       "modules": true,
+      "impliedStrict": true,
       "experimentalObjectRestSpread": true,
       "experimentalDecorators": true,
     }

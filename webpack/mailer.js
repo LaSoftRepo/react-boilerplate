@@ -1,4 +1,6 @@
 
+/* eslint-disable */
+
 const nodemailer = require('nodemailer');
 
 class Mailer {
@@ -48,3 +50,5 @@ module.exports = Mailer;
 
 //let mailer = new Mailer();
 //mailer.send('Hello World!', 'Test send');
+
+/* eslint-enable */

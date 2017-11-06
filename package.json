@@ -10,7 +10,10 @@
     "node": ">=8",
     "yarn": ">=0.24.6"
   },
-  "main": "index.js",
+  "main": "server/index.js",
+  "files": [
+    "server"
+  ],
   "scripts": {
     "start": "webpack-dev-server --colors --config webpack/webpack.config.js",
     "start:own": "node server/index --colors --config webpack/webpack.config.js",
@@ -19,7 +22,7 @@
     "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "build:clean": "rimraf ./.cache && rimraf ./build",
     "format": "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
-    "lint": "eslint **/*.{js,jsx} -c .eslintrc.js --quiet"
+    "lint": "./node_modules/.bin/eslint **/*.{js,jsx} -c .eslintrc.js --quiet"
   },
   "dependencies": {
     "axios": "^0.17.0",
@@ -49,7 +52,6 @@
     "react-router-dom": "^4.1.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^3.7.2",
-    "redux-immutable": "^4.0.0",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "sass-mediaqueries": "^1.6.1",
@@ -57,7 +59,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "8.0.2",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -105,6 +107,7 @@
     "eslint-import-resolver-alias": "^1.0.3",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-node": "^5.2.1",

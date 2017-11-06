@@ -134,3 +134,11 @@ rules:
 
   # Redux Saga Rules
   redux-saga/no-unhandled-errors:             off
+
+  # Node.js Rules
+  node/no-unpublished-require:
+    - warn
+    -
+      allowModules:                           []
+      convertPath:                            {}
+      tryExtensions:                          [.js, .json, .node]
