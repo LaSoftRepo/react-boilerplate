@@ -155,7 +155,6 @@
     "responsive-loader": "^1.1.0",
     "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.6",
-    "scottyjs": "^1.9.0",
     "sharp": "^0.18.4",
     "scottyjs": "^1.10.0",
     "style-loader": "^0.19.0",
