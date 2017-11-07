@@ -25,6 +25,7 @@ rules:
   semi:                                       off
   no-void:                                    off
   no-plusplus:                                off
+  prefer-arrow-callback:                      [warn, { allowNamedFunctions: true }]
   no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
   quotes:                                     [warn, single, { avoidEscape: true }]
   no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
