@@ -63,7 +63,7 @@ export default function configureStore(initialState, history) {
   const store = createStore(
     rootReducer(),
     initialState,
-    compose(...enhancers),
+    compose(...enhancers)
   );
 
   // Extensions for injectors

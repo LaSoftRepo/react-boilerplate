@@ -18,6 +18,7 @@ module.exports = {
     "promise",
     "prettier",
     "redux-saga",
+    "dependencies",
   ],
   "parser": "babel-eslint",
   "parserOptions": {

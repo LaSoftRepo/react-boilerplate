@@ -296,7 +296,7 @@ if (isProduction) {
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
-    ], { ignore: [ /.DS_Store/ ] }),
+    ], { ignore: [ /.DS_Store/ ] })
   );
 
   if (USE_OFFLINE_CACHE) {
@@ -381,7 +381,7 @@ if (isProduction) {
           // `node_modules/scottyjs/bin/scotty.js --spa -u -r eu-central-1 -s ./build -b ${PROJECT_NAME}`,
           openBrowser(url),
         ],
-      }),
+      })
     );
   }
 
@@ -408,7 +408,7 @@ if (isProduction) {
         },
       },
       debug: true,
-    }),
+    })
   );
 }
 

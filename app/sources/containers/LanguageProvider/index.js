@@ -12,7 +12,7 @@ import { localeSelector } from './selectors'
 
 const mapStateToProps = createSelector(
   localeSelector(),
-  locale => ({ locale }),
+  locale => ({ locale })
 );
 
 @connect(mapStateToProps)

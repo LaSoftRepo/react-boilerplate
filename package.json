@@ -22,7 +22,8 @@
     "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "build:clean": "rimraf ./.cache && rimraf ./build",
     "format": "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
-    "lint": "./node_modules/.bin/eslint . --color -f codeframe --max-warnings 50"
+    "lint": "./node_modules/.bin/eslint . --color -f codeframe --max-warnings 50",
+    "lint:fix": "./node_modules/.bin/eslint . --fix"
   },
   "dependencies": {
     "axios": "^0.17.0",
@@ -107,6 +108,7 @@
     "eslint-import-resolver-alias": "^1.0.3",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
+    "eslint-plugin-dependencies": "^2.4.0",
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",

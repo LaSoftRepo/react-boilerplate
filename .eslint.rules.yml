@@ -28,6 +28,8 @@ rules:
   no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
   quotes:                                     [warn, single, { avoidEscape: true }]
   no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
+  comma-dangle:                               [warn, { objects: only-multiline, imports: only-multiline, arrays: only-multiline, exports: only-multiline, functions: never }]
+
   class-methods-use-this:
     - warn
     -
@@ -128,9 +130,8 @@ rules:
   react/prefer-stateless-function:            off
   react/react-in-jsx-scope:                   warn
   react/self-closing-comp:                    warn
-  react/prop-types:                           [warn, { ignore: [children, dispatch] }]
+  react/prop-types:                           [warn, { ignore: [children, dispatch, className, style] }]
   react/prefer-es6-class:                     [error, always]
-  # react/prefer-stateless-function:            [error, { ignorePureComponents: true }]
 
   # Redux Saga Rules
   redux-saga/no-unhandled-errors:             off
@@ -142,3 +143,9 @@ rules:
       allowModules:                           []
       convertPath:                            {}
       tryExtensions:                          [.js, .json, .node]
+
+  # Dependencies Rules
+  dependencies/no-unresolved:                 off
+  dependencies/case-sensitive:                off
+  dependencies/no-cycles:                     warn
+  dependencies/require-json-ext:              warn
