@@ -5,8 +5,7 @@ import About       from 'containers/About'
 import Users       from 'containers/Users'
 import Profile     from 'containers/Profile'
 import Playground  from 'containers/Playground'
-
-import Modal from 'components/Modal'
+import Modal       from 'components/Modal'
 
 import { goBack } from 'react-router-redux'
 

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // TODO move this to internal
 
 import React from 'react'
@@ -12,3 +14,5 @@ export default function ConfirmationRenderer(message, callback) {
     <ConfirmationDialog open={ true } message={ message } callback={ callback } />
   ), modalHolder);
 }
+
+/* eslint-enable */

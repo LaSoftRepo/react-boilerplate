@@ -1,27 +1,31 @@
-//import ExecutionEnvironment from 'exenv';
+/*
+  eslint
+  jsx-a11y/lick-events-have-key-events:    "off",
+  jsx-a11y/no-static-element-interactions: "off",
+  jsx-a11y/click-events-have-key-events:   "off"
+*/
 
 import keycode from 'keycode'
-import Anime from 'react-anime'
+import Anime   from 'react-anime'
 
-import styles from './styles.module.scss'
+import styles  from './styles.module.scss'
 
-const textContent = `Sample text fgvkjfdv dfhvldhgvldg`;
+const textContent = 'Sample text fgvkjfdv dfhvldhgvldg';
 
 const animationDuration = 500;
 
 @CSSModules(styles, { allowMultiple: true })
-export default class Modal extends PureComponent {
+export default class Modal extends Component {
   static propTypes = {
     onClose:   PropTypes.func.isRequired,
     allowKeys: PropTypes.bool,
-    autoFocus: PropTypes.bool,
-    //children:  PropTypes.node,
+    // autoFocus: PropTypes.bool,
+    // children:  PropTypes.node,
   }
 
   static defaultProps = {
-    onClose:   () => {},
     allowKeys: true,
-    autoFocus: true,
+    // autoFocus: true,
   }
 
   static animations = ({ enter }) => {
@@ -67,18 +71,21 @@ export default class Modal extends PureComponent {
   }
 
   handleKeydown = event => {
-    const { allowKeys, onClose } = this.props;
+    const { allowKeys } = this.props;
     if (allowKeys) {
       if (event.keyCode === keycode('esc')) {
-        this.setState({ enter: false }, () => { this.handleClose(event, false) });
+        // eslint-disable-next-line react/no-set-state
+        this.setState({ shouldHide: true }, () => { this.handleClose(event, false) });
       } else if (event.keyCode === keycode('enter')) {
-        this.setState({ enter: false }, () => { this.handleClose(event, true) });
+        // eslint-disable-next-line react/no-set-state
+        this.setState({ shouldHide: true }, () => { this.handleClose(event, true) });
       }
     }
   }
 
   handleClick = (event, accept) => {
     event.persist();
+    // eslint-disable-next-line react/no-set-state
     this.setState(() => ({ shouldHide: true }));
     this.handleClose(event, accept);
   }
@@ -87,16 +94,16 @@ export default class Modal extends PureComponent {
     event.stopPropagation();
   }
 
-  renderDialogContent(props) {
+  renderDialogContent() {
     return (
       <div layout='rows' vertical-distribute='equal' horizontal-distribute='around' styleName='modal-container'>
         <div layout='colummns' horizontal-align='center'>
           <h2>DIALOG TITLE</h2>
         </div>
-        {/* { this.props.children } */}
+        { /* { this.props.children } */ }
         <div layout='colummns' center='true' styleName='modal-content'>{ textContent }</div>
         <div layout='colummns' vertical-align='bottom' horizontal-distribute='equal'>
-          <button id='ok' onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
+          <button id='ok'     onClick={ e => this.handleClick(e, true)  } styleName='modal-button left'>OK</button>
           <button id='cancel' onClick={ e => this.handleClick(e, false) } styleName='modal-button right'>CANCEL</button>
         </div>
       </div>
@@ -108,19 +115,19 @@ export default class Modal extends PureComponent {
     const direction = !shouldHide ? 'normal' : 'reverse';
 
     return (
-      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ animationDuration }>
-      <Anime opacity={[0, 1]} direction={ direction } duration={ animationDuration }>
+      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
+      <Anime opacity={ [0, 1] } direction={ direction } duration={ ANIMATE_DURATION }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
-          {/* <Anime
+          { /* <Anime
             translateY={ shouldHide ? 1200 : -1200 }
             scaleY='2.3'
             duration={ animationDuration }
             elasticity='0'
             delay={ shouldHide ? 120 : 0 }
             direction={ direction }
-          > */}
+          > */ }
             { this.renderDialogContent(this.props) }
-          {/* </Anime> */}
+          { /* </Anime> */ }
         </div>
       </Anime>
     );

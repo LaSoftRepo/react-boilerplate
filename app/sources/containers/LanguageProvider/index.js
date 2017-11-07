@@ -5,14 +5,14 @@
  * this component connects the redux state language locale to the
  * IntlProvider component and i18n messages (loaded from `app/sources/translations`)
  */
-import { IntlProvider }   from 'react-intl';
+import { IntlProvider }   from 'react-intl'
 
-import { DEFAULT_LOCALE } from './constants';
-import { localeSelector } from './selectors';
+import { DEFAULT_LOCALE } from './constants'
+import { localeSelector } from './selectors'
 
 const mapStateToProps = createSelector(
   localeSelector(),
-  locale => ({ locale }),
+  locale => ({ locale })
 );
 
 @connect(mapStateToProps)

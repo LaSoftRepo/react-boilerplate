@@ -1,0 +1,165 @@
+
+globals:
+
+  # External compile time variables
+  __USE_PERFORMANCE_TOOLS__:                  true
+
+  # Stubs for pass ProvidePlugin
+  axios:                                      true
+  store:                                      true
+  moment:                                     true
+  cc:                                         true
+  React:                                      true
+  ReactDOM:                                   true
+  PropTypes:                                  true
+  Component:                                  true
+  PureComponent:                              true
+  Children:                                   true
+  connect:                                    true
+  createSelector:                             true
+  CSSModules:                                 true
+
+rules:
+
+  # Common Rules
+  semi:                                       off
+  no-void:                                    off
+  no-plusplus:                                off
+  prefer-arrow-callback:                      [warn, { allowNamedFunctions: true }]
+  no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
+  quotes:                                     [warn, single, { avoidEscape: true }]
+  no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
+  comma-dangle:
+    - warn
+    -
+      objects:                                only-multiline
+      imports:                                only-multiline
+      arrays:                                 only-multiline
+      exports:                                only-multiline
+      functions:                              never
+
+  class-methods-use-this:
+    - warn
+    -
+      exceptMethods:
+        - render
+        - getInitialState
+        - getDefaultProps
+        - getChildContext
+        - componentWillMount
+        - componentDidMount
+        - componentWillReceiveProps
+        - shouldComponentUpdate
+        - componentWillUpdate
+        - componentDidUpdate
+        - componentWillUnmount
+
+  # Spacing Rules
+  keyword-spacing:                            warn
+  no-trailing-spaces:                         [warn, { skipBlankLines: true }]
+  func-call-spacing:                          [warn, never]
+  space-before-function-paren:                [warn, { anonymous: always, named: never, asyncArrow: always }]
+  space-before-blocks:                        warn
+  space-infix-ops:                            error
+
+  # Import Rules
+  import/first:                               off
+  import/no-dynamic-require:                  off
+
+  # JSX Common Rules
+  jsx-quotes:                                 [warn, prefer-single]
+  jsx-a11y/anchor-is-valid:
+    - error
+    -
+      components:                             []
+      specialLink:                            [hrefLeft, hrefRight]
+      aspects:                                [noHref, invalidHref, preferButton]
+
+  # JSX React Rules
+  react/jsx-filename-extension:               off
+  react/jsx-no-bind:                          off
+  react/jsx-no-literals:                      off
+  react/jsx-sort-prop-types:                  off
+  react/jsx-sort-props:                       off
+  react/jsx-boolean-value:                    warn
+  react/jsx-closing-bracket-location:         warn
+  react/jsx-wrap-multilines:                  warn
+  react/jsx-indent-props:                     warn
+  react/jsx-key:                              warn
+  react/jsx-no-undef:                         warn
+  react/jsx-pascal-case:                      warn
+  react/jsx-uses-react:                       warn
+  react/jsx-uses-vars:                        warn
+  react/jsx-equals-spacing:                   [warn, never]
+  react/jsx-first-prop-new-line:              [warn, multiline-multiprop]
+  react/jsx-max-props-per-line:               [warn, { maximum: 1, when: multiline }]
+  react/jsx-curly-spacing:
+    - warn
+    -
+      when:                                   always
+      children:                               true
+      spacing:                                { objectLiterals: never }
+
+  react/jsx-handler-names:                    [warn, { eventHandlerPrefix: handle, eventHandlerPropPrefix: on }]
+  react/jsx-no-duplicate-props:               [warn, { ignoreCase: true }]
+  react/jsx-no-comment-textnodes:             error
+  react/jsx-no-target-blank:                  error
+
+  # JS React Rules
+  react/no-multi-comp:                        off
+  react/no-array-index-key:                   warn
+  react/no-string-refs:                       warn
+  react/no-danger:                            warn
+  react/no-unknown-property:                  warn
+  react/no-set-state:                         warn
+  react/no-children-prop:                     error
+  react/no-direct-mutation-state:             error
+  react/no-did-mount-set-state:               error
+  react/no-did-update-set-state:              error
+  react/no-will-update-set-state:             error
+  react/no-is-mounted:                        error
+  react/no-find-dom-node:                     error
+  react/no-deprecated:                        error
+  react/no-redundant-should-component-update: error
+  react/no-render-return-value:               error
+  react/no-danger-with-children:              error
+  react/sort-comp:
+    - warn
+    -
+      order:
+        - static-methods
+        - constructor
+        - lifecycle
+        - /^on.+$/
+        - /^handle.+$/
+        - getters
+        - setters
+        - /^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/
+        - everything-else
+        - /^render.+$/
+        - render
+
+  react/display-name:                         off
+  react/forbid-prop-types:                    off
+  react/prefer-stateless-function:            off
+  react/react-in-jsx-scope:                   warn
+  react/self-closing-comp:                    warn
+  react/prop-types:                           [warn, { ignore: [children, dispatch, className, style] }]
+  react/prefer-es6-class:                     [error, always]
+
+  # Redux Saga Rules
+  redux-saga/no-unhandled-errors:             off
+
+  # Node.js Rules
+  node/no-unpublished-require:
+    - warn
+    -
+      allowModules:                           []
+      convertPath:                            {}
+      tryExtensions:                          [.js, .json, .node]
+
+  # Dependencies Rules
+  dependencies/no-unresolved:                 off
+  dependencies/case-sensitive:                off
+  dependencies/no-cycles:                     warn
+  dependencies/require-json-ext:              warn

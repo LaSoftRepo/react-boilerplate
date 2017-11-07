@@ -1,14 +1,16 @@
-const path    = require('path');
-const http    = require('http');
-const express = require('express');
-const webpack = require('webpack');
-const argv    = require('yargs').argv;
-const open    = require('open');
-const cors    = require('cors');
+/* eslint-disable */
 
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const history              = require('connect-history-api-fallback');
+const path     = require('path');
+const http     = require('http');
+const express  = require('express'); // eslint-disable-line
+const webpack  = require('webpack'); // eslint-disable-line
+const { argv } = require('yargs');   // eslint-disable-line
+const open     = require('open');    // eslint-disable-line
+const cors     = require('cors');    // eslint-disable-line
+
+const webpackDevMiddleware = require('webpack-dev-middleware');       // eslint-disable-line
+const webpackHotMiddleware = require('webpack-hot-middleware');       // eslint-disable-line
+const history              = require('connect-history-api-fallback'); // eslint-disable-line
 
 const rootPath     = path.resolve(__dirname, '..');
 const configPath   = process.env.WEBPACK_CONFIG || argv.config || './webpack.config';
@@ -43,33 +45,33 @@ if (isDeveloping) {
         doneModules++;
     		const ident = module.identifier();
     		if (ident) {
-    			//const idx = activeModules.indexOf(ident);
-    			//if(idx >= 0) activeModules.splice(idx, 1);
+    			// const idx = activeModules.indexOf(ident);
+    			// if(idx >= 0) activeModules.splice(idx, 1);
     		}
-        //update();
-        //console.log('module done!', doneModules);
+        // update();
+        // console.log('module done!', doneModules);
       }
 
-      compiler.plugin("compilation", compilation => {
+      compiler.plugin('compilation', compilation => {
         if (compilation.compiler.isChild()) return;
-        //handler(0, "compiling");
-        let moduleCount = 0;
-        //console.log('start compiling...');
-        compilation.plugin("build-module", module => {
-    		  moduleCount++;
-    		  const ident = module.identifier();
-    		  if (ident) {
-    		  	//activeModules.push(ident);
-    		  }
-    		  //update();
-          //console.log('progress:', moduleCount);
+        // handler(0, "compiling");
+        // let moduleCount = 0;
+        // console.log('start compiling...');
+        compilation.plugin('build-module', module => {
+    		  // moduleCount++;
+    		  // const ident = module.identifier();
+    		  // if (ident) {
+    		  	// activeModules.push(ident);
+    		  // }
+    		  // update();
+          // console.log('progress:', moduleCount);
         });
 
-        compilation.plugin("failed-module",  moduleDone);
-        compilation.plugin("succeed-module", moduleDone);
+        compilation.plugin('failed-module',  moduleDone);
+        compilation.plugin('succeed-module', moduleDone);
       });
 
-      /*res.header('Content-Type', 'text/html');
+      /* res.header('Content-Type', 'text/html');
       res.send(`
         <!doctype html>
         <html lang="en">
@@ -80,13 +82,13 @@ if (isDeveloping) {
             <h4>Building...</h4>
           </body>
         </html>
-      `);*/
+      `); */
 
       next();
     };
   }
 
-  /*app.use((req, res, next) => {
+  /* app.use((req, res, next) => {
     const _setHeader = http.ServerResponse.prototype.setHeader;
     res.setHeader = (a, b) => {
       if (!res.getHeader('Content-Type')) {
@@ -94,12 +96,12 @@ if (isDeveloping) {
       }
     };
     next();
-  });*/
+  }); */
 
-  //app.use(webLoaderMiddleware(compiler));
+  // app.use(webLoaderMiddleware(compiler));
 
   const devMiddleware = webpackDevMiddleware(compiler, {
-    //lazy:        true,
+    // lazy:        true,
     noInfo:      config.devServer.noInfo === undefined ? true : config.devServer.noInfo,
     publicPath:  config.output.publicPath,
     headers:     config.devServer.headers,
@@ -123,11 +125,11 @@ if (isDeveloping) {
 
   app.use(devMiddleware);
   app.use(webpackHotMiddleware(compiler, {
-    log: console.log,
+    log: console.log,       // eslint-disable-line no-console
     path: '/__webpack_hmr',
   }));
 
-  /*app.get('*', (req, res) => {
+  /* app.get('*', (req, res) => {
     const filename = path.resolve(rootPath, 'app/index.html');
     compiler.inputFileSystem.readFile(filename, (err, result) => {
       console.log('>>>>>>> send bundle before error');
@@ -136,9 +138,9 @@ if (isDeveloping) {
       res.send(result);
       res.end();
     });
-  });*/
+  }); */
 } else {
-  console.log('\r\nUser static server was lounched');
+  console.info('\r\nUser static server was lounched'); // eslint-disable-line no-console
 
   app.use(cors(corsOptions));
   app.use(express.static(path.join(rootPath, 'build')));
@@ -151,6 +153,8 @@ const server = http.createServer(app);
 server.listen(port, host, err => {
   if (err) throw err;
   const url = `http://${host}:${port}`;
-  console.log('\r\nListening at', url);
+  console.info('\r\nListening at', url); // eslint-disable-line no-console
   open(url);
 });
+
+/* eslint-enable */

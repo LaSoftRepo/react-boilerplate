@@ -1,13 +1,13 @@
 
 import {
-  RESET,
   USERS_REQUESTED,
   USERS_SUCCEEDED,
   USERS_FAILURED,
   USERS_CANCELLED,
   USERS_CANCELING,
-} from './constants';
+} from './constants'
 
+// eslint-disable-next-line
 export class UsersAction {
   static request(config) {
     return {

@@ -21,14 +21,35 @@
  *  const SomeRestrictedContainer = redirect(ifUserNotAuthorize)((props) => <div></div>));
  */
 
-import { replace } from 'react-router-redux';
-import reactHOC from 'react-hoc';
-import moize from 'moize';
+import { replace } from 'react-router-redux'
+import reactHOC from 'react-hoc'
+import moize from 'moize'
 
-const redirect = (condition, pathname = '/login') =>
-  reactHOC(WrappedComponent =>
+const redirect = (condition, pathname = '/login') => (
+  reactHOC(WrappedComponent => (
     @connect(({ router }) => ({ router }))
     class extends Component {
+      static propTypes = {
+        router: PropTypes.shape({
+          location: PropTypes.any,
+        }),
+      }
+
+      static defaultProps = {
+        router: {},
+      }
+
+      static checkCondition(props) {
+        if (condition()) {
+          props.dispatch(replace({
+            pathname,
+            state: {
+              from: props.router.location // Pass current location vis context for returning ability
+            },
+          }));
+        }
+      }
+
       constructor(props) {
         super(props);
 
@@ -42,23 +63,12 @@ const redirect = (condition, pathname = '/login') =>
       }
 
       componentWillMount() {
-        this.checkCondition(this.props);
+        this.constructor.checkCondition(this.props);
       }
 
       componentWillReceiveProps(nextProps) {
         if (nextProps.router.location !== this.props.router.location) {
-          this.checkCondition(nextProps);
-        }
-      }
-
-      checkCondition(props) {
-        if (condition()) {
-          props.dispatch(replace({
-            pathname,
-            state: {
-              from: props.router.location // Pass current location vis context for returning ability
-            },
-          }));
+          this.constructor.checkCondition(nextProps);
         }
       }
 
@@ -66,6 +76,7 @@ const redirect = (condition, pathname = '/login') =>
         return <WrappedComponent { ...this.props } />
       }
     }
-  )
+  ))
+)
 
 export default moize(redirect, { maxSize: 20 });

@@ -79,12 +79,12 @@ yarn deploy
 - [x] **OfflinePlugin** (ServiceWorker cache) webpack plugin **(will replace with WorkBox in future)** ***(production only)***
 - [ ] **DllPlugin** webpack plugin
 - [x] CSS modules
-- [ ] ES Linting
+- [x] ES Linting
 - [ ] Automatic send mail to customer after deploy (WIP)
 - [ ] SCSS Linting
-- [ ] React Linting
-- [ ] React Saga Linting
-- [ ] Integrate Prettier
+- [x] React Linting
+- [x] React Saga Linting
+- [x] Integrate Prettier
 - [ ] Add **static-site-generator-webpack-plugin** plugin for create static site for crawlers in production
 - [x] Create and setup customizable server for production/staging (WIP)
 - [x] **Brotli** compression plugin ***(production only)***

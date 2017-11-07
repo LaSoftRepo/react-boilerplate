@@ -2,15 +2,15 @@
  * Create the store with asynchronously loaded reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
-import createSagaMiddleware from 'redux-saga';
-import { createLogger } from 'redux-logger';
-import { persistState } from 'redux-devtools';
-import { rootReducer } from './reducers';
-import { rootSaga } from './sagas';
-import DevTools from 'containers/DevTools';
-import { hasReduxDevToolExtension } from './internal/utils';
+import { createStore, applyMiddleware, compose } from 'redux'
+import { routerMiddleware } from 'react-router-redux'
+import createSagaMiddleware from 'redux-saga'
+import { createLogger } from 'redux-logger'   // eslint-disable-line import/no-extraneous-dependencies
+import { persistState } from 'redux-devtools' // eslint-disable-line import/no-extraneous-dependencies
+import { rootReducer } from './reducers'
+import { rootSaga } from './sagas'
+import DevTools from 'containers/DevTools'    // eslint-disable-line
+import { hasReduxDevToolExtension } from './internal/utils'
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,24 +25,24 @@ export default function configureStore(initialState, history) {
   ];
 
   // Add some debug middlewares
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     const loggerMiddleware = createLogger({
-      level:    "info",
+      level:    'info',
       collapsed: true,
       logErrors: true,
       duration:  true,
       colors: {
-        title:     () => "#3366ff",
-        prevState: () => "#75b8d4",
-        nextState: () => "#f6921e",
-        action:    () => "#60bd16",
-        error:     () => "#aa0000",
+        title:     () => '#3366ff',
+        prevState: () => '#75b8d4',
+        nextState: () => '#f6921e',
+        action:    () => '#60bd16',
+        error:     () => '#aa0000',
       },
     });
 
     middlewares.unshift(
       loggerMiddleware,
-      require("redux-immutable-state-invariant").default(),
+      require('redux-immutable-state-invariant').default(), // eslint-disable-line
     );
   }
 
@@ -50,8 +50,9 @@ export default function configureStore(initialState, history) {
     applyMiddleware(...middlewares),
   ];
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     enhancers.push(
+       // eslint-disable-next-line
       hasReduxDevToolExtension ? window.__REDUX_DEVTOOLS_EXTENSION__() : DevTools.instrument(),
       persistState(
         window.location.href.match(/[?&]debug_session=([^&#]+)\b/)
@@ -62,7 +63,7 @@ export default function configureStore(initialState, history) {
   const store = createStore(
     rootReducer(),
     initialState,
-    compose(...enhancers),
+    compose(...enhancers)
   );
 
   // Extensions for injectors
@@ -74,17 +75,18 @@ export default function configureStore(initialState, history) {
   // Make sagas hot reloadable
   if (module.hot) {
     module.hot.accept('./sagas', () => {
-      const nextSagas = require('./sagas').rootSaga;
+      const nextSagas = require('./sagas').rootSaga; // eslint-disable-line global-require
       sagaTask.cancel();
-      sagaTask.done.then(() => {
+      return sagaTask.done.then(() => {
         sagaTask = sagaMiddleware.run(nextSagas);
+        return sagaTask;
       });
     });
 
     // Make reducers hot reloadable
     module.hot.accept('./reducers', () => {
-      //store.replaceReducer(createReducer(store.injectedReducers));
-      const nextReducers = require('./reducers').rootReducer;
+      // store.replaceReducer(createReducer(store.injectedReducers));
+      const nextReducers = require('./reducers').rootReducer; // eslint-disable-line global-require
       store.replaceReducer(nextReducers());
     });
   }

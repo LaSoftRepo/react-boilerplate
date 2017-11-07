@@ -1,13 +1,15 @@
 
-.iconic:before {
-  content:      '';
-  display:      inline-block;
+.iconic {
+  &::before {
+    content:      '';
+    display:      inline-block;
 
-  width:        24px;
-  height:       24px;
-  margin-right: 20px;
+    width:        24px;
+    height:       24px;
+    margin-right: 20px;
 
-  background-position: center;
+    background-position: center;
+  }
 }
 
 // .ic-add:before {

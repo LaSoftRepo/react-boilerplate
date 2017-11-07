@@ -1,1 +1,2 @@
-export const RESET           = '@@app/reset';
+// eslint-disable-next-line
+export const RESET = '@@app/reset';

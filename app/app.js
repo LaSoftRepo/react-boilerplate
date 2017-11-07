@@ -1,8 +1,8 @@
 
 // Polyfills
 import 'es6-promise/auto'
-import 'raf/polyfill'
 import 'isomorphic-fetch'
+import 'raf/polyfill'
 
 // Styles
 import 'styles/index.scss'
@@ -15,14 +15,14 @@ import Route    from 'react-router-dom/Route'
 import Switch   from 'react-router-dom/Switch'
 
 import createBrowserHistory from 'history/createBrowserHistory'
-import ConnectedRouter from 'react-router-redux/ConnectedRouter'
+import ConnectedRouter      from 'react-router-redux/ConnectedRouter'
 
 // Utils
 import { hasReduxDevToolExtension } from 'sources/internal/utils'
 import ErrorBoundary from 'components/internal/ErrorBoundary'
 
 // Cofigurations
-import configureStore from './sources/store'
+import configureStore   from './sources/store'
 
 // Main containers
 import App              from 'containers/App'
@@ -31,12 +31,12 @@ import NotFound         from 'containers/NotFound'
 import LanguageProvider from 'containers/LanguageProvider'
 import configureRoutes  from './sources/routes'
 
-//import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
+// import ConfirmationRenderer from './sources/components/ConfirmationRenderer';
 
 import { translations } from './sources/i18n'
 
 const history = createBrowserHistory({
-  //getUserConfirmation: ConfirmationRenderer
+  // getUserConfirmation: ConfirmationRenderer
 });
 
 const containerNode = document.getElementById('app');
@@ -45,7 +45,7 @@ const initialState = {};
 const store  = configureStore(initialState, history);
 const routes = configureRoutes(store);
 
-const render = translations => {
+const render = translations => { // eslint-disable-line
   ReactDOM.render(
     <div>
       <Provider store={ store }>
@@ -84,7 +84,7 @@ if (module.hot) {
     try {
       render(translations);
     } catch (e) {
-      location.reload(true);
+      window.location.reload(true);
     }
   });
 }
@@ -103,26 +103,15 @@ if (!window.Intl) {
 } else {
   console.log('intl supported');
   render(translations);
-}*/
+} */
 
 render(translations);
 
 if (process.env.NODE_ENV !== 'production') {
-  console.log('React v' + React.version);
+  // eslint-disable-next-line no-console
+  console.info(`React v${ React.version }`);
 
-  if (__USE_PERFORMANCE_TOOLS__) {
-    // according this issue https://github.com/garbles/why-did-you-update/issues/45
-    let createClass = React.createClass;
-    Object.defineProperty(React, 'createClass', {
-      set: nextCreateClass => { createClass = nextCreateClass }
-    });
-    // eslint-disable-next-line global-require
-    const { whyDidYouUpdate } = require('why-did-you-update');
-    whyDidYouUpdate(React, { exclude: /^(DevTools|DockMonitor|Route|Router)$/ });
-  }
-}
-
-// Install ServiceWorker and AppCache
-if (process.env.NODE_ENV === 'production') {
-  require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+  // Install ServiceWorker and AppCache
+  // eslint-disable-next-line global-require
+  require('offline-plugin/runtime').install();
 }

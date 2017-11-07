@@ -1,12 +1,9 @@
-'use strict'
 
-// TODO
-// + Add Dll plugin
-// + Add and config eslint
+require('dotenv').config();
 
 const path                  = require('path');
 const chalk                 = require('chalk');
-const argv                  = require('yargs').argv;
+const { argv }              = require('yargs');
 const webpack               = require('webpack');
 
 // Core plugins
@@ -29,17 +26,13 @@ const ModuleScopePlugin             = require('react-dev-utils/ModuleScopePlugin
 const InterpolateHtmlPlugin         = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const clearConsole                  = require('react-dev-utils/clearConsole');
-const eslintFormatter               = require('react-dev-utils/eslintFormatter');
+const prettyFormatter               = require('eslint-formatter-pretty');
 const openBrowser                   = require('react-dev-utils/openBrowser');
+const { prettifyPackageName }       = require('./utils');
+// const Mailer        = require('./mailer');
 
 const Path          = require('./paths');
-const Mailer        = require('./mailer');
 const packageConfig = require('../package.json');
-
-const SEPARATOR_REGEX  = /[-_]/;
-const CAPITALIZE_REGEX = /(^|[^a-zA-Z\u00C0-\u017F'])([a-zA-Z\u00C0-\u017F])/g;
-
-require('dotenv').config();
 
 // Config webpack enviroment
 const PROJECT_NAME          = prettifyPackageName(packageConfig.name) || 'Boilerplate';
@@ -56,7 +49,7 @@ const HOST = argv.host || (isWindow ? '127.0.0.1' : '0.0.0.0');
 const PORT = argv.port || 8080;
 const env  = process.env.NODE_ENV || 'development';
 
-const isTest       = env === 'test';
+// const isTest       = env === 'test';
 const isProduction = env === 'production';
 const isAWSDeploy  = !!process.env.deploy;
 
@@ -95,7 +88,6 @@ const htmlMinifyConfig = {
 };
 
 const stats = {
-  entrypoints: true,
   errors: true,
   errorDetails: true,
   cached: true,
@@ -112,18 +104,18 @@ const stats = {
   children: false,
   source: false,
   publicPath: false,
-  excludeAssets: [/^icons-[a-z0-9\/_.-]+/],
+  excludeAssets: [/^icons-[a-z0-9/_.-]+/],
 };
 
 // Common plugins
 const plugins = [
   new ProgressBarPlugin({
-      width:          70,
-      format:         chalk.green.bold('Build :bar :percent'),
-      complete:       '•',
-      incomplete:     '◦',
-      clear:          true,
-      renderThrottle: 96,
+    width:          70,
+    format:         chalk.green.bold('Build :bar :percent'),
+    complete:       '•',
+    incomplete:     '◦',
+    clear:          true,
+    renderThrottle: 96,
   }),
   new webpack.NoEmitOnErrorsPlugin(),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
@@ -136,7 +128,7 @@ const plugins = [
     '__USE_PERFORMANCE_TOOLS__': JSON.stringify(USE_PERFORMANCE_TOOLS),
   }),
   new InterpolateHtmlPlugin({
-    PUBLIC_URL: Path.to.public.replace(/\/$/, ""),
+    PUBLIC_URL: Path.to.public.replace(/\/$/, ''),
   }),
   new HtmlWebpackPlugin({
     title:    PROJECT_NAME,
@@ -175,7 +167,7 @@ function styleLoaders(extract, modules = false) {
     {
       loader: require.resolve('css-loader'),
       options: {
-        minimize: isProduction,
+        minimize:  isProduction,
         sourceMap: !isProduction,
         importLoaders: 2,
         alias: {
@@ -195,12 +187,12 @@ function styleLoaders(extract, modules = false) {
       loader: require.resolve('postcss-loader'),
       options: {
         sourceMap: !isProduction,
-        ident: 'postcss',
+        ident:     'postcss',
 
         plugins: () => [
-          require('postcss-nested')(),
-          require('postcss-flexbugs-fixes')(),
-          require('postcss-cssnext')({
+          require('postcss-nested')(),         // eslint-disable-line
+          require('postcss-flexbugs-fixes')(), // eslint-disable-line
+          require('postcss-cssnext')({         // eslint-disable-line
             browsers: [
               '> 1%',
               'Explorer >= 10',
@@ -210,7 +202,7 @@ function styleLoaders(extract, modules = false) {
               'Android >= 4.1',
             ],
           }),
-          require('postcss-browser-reporter')()
+          require('postcss-browser-reporter')() // eslint-disable-line
         ]
       },
     },
@@ -219,7 +211,7 @@ function styleLoaders(extract, modules = false) {
       options: {
         outputStyle: 'expanded',
         includePaths: ['node_modules', Path.to.app],
-        //sourceMap: !isProduction,
+        // sourceMap: !isProduction,
       },
     },
   ];
@@ -285,26 +277,26 @@ if (isProduction) {
       allChunks: true,
     }),
     new FaviconsWebpackPlugin({
-      logo: 'favicon.png',
-      prefix: 'icons-[hash]/',
+      logo:            'favicon.png',
+      prefix:          'icons-[hash]/',
       persistentCache: true,
-      inject: true,
+      inject:          true,
       icons: {
-        android: true,
-        appleIcon: true,
-        appleStartup: true,
-        coast: false,
-        favicons: true,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
+        android:       true,
+        appleIcon:     true,
+        appleStartup:  true,
+        favicons:      true,
+        coast:         false,
+        firefox:       false,
+        opengraph:     false,
+        twitter:       false,
+        yandex:        false,
+        windows:       false,
       },
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
-    ], { ignore: [ /.DS_Store/ ] }),
+    ], { ignore: [ /.DS_Store/ ] })
   );
 
   if (USE_OFFLINE_CACHE) {
@@ -314,8 +306,17 @@ if (isProduction) {
         publicPath: Path.to.public,
         excludes: ['**/.*', '**/*.map', '.htaccess'],
         caches: {
-          main: [':rest:'],
-          additional: ['vendor.*.js'],
+          main: [
+            'styles/style.*.css',
+            'vendor.*.js',
+            'app.*.js'
+          ],
+          additional: [':externals:'],
+          optional:   [':rest:'],
+        },
+        externals: ['/'],
+        ServiceWorker: {
+          navigateFallbackURL: '/'
         },
         safeToUseOptionalCaches: true,
         AppCache: false,
@@ -337,11 +338,11 @@ if (isProduction) {
 
   if (isAWSDeploy) {
     const url = 'http://react-boilerplate-test.s3-website-us-west-2.amazonaws.com';
-    console.log('Start deploing to AWS...')
-    console.log('url: ' + chalk.green.bold(url));
+    console.info('Start deploing to AWS...'); // eslint-disable-line
+    console.info(`url: ${chalk.green.bold(url)}`); // eslint-disable-line
 
     if (USE_MAIL_AFTER_DEPLOY) {
-      //let mailer = new Mailer();
+      // let mailer = new Mailer();
     }
 
     plugins.push(
@@ -354,11 +355,20 @@ if (isProduction) {
         s3UploadOptions: {
           Bucket: process.env.AWS_BUCKET,
           ContentEncoding(fileName) {
-            if (/\.gz/.test(fileName))
+            if (/\.br/.test(fileName))
+                return 'br';
+
+            else if (/\.gz/.test(fileName))
               return 'gzip';
 
-            if (/\.br/.test(fileName))
-              return 'br';
+            return void 0;
+          },
+
+          ContentType(fileName) {
+            if (/\.js/.test(fileName))
+              return 'application/javascript';
+
+            return void 0;
           },
         },
         // cloudfrontInvalidateOptions: {
@@ -371,7 +381,7 @@ if (isProduction) {
           // `node_modules/scottyjs/bin/scotty.js --spa -u -r eu-central-1 -s ./build -b ${PROJECT_NAME}`,
           openBrowser(url),
         ],
-      }),
+      })
     );
   }
 
@@ -381,7 +391,7 @@ if (isProduction) {
   plugins.push(
     new webpack.SourceMapDevToolPlugin({
        filename:   '[file].map',
-       append:     '\n//# source' + 'MappingURL=[url]',
+       append:     '\n//# sourceMappingURL=[url]',
        exclude:    /^vendor/,
        columns:    true,
        lineToLine: true,
@@ -392,18 +402,22 @@ if (isProduction) {
     new webpack.LoaderOptionsPlugin({
       options: {
         context: Path.to.app,
+        eslint: {
+          quite: true,
+          formatter: prettyFormatter,
+        },
       },
       debug: true,
-    }),
+    })
   );
 }
 
 
-module.exports = (env = {}) => {
+module.exports = () => {
 
   clearConsole();
 
-  let appEntry = [
+  const appEntry = [
     'react-hot-loader/patch',
     'react-dev-utils/webpackHotDevClient'
   ];
@@ -438,27 +452,28 @@ module.exports = (env = {}) => {
     performance: isProduction && {
       maxEntrypointSize: 1 * 1024 * 1024,
       maxAssetSize:      5 * 1024 * 1024,
-      hints: "warning",
+      hints: 'warning',
     },
 
     entry: {
       app: appEntry,
       vendor: [
-        "babel-polyfill",
-        "es6-promise",
-        "history",
-        "isomorphic-fetch",
-        "prop-types",
-        "react",
-        "react-css-modules",
-        "react-dom",
-        "react-hoc",
-        "react-intl",
-        "react-redux",
-        "react-router",
-        "react-router-dom",
-        "react-router-redux",
-        "redux",
+        'babel-polyfill',
+        'es6-promise',
+        'history',
+        'isomorphic-fetch',
+        'prop-types',
+        'react',
+        'react-dom',
+        'react-hoc',
+        'react-intl',
+        'react-redux',
+        'react-router',
+        'react-router-dom',
+        'react-router-redux',
+        'react-css-modules',
+        'redux-saga',
+        'redux',
       ],
     },
 
@@ -497,8 +512,7 @@ module.exports = (env = {}) => {
       noParse: [/moment.js/, /\.\/data\//],
       rules: [
         {
-          test: /\.jsx?$/,
-          enforce: 'pre',
+          test:    /\.jsx?$/,
           include: Path.to.app,
           exclude: /(node_modules|bower_components|build|spec|tests)/,
           use: [
@@ -508,27 +522,28 @@ module.exports = (env = {}) => {
                 cacheDirectory: Path.to.cache,
               },
             },
-            {
-              loader: require.resolve('thread-loader'),
-              options: {
-                workers:            8,
-                workerParallelJobs: 16,
-                poolParallelJobs:   16,
-              },
-            },
+            // {
+            //   loader: require.resolve('thread-loader'),
+            //   options: {
+            //     workers:            4,
+            //     workerParallelJobs: 4,
+            //     poolParallelJobs:   2,
+            //   },
+            // },
             {
               loader: require.resolve('babel-loader'),
               options: {
                 ignore: false,
               },
             },
-            // {
-            //   loader: require.resolve('eslint-loader'),
-            //   options: {
-            //     formatter: eslintFormatter,
-            //   },
-            // },
           ],
+        },
+        {
+          test:    /\.jsx?$/,
+          enforce: 'pre',
+          include: Path.to.app,
+          exclude: /(node_modules|bower_components|build|spec|tests)/,
+          loader:  require.resolve('eslint-loader'),
         },
         {
           test: /\.module\.scss$/,
@@ -649,7 +664,7 @@ module.exports = (env = {}) => {
         aggregateTimeout: 240,
         ignored: [
           /node_modules/,
-          "../build/**/*.*",
+          '../build/**/*.*',
           '../server/**/*.*',
           '../.cache/*.*'
         ],
@@ -657,11 +672,4 @@ module.exports = (env = {}) => {
       } : false,
     },
   };
-}
-
-function prettifyPackageName(name) {
-  if (!name || name === '') return null;
-  return name
-    .replace(SEPARATOR_REGEX, ' ')
-    .replace(CAPITALIZE_REGEX, m => m.toUpperCase());
 }

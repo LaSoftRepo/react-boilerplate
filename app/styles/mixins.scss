@@ -1,91 +1,86 @@
 
-@import "~sass-mediaqueries/_media-queries";
+@import '~sass-mediaqueries/_media-queries'; // sass-lint:disable-line clean-import-paths
 
-/*
- * Helpers
- */
+// Helpers
 
 @function capitalize($string) {
   @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
 }
 
-@function str-replace($string, $search, $replace: "") {
-	$index: str-index($string, $search);
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
 
-	@if $index {
-		@return str-slice($string, 1, $index - 1) + $replace +
-            str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+    str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
 	}
 
-	@return $string;
+  @return $string;
 }
 
 
 
-/**
- * font-smoothing [Mixin]
- * Usage:
- * body {
- *   @include font-smoothing(on);
- * }
- */
+//
+// font-smoothing [Mixin]
+// Usage:
+// body {
+//   @include font-smoothing(on);
+// }
+//
 
 @mixin font-smoothing($value: on) {
   @if $value == on {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  @else {
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: antialiased;          // sass-lint:disable-line no-vendor-prefixes
+    -moz-osx-font-smoothing: grayscale;           // sass-lint:disable-line no-vendor-prefixes
+  } @else {
+    -webkit-font-smoothing: subpixel-antialiased; // sass-lint:disable-line no-vendor-prefixes
+    -moz-osx-font-smoothing: auto;                // sass-lint:disable-line no-vendor-prefixes
   }
 }
 
 
 @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
-	$extmods: (
-		eot: "?",
-		svg: "#" + str-replace($name, " ", "_")
+  $extmods: (
+    eot: '?',
+    svg: '#' + str-replace($name, ' ', '_')
 	);
 
-	$formats: (
-		otf: "opentype",
-		ttf: "truetype"
+  $formats: (
+    otf: 'opentype',
+    ttf: 'truetype'
 	);
 
-  $src: local(quote($name + if($weight != "normal", " " + capitalize($weight), "")));
+  $src: local(quote($name + if($weight != 'normal', ' ' + capitalize($weight), '')));
 
-	@each $ext in $exts {
-		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
-		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-		$src:    append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src:    append($src, url(quote($path + '.' + $extmod)) format(quote($format)), comma);
 	}
 
-	@font-face {
-		font-family: quote($name);
-		font-style:  $style;
-		font-weight: $weight;
-		src:         $src;
+  @font-face {
+    font-family: quote($name);
+    font-style:  $style;
+    font-weight: $weight;
+    src:         $src;
 	}
 }
 
 
 
-@function pxToRem($size) {
+@function rem($size) {
   @return ($size / 16px) * 1rem;
 }
 
 
 @mixin font-size($size) {
   font-size: $size;
-  font-size: pxToRem($size);
+  font-size: rem($size); // sass-lint:disable-line no-duplicate-properties
 }
 
 
-/**
- * alpha [Function]
- * Usage: background-color: alpha(50)
- */
+// alpha [Function]
+// Usage: background-color: alpha(50)
 
 @function alpha($value) {
   @return rgba(0, 0, 0, $value / 100);
@@ -93,13 +88,12 @@
 
 
 @mixin retina {
-  @media
-    only screen and (-webkit-min-device-pixel-ratio: 2),
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
     only screen and (min--moz-device-pixel-ratio: 2),
-    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (-o-min-device-pixel-ratio: 2 / 1),
     only screen and (min-device-pixel-ratio: 2),
     only screen and (min-resolution: 192dpi),
     only screen and (min-resolution: 2dppx) {
-    @content;
-  }
+      @content;
+    }
 }

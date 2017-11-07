@@ -1,0 +1,57 @@
+options:
+  max-warnings:                 50
+
+files:
+  include:                      'app/**/*.s+(a|c)ss'
+  ignore:
+    - 'node_modules/**/*.*'
+
+rules:
+  no-warn:                      warn
+  no-debug:                     warn
+  no-ids:                       error
+  no-important:                 error
+  no-vendor-prefixes:
+    - warn
+    -
+      ignore-non-standard:      true
+
+  hex-notation:
+    - warn
+    -
+      style:                    lowercase
+
+  no-css-comments:              off
+  nesting-depth:
+    - warn
+    - max-depth:                3
+
+  property-sort-order:
+    - warn
+    -
+      order:
+        - content
+        - display
+        - flex
+        - flex-direction
+        - flex-flow
+        - position
+        - width
+        - height
+        - min-width
+        - min-height
+        - max-width
+        - max-height
+        - margin
+        - /^margin\-+/
+        - padding
+        - /^padding\-+/
+        - border
+        - /^border\-+/
+        - background
+        - /^background\-+/
+        - color
+        - font
+        - /font\-+/
+        - line-height
+      ignore-custom-properties: true

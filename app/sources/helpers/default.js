@@ -1,7 +1,8 @@
 
 export default {
-  noop: () => {},
-  identity: value => value,
-  comparator: (a, b) => a > b ? 1 : (a < b ? -1 : 0),
-  momentComparator: (a, b) => a.diff(b),
+  get noop() { return () => {} },
+  get identity() { return value => value },
+  // eslint-disable-next-line no-nested-ternary
+  get comparator() { return (a, b) => a > b ? 1 : (a < b ? -1 : 0) },
+  get momentComparator() { return (a, b) => a.diff(b) }
 };

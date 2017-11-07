@@ -21,6 +21,7 @@ export default class Playground extends Component {
   }
 
   handleChange = ({ currentTarget }) => {
+    // eslint-disable-next-line
     this.setState({ layout: currentTarget.value });
   }
 

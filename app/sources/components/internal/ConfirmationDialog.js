@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+
+/* eslint-disable */
 
 export default class ConfirmationDialog extends React.Component {
   constructor(props) {
@@ -42,3 +42,5 @@ export default class ConfirmationDialog extends React.Component {
     return <div style={{ position: 'fixed', width: '500px', height: '200px', backgroundColor: '#f00' }} >Dialog</div>
   }
 }
+
+/* eslint-enable */

@@ -1,3 +1,5 @@
+// sass-lint:disable quotes
+
 // Based on ragrid.css
 // See https://argyleink.github.io/ragrid how use this
 // This version has some changes in order attribute. Use "reverse" instead order="reverse"
@@ -38,135 +40,167 @@
   &[reverse~="true"] {
     flex-direction: row-reverse;
   }
+
   &[reverse~="false"] {
     flex-direction: row;
   }
+
   &[center] {
     align-items: center;
     justify-content: center;
   }
+
   &[nowrap] {
     flex-wrap: nowrap;
   }
+
   &[nowrap~="false"] {
     flex-wrap: wrap;
   }
 
-  /*
-  ALIGN
-    - Horizontal: Left, Center, Right
-    - Vertical: Top, Center, Bottom
-  */
+
+  // ALIGN
+  // - Horizontal: Left, Center, Right
+  // - Vertical: Top, Center, Bottom
+
   &[horizontal-align~="left"] {
     justify-content: flex-start;
   }
+
   &[horizontal-align~="center"] {
     justify-content: center;
   }
+
   &[horizontal-align~="right"] {
     justify-content: flex-end;
   }
+
   &[vertical-align~="top"] {
     align-items: flex-start;
   }
   &[vertical-align~="center"] {
     align-items: center;
   }
+
   &[vertical-align~="bottom"] {
     align-items: flex-end;
   }
+
   &[vertical-align~="baseline"] {
     align-items: baseline;
   }
 
-  /*
-  DISTRIBUTE
-    - Horizontal: Left, Center, Right
-    - Vertical: Top, Center, Bottom
-  */
+  // DISTRIBUTE
+  // - Horizontal: Left, Center, Right
+  // - Vertical: Top, Center, Bottom
+
   &[horizontal-distribute~="around"] {
     justify-content: space-around;
   }
+
   &[horizontal-distribute~="between"] {
     justify-content: space-between;
   }
+
   &[horizontal-distribute~="equal"] {
     > * {
       flex-grow: 1;
     }
   }
+
   &[vertical-distribute~="around"] {
     align-content: space-around;
   }
+
   &[vertical-distribute~="between"] {
     align-content: space-between;
   }
+
   &[vertical-distribute~="equal"] {
     align-items: stretch;
   }
 
-  /*
-  SIZE
-    - Instead of col-xs-12 or whatever
-    - Specify size on the parent
-  */
+
+  // SIZE
+  // - Instead of col-xs-12 or whatever
+  // - Specify size on the parent
+
   &[columns~="1"] > * {
     flex-basis: 100%;
   }
+
   &[columns~="2"] > * {
     flex-basis: (100% / 2);
   }
+
   &[columns~="3"] > * {
     flex-basis: (100% / 3);
   }
+
   &[columns~="4"] > * {
     flex-basis: (100% / 4);
   }
+
   &[columns~="5"] > * {
     flex-basis: (100% / 5);
   }
+
   &[columns~="6"] > * {
     flex-basis: (100% / 6);
   }
+
   &[columns~="7"] > * {
     flex-basis: (100% / 7);
   }
+
   &[columns~="8"] > * {
     flex-basis: (100% / 8);
   }
+
   &[columns~="9"] > * {
     flex-basis: (100% / 9);
   }
+
   &[columns~="10"] > * {
     flex-basis: (100% / 10);
   }
+
   &[columns~="11"] > * {
     flex-basis: (100% / 11);
   }
+
   &[columns~="12"] > * {
     flex-basis: (100% / 12);
   }
+
   &[columns~="13"] > * {
     flex-basis: (100% / 13);
   }
+
   &[columns~="14"] > * {
     flex-basis: (100% / 14);
   }
+
   &[columns~="15"] > * {
     flex-basis: (100% / 15);
   }
+
   &[columns~="16"] > * {
     flex-basis: (100% / 16);
   }
+
   &[columns~="17"] > * {
     flex-basis: (100% / 17);
   }
+
   &[columns~="18"] > * {
     flex-basis: (100% / 18);
   }
+
   &[columns~="19"] > * {
     flex-basis: (100% / 19);
   }
+
   &[columns~="20"] > * {
     flex-basis: (100% / 20);
   }
@@ -176,6 +210,7 @@
 [layout~="columns"] {
   &[vertical-distribute~="equal"] {
     align-items: stretch;
+
     > * {
       height: auto;
     }
@@ -190,12 +225,15 @@
   &[reverse] {
     flex-direction: column-reverse;
   }
+
   &[reverse~="false"] {
     flex-direction: column;
   }
+
   &[horizontal-align~="center"] {
     align-items: center;
   }
+
   &[horizontal-align~="right"] {
     align-items: flex-end;
   }
@@ -203,9 +241,11 @@
   &[vertical-distribute~="around"] {
     justify-content: space-around;
   }
+
   &[vertical-distribute~="between"] {
     justify-content: space-between;
   }
+
   &[vertical-distribute~="equal"] {
     > * {
       width: initial;
