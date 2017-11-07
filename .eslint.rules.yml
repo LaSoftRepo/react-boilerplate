@@ -29,7 +29,14 @@ rules:
   no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
   quotes:                                     [warn, single, { avoidEscape: true }]
   no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
-  comma-dangle:                               [warn, { objects: only-multiline, imports: only-multiline, arrays: only-multiline, exports: only-multiline, functions: never }]
+  comma-dangle:
+    - warn
+    -
+      objects:                                only-multiline
+      imports:                                only-multiline
+      arrays:                                 only-multiline
+      exports:                                only-multiline
+      functions:                              never
 
   class-methods-use-this:
     - warn
@@ -86,7 +93,13 @@ rules:
   react/jsx-equals-spacing:                   [warn, never]
   react/jsx-first-prop-new-line:              [warn, multiline-multiprop]
   react/jsx-max-props-per-line:               [warn, { maximum: 1, when: multiline }]
-  react/jsx-curly-spacing:                    [warn, { when: always, children: true, spacing: { objectLiterals: never } }]
+  react/jsx-curly-spacing:
+    - warn
+    -
+      when:                                   always
+      children:                               true
+      spacing:                                { objectLiterals: never }
+
   react/jsx-handler-names:                    [warn, { eventHandlerPrefix: handle, eventHandlerPropPrefix: on }]
   react/jsx-no-duplicate-props:               [warn, { ignoreCase: true }]
   react/jsx-no-comment-textnodes:             error
