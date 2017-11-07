@@ -29,7 +29,7 @@ export function capitalize(string, words = false) {
 
 export function formatNumber(value) {
   if (!value) return '0';
-  let parts = value.toString().split('.');
+  const parts = value.toString().split('.');
   parts[0] = parts[0].replace(NUM_GROUP_REGEX, ',');
   return parts.join('.');
 }
@@ -41,7 +41,7 @@ export function formatNumber(value) {
 
 export function parseValueUnit(input, trim = true) {
   if (typeof input !== 'string') return { value: 0, unit: '' };
-  const [value, unit] = compact(input.split(SPLIT_VALUE_UNIT_REGEX));
+  const [value, unit] = compact(input.split(SPLIT_VALUE_UNIT_REGEX)); // eslint-disable-line
   return { value: +value, unit: trim && unit ? unit.trim() : unit };
 }
 
@@ -62,7 +62,7 @@ export function unsnakeString(str, rejoinChar = ' ') {
 
 export function getExtension(filename, preserveCase = false) {
   if (!filename) return '';
-  let extention = (FILE_PATH_REGEX.exec(filename) || [''])[0];
+  const extention = (FILE_PATH_REGEX.exec(filename) || [''])[0];
   return preserveCase ? extention : extention.toLowerCase();
 }
 
@@ -114,11 +114,11 @@ export function isObject(arg) {
 }
 
 export function isDate(arg, notEmpty = false) {
-  return arg instanceof Date && !isNaN(+arg) && (notEmpty ? +arg !== 0 : true);
+  return arg instanceof Date && !Number.isNaN(+arg) && (notEmpty ? +arg !== 0 : true);
 }
 
 export function isRegExp(arg) {
-  return toString.call(arg) == '[object RegExp]';
+  return toString.call(arg) === '[object RegExp]';
 }
 
 export function isPromise(arg) {
@@ -174,7 +174,8 @@ export function cleanup(array) {
 export function shuffle(array) {
   const len = array.length - 1;
   for (let index = len; index >= 0; --index) {
-    let pivot = Math.round(Math.random() * len);
+    const pivot = Math.round(Math.random() * len);
+    // eslint-disable-next-line
     [array[pivot], array[index]] =
     [array[index], array[pivot]];
   }

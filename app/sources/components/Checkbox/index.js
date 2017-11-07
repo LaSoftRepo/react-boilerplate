@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus, jsx-a11y/click-events-have-key-events */
 
 import { State } from 'react-powerplug'
 import Default from 'helpers/default'
@@ -18,7 +19,16 @@ export default class Checkbox extends PureComponent {
     false: true,
   }
 
+  static propTypes = {
+		// id:         PropTypes.string,
+		value:      PropTypes.bool,
+		onChange:   PropTypes.func,
+    states:     PropTypes.object,
+    stateViews: PropTypes.object,
+	}
+
 	static defaultProps = {
+    // id:         void 0,
 		value:      false,
 		onChange:   Default.noop,
     states:     Checkbox.Tristate,
@@ -26,14 +36,7 @@ export default class Checkbox extends PureComponent {
       null:  '﹣',
       true:  '✓',
       false: ' ',
-    }
-	}
-
-	static propTypes = {
-		id:       PropTypes.string,
-		value:    PropTypes.bool,
-		onChange: PropTypes.func,
-    states:   PropTypes.object,
+    },
 	}
 
   trigger = ({ value }) => {
@@ -45,20 +48,25 @@ export default class Checkbox extends PureComponent {
 
 	render() {
     const {
-      id,
+      // id,
       value,
-      multistate,
+      // multistate,
       stateViews,
-      onChange,
+      // onChange,
     } = this.props;
 
     return (
       <State initial={{ value }}>
-        {({ state: { value }, setState }) => (
-          <div className='checkbox' onClick={ () => setState(this.trigger) }>
-            { stateViews[value] }
+        { ({ state, setState }) => (
+          <div
+            role='checkbox'
+            className='checkbox'
+            aria-checked={ state }
+            onClick={ () => setState(this.trigger) }
+          >
+            { stateViews[state.value] }
           </div>
-        )}
+        ) }
       </State>
     );
 	}

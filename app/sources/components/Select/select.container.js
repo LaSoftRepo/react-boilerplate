@@ -1,23 +1,27 @@
 
-import Types from 'helpers/types'
-import { isFunction, isString } from 'helpers/common'
-import fuzzysearch from 'fuzzysearch'
+// import Types from 'helpers/types'
+import { isFunction } from 'helpers/common'
+import fuzzysearch    from 'fuzzysearch'
 
 function defaultFilter(options, input) {
   if (!input) return options;
-  input = input.toLowerCase();
+  input = input.toLowerCase(); // eslint-disable-line no-param-reassign
   return options.filter(option => this(option.toLowerCase(), input));
 }
 
 export default class SelectContainer extends Component {
+  static propTypes = {
+    containerKey: PropTypes.string,
+  }
+
+  static defaultProps = {
+    containerKey: void 0,
+  }
+
   static defaultFilters = {
     includes:   defaultFilter.bind((option, input) => option.includes(input)),
     startsWith: defaultFilter.bind((option, input) => option.startsWith(input)),
     fuzzy:      defaultFilter.bind((option, input) => fuzzysearch(input, option)),
-  }
-
-  state = {
-    isOpen: false,
   }
 
   onDropdownFocus() {
@@ -33,43 +37,37 @@ export default class SelectContainer extends Component {
     }
   }
 
-  renderLabel = ({ getLabelProps, label, required, ...props }) => {
-    return label ? (
-      <label className={ cc({ required }) } { ...getLabelProps() }>{ label }</label>
-    ) : null;
-  }
+  renderLabel = ({ getLabelProps, label, required }) => label ? (
+    // eslint-disable-next-line jsx-a11y/label-has-for
+    <label className={ cc({ required }) } { ...getLabelProps() }>{ label }</label>
+  ) : null
 
-  renderInput = ({ getInputProps, getButtonProps, filter, placeholder, autoFocus, disabled, required, readOnly, ...props }) => {
-    return (
-      <input
-        type={ !filter ? 'button' : 'text' }
-        { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly }) }
-        { ...!filter ? getButtonProps() : {} }
-      />
-    );
-  }
+  renderInput = ({ getInputProps, getButtonProps, filter, placeholder, autoFocus, disabled, required, readOnly }) => (
+    <input
+      type={ !filter ? 'button' : 'text' }
+      { ...getInputProps({ placeholder, autoFocus, disabled, required, readOnly }) }
+      { ...!filter ? getButtonProps() : {} }
+    />
+  )
 
-  renderControls = ({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled, ...props }) => {
-    return [
-      filter && inputValue ? (
-        <button
-          key='0'
-          aria-label='clear selection'
-          className='select-button clear'
-          disabled={ disabled }
-          onClick={ clearSelection }
-        />
-      ) : null,
+  renderControls = ({ getButtonProps, clearSelection, filter, inputValue, isOpen: open, disabled }) => [
+    filter && inputValue ? (
       <button
-        key='1'
-        className={ cc({'select-button arrow': true, open }) }
-        { ...getButtonProps({ disabled }) }
-      />,
-    ];
-  }
+        key='0'
+        aria-label='clear selection'
+        className='select-button clear'
+        disabled={ disabled }
+        onClick={ clearSelection }
+      />
+    ) : null,
+    <button
+      key='1'
+      className={ cc({'select-button arrow': true, open }) }
+      { ...getButtonProps({ disabled }) }
+    />,
+  ]
 
-  renderOption = ({ getItemProps, optionStyle, ...props }) => {
-    const item  = props.item;
+  renderOption = ({ getItemProps, optionStyle, item, ...props }) => {
     const style = isFunction(optionStyle) ? optionStyle(props) : optionStyle;
     return (
       <div key={ item } className='select-option' { ...getItemProps({ style, item }) }>{ item }</div>
@@ -82,7 +80,7 @@ export default class SelectContainer extends Component {
       if (isFunction(filter)) {
         filtered = filter(options, inputValue);
       } else {
-        const defaultFilters = SelectContainer.defaultFilters;
+        const { defaultFilters } = SelectContainer;
         filtered = (defaultFilters[filter] || defaultFilters.includes)(options, inputValue);
       }
     }

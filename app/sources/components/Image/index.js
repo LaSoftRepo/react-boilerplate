@@ -2,7 +2,18 @@
 
 export default class Image extends Component {
 
+  static propTypes = {
+    alt:     PropTypes.string,
+    title:   PropTypes.string,
+    sources: PropTypes.object,
+    style:   PropTypes.object,
+  }
+
   static defaultProps = {
+    alt: '',
+    title: '',
+    sources: {},
+
     style: {
       width:  'auto',
       height: 'auto',
@@ -11,7 +22,7 @@ export default class Image extends Component {
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'top left',
-    }
+    },
   }
 
   state = {
@@ -21,11 +32,13 @@ export default class Image extends Component {
   componentDidMount() {
     const { src, complete } = this.img;
     if (complete) {
+      // eslint-disable-next-line react/no-did-mount-set-state, react/no-set-state
       this.setState(() => ({ src }));
     }
   }
 
-  onImageLoaded = ({ target: { src } }) => {
+  handleImageLoaded = ({ target: { src } }) => {
+    // eslint-disable-next-line react/no-set-state
     this.setState(() => ({ src }));
   }
 
@@ -50,9 +63,9 @@ export default class Image extends Component {
     return (
       <div style={ divStyle }>
         <img
-          ref={ self => this.img = self }
+          ref={ self => { this.img = self } }
           style={ imgStyle }
-          onLoad={ this.onImageLoaded }
+          onLoad={ this.handleImageLoaded }
           src={ src }
           srcSet={ srcSet }
           title={ title }

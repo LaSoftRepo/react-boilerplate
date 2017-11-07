@@ -1,4 +1,4 @@
-import { goBack } from 'react-router-redux'
+// import { goBack } from 'react-router-redux'
 
 import Select     from 'components/Select'
 import Image      from 'components/Image'
@@ -16,9 +16,11 @@ export default class Playground extends Component {
     simpleData: [ 'Apple', 'Google', 'Lenovo', 'Dell', 'HP', 'Gorilla Glass', 'Air BnB', 'Luke Skywalker' ],
   }
 
+  /*
   state = {
     layout: 'rows',
   }
+  */
 
   handleChange = ({ currentTarget }) => {
     // eslint-disable-next-line
@@ -26,12 +28,13 @@ export default class Playground extends Component {
   }
 
   render() {
+    // eslint-disable-next-line
     const { dispatch, simpleData } = this.props;
-    const layout = this.state.layout;
+    // const { layout } = this.state;
 
     return (
       <div layout='row' horizontal-distribute='equal'>
-        {/* <button onClick={ () => dispatch(goBack()) }>Back</button>
+        { /* <button onClick={ () => dispatch(goBack()) }>Back</button>
         <div layout='rows' horizontal-align='center'>
 
           <select size='3' value={ layout } onChange={ this.handleChange }>
@@ -49,7 +52,7 @@ export default class Playground extends Component {
             <div className='demo-box'></div>
             <div className='demo-box'></div>
           </section>
-        </div> */}
+        </div> */ }
 
         <div layout='column'>
           <Select
@@ -75,16 +78,16 @@ export default class Playground extends Component {
             filter={ (options, value) => value ? filter(options, value) : options }
             options={ simpleData }
           >
-            {({ SelectContainer, ...props }) => (
+            { ({ SelectContainer, ...props }) => (
               <SelectContainer { ...props } />
-            )}
+            ) }
           </Select>
 
           <Checkbox />
 
         </div>
 
-        {/* Test responcive image */}
+        { /* Test responcive image */ }
         <Image sources={ image } />
 
       </div>

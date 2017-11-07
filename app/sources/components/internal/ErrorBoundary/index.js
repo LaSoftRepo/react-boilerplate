@@ -19,6 +19,7 @@ export default class ErrorBoundary extends Component {
   }
 
   componentDidCatch(hasError, errorInfo) {
+    // eslint-disable-next-line
     this.setState({
       hasError,
       errorInfo,

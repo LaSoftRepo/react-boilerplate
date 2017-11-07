@@ -45,14 +45,10 @@ export default class Modal extends Component {
         duration,
         direction,
         scaleY:     2.3,
-        translateY: enter ?-1200 : 1200,
-        delay:      enter ? 0    : 120,
+        translateY: enter ? -1200 : 1200,
+        delay:      enter ?  0    : 120,
       },
     };
-  }
-
-  state = {
-    enter: true,
   }
 
   componentDidMount() {
@@ -115,8 +111,8 @@ export default class Modal extends Component {
     const direction = !shouldHide ? 'normal' : 'reverse';
 
     return (
-      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ ANIMATE_DURATION }>
-      <Anime opacity={ [0, 1] } direction={ direction } duration={ ANIMATE_DURATION }>
+      // <Anime opacity='0' direction={ direction } delay={ shouldHide ? 310 : 0 } duration={ animationDuration }>
+      <Anime opacity={ [0, 1] } direction={ direction } duration={ animationDuration }>
         <div layout='colummns' center='true' styleName='modal-backdrop' onClick={ this.handleModalClick }>
           { /* <Anime
             translateY={ shouldHide ? 1200 : -1200 }

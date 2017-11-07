@@ -28,6 +28,8 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const clearConsole                  = require('react-dev-utils/clearConsole');
 const prettyFormatter               = require('eslint-formatter-pretty');
 const openBrowser                   = require('react-dev-utils/openBrowser');
+
+const sharpAdapter                  = require('responsive-loader/sharp');
 const { prettifyPackageName }       = require('./utils');
 // const Mailer        = require('./mailer');
 
@@ -579,7 +581,7 @@ module.exports = () => {
           loader: require.resolve('responsive-loader'),
           options: {
             name:            '[name].[hash:base64:5].[width].[ext]',
-            adapter:         require('responsive-loader/sharp'),
+            adapter:         sharpAdapter,
             placeholder:     true,
             placeholderSize: 32,
             sizes:           [320, 640, 1280],
