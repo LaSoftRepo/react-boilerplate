@@ -15,16 +15,16 @@ export default class Select extends PureComponent {
     placeholder:         Types.string,
     optionStyle:         Types.funcOrObject,
     filter:              Types.funcOrBool,
-    defaultSelectedItem: Types.any,
+    defaultSelectedItem: Types.func,
 
     onInputValueChange:  PropTypes.func,
   }
 
   static defaultProps = {
     label:               void 0,
-    defaultSelectedItem: void 0,
     placeholder:         'Select item...',
     onInputValueChange:  Default.noop,
+    defaultSelectedItem: null,
 
     optionStyle: ({ index, item, highlightedIndex, selectedItem }) => ({
       backgroundColor: highlightedIndex === index ? '#559cc9' : 'transparent',

@@ -1,5 +1,5 @@
 // import { call, put, takeEvery } from 'redux-saga/effects'
 
 // App Saga watcher
-// export function * appSaga() {
-// }
+// eslint-disable-next-line
+export function * appSaga() {}

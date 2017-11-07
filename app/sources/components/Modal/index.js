@@ -51,6 +51,10 @@ export default class Modal extends Component {
     };
   }
 
+  state = {
+    shouldHide: false,
+  }
+
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
   }

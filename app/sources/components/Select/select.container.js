@@ -11,7 +11,7 @@ function defaultFilter(options, input) {
 
 export default class SelectContainer extends Component {
   static propTypes = {
-    containerKey: PropTypes.string,
+    containerKey: PropTypes.func,
   }
 
   static defaultProps = {
