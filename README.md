@@ -1,8 +1,6 @@
 # React Boilerplate
 
-### Still work in progress
-
-### Changes is coming!
+### Changes is coming in v1!
 #### Webpack config will be rewrite with [webpack-blocks](https://github.com/andywer/webpack-blocks)
 
 ---
