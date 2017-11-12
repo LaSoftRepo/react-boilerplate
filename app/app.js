@@ -107,10 +107,10 @@ if (!window.Intl) {
 
 render(translations);
 
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line no-console
-  console.info(`React v${ React.version }`);
+// eslint-disable-next-line no-console
+console.info(`React v${ React.version }`);
 
+if (process.env.NODE_ENV !== 'development') {
   // Install ServiceWorker and AppCache
   // eslint-disable-next-line global-require
   require('offline-plugin/runtime').install();

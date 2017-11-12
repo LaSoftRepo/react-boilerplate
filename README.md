@@ -1,8 +1,6 @@
 # React Boilerplate
 
-### Still work in progress
-
-### Changes is coming!
+### Changes is coming in v1!
 #### Webpack config will be rewrite with [webpack-blocks](https://github.com/andywer/webpack-blocks)
 
 ---
@@ -51,7 +49,7 @@ yarn deploy
 
 - [x] **yarn** package manager
 - [x] App Basic structure (WIP)
-- [x] React v16
+- [x] React v16.1
 - [x] React Router v4 with Redux binding
 - [x] Redux
 - [x] Redux Sagas
