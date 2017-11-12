@@ -413,16 +413,17 @@ if (isProduction) {
 }
 
 
-module.exports = () => {
+module.exports = (props = {}) => {
 
   clearConsole();
 
   const appEntry = [
     'react-hot-loader/patch',
-    'react-dev-utils/webpackHotDevClient'
+    'react-dev-utils/webpackHotDevClient',
+    path.join(Path.to.app, 'app.js'),
   ];
-  appEntry.push(path.join(Path.to.app, 'app.js'));
-  if (env.customServer) {
+
+  if (props.customServer) {
     appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=false`);
   }
 
