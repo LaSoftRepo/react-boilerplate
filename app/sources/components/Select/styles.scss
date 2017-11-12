@@ -1,6 +1,8 @@
 
+@import '~styles/variables';
+
 $red:  #d14b00;
-$gray: rgb(195,210,223);
+$gray: rgb(195, 210, 223);
 $blue: #559cc9;
 
 .select-container {
@@ -12,7 +14,7 @@ $blue: #559cc9;
   color:          darken($gray, 50%);
 
   label {
-    padding:      0.25rem 1.1rem;
+    padding:      .25rem 1.1rem;
 
     color:        darken($gray, 25%);
     font-size:    1rem;
@@ -21,11 +23,11 @@ $blue: #559cc9;
     pointer-events: none;
     // transition: 0.2s ease all;
 
-    &.required:after {
+    &.required::after {
       content:        ' *';
-      vertical-align: super;
-      font-size:      0.65rem;
       color:          $red;
+      vertical-align: super;
+      font-size:      .65rem;
     }
   }
 
@@ -33,8 +35,8 @@ $blue: #559cc9;
     position:   relative;
     width:      100%;
 
-    box-shadow: none;
     background: transparent;
+    box-shadow: none;
 
     transition: border .3s ease;
 
@@ -62,9 +64,11 @@ $blue: #559cc9;
 
   input {
     width:         100%;
-    padding:       0.8rem 1rem;
+    padding:       .8rem 1rem;
 
-    border:        none;
+    border:        0;
+
+    color:         darken($gray, 40%);
     box-shadow:    none;
     outline:       none;
 
@@ -75,9 +79,7 @@ $blue: #559cc9;
     word-wrap:     break-word;
     text-align:    left;
 
-    color:         darken($gray, 40%);
-
-    &[type="button"] {
+    &[type='button'] {
       user-select: none;
       cursor:      pointer;
     }
@@ -89,9 +91,10 @@ $blue: #559cc9;
   }
 
   .select-button {
-    border:         none;
+    padding:        0 .5rem;
+
+    border:         0;
     border-radius:  0;
-    padding:        0 0.5rem;
 
     color:          $gray;
     background:     transparent;
@@ -109,9 +112,9 @@ $blue: #559cc9;
       transform: scaleY(-1);
     }
 
-    &.arrow:after {
+    &.arrow::after {
       content:     '⌃';
-      line-height: 0.8;
+      line-height: .8;
     }
 
     &.arrow.open {
@@ -119,15 +122,15 @@ $blue: #559cc9;
       transform: scaleY(1);
     }
 
-    &.clear:after {
+    &.clear::after {
       content:        '×';
-      line-height:    0.8;
+      line-height:    .8;
       vertical-align: top;
     }
 
     &:hover {
-      color:      $blue;
       background: transparent;
+      color:      $blue;
     }
 
     &:last-of-type {
@@ -137,20 +140,20 @@ $blue: #559cc9;
 
   .select-dropdown {
     position:   absolute;
-    z-index:    1;
     width:      100%;
-
-    background: #fff;
+    max-height: 250px;
 
     border:     2px solid $gray;
-    border-top: none;
+    border-top: 0;
 
-    max-height: 250px;
+    z-index:    1;
+
+    background: $white;
     overflow-y: auto;
   }
 
   .select-option {
-    padding: 0.8rem 1rem;
+    padding: .8rem 1rem;
     cursor:  pointer;
   }
 }
