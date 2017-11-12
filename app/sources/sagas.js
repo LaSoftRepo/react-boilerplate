@@ -1,8 +1,8 @@
 
 import { all, call } from 'redux-saga/effects'
 
-import { appSaga }   from 'containers/App/sagas'
-import { usersSaga } from 'containers/Users/sagas'
+import appSaga   from 'containers/App/sagas'
+import usersSaga from 'containers/Users/sagas'
 
 export function* rootSaga() {
   yield all([

@@ -7,7 +7,7 @@ import { USERS_REQUESTED, USERS_CANCELING, RESPONSE_TIMEOUT } from './constants'
 import { UsersAction } from './actions'
 import { request }     from 'helpers/saga'
 
-export function* fetchSaga({ meta }) {
+function* fetchSaga({ meta }) {
   try {
     const { timeout, response } = yield race({
       timeout:  call(delay, RESPONSE_TIMEOUT),
@@ -29,7 +29,7 @@ export function* fetchSaga({ meta }) {
 }
 
 // App Saga watcher
-export function* usersSaga() {
+export default function* usersSaga() {
   while (true) {
     const action = yield take(USERS_REQUESTED);
     const task   = yield fork(fetchSaga, action);
