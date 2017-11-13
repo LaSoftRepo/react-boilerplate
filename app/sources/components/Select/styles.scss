@@ -23,11 +23,13 @@ $blue: #559cc9;
     pointer-events: none;
     // transition: 0.2s ease all;
 
-    &.required::after {
-      content:        ' *';
-      color:          $red;
-      vertical-align: super;
-      font-size:      .65rem;
+    &.required {
+      &::after {
+        content:        ' *';
+        color:          $red;
+        vertical-align: super;
+        font-size:      .65rem;
+      }
     }
   }
 
@@ -106,30 +108,56 @@ $blue: #559cc9;
     text-align:     center;
     vertical-align: middle;
 
-    transition:     transform 150ms ease, color .3s ease;
+    // transition:     transform 150ms ease, color .3s ease;
+
+    // transform: translateY(50%);
 
     &.arrow {
-      transform: scaleY(-1);
+      align-self: center;
+
+      margin-right: 10px;
+
+      width:  24px;
+      height: 24px;
+
+      // transform: scaleY(-1);
+      background-image:  url('~images/Select/expand.arrow.animated.svg');
+      background-repeat: no-repeat;
+
+      animation-duration: 400ms;
+      animation-timing-function: steps(24);
+      animation-fill-mode: both;
+      // animation-direction: alternate-reverse;
+      // animation-play-state: paused;
+
+      // &::after {
+      //   content:     '⌃';
+      //   line-height: .8;
+      //   background-image: url('~images/Select/expand.arrow.animated.svg');
+      //   animation-duration: 500ms;
+      //   animation-timing-function: steps(24);
+      //   width: 24px;
+      //   height: 24px;
+      //   background-repeat: no-repeat;
+      // }
+
+      &.open {
+        color:     $blue;
+        // transform: scaleY(1);
+        animation-name: expand-arrow-animation;
+      }
     }
 
-    &.arrow::after {
-      content:     '⌃';
-      line-height: .8;
-    }
-
-    &.arrow.open {
-      color:     $blue;
-      transform: scaleY(1);
-    }
-
-    &.clear::after {
-      content:        '×';
-      line-height:    .8;
-      vertical-align: top;
+    &.clear {
+      &::after {
+        content:        '×';
+        line-height:    .8;
+        vertical-align: top;
+      }
     }
 
     &:hover {
-      background: transparent;
+      background-color: transparent;
       color:      $blue;
     }
 
@@ -155,5 +183,15 @@ $blue: #559cc9;
   .select-option {
     padding: .8rem 1rem;
     cursor:  pointer;
+  }
+}
+
+@keyframes expand-arrow-animation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -576px 0;
   }
 }
