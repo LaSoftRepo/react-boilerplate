@@ -103,7 +103,7 @@ export default class Modal extends Component {
             delay={ shouldHide ? 120 : 0 }
             direction={ direction }
           > */ }
-            { this.renderDialogContent(this.props) }
+          { this.renderDialogContent(this.props) }
           { /* </Anime> */ }
         </div>
       </Anime>

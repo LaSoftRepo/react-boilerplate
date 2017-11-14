@@ -77,22 +77,25 @@ rules:
 
   # JSX React Rules
   react/jsx-filename-extension:               off
-  react/jsx-no-bind:                          off
   react/jsx-no-literals:                      off
   react/jsx-sort-prop-types:                  off
   react/jsx-sort-props:                       off
   react/jsx-boolean-value:                    warn
   react/jsx-closing-bracket-location:         warn
   react/jsx-wrap-multilines:                  warn
+  react/jsx-indent:                           warn
   react/jsx-indent-props:                     warn
   react/jsx-key:                              warn
   react/jsx-no-undef:                         warn
   react/jsx-pascal-case:                      warn
   react/jsx-uses-react:                       warn
   react/jsx-uses-vars:                        warn
+  react/jsx-no-bind:                          warn
+  react/jsx-tag-spacing:                      warn
   react/jsx-equals-spacing:                   [warn, never]
   react/jsx-first-prop-new-line:              [warn, multiline-multiprop]
   react/jsx-max-props-per-line:               [warn, { maximum: 1, when: multiline }]
+  react/jsx-curly-brace-presence:             [warn, never]
   react/jsx-curly-spacing:
     - warn
     -
@@ -108,10 +111,10 @@ rules:
   # JS React Rules
   react/no-multi-comp:                        off
   react/no-array-index-key:                   warn
-  react/no-string-refs:                       warn
   react/no-danger:                            warn
   react/no-unknown-property:                  warn
   react/no-set-state:                         warn
+  react/no-string-refs:                       error
   react/no-children-prop:                     error
   react/no-direct-mutation-state:             error
   react/no-did-mount-set-state:               error
@@ -123,6 +126,7 @@ rules:
   react/no-redundant-should-component-update: error
   react/no-render-return-value:               error
   react/no-danger-with-children:              error
+  react/style-prop-object:                    error
   react/sort-comp:
     - warn
     -
