@@ -56,7 +56,7 @@ rules:
 
   # Spacing Rules
   keyword-spacing:                            warn
-  no-trailing-spaces:                         [warn, { skipBlankLines: true }]
+  no-trailing-spaces:                         [warn, { skipBlankLines: true, ignoreComments: true }]
   func-call-spacing:                          [warn, never]
   space-before-function-paren:                [warn, { anonymous: always, named: never, asyncArrow: always }]
   space-before-blocks:                        warn
