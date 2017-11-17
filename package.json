@@ -21,7 +21,7 @@
     "preview": "yarn build && cross-env NODE_ENV=\"production\" node server/index --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "deploy": "rimraf ./build && cross-env NODE_ENV=\"production\" deploy=true webpack --define process.env.NODE_ENV=\"production\" --config webpack/webpack.config.js",
     "build:clean": "rimraf ./.cache && rimraf ./build",
-    "format": "prettier --write --no-semi --single-quote --trailing-comma --print-width=100 --tab-width=2 \"**/*.{js,jsx}\"",
+    "format": "prettier --write --no-semi --single-quote --trailing-comma=all --print-width=100 --tab-width=2 --no-bracket-spacing --jsx-bracket-same-line \"**/*.{js,jsx}\"",
     "lint": "./node_modules/.bin/eslint . --color -f codeframe --max-warnings 50",
     "lint:fix": "./node_modules/.bin/eslint . --fix"
   },
