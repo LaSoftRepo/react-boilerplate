@@ -140,7 +140,7 @@ if (isDeveloping) {
     });
   }); */
 } else {
-  console.info('\r\nUser static server was lounched'); // eslint-disable-line no-console
+  console.info('\r\nUser\'s static server was launched'); // eslint-disable-line no-console
 
   app.use(cors(corsOptions));
   app.use(express.static(path.join(rootPath, 'build')));
