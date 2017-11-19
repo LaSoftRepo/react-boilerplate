@@ -1,5 +1,7 @@
 {
   "plugins": [
+    "transform-strict-mode",
+    "syntax-dynamic-import",
     "transform-export-extensions",
     "transform-strict-mode",
     "transform-class-properties",
