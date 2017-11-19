@@ -413,7 +413,7 @@ if (isProduction) {
 }
 
 
-module.exports = (props = {}) => {
+module.exports = ({ customServer } = {}) => {
 
   clearConsole();
 
@@ -423,7 +423,7 @@ module.exports = (props = {}) => {
     path.join(Path.to.app, 'app.js'),
   ];
 
-  if (props.customServer) {
+  if (customServer) {
     appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=false`);
   }
 

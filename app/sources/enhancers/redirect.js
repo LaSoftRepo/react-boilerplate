@@ -67,7 +67,8 @@ const redirect = (condition, pathname = '/login') => (
       }
 
       componentWillReceiveProps(nextProps) {
-        if (nextProps.router.location !== this.props.router.location) {
+        const { router } = this.props;
+        if (nextProps.router.location !== router.location) {
           this.constructor.checkCondition(nextProps);
         }
       }

@@ -105,6 +105,7 @@ rules:
 
   react/jsx-handler-names:                    [warn, { eventHandlerPrefix: handle, eventHandlerPropPrefix: on }]
   react/jsx-no-duplicate-props:               [warn, { ignoreCase: true }]
+  react/destructuring-assignment:             [warn, always]
   react/jsx-no-comment-textnodes:             error
   react/jsx-no-target-blank:                  error
 
@@ -126,6 +127,7 @@ rules:
   react/no-redundant-should-component-update: error
   react/no-render-return-value:               error
   react/no-danger-with-children:              error
+  react/no-access-state-in-setstate:          error
   react/style-prop-object:                    error
   react/sort-comp:
     - warn
