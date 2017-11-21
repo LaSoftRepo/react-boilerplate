@@ -122,7 +122,7 @@ const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
   new FriendlyErrorsPlugin({
     compilationSuccessInfo: {
-      messages: [`You application is running here http://${HOST}:${PORT}`],
+      messages: !isProduction ? [`You application is running here http://${HOST}:${PORT}`] : void 0,
     },
   }),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
@@ -138,12 +138,13 @@ const plugins = [
     PUBLIC_URL: Path.to.public.replace(/\/$/, ''),
   }),
   new HtmlWebpackPlugin({
-    title:    PROJECT_NAME,
-    template: Path.to.template,
-    path:     Path.to.build,
-    filename: 'index.html',
-    inject:   'body',
-    minify:   isProduction ? htmlMinifyConfig : false,
+    title:          PROJECT_NAME,
+    template:       Path.to.template,
+    path:           Path.to.build,
+    filename:       'index.html',
+    inject:         'body',
+    minify:         isProduction ? htmlMinifyConfig : false,
+    chunksSortMode: 'dependency',
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
