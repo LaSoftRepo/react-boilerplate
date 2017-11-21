@@ -19,6 +19,7 @@ const UglifyJSPlugin        = require('uglifyjs-webpack-plugin');
 const BrotliPlugin          = require('brotli-webpack-plugin');
 const S3Plugin              = require('webpack-s3-plugin');
 const WebpackShellPlugin    = require('webpack-shell-plugin');
+const FriendlyErrorsPlugin  = require('friendly-errors-webpack-plugin');
 
 // Misc plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
@@ -118,6 +119,11 @@ const plugins = [
     renderThrottle: 96,
   }),
   new webpack.NoEmitOnErrorsPlugin(),
+  new FriendlyErrorsPlugin({
+    compilationSuccessInfo: {
+      messages: [`You application is running here http://${HOST}:${PORT}`],
+    },
+  }),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
   new ModuleScopePlugin(Path.to.app),
   new webpack.DefinePlugin({
@@ -626,6 +632,7 @@ module.exports = ({ customServer } = {}) => {
       open:        !isAWSDeploy,
       noInfo:      false,
       overlay:     false,
+      quiet:       true,
       compress:    isProduction,
       hot:         !isProduction,
       publicPath:  Path.to.public,

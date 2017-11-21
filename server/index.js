@@ -105,6 +105,7 @@ if (isDeveloping) {
     noInfo:      config.devServer.noInfo === undefined ? true : config.devServer.noInfo,
     publicPath:  config.output.publicPath,
     headers:     config.devServer.headers,
+    quiet:       true,
     stats: {
       colors:  true,
       hash:    false,
@@ -152,9 +153,7 @@ if (isDeveloping) {
 const server = http.createServer(app);
 server.listen(port, host, err => {
   if (err) throw err;
-  const url = `http://${host}:${port}`;
-  console.info('\r\nListening at', url); // eslint-disable-line no-console
-  open(url);
+  open(`http://${host}:${port}`);
 });
 
 /* eslint-enable */
