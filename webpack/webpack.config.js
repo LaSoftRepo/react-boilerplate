@@ -30,6 +30,7 @@ const clearConsole                  = require('react-dev-utils/clearConsole');
 const prettyFormatter               = require('eslint-formatter-pretty');
 const openBrowser                   = require('react-dev-utils/openBrowser');
 const { prettifyPackageName }       = require('./utils');
+const validation                    = require('./validation');
 // const Mailer        = require('./mailer');
 
 const Path          = require('./paths');
@@ -422,6 +423,7 @@ if (isProduction) {
 module.exports = ({ customServer } = {}) => {
 
   clearConsole();
+  validation();
 
   const appEntry = [
     'react-hot-loader/patch',
