@@ -543,6 +543,7 @@ module.exports = ({ customServer } = {}) => {
             {
               loader: require.resolve('babel-loader'),
               options: {
+                cacheDirectory: false,
                 ignore: false,
               },
             },
