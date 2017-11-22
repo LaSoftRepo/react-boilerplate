@@ -62,7 +62,7 @@ export default class SelectContainer extends Component {
     ) : null,
     <button
       key='1'
-      className={ cc({'select-button arrow': true, open }) }
+      className={ cc({ 'select-button arrow': true, open }) }
       { ...getButtonProps({ disabled }) }
     />,
   ]

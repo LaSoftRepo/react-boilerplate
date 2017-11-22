@@ -36,14 +36,15 @@ export default class Select extends PureComponent {
   }
 
   onInputValueChange = (inputValue, state) => {
-    if (isFunction(this.props.options)) {
+    const { options, onInputValueChange } = this.props;
+    if (isFunction(options)) {
       // TODO
       // this.props.options(inputValue);
     }
 
     // eslint-disable-next-line
     console.log('inputValue: ', inputValue);
-    this.props.onInputValueChange(inputValue, state);
+    onInputValueChange(inputValue, state);
   }
 
   render() {

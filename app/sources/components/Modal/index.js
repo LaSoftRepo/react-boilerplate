@@ -66,9 +66,7 @@ export default class Modal extends Component {
   handleClose = (event, accept) => {
     const { onClose } = this.props;
     event.persist();
-    setTimeout(() => {
-      this.props.onClose(event, accept);
-    }, animationDuration);
+    setTimeout(() => { onClose(event, accept) }, animationDuration);
   }
 
   handleKeydown = event => {

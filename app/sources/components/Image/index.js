@@ -37,7 +37,7 @@ export default class Image extends Component {
     }
   }
 
-  handleImageLoaded = ({ target: { src } }) => {
+  handleImageLoaded = ({ target: { src }}) => {
     // eslint-disable-next-line react/no-set-state
     this.setState(() => ({ src }));
   }
@@ -51,7 +51,7 @@ export default class Image extends Component {
       height:     'auto',
 
       display:    'block',
-      opacity:    this.state.src ? 1 : 0,
+      opacity:    this.state.src ? 1 : 0, // eslint-disable-line
       transition: placeholder ? 'opacity 0.2s ease-in' : void 0,
     };
 
