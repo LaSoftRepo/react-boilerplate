@@ -2,3 +2,7 @@
 build/
 coverage/
 fixtures/
+node_modules/
+webpack/
+server/
+bower_components/
