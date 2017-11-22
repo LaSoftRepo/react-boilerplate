@@ -27,6 +27,10 @@ if (shell.which('yarn')) {
     currentVersion: exec('yarn --version'),
     targetVersion:  packageConfig.engines.yarn,
   });
+} else {
+  // eslint-disable-next-line no-console
+  console.info(yellow('\nYou should install yarn (https://yarnpkg.com/lang/en/docs/install/) first\n'));
+  process.exit(1);
 }
 
 module.exports = () => {
