@@ -19,6 +19,7 @@ const UglifyJSPlugin        = require('uglifyjs-webpack-plugin');
 const BrotliPlugin          = require('brotli-webpack-plugin');
 const S3Plugin              = require('webpack-s3-plugin');
 const WebpackShellPlugin    = require('webpack-shell-plugin');
+const FriendlyErrorsPlugin  = require('friendly-errors-webpack-plugin');
 
 // Misc plugins
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
@@ -31,6 +32,7 @@ const openBrowser                   = require('react-dev-utils/openBrowser');
 
 const sharpAdapter                  = require('responsive-loader/sharp');
 const { prettifyPackageName }       = require('./utils');
+const validation                    = require('./validation');
 // const Mailer        = require('./mailer');
 
 const Path          = require('./paths');
@@ -120,6 +122,11 @@ const plugins = [
     renderThrottle: 96,
   }),
   new webpack.NoEmitOnErrorsPlugin(),
+  new FriendlyErrorsPlugin({
+    compilationSuccessInfo: {
+      messages: !isProduction ? [`You application is running here http://${HOST}:${PORT}`] : void 0,
+    },
+  }),
   new WatchMissingNodeModulesPlugin(Path.to.modules),
   new ModuleScopePlugin(Path.to.app),
   new webpack.DefinePlugin({
@@ -133,12 +140,13 @@ const plugins = [
     PUBLIC_URL: Path.to.public.replace(/\/$/, ''),
   }),
   new HtmlWebpackPlugin({
-    title:    PROJECT_NAME,
-    template: Path.to.template,
-    path:     Path.to.build,
-    filename: 'index.html',
-    inject:   'body',
-    minify:   isProduction ? htmlMinifyConfig : false,
+    title:          PROJECT_NAME,
+    template:       Path.to.template,
+    path:           Path.to.build,
+    filename:       'index.html',
+    inject:         'body',
+    minify:         isProduction ? htmlMinifyConfig : false,
+    chunksSortMode: 'dependency',
   }),
   new webpack.IgnorePlugin(/^\.\/(locale|lang)$/, /moment$/),
   new webpack.ProvidePlugin(provideConfig),
@@ -298,7 +306,7 @@ if (isProduction) {
     }),
     new CopyWebpackPlugin([
       { from: Path.to.assets, to: 'assets' },
-    ], { ignore: [ /.DS_Store/ ] })
+    ], { ignore: [ /.DS_Store/ ]})
   );
 
   if (USE_OFFLINE_CACHE) {
@@ -415,9 +423,10 @@ if (isProduction) {
 }
 
 
-module.exports = (props = {}) => {
+module.exports = ({ customServer } = {}) => {
 
   clearConsole();
+  validation();
 
   const appEntry = [
     'react-hot-loader/patch',
@@ -425,7 +434,7 @@ module.exports = (props = {}) => {
     path.join(Path.to.app, 'app.js'),
   ];
 
-  if (props.customServer) {
+  if (customServer) {
     appEntry.push(`webpack-hot-middleware/client?path=http://${HOST}:${PORT}/__webpack_hmr&timeout=2000&overlay=false`);
   }
 
@@ -536,6 +545,7 @@ module.exports = (props = {}) => {
             {
               loader: require.resolve('babel-loader'),
               options: {
+                cacheDirectory: false,
                 ignore: false,
               },
             },
@@ -640,6 +650,7 @@ module.exports = (props = {}) => {
       open:        !isAWSDeploy,
       noInfo:      false,
       overlay:     false,
+      quiet:       true,
       compress:    isProduction,
       hot:         !isProduction,
       publicPath:  Path.to.public,

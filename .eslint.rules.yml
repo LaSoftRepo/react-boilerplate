@@ -25,6 +25,8 @@ rules:
   semi:                                       off
   no-void:                                    off
   no-plusplus:                                off
+  no-extra-boolean-cast:                      warn
+  no-func-assign:                             warn
   prefer-arrow-callback:                      [warn, { allowNamedFunctions: true }]
   no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
   quotes:                                     [warn, single, { avoidEscape: true }]
@@ -54,12 +56,15 @@ rules:
         - componentDidUpdate
         - componentWillUnmount
 
+  no-div-regex:                               error
+
   # Spacing Rules
   keyword-spacing:                            warn
   no-trailing-spaces:                         [warn, { skipBlankLines: true, ignoreComments: true }]
   func-call-spacing:                          [warn, never]
   space-before-function-paren:                [warn, { anonymous: always, named: never, asyncArrow: always }]
   space-before-blocks:                        warn
+  object-curly-spacing:                       [warn, always, { arraysInObjects: false, objectsInObjects: false }]
   space-infix-ops:                            error
 
   # Import Rules
@@ -105,6 +110,7 @@ rules:
 
   react/jsx-handler-names:                    [warn, { eventHandlerPrefix: handle, eventHandlerPropPrefix: on }]
   react/jsx-no-duplicate-props:               [warn, { ignoreCase: true }]
+  react/destructuring-assignment:             [warn, always]
   react/jsx-no-comment-textnodes:             error
   react/jsx-no-target-blank:                  error
 
@@ -126,6 +132,7 @@ rules:
   react/no-redundant-should-component-update: error
   react/no-render-return-value:               error
   react/no-danger-with-children:              error
+  react/no-access-state-in-setstate:          error
   react/style-prop-object:                    error
   react/sort-comp:
     - warn

@@ -21,7 +21,8 @@ export default class Users extends Component {
   }
 
   componentWillMount() {
-    this.props.request(Api.users.get());
+    const { request } = this.props;
+    request(Api.users.get());
     // this.props.cancel();
   }
 

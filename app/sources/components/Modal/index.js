@@ -64,6 +64,7 @@ export default class Modal extends Component {
   }
 
   handleClose = (event, accept) => {
+    const { onClose } = this.props;
     event.persist();
     setTimeout(() => {
       this.props.onClose(event, accept);

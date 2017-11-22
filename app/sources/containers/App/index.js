@@ -21,11 +21,12 @@ export default class App extends Component {
   }
 
   render() {
+    const { hideHeader, hideFooter, children } = this.props;
     return (
       <div className='app'>
-        { this.props.hideHeader && <Header /> }
-        { Children.toArray(this.props.children) }
-        { this.props.hideFooter && <Footer /> }
+        { hideHeader && <Header /> }
+        { Children.toArray(children) }
+        { hideFooter && <Footer /> }
       </div>
     );
   }
