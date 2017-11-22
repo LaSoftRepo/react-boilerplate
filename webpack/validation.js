@@ -9,44 +9,45 @@ const childProcess = require('child_process');
 
 const packageConfig = require('../package.json');
 
+const { red, green, yellow } = chalk;
+
 function exec(command) {
   return childProcess.execSync(command).toString().trim();
 }
 
 const requirements = [{
-  name: 'node',
+  name:           'node',
   currentVersion: semver.clean(process.version),
-  versionRequirement: packageConfig.engines.node,
-}]
+  targetVersion:  packageConfig.engines.node,
+}];
 
 if (shell.which('yarn')) {
   requirements.push({
-    name: 'yarn',
+    name:           'yarn',
     currentVersion: exec('yarn --version'),
-    versionRequirement: packageConfig.engines.yarn
-  })
+    targetVersion:  packageConfig.engines.yarn,
+  });
 }
 
 module.exports = () => {
   const warnings = [];
   for (let i = 0, len = requirements.length; i < len; ++i) {
-    const req = requirements[i]
-    if (!semver.satisfies(req.currentVersion, req.versionRequirement)) {
+    const { name, currentVersion, targetVersion } = requirements[i];
+    if (!semver.satisfies(currentVersion, targetVersion)) {
       warnings.push(
-        `${ req.name }: ${ chalk.red(req.currentVersion) } should be ${ chalk.green(req.versionRequirement) }`
-      )
+        `${ name }: ${ red(currentVersion) } should be ${ green(targetVersion) }`
+      );
     }
   }
 
   if (warnings.length) {
     // eslint-disable-next-line no-console
-    console.info(chalk.yellow('\nReact Boilerplate required following modules:\n'))
+    console.info(yellow('\nReact Boilerplate required following modules:\n'));
 
     for (let i = 0, len = warnings.length; i < len; ++i)
       console.warn(`  ${ warnings[i] }`); // eslint-disable-line no-console
 
     console.warn(); // eslint-disable-line no-console
-
     process.exit(1);
   }
 }
