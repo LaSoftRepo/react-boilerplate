@@ -2683,9 +2683,9 @@ download@^4.0.0, download@^4.1.2:
     vinyl-fs "^2.2.0"
     ware "^1.2.0"
 
-downshift@^1.16.2:
-  version "1.16.2"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.16.2.tgz#8e69de5789da37f8abd2af8264a0abada8839c13"
+downshift@^1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.18.0.tgz#a1b0a7b19c06883df3a67dd8ca453e22089e1ed6"
 
 duplexer2@0.0.2:
   version "0.0.2"
