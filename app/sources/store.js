@@ -2,15 +2,19 @@
  * Create the store with asynchronously loaded reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
+import { applyMiddleware, compose, createStore } from 'redux'
+
+import DevTools from 'containers/DevTools'
+import { createLogger } from 'redux-logger' // eslint-disable-line import/no-extraneous-dependencies
 import createSagaMiddleware from 'redux-saga'
-import { createLogger } from 'redux-logger'   // eslint-disable-line import/no-extraneous-dependencies
+import { hasReduxDevToolExtension } from './internal/utils'
 import { persistState } from 'redux-devtools' // eslint-disable-line import/no-extraneous-dependencies
 import { rootReducer } from './reducers'
 import { rootSaga } from './sagas'
-import DevTools from 'containers/DevTools'    // eslint-disable-line
-import { hasReduxDevToolExtension } from './internal/utils'
+import { routerMiddleware } from 'react-router-redux'
+
+// eslint-disable-line import/no-extraneous-dependencies
+   // eslint-disable-line
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -42,7 +46,8 @@ export default function configureStore(initialState, history) {
 
     middlewares.unshift(
       loggerMiddleware,
-      require('redux-immutable-state-invariant').default(), // eslint-disable-line
+      // eslint-disable-next-line
+      require('redux-immutable-state-invariant').default()
     );
   }
 

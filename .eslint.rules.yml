@@ -31,6 +31,7 @@ rules:
   no-empty-function:                          [warn, { allow: [functions, arrowFunctions, generatorFunctions] }]
   quotes:                                     [warn, single, { avoidEscape: true }]
   no-underscore-dangle:                       [warn, { allowAfterThis: true, allowAfterSuper: true }]
+  no-unused-vars:                             [warn, { args: all, ignoreRestSiblings: true }]
   comma-dangle:
     - warn
     -
