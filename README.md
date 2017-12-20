@@ -56,7 +56,7 @@ yarn deploy
 - [x] Selectors
 - [x] Redux Dev Tools or Redux Dev Tools Extension ***(dev only)***
 - [x] Internalization (i18n)
-- [x] React-anime animation system
+- [x] React-popmotion animation system
 - [x] High order component **(HOC)** enhancers
 - [x] Experimental Layout based on **RAGrid** with binding to React
 - [x] Immutable
