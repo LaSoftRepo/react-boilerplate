@@ -68,9 +68,10 @@ const provideConfig = {
   PropTypes:     'prop-types',
   ReactDOM:      'react-dom',
   React:         'react',
-  Component:      ['react',       'Component'],
-  PureComponent:  ['react',       'PureComponent'],
-  Children:       ['react',       'Children'],
+  Component:      ['react', 'Component'],
+  PureComponent:  ['react', 'PureComponent'],
+  Children:       ['react', 'Children'],
+  Fragment:       ['react', 'Fragment'],
 
   connect:        ['react-redux', 'connect'],
   createSelector: ['reselect',    'createSelector'],
@@ -162,9 +163,9 @@ function styleLoaders(extract, modules = false) {
     {
       loader: require.resolve('thread-loader'),
       options: {
-        workers:            8,
-        workerParallelJobs: 16,
-        poolParallelJobs:   16,
+        workers:            2,
+        workerParallelJobs: 32,
+        poolParallelJobs:   32,
       },
     },
     {
@@ -187,7 +188,7 @@ function styleLoaders(extract, modules = false) {
           styles: Path.to.styles,
         },
         modules,
-        localIdentName: '[path]__[local]__[hash:base64:5]',
+        localIdentName: '[path]__[local]__[hash:base64:6]',
       },
     },
     {
@@ -534,18 +535,17 @@ module.exports = ({ customServer } = {}) => {
                 cacheDirectory: Path.to.cache,
               },
             },
-            // {
-            //   loader: require.resolve('thread-loader'),
-            //   options: {
-            //     workers:            4,
-            //     workerParallelJobs: 4,
-            //     poolParallelJobs:   2,
-            //   },
-            // },
+            {
+              loader: require.resolve('thread-loader'),
+              options: {
+                workers:            2,
+                workerParallelJobs: 32,
+                poolParallelJobs:   32,
+              },
+            },
             {
               loader: require.resolve('babel-loader'),
               options: {
-                cacheDirectory: false,
                 ignore: false,
               },
             },
@@ -555,7 +555,7 @@ module.exports = ({ customServer } = {}) => {
           test:    /\.jsx?$/,
           enforce: 'pre',
           include: Path.to.app,
-          exclude: /(node_modules|bower_components|build|spec|tests)/,
+          // exclude not use. Prefer .eslintignore instead
           loader:  require.resolve('eslint-loader'),
         },
         {
@@ -605,7 +605,7 @@ module.exports = ({ customServer } = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 20480,
-            name:  '[name].[hash:base64:5].[ext]',
+            name:  '[name].[hash:base64:6].[ext]',
           },
         },
         {
@@ -621,7 +621,7 @@ module.exports = ({ customServer } = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
-            name: '[name].[hash:base64:5].[ext]',
+            name: '[name].[hash:base64:6].[ext]',
           },
         },
         {
@@ -633,7 +633,7 @@ module.exports = ({ customServer } = {}) => {
           loader: require.resolve('url-loader'),
           options: {
             limit: 10000,
-            name: '[name].[hash:base64:5].[ext]',
+            name: '[name].[hash:base64:6].[ext]',
           },
         },
       ],
@@ -644,17 +644,17 @@ module.exports = ({ customServer } = {}) => {
 
     devServer: {
       stats,
-      host:        HOST,
-      port:        PORT,
+      host:             HOST,
+      port:             PORT,
+      open:             !isAWSDeploy,
+      noInfo:           false,
+      overlay:          false,
+      quiet:            true,
+      compress:         isProduction,
+      hot:              !isProduction,
+      publicPath:       Path.to.public,
+      contentBase:      isProduction ? './build' : './app',
       disableHostCheck: true,
-      open:        !isAWSDeploy,
-      noInfo:      false,
-      overlay:     false,
-      quiet:       true,
-      compress:    isProduction,
-      hot:         !isProduction,
-      publicPath:  Path.to.public,
-      contentBase: isProduction ? './build' : './app',
 
       historyApiFallback: {
         disableDotRule: true

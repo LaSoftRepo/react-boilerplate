@@ -13,12 +13,12 @@
   // Isolation for better performance
   contain: layout;
 
-
   &[visibility~="false"],
   &[visibility~="none"] {
     display: none;
   }
 
+  &[hidden],
   &[visibility~="hidden"] {
     display: flex;
     visibility: hidden;
@@ -29,6 +29,7 @@
     visibility: collapse;
   }
 
+  &[visibible],
   &[visibility~="true"],
   &[visibility~="visible"] {
     display: flex;
@@ -45,12 +46,14 @@
     flex-direction: row;
   }
 
-  &[center] {
+  &[center],
+  &[center~="true"] {
     align-items: center;
     justify-content: center;
   }
 
-  &[nowrap] {
+  &[nowrap],
+  &[nowrap~="true"] {
     flex-wrap: nowrap;
   }
 
@@ -78,6 +81,7 @@
   &[vertical-align~="top"] {
     align-items: flex-start;
   }
+
   &[vertical-align~="center"] {
     align-items: center;
   }
