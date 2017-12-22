@@ -66,9 +66,10 @@ const provideConfig = {
   PropTypes:     'prop-types',
   ReactDOM:      'react-dom',
   React:         'react',
-  Component:      ['react',       'Component'],
-  PureComponent:  ['react',       'PureComponent'],
-  Children:       ['react',       'Children'],
+  Component:      ['react', 'Component'],
+  PureComponent:  ['react', 'PureComponent'],
+  Children:       ['react', 'Children'],
+  Fragment:       ['react', 'Fragment'],
 
   connect:        ['react-redux', 'connect'],
   createSelector: ['reselect',    'createSelector'],

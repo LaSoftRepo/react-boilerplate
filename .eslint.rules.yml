@@ -15,6 +15,7 @@ globals:
   Component:                                  true
   PureComponent:                              true
   Children:                                   true
+  Fragment:                                   true
   connect:                                    true
   createSelector:                             true
   CSSModules:                                 true
@@ -92,13 +93,13 @@ rules:
   react/jsx-indent:                           warn
   react/jsx-indent-props:                     warn
   react/jsx-key:                              warn
-  react/jsx-no-undef:                         warn
   react/jsx-pascal-case:                      warn
   react/jsx-uses-react:                       warn
   react/jsx-uses-vars:                        warn
   react/jsx-no-bind:                          warn
   react/jsx-tag-spacing:                      warn
   react/jsx-equals-spacing:                   [warn, never]
+  react/jsx-no-undef:                         [warn, { allowGlobals: true }]
   react/jsx-first-prop-new-line:              [warn, multiline-multiprop]
   react/jsx-max-props-per-line:               [warn, { maximum: 1, when: multiline }]
   react/jsx-curly-brace-presence:             [warn, never]
