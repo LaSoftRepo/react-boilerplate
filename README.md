@@ -61,7 +61,7 @@ yarn deploy
 - [x] Experimental Layout based on **RAGrid** with binding to React
 - [x] Immutable
 - [x] Webpack v3
-- [x] Hot Loader v3
+- [x] Hot Loader v4
 - [x] Compile & Runtime Overlay Notifier like in react-create-app
 - [x] HTTP/2 Server Push via PreloadWebpackPlugin ([Video](https://www.youtube.com/watch?time_continue=11&v=nje_VEA05OI))
 - [x] Webpack use Caching and WebWorkers for speedup builds ***(Switch to [HappyPack](https://github.com/amireh/happypack) in future)***
