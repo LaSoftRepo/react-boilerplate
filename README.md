@@ -89,6 +89,7 @@ yarn deploy
 - [ ] Prepack (?) or Closure compiler (?) for final aggressive optimization?
 - [ ] Jest test solution
 - [ ] Circle CI
+- [ ] Use [HardSourceWebpack Plugin](https://github.com/mzgoddard/hard-source-webpack-plugin) for generate source maps (**performance improvments**)
 
 ### Components
 - [x] React-id-swiper **(port of [Swiper.js](http://idangero.us/swiper/demos))**. [React Examples](http://kidjp85.github.io/react-id-swiper/)
