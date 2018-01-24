@@ -3072,9 +3072,13 @@ es6-promise@^3.0.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
-es6-promise@^4.0.3, es6-promise@^4.2.2:
+es6-promise@^4.0.3:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.2.tgz#f722d7769af88bd33bc13ec6605e1f92966b82d9"
+
+es6-promise@^4.2.4:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.2.4.tgz#dc4221c2b16518760bd8c39a52d8f356fc00ed29"
 
 es6-set@~0.1.5:
   version "0.1.5"
@@ -4859,13 +4863,13 @@ image-size@^0.5.0:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
 
-image-webpack-loader@^3.3.1:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/image-webpack-loader/-/image-webpack-loader-3.4.2.tgz#7e8bfa7270e853eee6d7861f0ed6a3c12d8a20f8"
+image-webpack-loader@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/image-webpack-loader/-/image-webpack-loader-4.0.0.tgz#922be4eb07fc1ab804f292bbbcdc70053d9141b9"
   dependencies:
     imagemin "^5.2.2"
     imagemin-gifsicle "^5.1.0"
-    imagemin-mozjpeg "^6.0.0"
+    imagemin-mozjpeg "^7.0.0"
     imagemin-optipng "^5.2.1"
     imagemin-pngquant "^5.0.0"
     imagemin-svgo "^5.2.1"
@@ -4881,13 +4885,13 @@ imagemin-gifsicle@^5.1.0:
     gifsicle "^3.0.0"
     is-gif "^1.0.0"
 
-imagemin-mozjpeg@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/imagemin-mozjpeg/-/imagemin-mozjpeg-6.0.0.tgz#71a32a457aa1b26117a68eeef2d9b190c2e5091e"
+imagemin-mozjpeg@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/imagemin-mozjpeg/-/imagemin-mozjpeg-7.0.0.tgz#d926477fc6ef5f3a768a4222f7b2d808d3eba568"
   dependencies:
-    exec-buffer "^3.0.0"
+    execa "^0.8.0"
     is-jpg "^1.0.0"
-    mozjpeg "^4.0.0"
+    mozjpeg "^5.0.0"
 
 imagemin-optipng@^5.2.1:
   version "5.2.1"
@@ -6744,11 +6748,11 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-mozjpeg@^4.0.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/mozjpeg/-/mozjpeg-4.1.1.tgz#859030b24f689a53db9b40f0160d89195b88fd50"
+mozjpeg@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mozjpeg/-/mozjpeg-5.0.0.tgz#b8671c4924568a363de003ff2fd397ab83f752c5"
   dependencies:
-    bin-build "^2.0.0"
+    bin-build "^2.2.0"
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
@@ -8557,13 +8561,13 @@ react-hot-loader@^4.0.0-beta.17:
     hoist-non-react-statics "^2.3.1"
     react-stand-in "^4.0.0-beta.17"
 
-react-id-swiper@^1.5.7:
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-1.5.7.tgz#da077a92ed923f651bfe425e6a838769505a5097"
+react-id-swiper@^1.5.8:
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-1.5.8.tgz#365af04dd06c776fca813364a87cc85137d9662a"
   dependencies:
     object-assign "^4.1.1"
     prop-types "15.6.0"
-    swiper "4.0.7"
+    swiper "4.1.0"
 
 react-intl@^2.3.0:
   version "2.4.0"
@@ -10095,9 +10099,9 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-swiper@4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.0.7.tgz#89175c2a23d86622eda8344740c24a3701a6b270"
+swiper@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.1.0.tgz#3d1d97aef948366b8b36fa90d41dcedf5432c88c"
   dependencies:
     dom7 "^2.0.1"
 
@@ -11207,6 +11211,12 @@ yargs-parser@^8.1.0:
   dependencies:
     camelcase "^4.1.0"
 
+yargs-parser@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-9.0.2.tgz#9ccf6a43460fe4ed40a9bb68f48d43b8a68cc077"
+  dependencies:
+    camelcase "^4.1.0"
+
 yargs@6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
@@ -11225,7 +11235,7 @@ yargs@6.6.0:
     y18n "^3.2.1"
     yargs-parser "^4.2.0"
 
-yargs@^10.0.3, yargs@^10.1.1:
+yargs@^10.0.3:
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-10.1.1.tgz#5fe1ea306985a099b33492001fa19a1e61efe285"
   dependencies:
@@ -11241,6 +11251,23 @@ yargs@^10.0.3, yargs@^10.1.1:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^8.1.0"
+
+yargs@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^9.0.2"
 
 yargs@^3.31.0:
   version "3.32.0"
