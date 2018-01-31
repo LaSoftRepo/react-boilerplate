@@ -169,7 +169,6 @@ function styleLoaders(extract, modules = false) {
     {
       loader: require.resolve('style-loader'),
       options: {
-        minimize:  isProduction,
         sourceMap: !isProduction,
       },
     },

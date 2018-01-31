@@ -120,13 +120,13 @@ if (isDeveloping) {
   if (config.devServer.historyApiFallback) {
     app.use(history({
       verbose: false,
-      index: '/'
+      index:   '/',
     }));
   }
 
   app.use(devMiddleware);
   app.use(webpackHotMiddleware(compiler, {
-    log: console.log,       // eslint-disable-line no-console
+    log:  console.log,       // eslint-disable-line no-console
     path: '/__webpack_hmr',
   }));
 
